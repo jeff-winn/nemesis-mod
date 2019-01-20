@@ -1,0 +1,7 @@
+# Visual Studio Code configuration files
+.vscode/*
+
+# Build configuration outputs
+build/*
+
+docs/*.~*
