@@ -1,2 +1,13 @@
-# Nemesis-Mod
-Just a little side project I'm playing with to mod a Nemesis blaster using Arduino
+### Hardware Requirements
+- Adafruit Metro 328P
+- Breadboard
+- .NET Gadgeteer breakout board
+- .NET Gadgeteer L298 Motor Driver module
+
+
+### Development Environment
+This is the toolset that is currently being used to write the code included within the src folder within this repository.
+- Visual Studio Code
+  - C/C++ extension
+  - Arduino extension
+- Arduino IDE
