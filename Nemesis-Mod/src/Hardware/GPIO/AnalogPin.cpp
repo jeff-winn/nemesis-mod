@@ -9,3 +9,7 @@ AnalogPin::AnalogPin(uint32_t id) : Pin(id) {
 void AnalogPin::write(uint32_t value) {
     analogWrite(m_Id, value);
 }
+
+int AnalogPin::read() {
+    return analogRead(m_Id);
+}

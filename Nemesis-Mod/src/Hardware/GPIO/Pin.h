@@ -8,6 +8,8 @@ class Pin {
         Pin(uint32_t id);
 
         void setOutputMode();
+
+        virtual int read();
         virtual void write(uint32_t value);
 
     protected:

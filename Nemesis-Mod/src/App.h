@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include "Hardware/Motor.h"
+#include "Hardware/Button.h"
 
 class App {
     public:
@@ -12,9 +13,13 @@ class App {
         void run();
 
     private:
+        Motor* m_motor1;
+        Motor* m_motor2;
+        Button* m_button1;
+
         bool m_enabled;
-        Motor* m_m1;
-        Motor* m_m2;
+        void startAll();
+        void stopAll();
 };
 
 #endif

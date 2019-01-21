@@ -5,20 +5,33 @@ App::App() {
 }
 
 void App::init() {
-    m_m1 = new Motor();
-    m_m1->init(4, 9);
+    m_motor1 = new Motor();
+    m_motor1->init(4, 9);
 
-    m_m2 = new Motor();
-    m_m2->init(2, 5);
+    m_motor2 = new Motor();
+    m_motor2->init(2, 5);
+
+    m_button1 = new Button();
+    m_button1->init(12);
 }
 
 void App::run() {
-    if (m_enabled) {
-        m_m1->start();
-        m_m2->start();
+    while (true) {
+        if (m_button1->isPressed()) {
+            startAll();
+        }
+        else {
+            stopAll();
+        }
     }
-    else {
-        m_m1->stop();
-        m_m2->stop();
-    }
+}
+
+void App::startAll() {
+    m_motor1->start();
+    m_motor2->start();
+}
+
+void App::stopAll() {
+    m_motor1->stop();
+    m_motor2->stop();
 }

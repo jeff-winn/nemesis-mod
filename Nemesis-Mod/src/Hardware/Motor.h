@@ -14,6 +14,7 @@ class Motor {
     private:
         Pin* m_directionPin;
         Pin* m_pwmPin;
+        bool m_started;
 };
 
 #endif

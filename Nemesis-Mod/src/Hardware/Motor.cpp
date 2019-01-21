@@ -12,11 +12,23 @@ void Motor::init(uint32_t directionPin, uint32_t pwmPin) {
 }
 
 void Motor::start() {
+    if (m_started) {
+        return;
+    }
+
     m_directionPin->write(HIGH);
     m_pwmPin->write(1);
+
+    m_started = true;
 }
 
 void Motor::stop() {
+    if (!m_started) {
+        return;
+    }
+
     m_directionPin->write(LOW);
     m_pwmPin->write(0);
+
+    m_started = false;
 }

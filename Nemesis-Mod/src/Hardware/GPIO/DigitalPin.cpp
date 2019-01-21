@@ -9,3 +9,7 @@ DigitalPin::DigitalPin(uint32_t id) : Pin(id) {
 void DigitalPin::write(uint32_t value) {
     digitalWrite(m_Id, value);
 }
+
+int DigitalPin::read() {
+    return digitalRead(m_Id);
+}
