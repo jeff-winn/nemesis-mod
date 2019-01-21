@@ -1,4 +1,8 @@
-#include <Arduino.h>
+#ifndef MOTOR_H
+#define MOTOR_H
+
+#include <stdint.h>
+#include "Pin.h"
 
 class Motor {
     public:
@@ -8,6 +12,8 @@ class Motor {
         void stop();
 
     private:
-        uint32_t m_directionPin;
-        uint32_t m_pwmPin;
+        Pin* m_directionPin;
+        Pin* m_pwmPin;
 };
+
+#endif

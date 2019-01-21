@@ -1,20 +1,27 @@
 #include <Arduino.h>
+#include "AnalogPin.h"
+#include "DigitalPin.h"
 #include "Motor.h"
 
 void Motor::init(uint32_t directionPin, uint32_t pwmPin) {
-    m_directionPin = directionPin;
-    m_pwmPin = pwmPin;
+    m_directionPin = new DigitalPin(directionPin);
+    m_directionPin->setOutputMode();
 
-    pinMode(m_directionPin, OUTPUT);
-    pinMode(m_pwmPin, OUTPUT);
+    m_pwmPin = new AnalogPin(pwmPin);
+    m_pwmPin->setOutputMode();
 }
 
 void Motor::start() {
-    digitalWrite(m_directionPin, HIGH);
-    analogWrite(m_pwmPin, 1);
+    m_directionPin->write(HIGH);
+    m_pwmPin->write(1);
+    // digitalWrite(m_directionPin, HIGH);
+    // analogWrite(m_pwmPin, 1);
 }
 
 void Motor::stop() {
-    digitalWrite(m_directionPin, LOW);
-    analogWrite(m_pwmPin, 0);
+    m_directionPin->write(LOW);
+    m_pwmPin->write(0);
+    
+    // digitalWrite(m_directionPin, LOW);
+    // analogWrite(m_pwmPin, 0);
 }
