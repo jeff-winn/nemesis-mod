@@ -2,7 +2,7 @@
 #define APP_H
 
 #include <stdbool.h>
-#include "Motor.h"
+#include "Hardware/Motor.h"
 
 class App {
     public:

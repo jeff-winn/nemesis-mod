@@ -2,7 +2,7 @@
 #define MOTOR_H
 
 #include <stdint.h>
-#include "Pin.h"
+#include "GPIO/Pin.h"
 
 class Motor {
     public:

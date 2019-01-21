@@ -1,5 +1,4 @@
-#include "Nemesis-Mod.h"
-#include "App.h"
+#include "src/App.h"
 
 App* app;
 

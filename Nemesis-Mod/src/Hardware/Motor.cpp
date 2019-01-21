@@ -1,6 +1,6 @@
 #include <Arduino.h>
-#include "AnalogPin.h"
-#include "DigitalPin.h"
+#include "GPIO/AnalogPin.h"
+#include "GPIO/DigitalPin.h"
 #include "Motor.h"
 
 void Motor::init(uint32_t directionPin, uint32_t pwmPin) {
