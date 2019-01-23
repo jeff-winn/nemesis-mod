@@ -1,5 +1,5 @@
-#ifndef MOTORCONTROLLER_H
-#define MOTORCONTROLLER_H
+#ifndef FLYWHEEL_CONTROLLER_H
+#define FLYWHEEL_CONTROLLER_H
 
 #include "Motor.h"
 

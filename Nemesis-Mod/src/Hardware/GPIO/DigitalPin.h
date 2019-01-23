@@ -1,5 +1,5 @@
-#ifndef DIGITALPIN_H
-#define DIGITALPIN_H
+#ifndef DIGITAL_PIN_H
+#define DIGITAL_PIN_H
 
 #include <stdint.h>
 #include "Pin.h"
