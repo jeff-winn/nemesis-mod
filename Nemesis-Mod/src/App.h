@@ -14,7 +14,7 @@ class App {
 
     private:
         FlywheelController* m_flywheelController;
-        Button* m_button1;
+        Button* m_revTrigger;
 
         bool m_enabled;
         void startAll();

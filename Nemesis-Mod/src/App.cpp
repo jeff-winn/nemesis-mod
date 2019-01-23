@@ -9,13 +9,13 @@ void App::init() {
     m_flywheelController->init(9, 8, 7, 6);
     m_flywheelController->setDirection(MotorDirection::Forward);
 
-    m_button1 = new Button();
-    m_button1->init(12);
+    m_revTrigger = new Button();
+    m_revTrigger->init(12);
 }
 
 void App::run() {
     while (true) {
-        if (m_button1->isPressed()) {
+        if (m_revTrigger->isPressed()) {
             startAll();
         }
         else {
