@@ -1,17 +1,22 @@
 #include "FlywheelController.h"
-#include "Motor.h"
 
-void FlywheelController::init(uint32_t in1, uint32_t in2, uint32_t in3, uint32_t in4) {
-    m_motor1 = new Motor();
-    m_motor1->init(in1, in2);
+void FlywheelController::init(FlywheelMotor flywheel, uint32_t in1, uint32_t in2, MotorDirection direction) {
+    switch (flywheel) {
+        case FlywheelMotor::Motor1: {
+            m_motor1 = new Motor();
 
-    m_motor2 = new Motor();
-    m_motor2->init(in3, in4);
-}
+            m_motor1->init(in1, in2);
+            m_motor1->setDirection(direction);
+            break;
+        }
+        case FlywheelMotor::Motor2: {
+            m_motor2 = new Motor();
 
-void FlywheelController::setDirection(MotorDirection direction) {
-    m_motor1->setDirection(direction);
-    m_motor2->setDirection(direction);
+            m_motor2->init(in1, in2);
+            m_motor2->setDirection(direction);
+            break;
+        }
+    }
 }
 
 void FlywheelController::startAll() {

@@ -3,11 +3,15 @@
 
 #include "Motor.h"
 
+enum FlywheelMotor {
+    Motor1,
+    Motor2
+};
+
 class FlywheelController {
     public:
-        void init(uint32_t in1, uint32_t in2, uint32_t in3, uint32_t in4);
+        void init(FlywheelMotor flywheel, uint32_t in1, uint32_t in2, MotorDirection direction);
 
-        void setDirection(MotorDirection direction);
         void startAll();
         void stopAll();
 
