@@ -2,7 +2,7 @@
 #define APP_H
 
 #include <stdbool.h>
-#include "Hardware/Motor.h"
+#include "Hardware/FlywheelController.h"
 #include "Hardware/Button.h"
 
 class App {
@@ -13,8 +13,7 @@ class App {
         void run();
 
     private:
-        Motor* m_motor1;
-        Motor* m_motor2;
+        FlywheelController* m_flywheelController;
         Button* m_button1;
 
         bool m_enabled;

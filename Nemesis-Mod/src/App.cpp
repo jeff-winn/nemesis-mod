@@ -5,13 +5,9 @@ App::App() {
 }
 
 void App::init() {
-    m_motor1 = new Motor();
-    m_motor1->init(9, 8);
-    m_motor1->setDirection(MotorDirection::Forward);
-
-    m_motor2 = new Motor();
-    m_motor2->init(7, 6);
-    m_motor2->setDirection(MotorDirection::Forward);
+    m_flywheelController = new FlywheelController();
+    m_flywheelController->init(9, 8, 7, 6);
+    m_flywheelController->setDirection(MotorDirection::Forward);
 
     m_button1 = new Button();
     m_button1->init(12);
@@ -29,11 +25,9 @@ void App::run() {
 }
 
 void App::startAll() {
-    m_motor1->start();
-    m_motor2->start();
+    m_flywheelController->startAll();
 }
 
 void App::stopAll() {
-    m_motor1->stop();
-    m_motor2->stop();
+    m_flywheelController->stopAll();
 }
