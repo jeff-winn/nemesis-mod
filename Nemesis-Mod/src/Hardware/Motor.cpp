@@ -1,14 +1,12 @@
 #include <Arduino.h>
-#include "GPIO/AnalogPin.h"
-#include "GPIO/DigitalPin.h"
 #include "Motor.h"
 
-void Motor::init(uint32_t directionPin, uint32_t pwmPin) {
-    m_directionPin = new DigitalPin(directionPin);
-    m_directionPin->setOutputMode();
+void Motor::init(uint32_t in1Pin, uint32_t in2Pin) {
+    m_in1Pin = new DigitalPin(in1Pin);
+    m_in1Pin->setOutputMode();
 
-    m_pwmPin = new AnalogPin(pwmPin);
-    m_pwmPin->setOutputMode();
+    m_in2Pin = new DigitalPin(in2Pin);
+    m_in2Pin->setOutputMode();
 }
 
 void Motor::start() {
@@ -16,19 +14,33 @@ void Motor::start() {
         return;
     }
 
-    m_directionPin->write(HIGH);
-    m_pwmPin->write(1);
+    switch (m_direction) {
+        case MotorDirection::Forward: {
+            m_in1Pin->write(LOW);
+            m_in2Pin->write(HIGH);
+            break;
+        }
+        case MotorDirection::Reverse: {
+            m_in1Pin->write(HIGH);
+            m_in2Pin->write(LOW);
+            break;
+        }
+    }
 
     m_started = true;
+}
+
+void Motor::setDirection(MotorDirection direction) {
+    m_direction = direction;
 }
 
 void Motor::stop() {
     if (!m_started) {
         return;
     }
-
-    m_directionPin->write(LOW);
-    m_pwmPin->write(0);
+    
+    m_in1Pin->write(LOW);
+    m_in2Pin->write(LOW);
 
     m_started = false;
 }
