@@ -1,8 +1,8 @@
 ### Hardware Requirements
-- Adafruit Metro 328P
+- [Adafruit METRO 328](https://www.adafruit.com/product/2488)
 - Breadboard
-- .NET Gadgeteer breakout board
-- .NET Gadgeteer L298 Motor Driver module
+- [.NET Gadgeteer breakout board](http://old.ghielectronics.com/catalog/product/405)
+- [.NET Gadgeteer L298 Motor Driver module](http://old.ghielectronics.com/catalog/product/315)
 
 
 ### Development Environment
