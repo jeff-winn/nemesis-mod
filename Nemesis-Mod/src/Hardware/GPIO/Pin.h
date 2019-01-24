@@ -6,6 +6,8 @@
 class Pin {
     public:
         Pin(uint8_t id);
+
+        void setInputMode();
         void setOutputMode();
 
     protected:

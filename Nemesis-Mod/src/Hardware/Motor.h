@@ -13,6 +13,7 @@ class Motor {
 
     private:
         PwmPin* m_pin;
+        uint8_t m_dutyCycle;
         bool m_started;
 };
 
