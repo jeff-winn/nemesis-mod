@@ -1,12 +1,9 @@
 #include <Arduino.h>
 #include "Motor.h"
 
-void Motor::init(uint32_t in1Pin, uint32_t in2Pin) {
-    m_in1Pin = new DigitalPin(in1Pin);
+void Motor::init(uint32_t pin) {
+    m_in1Pin = new DigitalPin(pin);
     m_in1Pin->setOutputMode();
-
-    m_in2Pin = new DigitalPin(in2Pin);
-    m_in2Pin->setOutputMode();
 }
 
 void Motor::start() {
@@ -15,8 +12,6 @@ void Motor::start() {
     }
 
     m_in1Pin->write(HIGH);
-    m_in2Pin->write(LOW);
-
     m_started = true;
 }
 
@@ -26,7 +21,5 @@ void Motor::stop() {
     }
     
     m_in1Pin->write(LOW);
-    m_in2Pin->write(LOW);
-
     m_started = false;
 }

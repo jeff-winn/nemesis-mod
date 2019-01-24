@@ -6,7 +6,7 @@
 
 class Motor {
     public:
-        void init(uint32_t in1Pin, uint32_t in2Pin);
+        void init(uint32_t pin);
 
         void start();
         void stop();

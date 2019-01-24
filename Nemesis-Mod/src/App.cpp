@@ -6,8 +6,8 @@ App::App() {
 
 void App::init() {
     m_flywheelController = new FlywheelController();
-    m_flywheelController->init(FlywheelMotor::Motor1, 9, 8);
-    m_flywheelController->init(FlywheelMotor::Motor2, 7, 6);
+    m_flywheelController->init(FlywheelMotor::Motor1, 9); // L298->IN2
+    m_flywheelController->init(FlywheelMotor::Motor2, 7); // L298->IN4
 
     m_revTrigger = new Button();
     m_revTrigger->init(12);
