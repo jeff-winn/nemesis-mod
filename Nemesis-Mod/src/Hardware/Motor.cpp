@@ -1,17 +1,17 @@
-#include <Arduino.h>
 #include "Motor.h"
 
 void Motor::init(uint8_t pin) {
-    m_in1Pin = new DigitalPin(pin);
-    m_in1Pin->setOutputMode();
+    m_pin = new PwmPin(pin);
+    m_pin->init(25000); // 25 KHz
+    m_pin->setOutputMode();
 }
 
-void Motor::start() {
+void Motor::start(uint8_t dutyCycle) {
     if (m_started) {
         return;
     }
 
-    m_in1Pin->write(HIGH);
+    m_pin->write(dutyCycle);
     m_started = true;
 }
 
@@ -20,6 +20,6 @@ void Motor::stop() {
         return;
     }
     
-    m_in1Pin->write(LOW);
+    m_pin->write(0);
     m_started = false;
 }

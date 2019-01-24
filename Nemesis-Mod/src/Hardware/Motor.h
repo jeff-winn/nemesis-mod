@@ -2,17 +2,17 @@
 #define MOTOR_H
 
 #include <stdint.h>
-#include "GPIO/DigitalPin.h"
+#include "GPIO/PwmPin.h"
 
 class Motor {
     public:
         void init(uint8_t pin);
 
-        void start();
+        void start(uint8_t dutyCycle);
         void stop();
 
     private:
-        DigitalPin* m_in1Pin;
+        PwmPin* m_pin;
         bool m_started;
 };
 
