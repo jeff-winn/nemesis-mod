@@ -16,8 +16,8 @@ void FlywheelController::init(FlywheelMotor flywheel, uint8_t pwmPin) {
 }
 
 void FlywheelController::startAll() {
-    m_motor1->start();
-    m_motor2->start();
+    m_motor1->start(255);
+    m_motor2->start(255);
 }
 
 void FlywheelController::stopAll() {
