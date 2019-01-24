@@ -2,7 +2,7 @@
 #define BUTTON_H
 
 #include <stdint.h>
-#include "GPIO/Pin.h"
+#include "GPIO/DigitalPin.h"
 
 class Button {
     public:
@@ -10,7 +10,7 @@ class Button {
         bool isPressed();
 
     protected:
-        Pin* m_pin;
+        DigitalPin* m_pin;
 };
 
 #endif

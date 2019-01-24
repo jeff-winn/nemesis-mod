@@ -1,10 +1,11 @@
+#include <PWM.h>
 #include "PwmPin.h"
 
 PwmPin::PwmPin(uint8_t id) : Pin(id) {
 }
 
 void PwmPin::init(uint32_t frequency) {
-    SetPinFrequency(m_id, frequency);
+    SetPinFrequency(m_Id, frequency);
     m_frequency = frequency;
 }
 
