@@ -6,7 +6,7 @@
 
 class Button {
     public:
-        void init(uint32_t pin);
+        void init(uint8_t pin);
         bool isPressed();
 
     protected:

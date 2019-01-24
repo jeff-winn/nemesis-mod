@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "Motor.h"
 
-void Motor::init(uint32_t pin) {
+void Motor::init(uint8_t pin) {
     m_in1Pin = new DigitalPin(pin);
     m_in1Pin->setOutputMode();
 }

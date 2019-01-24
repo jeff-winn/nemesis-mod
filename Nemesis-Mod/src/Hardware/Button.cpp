@@ -1,7 +1,7 @@
 #include "Button.h"
 #include "GPIO/DigitalPin.h"
 
-void Button::init(uint32_t pin) {
+void Button::init(uint8_t pin) {
     m_pin = new DigitalPin(pin);
 }
 

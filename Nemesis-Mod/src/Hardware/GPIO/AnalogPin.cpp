@@ -3,7 +3,7 @@
 #include "AnalogPin.h"
 #include "Pin.h"
 
-AnalogPin::AnalogPin(uint32_t id) : Pin(id) {
+AnalogPin::AnalogPin(uint8_t id) : Pin(id) {
 }
 
 void AnalogPin::write(uint32_t value) {

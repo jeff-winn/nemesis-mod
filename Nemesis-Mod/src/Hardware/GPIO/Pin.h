@@ -5,7 +5,7 @@
 
 class Pin {
     public:
-        Pin(uint32_t id);
+        Pin(uint8_t id);
 
         void setOutputMode();
 
@@ -13,7 +13,7 @@ class Pin {
         virtual void write(uint32_t value);
 
     protected:
-        uint32_t m_Id;
+        uint8_t m_Id;
 };
 
 #endif

@@ -6,7 +6,7 @@
 
 class AnalogPin : public Pin {
     public:
-        AnalogPin::AnalogPin(uint32_t id);
+        AnalogPin::AnalogPin(uint8_t id);
 
         int read();
         void write(uint32_t value);

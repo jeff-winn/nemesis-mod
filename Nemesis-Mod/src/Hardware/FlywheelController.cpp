@@ -1,6 +1,6 @@
 #include "FlywheelController.h"
 
-void FlywheelController::init(FlywheelMotor flywheel, uint32_t pwmPin) {
+void FlywheelController::init(FlywheelMotor flywheel, uint8_t pwmPin) {
     switch (flywheel) {
         case FlywheelMotor::Motor1: {
             m_motor1 = new Motor();

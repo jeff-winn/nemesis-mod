@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "Pin.h"
 
-Pin::Pin(uint32_t id) {
+Pin::Pin(uint8_t id) {
     m_Id = id;
 }
 

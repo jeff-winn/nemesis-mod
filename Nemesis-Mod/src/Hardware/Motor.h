@@ -6,15 +6,13 @@
 
 class Motor {
     public:
-        void init(uint32_t pin);
+        void init(uint8_t pin);
 
         void start();
         void stop();
 
     private:
         DigitalPin* m_in1Pin;
-        DigitalPin* m_in2Pin;
-
         bool m_started;
 };
 
