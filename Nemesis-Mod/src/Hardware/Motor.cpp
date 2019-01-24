@@ -14,8 +14,8 @@ void Motor::start() {
         return;
     }
 
-    m_in1Pin->write(LOW);
-    m_in2Pin->write(HIGH);
+    m_in1Pin->write(HIGH);
+    m_in2Pin->write(LOW);
 
     m_started = true;
 }
