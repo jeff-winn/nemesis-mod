@@ -14,24 +14,10 @@ void Motor::start() {
         return;
     }
 
-    switch (m_direction) {
-        case MotorDirection::Forward: {
-            m_in1Pin->write(LOW);
-            m_in2Pin->write(HIGH);
-            break;
-        }
-        case MotorDirection::Reverse: {
-            m_in1Pin->write(HIGH);
-            m_in2Pin->write(LOW);
-            break;
-        }
-    }
+    m_in1Pin->write(LOW);
+    m_in2Pin->write(HIGH);
 
     m_started = true;
-}
-
-void Motor::setDirection(MotorDirection direction) {
-    m_direction = direction;
 }
 
 void Motor::stop() {
