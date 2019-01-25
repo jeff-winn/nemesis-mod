@@ -11,7 +11,7 @@ enum FlywheelMotor {
 
 class FlywheelController {
     public:
-        void init(FlywheelMotor flywheel, uint8_t pwm, uint8_t potentiometer);
+        void init(FlywheelMotor flywheel, uint8_t pwm, uint32_t frequency, uint8_t potentiometer);
 
         void startAll();
         void stopAll();

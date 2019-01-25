@@ -5,6 +5,9 @@
 #include "Hardware/FlywheelController.h"
 #include "Hardware/Button.h"
 
+// This frequency seemed to provide the best range of operation from the stock motors.
+static const uint32_t MOTOR_FREQUENCY = 35000;
+
 class App {
     public:
         App();

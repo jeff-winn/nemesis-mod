@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include "src/App.h"
 
 App* app;

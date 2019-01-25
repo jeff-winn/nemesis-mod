@@ -6,7 +6,7 @@
 
 class Motor {
     public:
-        void init(uint8_t pin);
+        void init(uint8_t pin, uint32_t frequency);
 
         void start(uint8_t dutyCycle);
         void stop();
