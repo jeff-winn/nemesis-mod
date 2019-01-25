@@ -1,6 +1,7 @@
 #ifndef FLYWHEEL_CONTROLLER_H
 #define FLYWHEEL_CONTROLLER_H
 
+#include "Potentiometer.h"
 #include "Motor.h"
 
 enum FlywheelMotor {
@@ -10,13 +11,16 @@ enum FlywheelMotor {
 
 class FlywheelController {
     public:
-        void init(FlywheelMotor flywheel, uint8_t pwmPin);
+        void init(FlywheelMotor flywheel, uint8_t pwm, uint32_t frequency, uint8_t potentiometer);
 
         void startAll();
         void stopAll();
 
     private:
+        Potentiometer* m_potentiometer1;
         Motor* m_motor1;
+
+        Potentiometer* m_potentiometer2;
         Motor* m_motor2;
 };
 

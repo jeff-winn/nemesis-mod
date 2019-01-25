@@ -1,13 +1,13 @@
 #include "Motor.h"
 
-void Motor::init(uint8_t pin) {
+void Motor::init(uint8_t pin, uint32_t frequency) {
     m_pin = new PwmPin(pin);
-    m_pin->init(25000); // 25 KHz
+    m_pin->init(frequency);
     m_pin->setOutputMode();
 }
 
 void Motor::start(uint8_t dutyCycle) {
-    if (m_started) {
+    if (m_started && m_dutyCycle == dutyCycle) {
         return;
     }
 

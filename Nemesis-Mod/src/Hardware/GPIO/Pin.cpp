@@ -8,3 +8,7 @@ Pin::Pin(uint8_t id) {
 void Pin::setOutputMode() {
     pinMode(m_Id, OUTPUT);
 }
+
+void Pin::setInputMode() {
+    pinMode(m_Id, INPUT);
+}
