@@ -1,7 +1,7 @@
 ### Hardware Requirements
 - [Adafruit METRO 328](https://www.adafruit.com/product/2488)
 - Breadboard
-- [.NET Gadgeteer breakout board](http://old.ghielectronics.com/catalog/product/405)
+- [.NET Gadgeteer breakout board](http://www.ctr-electronics.com/breakoutmodule.html)
 - [.NET Gadgeteer L298 Motor Driver module](http://old.ghielectronics.com/catalog/product/315)
 
 
