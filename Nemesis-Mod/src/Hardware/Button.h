@@ -1,7 +1,6 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include <stdint.h>
 #include "GPIO/DigitalPin.h"
 
 class Button {
