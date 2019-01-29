@@ -1,14 +1,14 @@
-#include <Arduino.h>
 #include "Pin.h"
 
 Pin::Pin(uint8_t id) {
     m_Id = id;
+    hal = new HAL();
 }
 
 void Pin::setOutputMode() {
-    pinMode(m_Id, OUTPUT);
+    hal->pinModeSafe(m_Id, PinMode::Output);
 }
 
 void Pin::setInputMode() {
-    pinMode(m_Id, INPUT);
+    hal->pinModeSafe(m_Id, PinMode::Input);
 }
