@@ -1,10 +1,10 @@
 #include "FlywheelController.h"
 
-void FlywheelController::init(FlywheelMotor flywheel, uint8_t pwm, uint32_t frequency, uint8_t pot) {
+void FlywheelController::init(FlywheelMotor flywheel, uint8_t pwm, uint8_t pot) {
     switch (flywheel) {
         case FlywheelMotor::Motor1: {
             m_motor1 = new Motor();
-            m_motor1->init(pwm, frequency);
+            m_motor1->init(pwm, MOTOR_FREQUENCY);
 
             m_potentiometer1 = new Potentiometer();
             m_potentiometer1->init(pot);
@@ -12,7 +12,7 @@ void FlywheelController::init(FlywheelMotor flywheel, uint8_t pwm, uint32_t freq
         }
         case FlywheelMotor::Motor2: {
             m_motor2 = new Motor();
-            m_motor2->init(pwm, frequency);
+            m_motor2->init(pwm, MOTOR_FREQUENCY);
 
             m_potentiometer2 = new Potentiometer();
             m_potentiometer2->init(pot);

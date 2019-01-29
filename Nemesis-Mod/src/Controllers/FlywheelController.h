@@ -4,6 +4,9 @@
 #include "../Hardware/Potentiometer.h"
 #include "../Hardware/Motor.h"
 
+// This frequency seemed to provide the best range of operation from the stock motors.
+static const uint32_t MOTOR_FREQUENCY = 35000;
+
 enum FlywheelMotor {
     Motor1,
     Motor2
@@ -11,7 +14,7 @@ enum FlywheelMotor {
 
 class FlywheelController {
     public:
-        void init(FlywheelMotor flywheel, uint8_t pwm, uint32_t frequency, uint8_t potentiometer);
+        void init(FlywheelMotor flywheel, uint8_t pwm, uint8_t potentiometer);
 
         void startAll();
         void stopAll();

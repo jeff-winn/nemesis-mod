@@ -6,8 +6,16 @@ enum PinMode {
     Output
 };
 
+enum InterruptMode {
+    Rising,
+    Falling,
+    All
+};
+
 class HAL {
     public:
+        virtual void attachInterruptSafe(uint8_t pin, void (*userFunc)(void), InterruptMode mode);
+        
         virtual void digitalWriteSafe(uint8_t pin, uint32_t value);
         virtual int digitalReadSafe(uint8_t pin);
 
