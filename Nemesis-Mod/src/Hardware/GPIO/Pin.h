@@ -2,6 +2,7 @@
 #define PIN_H
 
 #include <stdint.h>
+#include "../Interop/HAL.h"
 
 class Pin {
     public:
@@ -12,6 +13,7 @@ class Pin {
 
     protected:
         uint8_t m_Id;
+        HAL* hal;
 };
 
 #endif

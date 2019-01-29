@@ -10,6 +10,8 @@ class HAL {
     public:
         void digitalWriteSafe(uint8_t pin, uint32_t value);
         int digitalReadSafe(uint8_t pin);
+
+        void pinModeSafe(uint8_t pin, PinMode mode);
 };
 
 #endif
