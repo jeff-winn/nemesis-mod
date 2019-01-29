@@ -2,6 +2,7 @@
 #define DIGITAL_PIN_H
 
 #include <stdint.h>
+#include "../HAL.h"
 #include "Pin.h"
 
 class DigitalPin : public Pin {
@@ -10,6 +11,9 @@ class DigitalPin : public Pin {
 
         int read();
         void write(uint32_t value);
+    
+    private:
+        HAL* hal;
 };
 
 #endif
