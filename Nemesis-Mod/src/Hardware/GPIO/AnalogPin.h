@@ -1,7 +1,6 @@
 #ifndef ANALOG_PIN_H
 #define ANALOG_PIN_H
 
-#include <stdint.h>
 #include "Pin.h"
 
 class AnalogPin : public Pin {

@@ -8,10 +8,13 @@ enum PinMode {
 
 class HAL {
     public:
-        void digitalWriteSafe(uint8_t pin, uint32_t value);
-        int digitalReadSafe(uint8_t pin);
+        virtual void digitalWriteSafe(uint8_t pin, uint32_t value);
+        virtual int digitalReadSafe(uint8_t pin);
 
-        void pinModeSafe(uint8_t pin, PinMode mode);
+        virtual void pinModeSafe(uint8_t pin, PinMode mode);
+
+        virtual void analogWriteSafe(uint8_t pin, uint32_t value);
+        virtual int analogReadSafe(uint8_t pin);
 };
 
 #endif
