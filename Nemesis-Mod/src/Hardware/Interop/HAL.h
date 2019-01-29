@@ -15,6 +15,9 @@ class HAL {
 
         virtual void analogWriteSafe(uint8_t pin, uint32_t value);
         virtual int analogReadSafe(uint8_t pin);
+
+        virtual bool setPwmFrequencySafe(uint8_t pin, uint32_t frequency);
+        virtual void pwmWriteSafe(uint8_t pin, uint8_t value);
 };
 
 #endif

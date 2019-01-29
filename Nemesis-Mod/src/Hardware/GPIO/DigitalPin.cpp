@@ -1,4 +1,3 @@
-#include <stdint.h>
 #include "DigitalPin.h"
 
 DigitalPin::DigitalPin(uint8_t id) : Pin(id) {
