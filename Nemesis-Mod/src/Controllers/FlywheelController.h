@@ -1,8 +1,8 @@
 #ifndef FLYWHEEL_CONTROLLER_H
 #define FLYWHEEL_CONTROLLER_H
 
-#include "Potentiometer.h"
-#include "Motor.h"
+#include "../Hardware/Potentiometer.h"
+#include "../Hardware/Motor.h"
 
 enum FlywheelMotor {
     Motor1,

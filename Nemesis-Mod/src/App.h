@@ -2,7 +2,7 @@
 #define APP_H
 
 #include <stdbool.h>
-#include "Hardware/FlywheelController.h"
+#include "Controllers/FlywheelController.h"
 #include "Hardware/Button.h"
 
 // This frequency seemed to provide the best range of operation from the stock motors.
