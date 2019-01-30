@@ -3,6 +3,7 @@
 - Breadboard
 - [.NET Gadgeteer breakout board](http://www.ctr-electronics.com/breakoutmodule.html)
 - [.NET Gadgeteer L298 Motor Driver module](http://old.ghielectronics.com/catalog/product/315)
+- [.NET Gadgeteer Button module](https://old.ghielectronics.com/catalog/product/274)
 
 
 ### Development Environment
