@@ -19,6 +19,10 @@ class FlywheelController {
         void startAll();
         void stopAll();
 
+    protected:
+        virtual Motor* createMotor(uint8_t pwm, int frequency);
+        virtual Potentiometer* createPotentiometer(uint8_t pin);
+
     private:
         Potentiometer* m_potentiometer1;
         Motor* m_motor1;

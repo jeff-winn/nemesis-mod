@@ -3,19 +3,13 @@
 void FlywheelController::init(FlywheelMotor flywheel, uint8_t pwm, uint8_t pot) {
     switch (flywheel) {
         case FlywheelMotor::Motor1: {
-            m_motor1 = new Motor();
-            m_motor1->init(pwm, MOTOR_FREQUENCY);
-
-            m_potentiometer1 = new Potentiometer();
-            m_potentiometer1->init(pot);
+            m_motor1 = createMotor(pwm, MOTOR_FREQUENCY);
+            m_potentiometer1 = createPotentiometer(pot);
             break;
         }
         case FlywheelMotor::Motor2: {
-            m_motor2 = new Motor();
-            m_motor2->init(pwm, MOTOR_FREQUENCY);
-
-            m_potentiometer2 = new Potentiometer();
-            m_potentiometer2->init(pot);
+            m_motor2 = createMotor(pwm, MOTOR_FREQUENCY);
+            m_potentiometer2 = createPotentiometer(pot);
             break;
         }
     }
@@ -34,3 +28,16 @@ void FlywheelController::stopAll() {
     m_motor2->stop();
 }
 
+Motor* FlywheelController::createMotor(uint8_t pwm, int frequency) {
+    Motor* newMotor = new Motor();
+    newMotor->init(pwm, frequency);
+
+    return newMotor;
+}
+
+Potentiometer* FlywheelController::createPotentiometer(uint8_t pot) {
+    Potentiometer* newPotentiometer = new Potentiometer();
+    newPotentiometer->init(pot);
+
+    return newPotentiometer;
+}
