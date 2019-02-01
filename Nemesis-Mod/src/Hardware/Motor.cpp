@@ -1,5 +1,7 @@
 #include "Motor.h"
 
+using namespace App::Hardware;
+
 void Motor::init(uint8_t pin, uint32_t frequency) {
     m_pin = new PwmPin(pin);
     m_pin->init(frequency);

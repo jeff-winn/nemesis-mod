@@ -1,5 +1,7 @@
 #include "Potentiometer.h"
 
+using namespace App::Hardware;
+
 void Potentiometer::init(uint8_t pin) {
     m_pin = new AnalogPin(pin);
     m_pin->setInputMode();

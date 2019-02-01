@@ -4,6 +4,8 @@
 #include "../Hardware/Potentiometer.h"
 #include "../Hardware/Motor.h"
 
+using namespace App::Hardware;
+
 namespace App { namespace Controllers 
 {
     // This frequency seemed to provide the best range of operation from the stock motors.

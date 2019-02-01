@@ -4,6 +4,7 @@
 #include "src/Hardware/Button.h"
 
 using namespace App::Controllers;
+using namespace App::Hardware;
 
 FlywheelController* m_flywheelController;
 Button* m_revTrigger;
