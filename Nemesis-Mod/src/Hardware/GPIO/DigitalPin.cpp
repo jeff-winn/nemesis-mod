@@ -1,7 +1,5 @@
 #include "DigitalPin.h"
 
-using namespace App::Hardware::GPIO;
-
 DigitalPin::DigitalPin(uint8_t id) : Pin(id) {
 }
 

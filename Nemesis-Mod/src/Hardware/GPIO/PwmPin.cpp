@@ -1,7 +1,5 @@
 #include "PwmPin.h"
 
-using namespace App::Hardware::GPIO;
-
 PwmPin::PwmPin(uint8_t id) : Pin(id) {
 }
 

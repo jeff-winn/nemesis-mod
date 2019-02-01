@@ -1,7 +1,5 @@
 #include "Button.h"
 
-using namespace App::Hardware;
-
 void Button::init(uint8_t pin, uint8_t intPin, void (*onStateChangedCallback)(void)) {
     m_pin = createPin(pin, intPin, onStateChangedCallback);
 }

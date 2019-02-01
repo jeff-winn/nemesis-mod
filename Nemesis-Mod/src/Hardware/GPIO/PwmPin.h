@@ -3,18 +3,15 @@
 
 #include "Pin.h"
 
-namespace App { namespace Hardware { namespace GPIO
-{
-    class PwmPin : public Pin {
-        public:
-            PwmPin::PwmPin(uint8_t id);
-            void init(uint32_t frequency);
+class PwmPin : public Pin {
+    public:
+        PwmPin::PwmPin(uint8_t id);
+        void init(uint32_t frequency);
 
-            void write(uint8_t value);
-            
-        private:
-            uint32_t m_frequency;
-    };
-}}}
+        void write(uint8_t value);
+        
+    private:
+        uint32_t m_frequency;
+};
 
 #endif
