@@ -1,5 +1,7 @@
 #include "Pin.h"
 
+using namespace App::Hardware::GPIO;
+
 Pin::Pin(uint8_t id) {
     m_Id = id;
     hal = new HAL();

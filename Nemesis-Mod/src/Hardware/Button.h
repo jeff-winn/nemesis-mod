@@ -3,6 +3,8 @@
 
 #include "GPIO/InterruptPin.h"
 
+using namespace App::Hardware::GPIO;
+
 namespace App { namespace Hardware
 {
     class Button {

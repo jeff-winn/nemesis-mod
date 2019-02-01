@@ -2,6 +2,8 @@
 #include <PWM.h>
 #include "HAL.h"
 
+using namespace App::Hardware::Interop;
+
 void HAL::attachInterruptSafe(uint8_t pin, void (*userFunc)(void), InterruptMode mode) {
     int m = CHANGE;
 

@@ -4,16 +4,21 @@
 #include <stdint.h>
 #include "../Interop/HAL.h"
 
-class Pin {
-    public:
-        Pin(uint8_t id);
+using namespace App::Hardware::Interop;
 
-        void setInputMode();
-        void setOutputMode();
+namespace App { namespace Hardware { namespace GPIO
+{
+    class Pin {
+        public:
+            Pin(uint8_t id);
 
-    protected:
-        uint8_t m_Id;
-        HAL* hal;
-};
+            void setInputMode();
+            void setOutputMode();
+
+        protected:
+            uint8_t m_Id;
+            HAL* hal;
+    };
+}}}
 
 #endif

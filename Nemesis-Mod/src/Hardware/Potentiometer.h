@@ -3,6 +3,8 @@
 
 #include "GPIO/AnalogPin.h"
 
+using namespace App::Hardware::GPIO;
+
 namespace App { namespace Hardware 
 {
     class Potentiometer {

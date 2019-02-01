@@ -3,6 +3,8 @@
 
 #include "GPIO/PwmPin.h"
 
+using namespace App::Hardware::GPIO;
+
 namespace App { namespace Hardware 
 {
     class Motor {
@@ -14,6 +16,7 @@ namespace App { namespace Hardware
 
         private:
             PwmPin* m_pin;
+            
             uint8_t m_dutyCycle;
             bool m_started;
     };
