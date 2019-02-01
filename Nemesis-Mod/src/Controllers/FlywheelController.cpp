@@ -1,5 +1,7 @@
 #include "FlywheelController.h"
 
+using namespace App::Controllers;
+
 void FlywheelController::init(FlywheelMotor flywheel, uint8_t pwm, uint8_t pot) {
     switch (flywheel) {
         case FlywheelMotor::Motor1: {
