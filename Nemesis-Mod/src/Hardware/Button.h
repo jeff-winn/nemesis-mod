@@ -13,6 +13,9 @@ namespace App { namespace Hardware
             bool isPressed();
             
         protected:
+            virtual InterruptPin* createPin(uint8_t pin, uint8_t intPin, void (*onStateChangedCallback)(void));
+        
+        private:
             InterruptPin* m_pin;
     };
 }}

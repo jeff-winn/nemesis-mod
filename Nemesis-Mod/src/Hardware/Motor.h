@@ -14,6 +14,9 @@ namespace App { namespace Hardware
             void start(uint8_t dutyCycle);
             void stop();
 
+        protected:
+            virtual PwmPin* createPin(uint8_t pin, uint32_t frequency);
+
         private:
             PwmPin* m_pin;
             

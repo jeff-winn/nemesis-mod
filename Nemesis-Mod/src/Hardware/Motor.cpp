@@ -3,9 +3,7 @@
 using namespace App::Hardware;
 
 void Motor::init(uint8_t pin, uint32_t frequency) {
-    m_pin = new PwmPin(pin);
-    m_pin->init(frequency);
-    m_pin->setOutputMode();
+    m_pin = createPin(pin, frequency);
 }
 
 void Motor::start(uint8_t dutyCycle) {
@@ -24,4 +22,12 @@ void Motor::stop() {
     
     m_pin->write(0);
     m_started = false;
+}
+
+PwmPin* Motor::createPin(uint8_t pin, uint32_t frequency) {
+    PwmPin* newPin = new PwmPin(pin);
+    newPin->init(frequency);
+    newPin->setOutputMode();
+
+    return newPin;
 }
