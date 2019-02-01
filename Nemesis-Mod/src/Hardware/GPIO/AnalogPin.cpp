@@ -1,5 +1,7 @@
 #include "AnalogPin.h"
 
+using namespace App::Hardware::GPIO;
+
 AnalogPin::AnalogPin(uint8_t id) : Pin(id) {
 }
 

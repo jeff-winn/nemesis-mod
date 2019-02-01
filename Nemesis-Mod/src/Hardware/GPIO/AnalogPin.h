@@ -3,12 +3,15 @@
 
 #include "Pin.h"
 
-class AnalogPin : public Pin {
-    public:
-        AnalogPin::AnalogPin(uint8_t id);
+namespace App { namespace Hardware { namespace GPIO
+{
+    class AnalogPin : public Pin {
+        public:
+            AnalogPin::AnalogPin(uint8_t id);
 
-        int read();
-        void write(uint32_t value);
-};
+            int read();
+            void write(uint32_t value);
+    };
+}}}
 
 #endif

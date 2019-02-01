@@ -3,13 +3,21 @@
 
 #include "GPIO/AnalogPin.h"
 
-class Potentiometer {
-    public:
-        void init(uint8_t pin);
-        int read();
+using namespace App::Hardware::GPIO;
+
+namespace App { namespace Hardware 
+{
+    class Potentiometer {
+        public:
+            void init(uint8_t pin);
+            int read();
         
-    private:
-        AnalogPin* m_pin;
-};
+        protected:
+            virtual AnalogPin* createPin(uint8_t pin);
+
+        private:
+            AnalogPin* m_pin;
+    };
+}}
 
 #endif

@@ -12,3 +12,7 @@ This is the toolset that is currently being used to write the code included with
   - C/C++ extension
   - Arduino extension
 - Arduino IDE
+
+### Dependencies
+Below lists the dependencies that will need to be installed to the libraries folder on the build machine.
+- [Arduino PWM Frequency Library](https://code.google.com/archive/p/arduino-pwm-frequency-library/downloads)

@@ -1,5 +1,7 @@
 #include "InterruptPin.h"
 
+using namespace App::Hardware::GPIO;
+
 InterruptPin::InterruptPin(uint8_t id, uint8_t interruptId) : Pin(id) {
     m_interruptId = interruptId;
 }

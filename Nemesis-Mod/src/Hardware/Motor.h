@@ -3,17 +3,26 @@
 
 #include "GPIO/PwmPin.h"
 
-class Motor {
-    public:
-        void init(uint8_t pin, uint32_t frequency);
+using namespace App::Hardware::GPIO;
 
-        void start(uint8_t dutyCycle);
-        void stop();
+namespace App { namespace Hardware 
+{
+    class Motor {
+        public:
+            void init(uint8_t pin, uint32_t frequency);
 
-    private:
-        PwmPin* m_pin;
-        uint8_t m_dutyCycle;
-        bool m_started;
-};
+            void start(uint8_t dutyCycle);
+            void stop();
+
+        protected:
+            virtual PwmPin* createPin(uint8_t pin, uint32_t frequency);
+
+        private:
+            PwmPin* m_pin;
+            
+            uint8_t m_dutyCycle;
+            bool m_started;
+    };
+}}
 
 #endif

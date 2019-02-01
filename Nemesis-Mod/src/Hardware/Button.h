@@ -3,13 +3,21 @@
 
 #include "GPIO/InterruptPin.h"
 
-class Button {
-    public:
-        void init(uint8_t pin, uint8_t intPin, void (*onStateChangedCallback)(void));
-        bool isPressed();
+using namespace App::Hardware::GPIO;
+
+namespace App { namespace Hardware
+{
+    class Button {
+        public:
+            void init(uint8_t pin, uint8_t intPin, void (*onStateChangedCallback)(void));
+            bool isPressed();
+            
+        protected:
+            virtual InterruptPin* createPin(uint8_t pin, uint8_t intPin, void (*onStateChangedCallback)(void));
         
-    protected:
-        InterruptPin* m_pin;
-};
+        private:
+            InterruptPin* m_pin;
+    };
+}}
 
 #endif

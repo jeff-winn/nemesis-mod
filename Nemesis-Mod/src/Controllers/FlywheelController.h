@@ -4,31 +4,36 @@
 #include "../Hardware/Potentiometer.h"
 #include "../Hardware/Motor.h"
 
-// This frequency seemed to provide the best range of operation from the stock motors.
-static const uint32_t MOTOR_FREQUENCY = 35000;
+using namespace App::Hardware;
 
-enum FlywheelMotor {
-    Motor1,
-    Motor2
-};
+namespace App { namespace Controllers 
+{
+    // This frequency seemed to provide the best range of operation from the stock motors.
+    static const uint32_t MOTOR_FREQUENCY = 35000;
 
-class FlywheelController {
-    public:
-        void init(FlywheelMotor flywheel, uint8_t pwm, uint8_t potentiometer);
+    enum FlywheelMotor {
+        Motor1,
+        Motor2
+    };
 
-        void startAll();
-        void stopAll();
+    class FlywheelController {
+        public:
+            void init(FlywheelMotor flywheel, uint8_t pwm, uint8_t potentiometer);
 
-    protected:
-        virtual Motor* createMotor(uint8_t pwm, int frequency);
-        virtual Potentiometer* createPotentiometer(uint8_t pin);
+            void startAll();
+            void stopAll();
 
-    private:
-        Potentiometer* m_potentiometer1;
-        Motor* m_motor1;
+        protected:
+            virtual Motor* createMotor(uint8_t pwm, int frequency);
+            virtual Potentiometer* createPotentiometer(uint8_t pin);
 
-        Potentiometer* m_potentiometer2;
-        Motor* m_motor2;
-};
+        private:
+            Potentiometer* m_potentiometer1;
+            Motor* m_motor1;
+
+            Potentiometer* m_potentiometer2;
+            Motor* m_motor2;
+    };
+}}
 
 #endif
