@@ -1,5 +1,6 @@
 # Visual Studio Code configuration files
-.vscode/tasks.json
+.vscode/**
+!.vscode/c_cpp_properties.json
 
 # Build configuration outputs
 build/*
