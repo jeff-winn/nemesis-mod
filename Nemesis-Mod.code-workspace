@@ -7,7 +7,6 @@
 	"settings": {		
 		"C_Cpp.intelliSenseEngine": "Tag Parser",
 		"files.exclude": {
-			".packages": true,
 			"build": true,
 			"docs": true,
 			"tools": true,

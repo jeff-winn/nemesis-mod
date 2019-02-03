@@ -2,8 +2,7 @@
 WORKSPACE_FOLDER ?= 
 
 # Arduino CLI executable name and directory location
-ARDUINO_CLI = arduino-cli.exe
-TOOLS_FOLDER = $(WORKSPACE_FOLDER)
+ARDUINO_CLI = $(WORKSPACE_FOLDER)\arduino-cli.exe
 
 # Arduino CLI Board type
 BOARD_TYPE = arduino:avr:uno
@@ -18,13 +17,20 @@ VERBOSE =
 BUILD_FOLDER=$(WORKSPACE_FOLDER)\build
 PROJECT_FOLDER=$(WORKSPACE_FOLDER)\Nemesis-Mod
 
+.PHONY: all
+
+all: install_prerequisites rebuild
 rebuild: clean build
 
+install_prerequisites:
+	$(ARDUINO_CLI) core update-index
+	$(ARDUINO_CLI) core install arduino:avr
+	
 build:
-	$(TOOLS_FOLDER)/$(ARDUINO_CLI) compile $(VERBOSE) --build-path=$(BUILD_FOLDER) --build-cache-path=$(BUILD_FOLDER) -b $(BOARD_TYPE) $(PROJECT_FOLDER)
+	$(ARDUINO_CLI) compile $(VERBOSE) --build-path=$(BUILD_FOLDER) --build-cache-path=$(BUILD_FOLDER) -b $(BOARD_TYPE) $(PROJECT_FOLDER)
 
 upload:
-	$(TOOLS_FOLDER)/$(ARDUINO_CLI) upload --port $(SERIAL_PORT) --fqbn $(BOARD_TYPE) --verify $(PROJECT_FOLDER)
+	$(ARDUINO_CLI) upload --port $(SERIAL_PORT) --fqbn $(BOARD_TYPE) --verify $(PROJECT_FOLDER)
 
 clean:
 	@rd /s /q $(BUILD_FOLDER)

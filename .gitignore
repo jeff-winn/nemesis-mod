@@ -1,13 +1,13 @@
 # Visual Studio Code configuration files
-.vscode/*
+.vscode/tasks.json
 
 # Build configuration outputs
 build/*
 **/*.elf
 **/*.hex
 
-# Arduino packages
-.packages
+# External dependencies
+external
 
 # Documentation temporary files
 docs/*.~*
