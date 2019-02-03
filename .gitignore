@@ -6,5 +6,8 @@ build/*
 **/*.elf
 **/*.hex
 
+# Arduino packages
+.packages
+
 # Documentation temporary files
 docs/*.~*

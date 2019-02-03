@@ -3,7 +3,7 @@ WORKSPACE_FOLDER ?=
 
 # Arduino CLI executable name and directory location
 ARDUINO_CLI = arduino-cli.exe
-TOOLS_FOLDER = $(WORKSPACE_FOLDER)\tools
+TOOLS_FOLDER = $(WORKSPACE_FOLDER)
 
 # Arduino CLI Board type
 BOARD_TYPE = arduino:avr:uno
