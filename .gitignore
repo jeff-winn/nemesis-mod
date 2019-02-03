@@ -3,5 +3,8 @@
 
 # Build configuration outputs
 build/*
+**/*.elf
+**/*.hex
 
+# Documentation temporary files
 docs/*.~*
