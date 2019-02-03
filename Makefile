@@ -1,5 +1,5 @@
 # Arduino Library base folder and example structure
-WORKSPACE_FOLDER ?= 
+WORKSPACE_FOLDER ?= $(abspath .)
 
 # Arduino CLI executable name and directory location
 ARDUINO_CLI = $(WORKSPACE_FOLDER)\arduino-cli.exe
@@ -18,22 +18,21 @@ VERBOSE =
 BUILD_FOLDER=$(WORKSPACE_FOLDER)\build
 PROJECT_FOLDER=$(WORKSPACE_FOLDER)\Nemesis-Mod
 
-.PHONY: all
+.PHONY: install_prerequisites build
 
-all: install_prerequisites rebuild
 rebuild: clean build
 
 install_prerequisites:
-	$(ARDUINO_CLI) core update-index
-	$(ARDUINO_CLI) core install $(BOARD_TYPE)
+	"$(ARDUINO_CLI)" core update-index
+	"$(ARDUINO_CLI)" core install $(BOARD_TYPE)
 	
 build:
-	$(ARDUINO_CLI) compile $(VERBOSE) --build-path=$(BUILD_FOLDER) --build-cache-path=$(BUILD_FOLDER) -b $(FQBN) $(PROJECT_FOLDER)
+	"$(ARDUINO_CLI)" compile $(VERBOSE) --build-path="$(BUILD_FOLDER)" --build-cache-path="$(BUILD_FOLDER)" -b $(FQBN) "$(PROJECT_FOLDER)"
 
 upload:
-	$(ARDUINO_CLI) upload --port $(SERIAL_PORT) --fqbn $(FQBN) --verify $(PROJECT_FOLDER)
+	"$(ARDUINO_CLI)" upload --port $(SERIAL_PORT) --fqbn $(FQBN) --verify "$(PROJECT_FOLDER)"
 
 clean:
-	@rd /s /q $(BUILD_FOLDER)
-	del $(PROJECT_FOLDER)\*.elf
-	del $(PROJECT_FOLDER)\*.hex
+	rd /s /q "$(BUILD_FOLDER)"
+	del "$(PROJECT_FOLDER)\*.elf"
+	del "$(PROJECT_FOLDER)\*.hex"
