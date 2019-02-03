@@ -1,5 +1,5 @@
 # Arduino Library base folder and example structure
-WORKSPACE_FOLDER = .\
+WORKSPACE_FOLDER ?= 
 
 # Arduino CLI executable name and directory location
 ARDUINO_CLI = arduino-cli.exe
@@ -18,12 +18,15 @@ VERBOSE =
 BUILD_FOLDER=$(WORKSPACE_FOLDER)\build
 PROJECT_FOLDER=$(WORKSPACE_FOLDER)\Nemesis-Mod
 
-.PHONY: build clean
+rebuild: clean build
 
 build:
 	$(TOOLS_FOLDER)/$(ARDUINO_CLI) compile $(VERBOSE) --build-path=$(BUILD_FOLDER) --build-cache-path=$(BUILD_FOLDER) -b $(BOARD_TYPE) $(PROJECT_FOLDER)
 
+upload:
+	$(TOOLS_FOLDER)/$(ARDUINO_CLI) upload --port $(SERIAL_PORT) --fqbn $(BOARD_TYPE) --verify $(PROJECT_FOLDER)
+
 clean:
-	@rm -rf $(BUILD_PATH)
-	@rm $(PROJECT_FOLDER)/*.elf
-	@rm $(PROJECT_FOLDER)/*.hex
+	@rd /s /q $(BUILD_FOLDER)
+	del $(PROJECT_FOLDER)\*.elf
+	del $(PROJECT_FOLDER)\*.hex
