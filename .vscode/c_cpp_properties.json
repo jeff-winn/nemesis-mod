@@ -3,7 +3,7 @@
         {
             "name": "Win32",
             "browse": {
-                "limitSymbolsToIncludedHeaders": false,
+                "limitSymbolsToIncludedHeaders": true,
                 "path": [
                     "${workspaceFolder}\\libraries",
                     "${workspaceFolder}\\Nemesis-Mod",
