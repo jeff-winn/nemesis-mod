@@ -1,4 +1,11 @@
-### Hardware Requirements
+## Build Status
+Master | Current
+------------ | -------------
+![Master Build Status](https://ci.appveyor.com/api/projects/status/85ad7mn4lbf9lewh/branch/master?svg=true) | ![Current Build Status](https://ci.appveyor.com/api/projects/status/85ad7mn4lbf9lewh?svg=true)
+
+
+## Hardware Requirements
+These are the boards and hardware being used by the project.
 - [Adafruit METRO 328](https://www.adafruit.com/product/2488)
 - Breadboard
 - [.NET Gadgeteer breakout board](http://www.ctr-electronics.com/breakoutmodule.html)
@@ -12,5 +19,5 @@ This is the toolset that is currently being used to write the code included with
   - MinGW (mingw32-base-bin, mingw32-gcc-g++-bin, msys-base-bin)
 
 ### Dependencies
-Below lists the dependencies that will need to be installed to the libraries folder on the build machine.
+Below are the dependencies that are being used by the project.
 - [Arduino PWM Frequency Library](https://code.google.com/archive/p/arduino-pwm-frequency-library/downloads)
