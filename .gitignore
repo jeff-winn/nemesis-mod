@@ -1,7 +1,14 @@
 # Visual Studio Code configuration files
-.vscode/*
+.vscode/**
+!.vscode/c_cpp_properties.json
 
 # Build configuration outputs
 build/*
+**/*.elf
+**/*.hex
 
+# External dependencies
+external
+
+# Documentation temporary files
 docs/*.~*

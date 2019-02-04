@@ -4,34 +4,15 @@
 			"path": "."
 		}		
 	],
-	"settings": {
-		"arduino.defaultBaudRate": 9600,
-		"editor.tokenColorCustomizations": {
-			"textMateRules": [
-				{
-					"scope": "googletest.failed",
-					"settings": {
-						"foreground": "#f00"
-					}
-				},
-				{
-					"scope": "googletest.passed",
-					"settings": {
-						"foreground": "#0f0"
-					}
-				},
-				{
-					"scope": "googletest.run",
-					"settings": {
-						"foreground": "#0f0"
-					}
-				}
-			]
-		},
+	"settings": {		
 		"C_Cpp.intelliSenseEngine": "Tag Parser",
 		"files.exclude": {
 			"build": true,
-			"docs": true
+			"external": true,
+			"docs": true,
+			"tools": true,
+			"**/*.elf": true,
+			"**/*.hex": true
 		},
 		"files.associations": {
 			"xiosbase": "cpp",
