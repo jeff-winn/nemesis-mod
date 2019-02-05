@@ -3,7 +3,7 @@
         {
             "name": "Arduino",
             "browse": {
-                "limitSymbolsToIncludedHeaders": true,
+                "limitSymbolsToIncludedHeaders": false,
                 "path": [
                     "${workspaceFolder}\\libraries",
                     "${workspaceFolder}\\Nemesis-Mod",
