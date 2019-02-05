@@ -25,9 +25,9 @@ void loop() {
 
 void onRevTriggerStateChanged() {
     if (m_revTrigger->isPressed()) {
-        m_flywheelController->startAll();
+        m_flywheelController->start();
     }
     else {
-        m_flywheelController->stopAll();
+        m_flywheelController->stop();
     }
 }

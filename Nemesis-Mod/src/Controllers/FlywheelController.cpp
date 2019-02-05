@@ -1,43 +1,31 @@
 #include "FlywheelController.h"
 
 void FlywheelController::init(FlywheelMotor flywheel, uint8_t pwm, uint8_t pot) {
-    switch (flywheel) {
+    switch (flywheel) {        
         case FlywheelMotor::Motor1: {
-            m_motor1 = createMotor(pwm, MOTOR_FREQUENCY);
-            m_potentiometer1 = createPotentiometer(pot);
+            m_motorController1 = createMotorController(pwm, pot);
             break;
         }
         case FlywheelMotor::Motor2: {
-            m_motor2 = createMotor(pwm, MOTOR_FREQUENCY);
-            m_potentiometer2 = createPotentiometer(pot);
+            m_motorController2 = createMotorController(pwm, pot);
             break;
         }
     }
 }
 
-void FlywheelController::startAll() {
-    uint8_t dutyCycle1 = m_potentiometer1->read() / 4;
-    uint8_t dutyCycle2 = m_potentiometer2->read() / 4;
-
-    m_motor1->start(dutyCycle1);
-    m_motor2->start(dutyCycle2);
+void FlywheelController::start() {
+    m_motorController1->start();
+    m_motorController2->start();
 }
 
-void FlywheelController::stopAll() {
-    m_motor1->stop();
-    m_motor2->stop();
+void FlywheelController::stop() {
+    m_motorController1->stop();
+    m_motorController2->stop();
 }
 
-Motor* FlywheelController::createMotor(uint8_t pwm, int frequency) {
-    Motor* newMotor = new Motor();
-    newMotor->init(pwm, frequency);
+MotorController* FlywheelController::createMotorController(uint8_t pwm, uint8_t pot) {
+    MotorController* newController = new MotorController();
+    newController->init(pwm, pot);
 
-    return newMotor;
-}
-
-Potentiometer* FlywheelController::createPotentiometer(uint8_t pot) {
-    Potentiometer* newPotentiometer = new Potentiometer();
-    newPotentiometer->init(pot);
-
-    return newPotentiometer;
+    return newController;
 }
