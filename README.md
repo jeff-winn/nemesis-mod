@@ -1,4 +1,6 @@
 ## Build Status
+This project currently integrates with AppVeyor CI to build the Makefile (using MinGW) on their virtual machines automatically upon check-in.
+
 Master | Current
 ------------ | -------------
 ![Master Build Status](https://ci.appveyor.com/api/projects/status/85ad7mn4lbf9lewh/branch/master?svg=true) | ![Current Build Status](https://ci.appveyor.com/api/projects/status/85ad7mn4lbf9lewh?svg=true)
