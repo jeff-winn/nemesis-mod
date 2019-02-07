@@ -10,8 +10,8 @@ Master | Current
 These are the boards and hardware being used by the project.
 - [Adafruit METRO 328](https://www.adafruit.com/product/2488)
 - Breadboard
+- [Pololu Dual G2 High-Power Motor Driver 18v18 Shield for Arduino](https://www.pololu.com/product/2515)
 - [.NET Gadgeteer breakout board](http://www.ctr-electronics.com/breakoutmodule.html)
-- [.NET Gadgeteer L298 Motor Driver module](http://old.ghielectronics.com/catalog/product/315)
 - [.NET Gadgeteer Button module](https://old.ghielectronics.com/catalog/product/274)
 
 ### Development Environment
