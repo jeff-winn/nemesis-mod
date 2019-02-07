@@ -2,11 +2,18 @@
     "configurations": [
         {
             "name": "Arduino",
+            "includePath": [
+                "${workspaceFolder}\\libraries\\**",
+                "${workspaceFolder}\\Nemesis-Mod\\src\\**",
+                "${workspaceFolder}\\external\\packages\\arduino\\hardware\\avr\\1.6.23\\cores\\arduino\\**",
+                "${workspaceFolder}\\external\\packages\\arduino\\hardware\\avr\\1.6.23\\variants\\standard\\**",
+                "${workspaceFolder}\\external\\packages\\arduino\\tools\\avr-gcc\\5.4.0-atmel3.6.1-arduino2\\avr\\include\\**"
+            ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": false,
                 "path": [
                     "${workspaceFolder}\\libraries",
-                    "${workspaceFolder}\\Nemesis-Mod",
+                    "${workspaceFolder}\\Nemesis-Mod\\src",
                     "${workspaceFolder}\\external\\packages\\arduino\\hardware\\avr\\1.6.23\\cores\\arduino",
                     "${workspaceFolder}\\external\\packages\\arduino\\hardware\\avr\\1.6.23\\variants\\standard",
                     "${workspaceFolder}\\external\\packages\\arduino\\tools\\avr-gcc\\5.4.0-atmel3.6.1-arduino2\\avr\\include"
