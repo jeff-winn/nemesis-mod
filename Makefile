@@ -3,7 +3,11 @@ WORKSPACE_FOLDER ?= $(abspath .)
 EXTERNAL_FOLDER = $(WORKSPACE_FOLDER)/external
 
 # Arduino CLI executable name and directory location
-ARDUINO_CLI = $(WORKSPACE_FOLDER)/arduino-cli.exe
+ifeq ($(OS),Windows_NT)
+	ARDUINO_CLI := $(WORKSPACE_FOLDER)/arduino-cli.exe
+else
+	ARDUINO_CLI := $(WORKSPACE_FOLDER)/arduino-cli
+endif
 
 # Arduino CLI Board type
 BOARD_TYPE = arduino:avr
