@@ -1,29 +1,37 @@
 {
+    "env": {
+        "boardName": "ATmega328P",
+        "avrVersionId": "1.6.23",
+        "avrGccVersionId": "5.4.0-atmel3.6.1-arduino2"
+    },
     "configurations": [
         {
-            "name": "Arduino",
+            "name": "Arduino Uno",
             "includePath": [
                 "${workspaceFolder}/libraries/**",
                 "${workspaceFolder}/Nemesis-Mod/src/**",
-                "${workspaceFolder}/external/packages/arduino/hardware/avr/1.6.23/cores/arduino/**",
-                "${workspaceFolder}/external/packages/arduino/hardware/avr/1.6.23/variants/standard/**",
-                "${workspaceFolder}/external/packages/arduino/tools/avr-gcc/5.4.0-atmel3.6.1-arduino2/avr/include/**"
+                "${workspaceFolder}/external/packages/arduino/hardware/avr/${avrVersionId}/cores/arduino/**",
+                "${workspaceFolder}/external/packages/arduino/hardware/avr/${avrVersionId}/variants/standard/**",
+                "${workspaceFolder}/external/packages/arduino/tools/avr-gcc/${avrGccVersionId}/avr/include/**"
             ],
             "defines": [
                 "_DEBUG",
-                "__AVR_ATmega328P__"
+                "ARDUINO",
+                "ARDUINO_AVR_UNO",
+                "__AVR_${env:boardName}__"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": false,
                 "path": [
                     "${workspaceFolder}/libraries",
                     "${workspaceFolder}/Nemesis-Mod/src",
-                    "${workspaceFolder}/external/packages/arduino/hardware/avr/1.6.23/cores/arduino",
-                    "${workspaceFolder}/external/packages/arduino/hardware/avr/1.6.23/variants/standard",
-                    "${workspaceFolder}/external/packages/arduino/tools/avr-gcc/5.4.0-atmel3.6.1-arduino2/avr/include"
+                    "${workspaceFolder}/external/packages/arduino/hardware/avr/${avrVersionId}/cores/arduino",
+                    "${workspaceFolder}/external/packages/arduino/hardware/avr/${avrVersionId}/variants/standard",
+                    "${workspaceFolder}/external/packages/arduino/tools/avr-gcc/${avrGccVersionId}/avr/include"
                 ]
             },
-            "compilerPath": "${workspaceFolder}/external/packages/arduino/tools/avr-gcc/5.4.0-atmel3.6.1-arduino2/bin/avr-gcc.exe",
+            "compilerPath": "${workspaceFolder}/external/packages/arduino/tools/avr-gcc/${avrGccVersionId}/bin/avr-gcc.exe -mmcu=${env:boardName}",
+            "macFrameworkPath": [],
             "intelliSenseMode": "gcc-x64",            
             "cStandard": "c11",
             "cppStandard": "c++17"
