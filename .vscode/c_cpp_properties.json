@@ -16,6 +16,7 @@
             ],
             "defines": [
                 "_DEBUG",
+                "F_CPU=16000000",
                 "ARDUINO",
                 "ARDUINO_AVR_UNO",
                 "__AVR_${boardName}__"
