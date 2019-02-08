@@ -8,13 +8,14 @@ Master | Current
 
 ## Hardware Requirements
 These are the boards and hardware being used by the project.
+- [Nerf Rival Nemesis MXVII-10K](https://shop.hasbro.com/en-us/product/nerf-rival-nemesis-mxvii-10-k-blue:04E71588-5056-9047-F5B8-940FC9A5A209)
 - [Adafruit METRO 328](https://www.adafruit.com/product/2488)
 - Breadboard
 - [Pololu Dual G2 High-Power Motor Driver 18v18 Shield for Arduino](https://www.pololu.com/product/2515)
 - [.NET Gadgeteer breakout board](http://www.ctr-electronics.com/breakoutmodule.html)
 - [.NET Gadgeteer Button module](https://old.ghielectronics.com/catalog/product/274)
 
-### Development Environment
+## Development Environment
 This is the toolset that is currently being used to write the code included within the src folder within this repository.
 - Visual Studio Code
   - C/C++ extension
