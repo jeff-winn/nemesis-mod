@@ -18,6 +18,9 @@ These are the boards and hardware being used by the project.
 This is the toolset that is currently being used to write the code included within the src folder within this repository.
 - Visual Studio Code
   - C/C++ extension
+- MacOS
+  - XCode command line tools
+- Windows
   - MinGW (mingw32-base-bin, mingw32-gcc-g++-bin, msys-base-bin)
 
 ### Dependencies
