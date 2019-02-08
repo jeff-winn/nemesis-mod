@@ -18,7 +18,7 @@
                 "_DEBUG",
                 "ARDUINO",
                 "ARDUINO_AVR_UNO",
-                "__AVR_${env:boardName}__"
+                "__AVR_${boardName}__"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": false,
@@ -30,7 +30,7 @@
                     "${workspaceFolder}/external/packages/arduino/tools/avr-gcc/${avrGccVersionId}/avr/include"
                 ]
             },
-            "compilerPath": "${workspaceFolder}/external/packages/arduino/tools/avr-gcc/${avrGccVersionId}/bin/avr-gcc.exe -mmcu=${env:boardName}",
+            "compilerPath": "${workspaceFolder}/external/packages/arduino/tools/avr-gcc/${avrGccVersionId}/bin/avr-gcc.exe -mmcu=${boardName}",
             "macFrameworkPath": [],
             "intelliSenseMode": "gcc-x64",            
             "cStandard": "c11",
