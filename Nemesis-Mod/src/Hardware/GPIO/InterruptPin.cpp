@@ -5,7 +5,7 @@ InterruptPin::InterruptPin(uint8_t id, uint8_t interruptId) : Pin(id) {
 }
 
 void InterruptPin::init(void (*onStateChangedCallback)(void), InterruptMode mode) {
-    hal->pinModeSafe(m_Id, PinMode::Input);
+    hal->pinModeSafe(m_Id, PinMode::Read);
     hal->attachInterruptSafe(m_interruptId, onStateChangedCallback, mode);
 }
 

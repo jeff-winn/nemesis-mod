@@ -6,9 +6,9 @@ Pin::Pin(uint8_t id) {
 }
 
 void Pin::setOutputMode() {
-    hal->pinModeSafe(m_Id, PinMode::Output);
+    hal->pinModeSafe(m_Id, PinMode::Write);
 }
 
 void Pin::setInputMode() {
-    hal->pinModeSafe(m_Id, PinMode::Input);
+    hal->pinModeSafe(m_Id, PinMode::Read);
 }

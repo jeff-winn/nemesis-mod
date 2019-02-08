@@ -37,11 +37,11 @@ void HAL::digitalWriteSafe(uint8_t pin, uint32_t value) {
 
 void HAL::pinModeSafe(uint8_t pin, PinMode mode) {
     switch (mode) {
-        case PinMode::Input: {
+        case PinMode::Read: {
             pinMode(pin, INPUT);
             break;
         }
-        case PinMode::Output: { 
+        case PinMode::Write: { 
             pinMode(pin, OUTPUT);
             break;
         }
