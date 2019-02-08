@@ -7,7 +7,7 @@ TOOLS_FOLDER = $(WORKSPACE_FOLDER)/tools
 ifeq ($(OS),Windows_NT)
 	ARDUINO_CLI = $(TOOLS_FOLDER)/arduino-cli.exe
 else
-	ARDUINO_CLI = $(TOOLS_FOLDER)/tools/arduino-cli
+	ARDUINO_CLI = $(TOOLS_FOLDER)/arduino-cli
 endif
 
 # Arduino CLI Board type

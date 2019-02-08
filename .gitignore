@@ -12,3 +12,6 @@ external
 
 # Documentation temporary files
 docs/*.~*
+
+# MacOS files
+**/.DS_Store
