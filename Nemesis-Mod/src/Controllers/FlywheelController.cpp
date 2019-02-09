@@ -1,31 +1,19 @@
 #include "FlywheelController.h"
 
-void FlywheelController::init(FlywheelMotor flywheel, uint8_t pwm, uint8_t pot) {
-    switch (flywheel) {        
-        case FlywheelMotor::Motor1: {
-            m_motorController1 = createMotorController(pwm, pot);
-            break;
-        }
-        case FlywheelMotor::Motor2: {
-            m_motorController2 = createMotorController(pwm, pot);
-            break;
-        }
-    }
+FlywheelController::FlywheelController(DualG2HighPowerMotorShield18v18* motorController, Potentiometer* pot1, Potentiometer* pot2) {
+    m_motorController = motorController;
+    m_pot1 = pot1;
+    m_pot2 = pot2;
+}
+
+void FlywheelController::init() {
+    m_motorController->enableDrivers();
+    m_motorController->init();
 }
 
 void FlywheelController::start() {
-    m_motorController1->start();
-    m_motorController2->start();
+    
 }
 
 void FlywheelController::stop() {
-    m_motorController1->stop();
-    m_motorController2->stop();
-}
-
-MotorController* FlywheelController::createMotorController(uint8_t pwm, uint8_t pot) {
-    MotorController* newController = new MotorController();
-    newController->init(pwm, pot);
-
-    return newController;
 }
