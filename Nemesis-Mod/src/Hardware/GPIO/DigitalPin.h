@@ -9,7 +9,7 @@ class DigitalPin : public Pin {
         DigitalPin::DigitalPin(uint8_t id);
 
         // Reads the value of the pin.
-        virtual int read();
+        virtual bool read();
         
         // Writes the value to the pin.
         virtual void write(uint32_t value);

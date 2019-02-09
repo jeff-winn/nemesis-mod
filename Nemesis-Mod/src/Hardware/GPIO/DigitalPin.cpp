@@ -7,6 +7,6 @@ void DigitalPin::write(uint32_t value) {
     hal->digitalWriteSafe(m_Id, value);
 }
 
-int DigitalPin::read() {
-    return hal->digitalReadSafe(m_Id);
+bool DigitalPin::read() {
+    return hal->digitalReadSafe(m_Id) != 0;
 }

@@ -1,16 +1,16 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
+#include "GPIO/DigitalPin.h"
 #include "GPIO/InterruptPin.h"
 
 class Button {
     public:
-        void init(uint8_t pin, uint8_t intPin, void (*onStateChangedCallback)(void));
-        bool isPressed();
-        
-    protected:
-        virtual InterruptPin* createPin(uint8_t pin, uint8_t intPin, void (*onStateChangedCallback)(void));
-    
+        Button::Button(InterruptPin* pin);
+
+        virtual void init(void (*onStateChangedCallback)(void));
+        virtual bool isPressed();
+
     private:
         InterruptPin* m_pin;
 };

@@ -12,18 +12,13 @@ void setup() {
 
     m_flywheelController = new FlywheelController(
         new DualG2HighPowerMotorShield18v18(),
-        new Potentiometer(
-            new AnalogPin(A0)),
-        new Potentiometer(
-            new AnalogPin(A1)));
+        new Potentiometer(new AnalogPin(A0)),
+        new Potentiometer(new AnalogPin(A1)));
 
     m_flywheelController->init();
-    
-    // m_flywheelController->init(FlywheelMotor::Motor1, 9, A0);  // (OC1A) to L298->IN2
-    // m_flywheelController->init(FlywheelMotor::Motor2, 10, A1); // (OC1B) to L298->IN4
 
-    m_revTrigger = new Button();
-    m_revTrigger->init(2, INT0, onRevTriggerStateChanged);
+    m_revTrigger = new Button(new InterruptPin(3, INT1));
+    m_revTrigger->init(onRevTriggerStateChanged);
 }
 
 void loop() {

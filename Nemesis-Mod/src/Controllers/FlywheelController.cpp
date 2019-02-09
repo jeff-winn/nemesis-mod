@@ -7,13 +7,27 @@ FlywheelController::FlywheelController(DualG2HighPowerMotorShield18v18* motorCon
 }
 
 void FlywheelController::init() {
-    m_motorController->enableDrivers();
     m_motorController->init();
+    m_motorController->calibrateCurrentOffsets();
+    
+    m_motorController->flipM1(true);
+    delay(1);
+
+    m_motorController->flipM2(true);
+    delay(1);    
 }
 
 void FlywheelController::start() {
+    m_motorController->enableDrivers();
+    delay(1);
     
+    m_motorController->setSpeeds(400, 400);
+    delay(1);
 }
 
 void FlywheelController::stop() {
+    m_motorController->setSpeeds(0, 0);
+
+    delay(1);
+    m_motorController->disableDrivers();
 }
