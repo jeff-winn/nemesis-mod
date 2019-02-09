@@ -5,7 +5,7 @@ Button::Button(InterruptPin* pin) {
 }
 
 void Button::init(void (*onStateChangedCallback)(void)) {
-    m_pin->init(onStateChangedCallback, InterruptMode::All);\
+    m_pin->init(onStateChangedCallback, InterruptMode::All);
     m_pin->setInputMode();
 }
 
