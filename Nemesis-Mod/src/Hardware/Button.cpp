@@ -1,16 +1,14 @@
 #include "Button.h"
 
-void Button::init(uint8_t pin, uint8_t intPin, void (*onStateChangedCallback)(void)) {
-    m_pin = createPin(pin, intPin, onStateChangedCallback);
+Button::Button(InterruptPin* pin) {
+    m_pin = pin;
+}
+
+void Button::init(void (*onStateChangedCallback)(void)) {
+    m_pin->init(onStateChangedCallback, InterruptMode::All);
+    m_pin->setInputMode();
 }
 
 bool Button::isPressed() {
     return m_pin->read() == 0;
-}
-
-InterruptPin* Button::createPin(uint8_t pin, uint8_t intPin, void (*onStateChangedCallback)(void)) {
-    InterruptPin* newPin = new InterruptPin(pin, intPin);
-    newPin->init(onStateChangedCallback, InterruptMode::All);
-
-    return newPin;
 }

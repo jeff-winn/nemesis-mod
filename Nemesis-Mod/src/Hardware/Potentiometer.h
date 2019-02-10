@@ -3,13 +3,13 @@
 
 #include "GPIO/AnalogPin.h"
 
+// Represents a potentiometer.
 class Potentiometer {
     public:
-        void init(uint8_t pin);
-        int read();
-    
-    protected:
-        virtual AnalogPin* createPin(uint8_t pin);
+        Potentiometer::Potentiometer(AnalogPin* pin);
+
+        // Reads the value.
+        virtual float read();
 
     private:
         AnalogPin* m_pin;

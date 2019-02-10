@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include <PWM.h>
 #include "HAL.h"
 
 void HAL::attachInterruptSafe(uint8_t pin, void (*userFunc)(void), InterruptMode mode) {
@@ -37,21 +36,13 @@ void HAL::digitalWriteSafe(uint8_t pin, uint32_t value) {
 
 void HAL::pinModeSafe(uint8_t pin, PinMode mode) {
     switch (mode) {
-        case PinMode::Input: {
+        case PinMode::Read: {
             pinMode(pin, INPUT);
             break;
         }
-        case PinMode::Output: { 
+        case PinMode::Write: { 
             pinMode(pin, OUTPUT);
             break;
         }
     }
-}
-
-bool HAL::setPwmFrequencySafe(uint8_t pin, uint32_t frequency) {
-    return SetPinFrequencySafe(pin, frequency);
-}
-
-void HAL::pwmWriteSafe(uint8_t pin, uint8_t value) {
-    pwmWrite(pin, value);
 }

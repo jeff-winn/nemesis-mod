@@ -1,6 +1,6 @@
 proxy_type: auto
-sketchbook_path: .\
-arduino_data: .\external
+sketchbook_path: ./
+arduino_data: ./external
 board_manager:
   additional_urls:
     - https://adafruit.github.io/arduino-board-index/package_adafruit_index.json

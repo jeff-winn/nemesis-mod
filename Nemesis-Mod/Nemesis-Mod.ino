@@ -7,19 +7,22 @@ FlywheelController* m_flywheelController;
 Button* m_revTrigger;
 
 void setup() {
-    set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+    set_sleep_mode(SLEEP_MODE_IDLE);
     sleep_enable();
 
-    m_flywheelController = new FlywheelController();
-    m_flywheelController->init(FlywheelMotor::Motor1, 9, A0);  // (OC1A) to L298->IN2
-    m_flywheelController->init(FlywheelMotor::Motor2, 10, A1); // (OC1B) to L298->IN4
+    m_flywheelController = new FlywheelController(
+        new DualG2HighPowerMotorShield18v18(),
+        new Potentiometer(new AnalogPin(A3)),
+        new Potentiometer(new AnalogPin(A4)));
 
-    m_revTrigger = new Button();
-    m_revTrigger->init(2, INT0, onRevTriggerStateChanged);
+    m_flywheelController->init();
+
+    m_revTrigger = new Button(new InterruptPin(3, INT1));
+    m_revTrigger->init(onRevTriggerStateChanged);
 }
 
 void loop() {
-    // Keep the device in a perpetual powered down state (interrupts will be used to awaken when needed).
+    // Keep the device in a perpetual power saving state (interrupts will be used to awaken when needed).
     sleep_mode();
 }
 
