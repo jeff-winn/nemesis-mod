@@ -41,7 +41,7 @@ class FlywheelController {
         virtual void stop();
 
     protected:
-        virtual float getMotorAdjustment(FlywheelMotor motor);
+        virtual float getMotorSpeedAdjustment(FlywheelMotor motor);
         
     private:
         DualG2HighPowerMotorShield18v18* m_motorController;
@@ -49,6 +49,7 @@ class FlywheelController {
         Potentiometer* m_motor2Adjustment;
 
         int m_motorSpeed;
+        bool m_isRunning;
 };
 
 #endif

@@ -59,20 +59,26 @@ unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
 }
 
 void FlywheelController::start() {
+    if (m_isRunning) {
+        return;
+    }
+
     m_motorController->enableDrivers();
     delay(1);
 
-    float motor1Adjustment = getMotorAdjustment(FlywheelMotor::Motor1);
-    float motor2Adjustment = getMotorAdjustment(FlywheelMotor::Motor2);
+    float motor1Adjustment = getMotorSpeedAdjustment(FlywheelMotor::Motor1);
+    float motor2Adjustment = getMotorSpeedAdjustment(FlywheelMotor::Motor2);
 
     // Ramp up the motor speed rather than going directly to max power.
     for (int speed = 0; speed <= m_motorSpeed; speed = speed + FLYWHEEL_STEP_INCREMENT) {
         m_motorController->setSpeeds(speed * motor1Adjustment, speed * motor2Adjustment);
         delay(1);
     }
+
+    m_isRunning = true;
 }
 
-float FlywheelController::getMotorAdjustment(FlywheelMotor motor) {
+float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
     int value = 0;
     switch (motor) {
         case FlywheelMotor::Motor1: {
@@ -89,9 +95,15 @@ float FlywheelController::getMotorAdjustment(FlywheelMotor motor) {
 }
 
 void FlywheelController::stop() {
+    if (!m_isRunning) {
+        return;
+    }
+
     m_motorController->setSpeeds(0, 0);
     delay(1);
     
     m_motorController->disableDrivers();
     delay(1);
+
+    m_isRunning = false;
 }
