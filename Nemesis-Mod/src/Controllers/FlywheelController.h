@@ -10,6 +10,13 @@ enum FlywheelMotor {
     Motor2
 };
 
+// Defines the flywheel speeds available.
+enum FlywheelSpeed {
+    Level1,
+    Level2,
+    Level3
+};
+
 // Provides a mechanism to control the flywheel assembly.
 class FlywheelController {
     public:
@@ -22,6 +29,9 @@ class FlywheelController {
         // Initializes the controller.
         virtual void init();
 
+        // Sets the flywheel assembly speed.
+        virtual void setSpeed(FlywheelSpeed speed);
+
         // Starts the flywheels.
         virtual void start();
 
@@ -30,6 +40,7 @@ class FlywheelController {
 
     private:
         DualG2HighPowerMotorShield18v18* m_motorController;
+        int m_motorSpeed;
 };
 
 #endif
