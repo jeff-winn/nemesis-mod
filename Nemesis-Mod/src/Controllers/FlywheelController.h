@@ -31,8 +31,8 @@ class FlywheelController {
         // Initializes the controller.
         virtual void init();
 
-        // Sets the flywheel assembly speed.
-        virtual void setSpeed(FlywheelSpeed speed);
+        // Sets the flywheel motor speed.
+        virtual void setSpeed(FlywheelSpeed value);
 
         // Starts the flywheels.
         virtual void start();
@@ -42,13 +42,14 @@ class FlywheelController {
 
     protected:
         virtual float getMotorSpeedAdjustment(FlywheelMotor motor);
+        virtual int determineMotorSpeed();
         
     private:
         DualG2HighPowerMotorShield18v18* m_motorController;
         Potentiometer* m_motor1Adjustment;
         Potentiometer* m_motor2Adjustment;
 
-        int m_motorSpeed;
+        FlywheelSpeed m_speed;
         bool m_isRunning;
 };
 

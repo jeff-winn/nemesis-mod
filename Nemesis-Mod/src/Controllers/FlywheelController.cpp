@@ -1,7 +1,7 @@
 #include "FlywheelController.h"
 
 // Defines the step increment when the flywheel assembly is being started.
-int FLYWHEEL_STEP_INCREMENT = 2;
+int FLYWHEEL_STEP_INCREMENT = 5;
 
 // Defines the minimum viable speed for the flywheel assembly.
 int FLYWHEEL_MIN_SPEED = 200;
@@ -18,7 +18,7 @@ FlywheelController::FlywheelController(
     m_motor1Adjustment = motor1Potentiometer;
     m_motor2Adjustment = motor2Potentiometer;
 
-    m_motorSpeed = FLYWHEEL_MIN_SPEED;
+    m_speed = FlywheelSpeed::Level1;
 }
 
 void FlywheelController::init() {
@@ -28,21 +28,8 @@ void FlywheelController::init() {
     delay(1);    
 }
 
-void FlywheelController::setSpeed(FlywheelSpeed speed) {
-    switch (speed) {
-        case FlywheelSpeed::Level1: {
-            m_motorSpeed = FLYWHEEL_MIN_SPEED;
-            break;
-        }
-        case FlywheelSpeed::Level2: {
-            m_motorSpeed = FLYWHEEL_INTERMEDIATE_SPEED;
-            break;
-        }
-        case FlywheelSpeed::Level3: {
-            m_motorSpeed = FLYWHEEL_MAX_SPEED;
-            break;
-        }
-    }
+void FlywheelController::setSpeed(FlywheelSpeed value) {
+    m_speed = value;
 }
 
 unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
@@ -66,32 +53,49 @@ void FlywheelController::start() {
     m_motorController->enableDrivers();
     delay(1);
 
+    int maximumSpeed = determineMotorSpeed();
+
     float motor1Adjustment = getMotorSpeedAdjustment(FlywheelMotor::Motor1);
     float motor2Adjustment = getMotorSpeedAdjustment(FlywheelMotor::Motor2);
 
     // Ramp up the motor speed rather than going directly to max power.
-    for (int speed = 0; speed <= m_motorSpeed; speed = speed + FLYWHEEL_STEP_INCREMENT) {
-        m_motorController->setSpeeds(speed * motor1Adjustment, speed * motor2Adjustment);
+    for (int speed = 0; speed <= maximumSpeed; speed = speed + FLYWHEEL_STEP_INCREMENT) {
+        m_motorController->setM1Speed(speed * motor1Adjustment);
+        m_motorController->setM2Speed(speed * motor2Adjustment);
+                
         delay(1);
     }
 
     m_isRunning = true;
 }
 
-float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
-    int value = 0;
-    switch (motor) {
-        case FlywheelMotor::Motor1: {
-            value = m_motor1Adjustment->read();
-            break;
+int FlywheelController::determineMotorSpeed() {
+    switch (m_speed) {
+        case FlywheelSpeed::Level1: {
+            return FLYWHEEL_MIN_SPEED;
         }
-        case FlywheelMotor::Motor2: {
-            value = m_motor2Adjustment->read();
-            break;
+        case FlywheelSpeed::Level2: {
+            return FLYWHEEL_INTERMEDIATE_SPEED;
+        }
+        case FlywheelSpeed::Level3: {
+            return FLYWHEEL_MAX_SPEED;
         }
     }
 
-    return (float)value / 255;
+    return 0;
+}
+
+float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
+    switch (motor) {
+        case FlywheelMotor::Motor1: {
+            return m_motor1Adjustment->read();
+        }
+        case FlywheelMotor::Motor2: {
+            return m_motor2Adjustment->read();
+        }
+    }
+
+    return 0;
 }
 
 void FlywheelController::stop() {

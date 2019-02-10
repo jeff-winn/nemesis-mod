@@ -9,7 +9,7 @@ class Potentiometer {
         Potentiometer::Potentiometer(AnalogPin* pin);
 
         // Reads the value.
-        virtual int read();
+        virtual float read();
 
     private:
         AnalogPin* m_pin;
