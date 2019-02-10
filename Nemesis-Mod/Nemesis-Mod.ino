@@ -11,9 +11,7 @@ void setup() {
     sleep_enable();
 
     m_flywheelController = new FlywheelController(
-        new DualG2HighPowerMotorShield18v18(),
-        new Potentiometer(new AnalogPin(A0)),
-        new Potentiometer(new AnalogPin(A1)));
+        new DualG2HighPowerMotorShield18v18());
 
     m_flywheelController->init();
 

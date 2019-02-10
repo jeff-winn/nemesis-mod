@@ -6,10 +6,8 @@ int MOTOR_STEP_INCREMENT = 2;
 // Defines the maximum speed for the motors.
 int MOTOR_MAX_SPEED = 400;
 
-FlywheelController::FlywheelController(DualG2HighPowerMotorShield18v18* motorController, Potentiometer* pot1, Potentiometer* pot2) {
+FlywheelController::FlywheelController(DualG2HighPowerMotorShield18v18* motorController) {
     m_motorController = motorController;
-    m_pot1 = pot1;
-    m_pot2 = pot2;
 }
 
 void FlywheelController::init() {
