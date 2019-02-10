@@ -7,8 +7,9 @@ FlywheelController* m_flywheelController;
 Button* m_revTrigger;
 
 void setup() {
-    set_sleep_mode(SLEEP_MODE_PWR_DOWN);
-    sleep_enable();
+    // set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+    // sleep_enable();
+    Serial.begin(9600);
 
     m_flywheelController = new FlywheelController(
         new DualG2HighPowerMotorShield18v18());
@@ -20,8 +21,11 @@ void setup() {
 }
 
 void loop() {
-    // Keep the device in a perpetual powered down state (interrupts will be used to awaken when needed).
-    sleep_mode();
+    printFlywheelMotorCurrent(FlywheelMotor::Motor1);
+    printFlywheelMotorCurrent(FlywheelMotor::Motor2);    
+
+    // // Keep the device in a perpetual powered down state (interrupts will be used to awaken when needed).
+    // sleep_mode();
 }
 
 void onRevTriggerStateChanged() {
@@ -30,5 +34,12 @@ void onRevTriggerStateChanged() {
     }
     else {
         m_flywheelController->stop();
+    }
+}
+
+void printFlywheelMotorCurrent(FlywheelMotor motor) {
+    unsigned int current = m_flywheelController->getMotorCurrentMilliamps(motor);
+    if (current > 0) {
+        Serial.println(current, DEC);
     }
 }

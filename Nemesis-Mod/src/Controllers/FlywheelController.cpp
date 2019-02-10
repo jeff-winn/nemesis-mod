@@ -17,6 +17,19 @@ void FlywheelController::init() {
     delay(1);    
 }
 
+unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
+    switch (motor) {
+        case FlywheelMotor::Motor1: {
+            return m_motorController->getM1CurrentMilliamps();
+        }
+        case FlywheelMotor::Motor2: {
+            return m_motorController->getM2CurrentMilliamps();
+        }
+    }
+
+    return 0;
+}
+
 void FlywheelController::start() {
     m_motorController->enableDrivers();
     delay(1);
