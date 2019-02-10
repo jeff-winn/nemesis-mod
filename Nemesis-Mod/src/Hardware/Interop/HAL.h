@@ -39,12 +39,6 @@ class HAL {
 
         // Reads the value of the analog pin specified.
         virtual int analogReadSafe(uint8_t pin);
-
-        // Sets the Pulse Width Modulation (PWM) frequency for the pin specified.
-        virtual bool setPwmFrequencySafe(uint8_t pin, uint32_t frequency);
-
-        // Writes the value to the pin specified.
-        virtual void pwmWriteSafe(uint8_t pin, uint8_t value);
 };
 
 #endif

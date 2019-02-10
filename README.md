@@ -26,4 +26,4 @@ This is the toolset that is currently being used to write the code included with
 
 ### Dependencies
 Below are the dependencies that are being used by the project.
-- [Arduino PWM Frequency Library](https://code.google.com/archive/p/arduino-pwm-frequency-library/downloads)
+- [Pololu Dual G2 High-Power Motor Driver Library for Arduino](https://github.com/pololu/dual-g2-high-power-motor-shield)
