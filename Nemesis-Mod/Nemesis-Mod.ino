@@ -12,7 +12,9 @@ void setup() {
     Serial.begin(9600);
 
     m_flywheelController = new FlywheelController(
-        new DualG2HighPowerMotorShield18v18());
+        new DualG2HighPowerMotorShield18v18(),
+        new Potentiometer(new AnalogPin(A3)),
+        new Potentiometer(new AnalogPin(A4)));
 
     m_flywheelController->init();
 

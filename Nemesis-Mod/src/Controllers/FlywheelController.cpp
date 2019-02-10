@@ -12,8 +12,12 @@ int FLYWHEEL_INTERMEDIATE_SPEED = 300;
 // Defines the maximum speed for the flywheel assembly.
 int FLYWHEEL_MAX_SPEED = 400;
 
-FlywheelController::FlywheelController(DualG2HighPowerMotorShield18v18* motorController) {
+FlywheelController::FlywheelController(
+    DualG2HighPowerMotorShield18v18* motorController, Potentiometer* motor1Potentiometer, Potentiometer* motor2Potentiometer) {
     m_motorController = motorController;
+    m_motor1Adjustment = motor1Potentiometer;
+    m_motor2Adjustment = motor2Potentiometer;
+
     m_motorSpeed = FLYWHEEL_MIN_SPEED;
 }
 
@@ -57,12 +61,31 @@ unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
 void FlywheelController::start() {
     m_motorController->enableDrivers();
     delay(1);
-    
+
+    float motor1Adjustment = getMotorAdjustment(FlywheelMotor::Motor1);
+    float motor2Adjustment = getMotorAdjustment(FlywheelMotor::Motor2);
+
     // Ramp up the motor speed rather than going directly to max power.
     for (int speed = 0; speed <= m_motorSpeed; speed = speed + FLYWHEEL_STEP_INCREMENT) {
-        m_motorController->setSpeeds(speed, speed);
+        m_motorController->setSpeeds(speed * motor1Adjustment, speed * motor2Adjustment);
         delay(1);
     }
+}
+
+float FlywheelController::getMotorAdjustment(FlywheelMotor motor) {
+    int value = 0;
+    switch (motor) {
+        case FlywheelMotor::Motor1: {
+            value = m_motor1Adjustment->read();
+            break;
+        }
+        case FlywheelMotor::Motor2: {
+            value = m_motor2Adjustment->read();
+            break;
+        }
+    }
+
+    return (float)value / 255;
 }
 
 void FlywheelController::stop() {

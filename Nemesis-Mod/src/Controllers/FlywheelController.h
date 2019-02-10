@@ -21,7 +21,9 @@ enum FlywheelSpeed {
 class FlywheelController {
     public:
         FlywheelController::FlywheelController(
-            DualG2HighPowerMotorShield18v18* motorController);
+            DualG2HighPowerMotorShield18v18* motorController, 
+            Potentiometer* motor1Potentiometer,
+            Potentiometer* motor2Potentiometer);
 
         // Gets the current of the motor specified (in milliamps).
         virtual unsigned int getMotorCurrentMilliamps(FlywheelMotor motor);
@@ -38,8 +40,14 @@ class FlywheelController {
         // Stops the flywheels.
         virtual void stop();
 
+    protected:
+        virtual float getMotorAdjustment(FlywheelMotor motor);
+        
     private:
         DualG2HighPowerMotorShield18v18* m_motorController;
+        Potentiometer* m_motor1Adjustment;
+        Potentiometer* m_motor2Adjustment;
+
         int m_motorSpeed;
 };
 
