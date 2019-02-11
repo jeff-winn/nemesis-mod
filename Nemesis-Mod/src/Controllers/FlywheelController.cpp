@@ -18,7 +18,7 @@ FlywheelController::FlywheelController(
     m_motor1Adjustment = motor1Potentiometer;
     m_motor2Adjustment = motor2Potentiometer;
 
-    m_speed = FlywheelSpeed::Level1;
+    m_speed = FlywheelSpeed::Low;
 }
 
 void FlywheelController::init() {
@@ -71,13 +71,13 @@ void FlywheelController::start() {
 
 int FlywheelController::determineMotorSpeed() {
     switch (m_speed) {
-        case FlywheelSpeed::Level1: {
+        case FlywheelSpeed::Low: {
             return FLYWHEEL_MIN_SPEED;
         }
-        case FlywheelSpeed::Level2: {
+        case FlywheelSpeed::Medium: {
             return FLYWHEEL_INTERMEDIATE_SPEED;
         }
-        case FlywheelSpeed::Level3: {
+        case FlywheelSpeed::High: {
             return FLYWHEEL_MAX_SPEED;
         }
     }

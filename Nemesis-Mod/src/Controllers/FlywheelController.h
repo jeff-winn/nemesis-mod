@@ -12,9 +12,9 @@ enum FlywheelMotor {
 
 // Defines the flywheel speeds available.
 enum FlywheelSpeed {
-    Level1,
-    Level2,
-    Level3
+    Low,
+    Medium,
+    High
 };
 
 // Provides a mechanism to control the flywheel assembly.
