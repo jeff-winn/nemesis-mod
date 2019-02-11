@@ -67,6 +67,7 @@ void FlywheelController::start() {
     }
 
     m_isRunning = true;
+    delay(500);
 }
 
 int FlywheelController::determineMotorSpeed() {
@@ -103,11 +104,10 @@ void FlywheelController::stop() {
         return;
     }
 
-    m_motorController->setSpeeds(0, 0);
-    delay(1);
-    
+    m_motorController->setSpeeds(0, 0);   
     m_motorController->disableDrivers();
     delay(1);
 
     m_isRunning = false;
+    delay(500);
 }
