@@ -6,7 +6,7 @@
 // Represents a potentiometer.
 class Potentiometer {
     public:
-        Potentiometer::Potentiometer(AnalogPin* pin);
+        Potentiometer(AnalogPin* pin);
 
         // Reads the value.
         virtual float read();

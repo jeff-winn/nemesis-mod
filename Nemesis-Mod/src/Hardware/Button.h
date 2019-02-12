@@ -5,7 +5,7 @@
 
 class Button {
     public:
-        Button::Button(InterruptPin* pin);
+        Button(InterruptPin* pin);
 
         virtual void init(void (*onStateChangedCallback)(void));
         virtual bool isPressed();
