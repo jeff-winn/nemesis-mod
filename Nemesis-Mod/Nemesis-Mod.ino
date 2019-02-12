@@ -6,10 +6,12 @@
 
 FlywheelController* m_flywheelController;
 InterruptButton* m_revTrigger;
-PolledButton* m_fireTrigger;
 
 // Identifies whether the hardware should continue execution.
-volatile bool CONTINUE_EXECUTION = false;
+volatile bool SHOULD_CONTINUE_EXECUTION = false;
+
+// Identifies whether the operator has authenticated prior to releasing the software lock.
+volatile bool HAS_OPERATOR_AUTHENTICATED = true;
 
 void setup() {
     set_sleep_mode(SLEEP_MODE_PWR_SAVE);
@@ -23,25 +25,18 @@ void setup() {
     m_revTrigger = new InterruptButton(
         new InterruptPin(3, INT1));
     m_revTrigger->init(m_revTriggerStateChangedCallback);
-
-    m_fireTrigger = new PolledButton(
-        new DigitalPin(0));
-    m_fireTrigger->init();
 }
 
 void loop() {
     waitForWakeEvent();
+    if (!HAS_OPERATOR_AUTHENTICATED) {
+        delay(10);
+        return;
+    }
 
     m_flywheelController->start();
     
-    while (CONTINUE_EXECUTION) {
-        if (m_fireTrigger->isPressed()) {
-            // Start the feed motor assembly.
-        }
-        else {
-            // Stop the feed motor assembly.
-        }
-
+    while (SHOULD_CONTINUE_EXECUTION) {
         delay(10);
     }
 
@@ -50,7 +45,7 @@ void loop() {
 
 // Pauses the CPU until an external event wakes the device.
 void waitForWakeEvent() {
-    if (CONTINUE_EXECUTION) {
+    if (SHOULD_CONTINUE_EXECUTION) {
         return;
     }
 
@@ -60,7 +55,7 @@ void waitForWakeEvent() {
 
 // Attempts to wake the device.
 void attemptToWakeTheDevice() {
-    if (!CONTINUE_EXECUTION) {
+    if (!SHOULD_CONTINUE_EXECUTION) {
         return;
     }
 
@@ -68,6 +63,6 @@ void attemptToWakeTheDevice() {
 }
 
 void m_revTriggerStateChangedCallback() {
-    CONTINUE_EXECUTION = m_revTrigger->isPressed();
+    SHOULD_CONTINUE_EXECUTION = m_revTrigger->isPressed();
     attemptToWakeTheDevice();
 }

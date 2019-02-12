@@ -50,7 +50,6 @@ void FlywheelController::start() {
         return;
     }
 
-    m_motorController->enableDrivers();
     delay(1);
 
     int maximumSpeed = determineMotorSpeed();
@@ -104,8 +103,7 @@ void FlywheelController::stop() {
         return;
     }
 
-    m_motorController->setSpeeds(0, 0);   
-    m_motorController->disableDrivers();
+    m_motorController->setSpeeds(0, 0);
     delay(1);
 
     m_isRunning = false;
