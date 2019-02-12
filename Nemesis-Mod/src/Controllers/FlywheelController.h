@@ -14,13 +14,14 @@ enum FlywheelMotor {
 enum FlywheelSpeed {
     Low,
     Medium,
+    // WARNING: This value may cause physical bruising on the intended target, use with caution!
     High
 };
 
 // Provides a mechanism to control the flywheel assembly.
 class FlywheelController {
     public:
-        FlywheelController::FlywheelController(
+        FlywheelController(
             DualG2HighPowerMotorShield18v18* motorController, 
             Potentiometer* motor1Potentiometer,
             Potentiometer* motor2Potentiometer);

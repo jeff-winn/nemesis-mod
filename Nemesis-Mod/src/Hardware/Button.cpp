@@ -10,5 +10,5 @@ void Button::init(void (*onStateChangedCallback)(void)) {
 }
 
 bool Button::isPressed() {
-    return m_pin->read() == 0;
+    return m_pin->read() == 1;
 }

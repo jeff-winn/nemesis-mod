@@ -13,8 +13,6 @@ These are the boards and hardware being used by the project.
 - [Breadboard](https://www.adafruit.com/product/64)
 - [Breadboard Trim Potentiometer (10k)](https://www.adafruit.com/product/356)
 - [Pololu Dual G2 High-Power Motor Driver 18v18 Shield for Arduino](https://www.pololu.com/product/2515)
-- [.NET Gadgeteer breakout board](http://www.ctr-electronics.com/breakoutmodule.html)
-- [.NET Gadgeteer Button module](https://old.ghielectronics.com/catalog/product/274)
 
 ## Development Environment
 This is the toolset that is currently being used to write the code included within the src folder within this repository.

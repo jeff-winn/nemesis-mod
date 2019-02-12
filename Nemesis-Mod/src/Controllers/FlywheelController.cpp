@@ -1,7 +1,7 @@
 #include "FlywheelController.h"
 
 // Defines the step increment when the flywheel assembly is being started.
-int FLYWHEEL_STEP_INCREMENT = 5;
+int FLYWHEEL_STEP_INCREMENT = 2;
 
 // Defines the minimum viable speed for the flywheel assembly.
 int FLYWHEEL_MIN_SPEED = 200;
@@ -63,7 +63,7 @@ void FlywheelController::start() {
         m_motorController->setM1Speed(speed * motor1Adjustment);
         m_motorController->setM2Speed(speed * motor2Adjustment);
                 
-        delay(1);
+        delay(2);
     }
 
     m_isRunning = true;
