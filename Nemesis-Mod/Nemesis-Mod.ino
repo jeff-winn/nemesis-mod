@@ -1,10 +1,10 @@
 #include <Arduino.h>
 #include <avr/sleep.h>
 #include "src/Controllers/FlywheelController.h"
-#include "src/Hardware/Button.h"
+#include "src/Hardware/InterruptButton.h"
 
 FlywheelController* m_flywheelController;
-Button* m_revTrigger;
+InterruptButton* m_revTrigger;
 
 // Identifies whether the hardware should continue execution.
 volatile bool CONTINUE_EXECUTION = false;
@@ -16,11 +16,11 @@ void setup() {
         new DualG2HighPowerMotorShield18v18(),
         new Potentiometer(new AnalogPin(A3)),
         new Potentiometer(new AnalogPin(A4)));
-
     m_flywheelController->init();
 
-    m_revTrigger = new Button(new InterruptPin(3, INT1));
-    m_revTrigger->init(onRevTriggerStateChanged);
+    m_revTrigger = new InterruptButton(
+        new InterruptPin(3, INT1));
+    m_revTrigger->init(m_revTriggerStateChangedCallback);
 }
 
 void loop() {
@@ -45,6 +45,7 @@ void waitForWakeEvent() {
     sleep_mode();
 }
 
+// Attempts to wake the device.
 void attemptToWakeTheDevice() {
     if (!CONTINUE_EXECUTION) {
         return;
@@ -53,7 +54,7 @@ void attemptToWakeTheDevice() {
     sleep_disable();
 }
 
-void onRevTriggerStateChanged() {
+void m_revTriggerStateChangedCallback() {
     CONTINUE_EXECUTION = m_revTrigger->isPressed();
     attemptToWakeTheDevice();
 }
