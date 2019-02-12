@@ -6,9 +6,11 @@
 FlywheelController* m_flywheelController;
 Button* m_revTrigger;
 
+// Identifies whether the hardware should continue execution.
+volatile bool CONTINUE_EXECUTION = false;
+
 void setup() {
-    set_sleep_mode(SLEEP_MODE_IDLE);
-    sleep_enable();
+    set_sleep_mode(SLEEP_MODE_PWR_SAVE);
 
     m_flywheelController = new FlywheelController(
         new DualG2HighPowerMotorShield18v18(),
@@ -22,15 +24,36 @@ void setup() {
 }
 
 void loop() {
-    // Keep the device in a perpetual power saving state (interrupts will be used to awaken when needed).
+    waitForWakeEvent();
+
+    m_flywheelController->start();
+    
+    while (CONTINUE_EXECUTION) {
+        delay(10);
+    }
+
+    m_flywheelController->stop();
+}
+
+// Pauses the CPU until an external event wakes the device.
+void waitForWakeEvent() {
+    if (CONTINUE_EXECUTION) {
+        return;
+    }
+
+    sleep_enable();
     sleep_mode();
 }
 
+void attemptToWakeTheDevice() {
+    if (!CONTINUE_EXECUTION) {
+        return;
+    }
+
+    sleep_disable();
+}
+
 void onRevTriggerStateChanged() {
-    if (m_revTrigger->isPressed()) {
-        m_flywheelController->start();
-    }
-    else {
-        m_flywheelController->stop();
-    }
+    CONTINUE_EXECUTION = m_revTrigger->isPressed();
+    attemptToWakeTheDevice();
 }
