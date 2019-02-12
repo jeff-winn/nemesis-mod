@@ -1,10 +1,11 @@
-#ifndef BUTTON_H
-#define BUTTON_H
+#ifndef INTERRUPT_BUTTON_H
+#define INTERRUPT_BUTTON_H
 
 #include "GPIO/InterruptPin.h"
+#include "Button.h"
 
 // Provides a button which will trigger an interrupt pin.
-class InterruptButton {
+class InterruptButton : public Button {
     public:
         InterruptButton(InterruptPin* pin);
         
@@ -12,7 +13,7 @@ class InterruptButton {
         virtual void init(void (*onStateChangedCallback)(void));
 
         // Returns a value indicating whether the button is pressed.
-        virtual bool isPressed();
+        virtual bool isPressed() override;
 
     private:
         InterruptPin* m_pin;

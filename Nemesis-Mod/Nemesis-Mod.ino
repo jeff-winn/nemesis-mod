@@ -2,9 +2,11 @@
 #include <avr/sleep.h>
 #include "src/Controllers/FlywheelController.h"
 #include "src/Hardware/InterruptButton.h"
+#include "src/Hardware/PolledButton.h"
 
 FlywheelController* m_flywheelController;
 InterruptButton* m_revTrigger;
+PolledButton* m_fireTrigger;
 
 // Identifies whether the hardware should continue execution.
 volatile bool CONTINUE_EXECUTION = false;
@@ -21,6 +23,10 @@ void setup() {
     m_revTrigger = new InterruptButton(
         new InterruptPin(3, INT1));
     m_revTrigger->init(m_revTriggerStateChangedCallback);
+
+    m_fireTrigger = new PolledButton(
+        new DigitalPin(0));
+    m_fireTrigger->init();
 }
 
 void loop() {
@@ -29,6 +35,13 @@ void loop() {
     m_flywheelController->start();
     
     while (CONTINUE_EXECUTION) {
+        if (m_fireTrigger->isPressed()) {
+            // Start the feed motor assembly.
+        }
+        else {
+            // Stop the feed motor assembly.
+        }
+
         delay(10);
     }
 
