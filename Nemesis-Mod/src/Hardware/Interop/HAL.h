@@ -39,6 +39,15 @@ class HAL {
 
         // Reads the value of the analog pin specified.
         virtual int analogReadSafe(uint8_t pin);
+
+        // Enables power saving sleep mode.
+        virtual void enableSleepModePowerSave();
+
+        // Disables the sleep mode.
+        virtual void disableSleepMode();
+
+        // Puts the device to sleep.
+        virtual void sleep();
 };
 
 #endif

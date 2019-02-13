@@ -1,93 +1,49 @@
 #include <Arduino.h>
-#include <avr/sleep.h>
-#include "src/Controllers/FlywheelController.h"
-#include "src/Hardware/InterruptButton.h"
-#include "src/Hardware/PolledButton.h"
+#include "src/LawgiverApp.h"
 
-HAL* HardwareAccessLayer;
-FlywheelController* flywheelController;
-InterruptButton* revTrigger;
-InterruptButton* firingTrigger;
+/* 
+NOTE: This file intentionally serves as nothing more than an adapter to the Arduino tool chain requirements while allowing
+all of the real functionality to move elsewhere allowing for easier maintenance.
+*/
 
-// Indicates whether the hardware should continue execution.
-volatile bool SHOULD_CONTINUE_EXECUTION = false;
-
-// Indicates whether the operator has authenticated prior to releasing the software lock.
-volatile bool HAS_OPERATOR_AUTHENTICATED = true;
-
-// Indicates whether the blaster should fire rounds at the target.
-volatile bool SHOULD_FIRE_ROUNDS = false;
+LawgiverApp* app;
 
 void setup() {
-    set_sleep_mode(SLEEP_MODE_PWR_SAVE);
+    auto* hal = new HAL();
 
-    HardwareAccessLayer = new HAL();
-
-    flywheelController = new FlywheelController(
+    auto* flywheelController = new FlywheelController(
         new DualG2HighPowerMotorShield18v18(
             0, 0, 9, 0, A0, 0, 0, 10, 0, A1),
         new Potentiometer(
-            new AnalogPin(A3, HardwareAccessLayer)),
+            new AnalogPin(A3, hal)),
         new Potentiometer(
-            new AnalogPin(A4, HardwareAccessLayer)));
+            new AnalogPin(A4, hal)));
     flywheelController->init();
 
-    revTrigger = new InterruptButton(
-        new InterruptPin(3, INT1, HardwareAccessLayer));
-    revTrigger->init(revTriggerStateChangedCallback);
+    auto* revTrigger = new InterruptButton(
+            new InterruptPin(3, INT1, hal));
+    revTrigger->init(onRevTriggerStateChangedCallback);
 
-    firingTrigger = new InterruptButton(
-        new InterruptPin(2, INT0, HardwareAccessLayer));
-    firingTrigger->init(firingTriggerStateChangedCallback);
+    auto* firingTrigger = new InterruptButton(
+            new InterruptPin(2, INT0, hal));
+    firingTrigger->init(onFiringTriggerStateChangedCallback);
+
+    app = new LawgiverApp(
+        flywheelController,
+        revTrigger,
+        firingTrigger,
+        hal);
+    app->init();
 }
 
 void loop() {
-    waitForWakeEvent();
-    if (!HAS_OPERATOR_AUTHENTICATED) {
-        return;
-    }
-
-    flywheelController->setSpeed(FlywheelSpeed::Low);
-    flywheelController->start();
-    
-    while (SHOULD_CONTINUE_EXECUTION) {
-        if (SHOULD_FIRE_ROUNDS) {
-            // Start firing rounds.
-        }
-        else {
-            // Stop firing rounds.
-        }
-
-        delay(10);
-    }
-
-    flywheelController->stop();
+    app->run();    
 }
 
-// Pauses the CPU until an external event wakes the device.
-void waitForWakeEvent() {
-    if (SHOULD_CONTINUE_EXECUTION) {
-        return;
-    }
-
-    sleep_enable();
-    sleep_mode();
+void onRevTriggerStateChangedCallback() {
+    app->onRevTriggerStateChangedCallback();
 }
 
-// Attempts to wake the device.
-void attemptToWakeTheDevice() {
-    if (!SHOULD_CONTINUE_EXECUTION) {
-        return;
-    }
-
-    sleep_disable();
-}
-
-void revTriggerStateChangedCallback() {
-    SHOULD_CONTINUE_EXECUTION = revTrigger->isPressed();
-    attemptToWakeTheDevice();
-}
-
-void firingTriggerStateChangedCallback() {
-    SHOULD_FIRE_ROUNDS = firingTrigger->isPressed();
+void onFiringTriggerStateChangedCallback() {
+    app->onFiringTriggerStateChangedCallback();
 }

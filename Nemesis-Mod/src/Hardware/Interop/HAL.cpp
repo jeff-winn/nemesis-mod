@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <avr/sleep.h>
 #include "HAL.h"
 
 void HAL::attachInterruptSafe(uint8_t pin, void (*userFunc)(void), InterruptMode mode) {
@@ -45,4 +46,17 @@ void HAL::pinModeSafe(uint8_t pin, PinMode mode) {
             break;
         }
     }
+}
+
+void HAL::enableSleepModePowerSave() {
+    set_sleep_mode(SLEEP_MODE_PWR_SAVE);
+}
+
+void HAL::disableSleepMode() {
+    sleep_disable();
+}
+
+void HAL::sleep() {
+    sleep_enable();
+    sleep_mode();
 }
