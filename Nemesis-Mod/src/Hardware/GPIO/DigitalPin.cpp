@@ -1,6 +1,7 @@
 #include "DigitalPin.h"
 
-DigitalPin::DigitalPin(uint8_t id) : Pin(id) {
+DigitalPin::DigitalPin(uint8_t id, HAL* p_hal) 
+    : Pin(id, p_hal) {
 }
 
 void DigitalPin::write(uint32_t value) {

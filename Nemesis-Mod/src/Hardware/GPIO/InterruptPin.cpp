@@ -1,6 +1,7 @@
 #include "InterruptPin.h"
 
-InterruptPin::InterruptPin(uint8_t id, uint8_t interruptId) : Pin(id) {
+InterruptPin::InterruptPin(uint8_t id, uint8_t interruptId, HAL* p_hal) 
+    : Pin(id, p_hal) {
     m_interruptId = interruptId;
 }
 

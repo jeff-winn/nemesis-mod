@@ -1,8 +1,8 @@
 #include "Pin.h"
 
-Pin::Pin(uint8_t id) {
+Pin::Pin(uint8_t id, HAL* p_hal) {
     m_Id = id;
-    hal = new HAL();
+    hal = p_hal;
 }
 
 void Pin::setOutputMode() {
