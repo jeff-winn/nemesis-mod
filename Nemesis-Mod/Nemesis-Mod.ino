@@ -17,7 +17,7 @@ void setup() {
     set_sleep_mode(SLEEP_MODE_PWR_SAVE);
 
     m_flywheelController = new FlywheelController(
-        new DualG2HighPowerMotorShield18v18(),
+        new DualG2HighPowerMotorShield18v18(0, 0, 9, 0, A0, 0, 0, 10, 0, A1),
         new Potentiometer(new AnalogPin(A3)),
         new Potentiometer(new AnalogPin(A4)));
     m_flywheelController->init();
@@ -30,10 +30,10 @@ void setup() {
 void loop() {
     waitForWakeEvent();
     if (!HAS_OPERATOR_AUTHENTICATED) {
-        delay(10);
         return;
     }
 
+    m_flywheelController->setSpeed(FlywheelSpeed::Low);
     m_flywheelController->start();
     
     while (SHOULD_CONTINUE_EXECUTION) {
