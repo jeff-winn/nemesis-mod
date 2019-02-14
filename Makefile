@@ -1,14 +1,9 @@
 # Arduino Library base folder and example structure
 WORKSPACE_FOLDER ?= $(abspath .)
 EXTERNAL_FOLDER = $(WORKSPACE_FOLDER)/external
-TOOLS_FOLDER = $(WORKSPACE_FOLDER)/tools
 
 # Arduino CLI executable name and directory location
-ifeq ($(OS),Windows_NT)
-	ARDUINO_CLI = $(TOOLS_FOLDER)/arduino-cli.exe
-else
-	ARDUINO_CLI = $(TOOLS_FOLDER)/arduino-cli
-endif
+ARDUINO_CLI = $(WORKSPACE_FOLDER)/arduino-cli.exe
 
 # Arduino CLI Board type
 BOARD_TYPE = arduino:avr

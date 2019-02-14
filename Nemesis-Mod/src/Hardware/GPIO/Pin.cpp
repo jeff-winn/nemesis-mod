@@ -1,14 +1,14 @@
 #include "Pin.h"
 
-Pin::Pin(uint8_t id, HAL* p_hal) {
+Pin::Pin(uint8_t id, HardwareAccessLayer* p_hal) {
     m_Id = id;
-    hal = p_hal;
+    hardware = p_hal;
 }
 
 void Pin::setOutputMode() {
-    hal->pinModeSafe(m_Id, PinMode::Write);
+    hardware->pinModeSafe(m_Id, PinMode::Write);
 }
 
 void Pin::setInputMode() {
-    hal->pinModeSafe(m_Id, PinMode::Read);
+    hardware->pinModeSafe(m_Id, PinMode::Read);
 }

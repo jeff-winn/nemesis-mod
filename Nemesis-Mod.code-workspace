@@ -2,7 +2,7 @@
 	"folders": [
 		{
 			"path": "."
-		}		
+		}
 	],
 	"settings": {		
 		"C_Cpp.intelliSenseEngine": "Default",
@@ -12,7 +12,8 @@
 			"docs": true,
 			"tools": true,
 			"**/*.elf": true,
-			"**/*.hex": true
+			"**/*.hex": true,
+			"**/*.exe": true
 		},
 		"files.associations": {
 			"xiosbase": "cpp",

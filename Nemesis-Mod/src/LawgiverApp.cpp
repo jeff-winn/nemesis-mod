@@ -9,15 +9,15 @@ volatile bool HAS_OPERATOR_AUTHENTICATED = true;
 // Indicates whether the blaster should fire rounds at the target.
 volatile bool SHOULD_FIRE_ROUNDS = false;
 
-LawgiverApp::LawgiverApp(FlywheelController* flywheelController, InterruptButton* revTrigger, InterruptButton* firingTrigger, HAL* hardwareAccessLayer) {
+LawgiverApp::LawgiverApp(FlywheelController* flywheelController, InterruptButton* revTrigger, InterruptButton* firingTrigger, HardwareAccessLayer* p_hardware) {
     m_flywheelController = flywheelController;
     m_revTrigger = revTrigger;
     m_firingTrigger = firingTrigger;
-    hal = hardwareAccessLayer;
+    hardware = p_hardware;
 }
 
 void LawgiverApp::init() {
-    hal->enableSleepModePowerSave();
+    hardware->enableSleepModePowerSave();
 }
 
 void LawgiverApp::onFiringTriggerStateChangedCallback() {
@@ -57,7 +57,7 @@ void LawgiverApp::waitForWakeEvent() {
         return;
     }
 
-    hal->sleep();
+    hardware->sleep();
 }
 
 void LawgiverApp::attemptToWakeTheDevice() {
@@ -65,5 +65,5 @@ void LawgiverApp::attemptToWakeTheDevice() {
         return;
     }
 
-    hal->disableSleepMode();
+    hardware->disableSleepMode();
 }

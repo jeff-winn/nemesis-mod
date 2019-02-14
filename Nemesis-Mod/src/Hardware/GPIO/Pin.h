@@ -2,12 +2,12 @@
 #define PIN_H
 
 #include <stdint.h>
-#include "../Interop/HAL.h"
+#include "../Interop/HardwareAccessLayer.h"
 
 // Represents a GPIO pin.
 class Pin {
     public:
-        Pin(uint8_t id, HAL* p_hal);
+        Pin(uint8_t id, HardwareAccessLayer* p_hal);
 
         // Sets the pin for read access.
         virtual void setInputMode();
@@ -17,7 +17,7 @@ class Pin {
 
     protected:
         uint8_t m_Id;
-        HAL* hal;
+        HardwareAccessLayer* hardware;
 };
 
 #endif

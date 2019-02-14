@@ -10,7 +10,7 @@ class LawgiverApp {
             FlywheelController* flywheelController, 
             InterruptButton* revTrigger, 
             InterruptButton* firingTrigger,
-            HAL* hardwareAccessLayer);
+            HardwareAccessLayer* p_hardware);
         
         void init();
         void run();
@@ -26,7 +26,7 @@ class LawgiverApp {
         FlywheelController* m_flywheelController;
         InterruptButton* m_revTrigger;
         InterruptButton* m_firingTrigger;
-        HAL* hal;
+        HardwareAccessLayer* hardware;
 };
 
 #endif
