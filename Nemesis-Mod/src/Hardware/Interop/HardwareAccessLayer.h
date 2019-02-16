@@ -42,8 +42,8 @@ class HardwareAccessLayer {
         // Reads the value of the analog pin specified.
         virtual int analogReadSafe(uint8_t pin);
 
-        // Enables power saving sleep mode.
-        virtual void enableSleepModePowerSave();
+        // Enables sleep mode.
+        virtual void enableSleepMode();
 
         // Disables the sleep mode.
         virtual void disableSleepMode();

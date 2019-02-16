@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include <avr/sleep.h>
 #include "HardwareAccessLayer.h"
 
 void HardwareAccessLayer::attachInterruptSafe(uint8_t pin, void (*userFunc)(void), InterruptMode mode) {
@@ -48,15 +47,11 @@ void HardwareAccessLayer::pinModeSafe(uint8_t pin, PinMode mode) {
     }
 }
 
-void HardwareAccessLayer::enableSleepModePowerSave() {
-    set_sleep_mode(SLEEP_MODE_PWR_SAVE);
+void HardwareAccessLayer::enableSleepMode() {
 }
 
 void HardwareAccessLayer::disableSleepMode() {
-    sleep_disable();
 }
 
 void HardwareAccessLayer::sleep() {
-    sleep_enable();
-    sleep_mode();
 }

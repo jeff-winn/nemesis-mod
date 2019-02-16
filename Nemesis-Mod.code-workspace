@@ -4,9 +4,13 @@
 			"path": "."
 		}
 	],
-	"settings": {		
+	"settings": {
+		"arduino.additionalUrls": [
+			"https://adafruit.github.io/arduino-board-index/package_adafruit_index.json"
+		],
 		"C_Cpp.intelliSenseEngine": "Default",
 		"files.exclude": {
+			".vscode/temp": true,
 			"build": true,
 			"external": true,
 			"docs": true,

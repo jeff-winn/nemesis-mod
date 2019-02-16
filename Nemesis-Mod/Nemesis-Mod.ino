@@ -21,11 +21,11 @@ void setup() {
     flywheelController->init();
 
     auto* revTrigger = new InterruptButton(
-            new InterruptPin(3, INT1, hardware));
+            new InterruptPin(3, EXTERNAL_INT_1, hardware));
     revTrigger->init(onRevTriggerStateChangedCallback);
 
     auto* firingTrigger = new InterruptButton(
-            new InterruptPin(2, INT0, hardware));
+            new InterruptPin(2, EXTERNAL_INT_0, hardware));
     firingTrigger->init(onFiringTriggerStateChangedCallback);
 
     app = new LawgiverApp(

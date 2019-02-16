@@ -13,11 +13,11 @@ LawgiverApp::LawgiverApp(FlywheelController* flywheelController, InterruptButton
     m_flywheelController = flywheelController;
     m_revTrigger = revTrigger;
     m_firingTrigger = firingTrigger;
-    hardware = p_hardware;
+    hardware = p_hardware;    
 }
 
 void LawgiverApp::init() {
-    hardware->enableSleepModePowerSave();
+    hardware->enableSleepMode();
 }
 
 void LawgiverApp::onFiringTriggerStateChangedCallback() {
