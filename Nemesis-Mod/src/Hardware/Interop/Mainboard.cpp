@@ -1,7 +1,7 @@
 #include <Arduino.h>
-#include "HardwareAccessLayer.h"
+#include "Mainboard.h"
 
-void HardwareAccessLayer::attachInterruptSafe(uint8_t pin, void (*userFunc)(void), InterruptMode mode) {
+void Mainboard::attachInterruptSafe(uint8_t pin, void (*userFunc)(void), InterruptMode mode) {
     int m = CHANGE;
 
     switch (mode) {
@@ -18,23 +18,23 @@ void HardwareAccessLayer::attachInterruptSafe(uint8_t pin, void (*userFunc)(void
     attachInterrupt(pin, userFunc, m);
 }
 
-int HardwareAccessLayer::analogReadSafe(uint8_t pin) {
+int Mainboard::analogReadSafe(uint8_t pin) {
     return analogRead(pin);
 }
 
-void HardwareAccessLayer::analogWriteSafe(uint8_t pin, uint32_t value) {
+void Mainboard::analogWriteSafe(uint8_t pin, uint32_t value) {
     analogWrite(pin, value);
 }
 
-int HardwareAccessLayer::digitalReadSafe(uint8_t pin) {
+int Mainboard::digitalReadSafe(uint8_t pin) {
     return digitalRead(pin);
 }
 
-void HardwareAccessLayer::digitalWriteSafe(uint8_t pin, uint32_t value) {
+void Mainboard::digitalWriteSafe(uint8_t pin, uint32_t value) {
     digitalWrite(pin, value);
 }
 
-void HardwareAccessLayer::pinModeSafe(uint8_t pin, PinMode mode) {
+void Mainboard::pinModeSafe(uint8_t pin, PinMode mode) {
     switch (mode) {
         case PinMode::Read: {
             pinMode(pin, INPUT);
@@ -47,11 +47,11 @@ void HardwareAccessLayer::pinModeSafe(uint8_t pin, PinMode mode) {
     }
 }
 
-void HardwareAccessLayer::enableSleepMode() {
+void Mainboard::enableSleepMode() {
 }
 
-void HardwareAccessLayer::disableSleepMode() {
+void Mainboard::disableSleepMode() {
 }
 
-void HardwareAccessLayer::sleep() {
+void Mainboard::sleep() {
 }

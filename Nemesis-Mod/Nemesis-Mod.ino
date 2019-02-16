@@ -10,7 +10,7 @@ LawgiverApp* app;
 
 void setup() {
     auto* hardware = new HardwareAccessLayer();
-
+    
     auto* flywheelController = new FlywheelController(
         new DualG2HighPowerMotorShield18v18(
             0, 0, 9, 0, A0, 0, 0, 10, 0, A1),
