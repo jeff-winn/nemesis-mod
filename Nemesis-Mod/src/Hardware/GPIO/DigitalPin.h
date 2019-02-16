@@ -6,7 +6,7 @@
 // Represents a GPIO digital pin.
 class DigitalPin : public Pin {
     public:
-        DigitalPin(uint8_t id, HardwareAccessLayer* p_hal);
+        DigitalPin(uint8_t id, HardwareAccessLayer* hal);
 
         // Reads the value of the pin.
         virtual bool read();

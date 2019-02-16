@@ -1,7 +1,7 @@
 #include "InterruptPin.h"
 
-InterruptPin::InterruptPin(uint8_t id, uint8_t interruptId, HardwareAccessLayer* p_hal) 
-    : Pin(id, p_hal) {
+InterruptPin::InterruptPin(uint8_t id, uint8_t interruptId, HardwareAccessLayer* hal) 
+    : Pin(id, hal) {
     m_interruptId = interruptId;
 }
 

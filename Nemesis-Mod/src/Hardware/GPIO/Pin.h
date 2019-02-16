@@ -7,7 +7,7 @@
 // Represents a GPIO pin.
 class Pin {
     public:
-        Pin(uint8_t id, HardwareAccessLayer* p_hal);
+        Pin(uint8_t id, HardwareAccessLayer* hal);
 
         // Sets the pin for read access.
         virtual void setInputMode();

@@ -1,8 +1,8 @@
 #include "Pin.h"
 
-Pin::Pin(uint8_t id, HardwareAccessLayer* p_hal) {
+Pin::Pin(uint8_t id, HardwareAccessLayer* hal) {
     m_Id = id;
-    hardware = p_hal;
+    hardware = hal;
 }
 
 void Pin::setOutputMode() {

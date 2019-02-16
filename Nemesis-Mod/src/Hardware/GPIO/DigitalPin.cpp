@@ -1,7 +1,7 @@
 #include "DigitalPin.h"
 
-DigitalPin::DigitalPin(uint8_t id, HardwareAccessLayer* p_hal) 
-    : Pin(id, p_hal) {
+DigitalPin::DigitalPin(uint8_t id, HardwareAccessLayer* hal) 
+    : Pin(id, hal) {
 }
 
 void DigitalPin::write(uint32_t value) {
