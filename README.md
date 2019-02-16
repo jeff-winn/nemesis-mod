@@ -11,12 +11,10 @@ This is the toolset that is currently being used to write the code included with
 - Visual Studio Code
   - C/C++ extension
   - Arduino Extension
-- Windows
-  - MinGW (mingw32-base-bin, mingw32-gcc-g++-bin, msys-base-bin)
-
-### Dependencies
-Below are the dependencies that are being used by the project.
-- [Pololu Dual G2 High-Power Motor Driver Library for Arduino](https://github.com/pololu/dual-g2-high-power-motor-shield)
 - Arduino Board Manager Packages
   - Arduino SAMD Boards (32-bits ARM Cortex-M0+)
   - Adafruit SAMD Boards
+  
+### Dependencies
+Below are the dependencies that are being used by the project.
+- [Pololu Dual G2 High-Power Motor Driver Library for Arduino](https://github.com/pololu/dual-g2-high-power-motor-shield)
