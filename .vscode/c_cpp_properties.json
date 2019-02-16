@@ -1,7 +1,7 @@
 {
     "env": {
         "sketchBookPath": "${env:USERPROFILE}/Documents/Arduino",
-        "arduinoDataPath": "${env:LOCALAPPDATA}/Arduino15"
+        "arduinoDataPath": "${env:LOCALAPPDATA}/Arduino15/packages"
     },
     "configurations": [
         {
@@ -17,21 +17,21 @@
             "includePath": [
                 "${workspaceFolder}/Nemesis-Mod/**",
                 "${sketchBookPath}/libraries/DualG2HighPowerMotorShield",
-                "${arduinoDataPath}/packages/adafruit/hardware/samd/1.2.9/cores/arduino",
-                "${arduinoDataPath}/packages/adafruit/hardware/samd/1.2.9/variants/feather_m0",
-                "${arduinoDataPath}/packages/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL"
+                "${arduinoDataPath}/adafruit/hardware/samd/1.2.9/cores/arduino",
+                "${arduinoDataPath}/adafruit/hardware/samd/1.2.9/variants/feather_m0",
+                "${arduinoDataPath}/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL"
             ],
             "browse": {
-                "limitSymbolsToIncludedHeaders": false,
+                "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": "${workspaceFolder}/.vscode/temp/cache",
                 "path": [
                     "${sketchBookPath}/libraries/DualG2HighPowerMotorShield/*",
-                    "${arduinoDataPath}/packages/adafruit/hardware/samd/1.2.9/cores/arduino/*",
-                    "${arduinoDataPath}/packages/adafruit/hardware/samd/1.2.9/variants/feather_m0/*",
-                    "${arduinoDataPath}/packages/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/*"
+                    "${arduinoDataPath}/adafruit/hardware/samd/1.2.9/cores/arduino/*",
+                    "${arduinoDataPath}/adafruit/hardware/samd/1.2.9/variants/feather_m0/*",
+                    "${arduinoDataPath}/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/*"
                 ]
             },
-            "compilerPath": "${arduinoDataPath}/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/bin/gcc.exe",
+            "compilerPath": "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-gcc.exe",
             "cStandard": "c11",
             "cppStandard": "c++17"
         }
