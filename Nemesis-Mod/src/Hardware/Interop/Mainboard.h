@@ -21,7 +21,7 @@ enum InterruptMode {
     All
 };
 
-// Provides access to the mainboard hardware operations.
+// Provides hardware control for the mainboard.
 class Mainboard {
     public:
         // Attaches an interrupt pin with a user function callback.

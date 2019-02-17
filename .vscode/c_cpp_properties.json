@@ -8,27 +8,35 @@
             "name": "ARM",
             "intelliSenseMode": "gcc-x64",
             "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE",
-                "ARDUINO_SAMD_ARCH",
-                "SAMD21G18A"
+                "F_CPU=48000000L",
+                "ARDUINO=10808",
+                "ARDUINO_ARCH_SAMD",
+                "ARDUINO_SAMD_ZERO",
+                "ARM_MATH_CM0PLUS",
+                "ADAFRUIT_FEATHER_M0",
+                "__SAMD21G18A__"
             ],
             "includePath": [
                 "${workspaceFolder}/Nemesis-Mod/**",
                 "${sketchBookPath}/libraries/DualG2HighPowerMotorShield",
+                "${sketchBookPath}/libraries/Adafruit_PWM_Servo_Driver_Library",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.2.9/cores/arduino",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.2.9/variants/feather_m0",
-                "${arduinoDataPath}/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL"
+                "${arduinoDataPath}/arduino/hardware/samd/1.6.20/libraries/Wire",
+                "${arduinoDataPath}/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL",
+                "${arduinoDataPath}/arduino/tools/CMSIS/4.5.0/CMSIS/Include"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": "${workspaceFolder}/.vscode/temp/cache",
                 "path": [
                     "${sketchBookPath}/libraries/DualG2HighPowerMotorShield/*",
+                    "${sketchBookPath}/libraries/Adafruit_PWM_Servo_Driver_Library/*",
                     "${arduinoDataPath}/adafruit/hardware/samd/1.2.9/cores/arduino/*",
                     "${arduinoDataPath}/adafruit/hardware/samd/1.2.9/variants/feather_m0/*",
-                    "${arduinoDataPath}/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/*"
+                    "${arduinoDataPath}/arduino/hardware/samd/1.6.20/libraries/Wire/*",
+                    "${arduinoDataPath}/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/*",
+                    "${arduinoDataPath}/arduino/tools/CMSIS/4.5.0/CMSIS/Include/*"
                 ]
             },
             "compilerPath": "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-gcc.exe",
