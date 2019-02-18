@@ -17,7 +17,7 @@
                 "__SAMD21G18A__"
             ],
             "includePath": [
-                "${workspaceFolder}/Nemesis-Mod/**",
+                "${workspaceFolder}/**",
                 "${sketchBookPath}/libraries/DualG2HighPowerMotorShield",
                 "${sketchBookPath}/libraries/Adafruit_PWM_Servo_Driver_Library",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.2.9/cores/arduino",
@@ -42,6 +42,15 @@
             "compilerPath": "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-gcc.exe",
             "cStandard": "c11",
             "cppStandard": "c++17"
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:\\Users\\jeffw\\AppData\\Local\\Arduino15\\packages\\adafruit\\hardware\\samd\\1.2.9\\**"
+            ],
+            "forcedInclude": [
+                "C:\\Users\\jeffw\\AppData\\Local\\Arduino15\\packages\\adafruit\\hardware\\samd\\1.2.9\\cores\\arduino\\Arduino.h"
+            ]
         }
     ],
     "version": 4

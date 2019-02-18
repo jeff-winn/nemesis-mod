@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "./Nemesis-Mod"
+		},
+		{
+			"path": "test"
 		}
 	],
 	"settings": {
