@@ -1,12 +1,12 @@
-#ifndef LAWGIVER_APP_H
-#define LAWGIVER_APP_H
+#ifndef APP_H
+#define APP_H
 
 #include "Controllers/FlywheelController.h"
 #include "Hardware/InterruptButton.h"
 
-class LawgiverApp {
+class App {
     public:
-        LawgiverApp(
+        App(
             FlywheelController* flywheelController, 
             InterruptButton* revTrigger, 
             InterruptButton* firingTrigger,

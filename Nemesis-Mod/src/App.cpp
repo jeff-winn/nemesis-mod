@@ -1,4 +1,4 @@
-#include "LawgiverApp.h"
+#include "App.h"
 
 // Indicates whether the hardware should continue execution.
 volatile bool SHOULD_CONTINUE_EXECUTION = false;
@@ -9,27 +9,27 @@ volatile bool HAS_OPERATOR_AUTHENTICATED = true;
 // Indicates whether the blaster should fire rounds at the target.
 volatile bool SHOULD_FIRE_ROUNDS = false;
 
-LawgiverApp::LawgiverApp(FlywheelController* flywheelController, InterruptButton* revTrigger, InterruptButton* firingTrigger, HardwareAccessLayer* p_hardware) {
+App::App(FlywheelController* flywheelController, InterruptButton* revTrigger, InterruptButton* firingTrigger, HardwareAccessLayer* p_hardware) {
     m_flywheelController = flywheelController;
     m_revTrigger = revTrigger;
     m_firingTrigger = firingTrigger;
     hardware = p_hardware;    
 }
 
-void LawgiverApp::init() {
+void App::init() {
     hardware->enableSleepMode();
 }
 
-void LawgiverApp::onFiringTriggerStateChangedCallback() {
+void App::onFiringTriggerStateChangedCallback() {
     SHOULD_FIRE_ROUNDS = m_firingTrigger->isPressed();    
 }
 
-void LawgiverApp::onRevTriggerStateChangedCallback() {
+void App::onRevTriggerStateChangedCallback() {
     SHOULD_CONTINUE_EXECUTION = m_revTrigger->isPressed();
     attemptToWakeTheDevice();
 }
 
-void LawgiverApp::run() {
+void App::run() {
     waitForWakeEvent();
     if (!HAS_OPERATOR_AUTHENTICATED) {
         return;
@@ -52,7 +52,7 @@ void LawgiverApp::run() {
     m_flywheelController->stop();
 }
 
-void LawgiverApp::waitForWakeEvent() {
+void App::waitForWakeEvent() {
     if (SHOULD_CONTINUE_EXECUTION) {
         return;
     }
@@ -60,7 +60,7 @@ void LawgiverApp::waitForWakeEvent() {
     hardware->sleep();
 }
 
-void LawgiverApp::attemptToWakeTheDevice() {
+void App::attemptToWakeTheDevice() {
     if (!SHOULD_CONTINUE_EXECUTION) {
         return;
     }

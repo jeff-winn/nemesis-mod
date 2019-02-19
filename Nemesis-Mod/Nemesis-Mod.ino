@@ -1,12 +1,12 @@
 #include <Arduino.h>
-#include "src/LawgiverApp.h"
+#include "src/App.h"
 
 /* 
 NOTE: This file intentionally serves as nothing more than an adapter to the Arduino tool chain requirements while allowing
 all of the real functionality to move elsewhere allowing for easier maintenance.
 */
 
-LawgiverApp* app;
+App* app;
 
 void setup() {
     auto* hardware = new HardwareAccessLayer();
@@ -28,7 +28,7 @@ void setup() {
             new InterruptPin(2, EXTERNAL_INT_0, hardware));
     firingTrigger->init(onFiringTriggerStateChangedCallback);
 
-    app = new LawgiverApp(
+    app = new App(
         flywheelController,
         revTrigger,
         firingTrigger,
