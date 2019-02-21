@@ -9,7 +9,7 @@ volatile bool HAS_OPERATOR_AUTHENTICATED = true;
 // Indicates whether the blaster should fire rounds at the target.
 volatile bool SHOULD_FIRE_ROUNDS = false;
 
-App::App(FlywheelController* flywheelController, InterruptButton* revTrigger, InterruptButton* firingTrigger, HardwareAccessLayer* p_hardware) {
+App::App(FlywheelController* flywheelController, PolledButton* revTrigger, PolledButton* firingTrigger, HardwareAccessLayer* p_hardware) {
     m_flywheelController = flywheelController;
     m_revTrigger = revTrigger;
     m_firingTrigger = firingTrigger;
@@ -30,26 +30,34 @@ void App::onRevTriggerStateChangedCallback() {
 }
 
 void App::run() {
-    waitForWakeEvent();
-    if (!HAS_OPERATOR_AUTHENTICATED) {
-        return;
+    if (m_revTrigger->isPressed()) {
+        m_flywheelController->setSpeed(FlywheelSpeed::Low);
+        m_flywheelController->start();        
+    }
+    else {
+        m_flywheelController->stop();
     }
 
-    m_flywheelController->setSpeed(FlywheelSpeed::Low);
-    m_flywheelController->start();
+    // waitForWakeEvent();
+    // if (!HAS_OPERATOR_AUTHENTICATED) {
+    //     return;
+    // }
+
+    // m_flywheelController->setSpeed(FlywheelSpeed::Low);
+    // m_flywheelController->start();
     
-    while (SHOULD_CONTINUE_EXECUTION) {
-        if (SHOULD_FIRE_ROUNDS) {
-            // Start firing rounds.
-        }
-        else {
-            // Stop firing rounds.
-        }
+    // while (SHOULD_CONTINUE_EXECUTION) {
+    //     if (SHOULD_FIRE_ROUNDS) {
+    //         // Start firing rounds.
+    //     }
+    //     else {
+    //         // Stop firing rounds.
+    //     }
 
-        delay(10);
-    }
+    //     delay(10);
+    // }
 
-    m_flywheelController->stop();
+    // m_flywheelController->stop();
 }
 
 void App::waitForWakeEvent() {
@@ -65,5 +73,5 @@ void App::attemptToWakeTheDevice() {
         return;
     }
 
-    hardware->disableSleepMode();
+    hardware->wake();
 }

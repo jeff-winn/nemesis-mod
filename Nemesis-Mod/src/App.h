@@ -2,14 +2,14 @@
 #define APP_H
 
 #include "Controllers/FlywheelController.h"
-#include "Hardware/InterruptButton.h"
+#include "Hardware/PolledButton.h"
 
 class App {
     public:
         App(
             FlywheelController* flywheelController, 
-            InterruptButton* revTrigger, 
-            InterruptButton* firingTrigger,
+            PolledButton* revTrigger, 
+            PolledButton* firingTrigger,
             HardwareAccessLayer* p_hardware);
         
         void init();
@@ -24,8 +24,8 @@ class App {
     
     private:
         FlywheelController* m_flywheelController;
-        InterruptButton* m_revTrigger;
-        InterruptButton* m_firingTrigger;
+        PolledButton* m_revTrigger;
+        PolledButton* m_firingTrigger;
         HardwareAccessLayer* hardware;
 };
 

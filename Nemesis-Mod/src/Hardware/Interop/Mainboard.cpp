@@ -50,7 +50,7 @@ void Mainboard::pinModeSafe(uint8_t pin, PinMode mode) {
 void Mainboard::enableSleepMode() {
 }
 
-void Mainboard::disableSleepMode() {
+void Mainboard::wake() {
 }
 
 void Mainboard::sleep() {

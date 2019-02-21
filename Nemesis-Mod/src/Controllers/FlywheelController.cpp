@@ -6,8 +6,8 @@ int FLYWHEEL_STEP_INCREMENT = 2;
 // Defines the minimum viable speed for the flywheel assembly.
 int FLYWHEEL_MIN_SPEED = 200;
 
-// Defines the intermediate speed for the flywheel assembly.
-int FLYWHEEL_INTERMEDIATE_SPEED = 300;
+// Defines the 'normal' speed for the flywheel assembly.
+int FLYWHEEL_NORMAL_SPEED = 300;
 
 // Defines the maximum speed for the flywheel assembly.
 int FLYWHEEL_MAX_SPEED = 400;
@@ -61,8 +61,6 @@ void FlywheelController::start() {
     for (int speed = 0; speed <= maximumSpeed; speed = speed + FLYWHEEL_STEP_INCREMENT) {
         m_motorController->setM1Speed(speed * motor1Adjustment);
         m_motorController->setM2Speed(speed * motor2Adjustment);
-                
-        delay(2);
     }
 
     m_isRunning = true;
@@ -74,8 +72,8 @@ int FlywheelController::determineMotorSpeed() {
         case FlywheelSpeed::Low: {
             return FLYWHEEL_MIN_SPEED;
         }
-        case FlywheelSpeed::Medium: {
-            return FLYWHEEL_INTERMEDIATE_SPEED;
+        case FlywheelSpeed::Normal: {
+            return FLYWHEEL_NORMAL_SPEED;
         }
         case FlywheelSpeed::High: {
             return FLYWHEEL_MAX_SPEED;

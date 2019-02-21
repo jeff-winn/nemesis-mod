@@ -45,8 +45,8 @@ class Mainboard {
         // Enables sleep mode.
         virtual void enableSleepMode();
 
-        // Disables the sleep mode.
-        virtual void disableSleepMode();
+        // Wakes the device from sleep.
+        virtual void wake();
 
         // Puts the device to sleep.
         virtual void sleep();
