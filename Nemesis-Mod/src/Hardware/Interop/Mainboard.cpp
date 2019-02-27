@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "Mainboard.h"
 
-void Mainboard::attachInterruptSafe(uint8_t pin, void (*userFunc)(void), InterruptMode mode) {
+void Mainboard::attachInterruptSafe(uint8_t pin, voidFuncPtr callback, InterruptMode mode) {
     int m = CHANGE;
 
     switch (mode) {
@@ -15,7 +15,7 @@ void Mainboard::attachInterruptSafe(uint8_t pin, void (*userFunc)(void), Interru
         }
     }
 
-    attachInterrupt(pin, userFunc, m);
+    attachInterrupt(pin, callback, m);
 }
 
 int Mainboard::analogReadSafe(uint8_t pin) {
@@ -45,12 +45,6 @@ void Mainboard::pinModeSafe(uint8_t pin, PinMode mode) {
             break;
         }
     }
-}
-
-void Mainboard::enableSleepMode() {
-}
-
-void Mainboard::wake() {
 }
 
 void Mainboard::sleep() {

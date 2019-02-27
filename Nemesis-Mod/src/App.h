@@ -19,7 +19,6 @@ class App {
         void onFiringTriggerStateChangedCallback();
 
     protected:
-        virtual void attemptToWakeTheDevice();
         virtual void waitForWakeEvent();
     
     private:

@@ -2,6 +2,7 @@
 #define MAINBOARD_H
 
 #include <stdint.h>
+#include <WInterrupts.h>
 
 // Defines the GPIO pin modes.
 enum PinMode {
@@ -25,7 +26,7 @@ enum InterruptMode {
 class Mainboard {
     public:
         // Attaches an interrupt pin with a user function callback.
-        virtual void attachInterruptSafe(uint8_t pin, void (*userFunc)(void), InterruptMode mode);
+        virtual void attachInterruptSafe(uint8_t pin, voidFuncPtr callback, InterruptMode mode);
         
         // Writes the value to the digital pin specified.
         virtual void digitalWriteSafe(uint8_t pin, uint32_t value);
@@ -41,12 +42,6 @@ class Mainboard {
 
         // Reads the value of the analog pin specified.
         virtual int analogReadSafe(uint8_t pin);
-
-        // Enables sleep mode.
-        virtual void enableSleepMode();
-
-        // Wakes the device from sleep.
-        virtual void wake();
 
         // Puts the device to sleep.
         virtual void sleep();

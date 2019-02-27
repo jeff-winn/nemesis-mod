@@ -20,6 +20,8 @@
                 "${workspaceFolder}/**",
                 "${sketchBookPath}/libraries/DualG2HighPowerMotorShield",
                 "${sketchBookPath}/libraries/Adafruit_PWM_Servo_Driver_Library",
+                "${sketchBookPath}/libraries/Arduino_Low_Power/src",
+                "${sketchBookPath}/libraries/RTCZero/src",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.2.9/cores/arduino",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.2.9/variants/feather_m0",
                 "${arduinoDataPath}/arduino/hardware/samd/1.6.20/libraries/Wire",
@@ -32,6 +34,8 @@
                 "path": [
                     "${sketchBookPath}/libraries/DualG2HighPowerMotorShield/*",
                     "${sketchBookPath}/libraries/Adafruit_PWM_Servo_Driver_Library/*",
+                    "${sketchBookPath}/libraries/Arduino_Low_Power/src/*",
+                    "${sketchBookPath}/libraries/RTCZero/src/*",
                     "${arduinoDataPath}/adafruit/hardware/samd/1.2.9/cores/arduino/*",
                     "${arduinoDataPath}/adafruit/hardware/samd/1.2.9/variants/feather_m0/*",
                     "${arduinoDataPath}/arduino/hardware/samd/1.6.20/libraries/Wire/*",

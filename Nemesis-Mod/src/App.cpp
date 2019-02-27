@@ -17,7 +17,6 @@ App::App(FlywheelController* flywheelController, PolledButton* revTrigger, Polle
 }
 
 void App::init() {
-    hardware->enableSleepMode();
 }
 
 void App::onFiringTriggerStateChangedCallback() {
@@ -26,7 +25,6 @@ void App::onFiringTriggerStateChangedCallback() {
 
 void App::onRevTriggerStateChangedCallback() {
     SHOULD_CONTINUE_EXECUTION = m_revTrigger->isPressed();
-    attemptToWakeTheDevice();
 }
 
 void App::run() {
@@ -66,12 +64,4 @@ void App::waitForWakeEvent() {
     }
 
     hardware->sleep();
-}
-
-void App::attemptToWakeTheDevice() {
-    if (!SHOULD_CONTINUE_EXECUTION) {
-        return;
-    }
-
-    hardware->wake();
 }
