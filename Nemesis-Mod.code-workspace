@@ -29,7 +29,8 @@
 			"xlocmon": "cpp",
 			"xlocnum": "cpp",
 			"xloctime": "cpp",
-			"ios": "cpp"
+			"ios": "cpp",
+			"cstdbool": "cpp"
 		}
 	}
 }
