@@ -1,13 +1,11 @@
 #include "InterruptPin.h"
 
-InterruptPin::InterruptPin(uint8_t id, uint8_t interruptId, HardwareAccessLayer* hal) 
+InterruptPin::InterruptPin(uint8_t id, HardwareAccessLayer* hal) 
     : Pin(id, hal) {
-    m_interruptId = interruptId;
 }
 
-void InterruptPin::init(void (*onStateChangedCallback)(void), InterruptMode mode) {
-    hardware->pinModeSafe(m_Id, PinMode::Read);
-    hardware->attachInterruptSafe(m_interruptId, onStateChangedCallback, mode);
+void InterruptPin::init(InterruptCallback onInterruptCallback, InterruptMode mode) {
+    hardware->attachInterruptSafe(m_Id, onInterruptCallback, mode, true);
 }
 
 int InterruptPin::read() {

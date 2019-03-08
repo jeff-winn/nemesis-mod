@@ -6,16 +6,13 @@
 // Represents a GPIO interrupt pin with a user defined callback function.
 class InterruptPin : public Pin {
     public:
-        InterruptPin(uint8_t id, uint8_t interruptId, HardwareAccessLayer* hal);
+        InterruptPin(uint8_t id, HardwareAccessLayer* hal);
 
         // Initializes the pin.
-        virtual void init(void (*onStateChangedCallback)(void), InterruptMode mode);
+        virtual void init(InterruptCallback onInterruptCallback, InterruptMode mode);
 
         // Reads the value of the pin.
         virtual int read();
-        
-    protected:
-        uint8_t m_interruptId;
 };
 
 #endif

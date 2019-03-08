@@ -5,8 +5,8 @@ InterruptButton::InterruptButton(InterruptPin* pin) {
 }
 
 void InterruptButton::init(void (*onStateChangedCallback)(void)) {
-    m_pin->init(onStateChangedCallback, InterruptMode::All);
     m_pin->setInputMode();
+    m_pin->init(onStateChangedCallback, InterruptMode::All);
 }
 
 bool InterruptButton::isPressed() {

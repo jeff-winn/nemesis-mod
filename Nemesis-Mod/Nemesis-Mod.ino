@@ -20,20 +20,29 @@ void setup() {
             new AnalogPin(A4, hardware)));
     flywheelController->init();
 
-    auto* revTrigger = new PolledButton(
-        new DigitalPin(11, hardware));
+    auto* revTrigger = new InterruptButton(
+        new InterruptPin(13, hardware));
+    revTrigger->init(onRevTriggerStateChangedCallback);
 
-    auto* firingTrigger = new PolledButton(
-        new DigitalPin(12, hardware));
+    auto* firingTrigger = new InterruptButton(
+        new InterruptPin(12, hardware));
+    firingTrigger->init(onFiringTriggerStateChangedCallback);
 
     app = new App(
         flywheelController,
         revTrigger,
         firingTrigger,
         hardware);
-    app->init();
 }
 
 void loop() {
     app->run();    
+}
+
+void onRevTriggerStateChangedCallback() {
+    app->onRevTriggerStateChangedCallback();
+}
+
+void onFiringTriggerStateChangedCallback() {
+    app->onFiringTriggerStateChangedCallback();
 }

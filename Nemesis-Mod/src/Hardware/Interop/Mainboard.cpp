@@ -1,21 +1,31 @@
 #include <Arduino.h>
+#include <ArduinoLowPower.h>
 #include "Mainboard.h"
 
-void Mainboard::attachInterruptSafe(uint8_t pin, voidFuncPtr callback, InterruptMode mode) {
-    int m = CHANGE;
+void Mainboard::attachInterruptSafe(uint8_t pin, InterruptCallback callback, InterruptMode mode, bool wakeDeviceOnInterrupt) {
+    uint32_t modeId;
 
     switch (mode) {
-        case InterruptMode::Rising: {
-            m = RISING;
+        case InterruptMode::Falling: {
+            modeId = LOW;
             break;
         }
-        case InterruptMode::Falling: {
-            m = FALLING;
+        case InterruptMode::Rising: {
+            modeId = HIGH;
+            break;
+        }
+        case InterruptMode::All: {
+            modeId = CHANGE;
             break;
         }
     }
 
-    attachInterrupt(pin, callback, m);
+    if (wakeDeviceOnInterrupt) {
+        LowPower.attachInterruptWakeup(pin ,callback, modeId);
+    }
+    else {
+        attachInterrupt(digitalPinToInterrupt(pin), callback, modeId);
+    }
 }
 
 int Mainboard::analogReadSafe(uint8_t pin) {
@@ -35,17 +45,22 @@ void Mainboard::digitalWriteSafe(uint8_t pin, uint32_t value) {
 }
 
 void Mainboard::pinModeSafe(uint8_t pin, PinMode mode) {
+    uint32_t modeId;
+
     switch (mode) {
         case PinMode::Read: {
-            pinMode(pin, INPUT);
+            modeId = INPUT;
             break;
         }
-        case PinMode::Write: { 
-            pinMode(pin, OUTPUT);
+        case PinMode::Write: {
+            modeId = OUTPUT;
             break;
         }
     }
+
+    pinMode(pin, modeId);
 }
 
 void Mainboard::sleep() {
+    LowPower.sleep();
 }

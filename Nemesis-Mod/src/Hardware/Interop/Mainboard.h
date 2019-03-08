@@ -1,8 +1,7 @@
 #ifndef MAINBOARD_H
 #define MAINBOARD_H
 
-#include <stdint.h>
-#include <WInterrupts.h>
+typedef void (*InterruptCallback)(void);
 
 // Defines the GPIO pin modes.
 enum PinMode {
@@ -26,7 +25,7 @@ enum InterruptMode {
 class Mainboard {
     public:
         // Attaches an interrupt pin with a user function callback.
-        virtual void attachInterruptSafe(uint8_t pin, voidFuncPtr callback, InterruptMode mode);
+        virtual void attachInterruptSafe(uint8_t pin, InterruptCallback callback, InterruptMode mode, bool wakeDeviceOnInterrupt);
         
         // Writes the value to the digital pin specified.
         virtual void digitalWriteSafe(uint8_t pin, uint32_t value);

@@ -2,17 +2,16 @@
 #define APP_H
 
 #include "Controllers/FlywheelController.h"
-#include "Hardware/PolledButton.h"
+#include "Hardware/InterruptButton.h"
 
 class App {
     public:
         App(
             FlywheelController* flywheelController, 
-            PolledButton* revTrigger, 
-            PolledButton* firingTrigger,
+            InterruptButton* revTrigger, 
+            InterruptButton* firingTrigger,
             HardwareAccessLayer* p_hardware);
         
-        void init();
         void run();
 
         void onRevTriggerStateChangedCallback();
@@ -23,8 +22,8 @@ class App {
     
     private:
         FlywheelController* m_flywheelController;
-        PolledButton* m_revTrigger;
-        PolledButton* m_firingTrigger;
+        InterruptButton* m_revTrigger;
+        InterruptButton* m_firingTrigger;
         HardwareAccessLayer* hardware;
 };
 

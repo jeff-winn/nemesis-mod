@@ -20,5 +20,5 @@ This is the toolset that is currently being used to write the code included with
 Below are the dependencies that are being used by the project.
 - [Pololu Dual G2 High-Power Motor Driver Library for Arduino](https://github.com/pololu/dual-g2-high-power-motor-shield)
 - [Adafruit PWM Servo Driver Library](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
-- [Arduino Low Power Library](http://arduino.cc/libraries/ArduinoLowPower)
-- [RTCZero Library](http://www.arduino.cc/en/Reference/RTC)
+- [Arduino Low-Power Library](https://github.com/arduino-libraries/ArduinoLowPower)
+- [RTCZero](https://github.com/arduino-libraries/RTCZero)
