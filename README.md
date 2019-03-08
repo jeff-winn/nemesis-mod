@@ -16,6 +16,9 @@ This is the toolset that is currently being used to write the code included with
   - Arduino SAMD Boards (32-bits ARM Cortex-M0+)
   - Adafruit SAMD Boards
   
+## Code Layout
+<img src="docs/code_layout.png" />
+
 ### Dependencies
 Below are the dependencies that are being used by the project.
 - [Pololu Dual G2 High-Power Motor Driver Library for Arduino](https://github.com/pololu/dual-g2-high-power-motor-shield)
