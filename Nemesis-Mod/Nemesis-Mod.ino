@@ -17,10 +17,13 @@ void setup() {
         new Potentiometer(
             new AnalogPin(A3, hardware)),
         new Potentiometer(
-            new AnalogPin(A4, hardware)));
+            new AnalogPin(A4, hardware)),
+        FlywheelSpeed::High);
     flywheelController->init();
 
-    auto* feedController = new FeedController();
+    auto* feedController = new FeedController(
+        new AnalogPin(A7, hardware));
+    feedController->init();
 
     auto* revTrigger = new InterruptButton(
         new InterruptPin(13, hardware));
@@ -39,7 +42,7 @@ void setup() {
 }
 
 void loop() {
-    app->run();    
+    app->run();
 }
 
 void onRevTriggerStateChangedCallback() {

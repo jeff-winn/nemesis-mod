@@ -13,12 +13,11 @@ int FLYWHEEL_NORMAL_SPEED = 300;
 int FLYWHEEL_MAX_SPEED = 400;
 
 FlywheelController::FlywheelController(
-    DualG2HighPowerMotorShield18v18* motorController, Potentiometer* motor1Potentiometer, Potentiometer* motor2Potentiometer) {
+    DualG2HighPowerMotorShield18v18* motorController, Potentiometer* motor1Potentiometer, Potentiometer* motor2Potentiometer, FlywheelSpeed speed) {
     m_motorController = motorController;
     m_motor1Adjustment = motor1Potentiometer;
     m_motor2Adjustment = motor2Potentiometer;
-
-    m_speed = FlywheelSpeed::Low;
+    m_speed = speed;
 }
 
 void FlywheelController::init() {

@@ -24,7 +24,8 @@ class FlywheelController {
         FlywheelController(
             DualG2HighPowerMotorShield18v18* motorController, 
             Potentiometer* motor1Potentiometer,
-            Potentiometer* motor2Potentiometer);
+            Potentiometer* motor2Potentiometer,
+            FlywheelSpeed speed);
 
         // Gets the current of the motor specified (in milliamps).
         virtual unsigned int getMotorCurrentMilliamps(FlywheelMotor motor);

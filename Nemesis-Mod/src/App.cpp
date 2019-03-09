@@ -27,11 +27,10 @@ void App::onRevTriggerStateChangedCallback() {
 
 void App::run() {
     waitForWakeEvent();
-    if (!HAS_OPERATOR_AUTHENTICATED) {
+    if (!HAS_OPERATOR_AUTHENTICATED || !SHOULD_CONTINUE_EXECUTION) {
         return;
     }
 
-    m_flywheelController->setSpeed(FlywheelSpeed::Low);
     m_flywheelController->start();
     
     while (SHOULD_CONTINUE_EXECUTION) {
@@ -45,6 +44,7 @@ void App::run() {
         delay(10);
     }
 
+    m_feedController->stop();
     m_flywheelController->stop();
 }
 
@@ -53,5 +53,7 @@ void App::waitForWakeEvent() {
         return;
     }
 
+#if defined (__RELEASE__)
     hardware->sleepSafe();
+#endif
 }
