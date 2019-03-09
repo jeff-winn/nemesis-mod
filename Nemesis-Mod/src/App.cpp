@@ -1,6 +1,6 @@
 #include "App.h"
 
-// Indicates whether the hardware should continue execution.
+// Indicates whether the blaster should continue execution.
 volatile bool SHOULD_CONTINUE_EXECUTION = false;
 
 // Indicates whether the operator has authenticated prior to releasing the software lock.
@@ -9,8 +9,9 @@ volatile bool HAS_OPERATOR_AUTHENTICATED = true;
 // Indicates whether the blaster should fire rounds at the target.
 volatile bool SHOULD_FIRE_ROUNDS = false;
 
-App::App(FlywheelController* flywheelController, InterruptButton* revTrigger, InterruptButton* firingTrigger, HardwareAccessLayer* p_hardware) {
+App::App(FlywheelController* flywheelController, FeedController* feedController, InterruptButton* revTrigger, InterruptButton* firingTrigger, HardwareAccessLayer* p_hardware) {
     m_flywheelController = flywheelController;
+    m_feedController = feedController;
     m_revTrigger = revTrigger;
     m_firingTrigger = firingTrigger;
     hardware = p_hardware;    
@@ -35,10 +36,10 @@ void App::run() {
     
     while (SHOULD_CONTINUE_EXECUTION) {
         if (SHOULD_FIRE_ROUNDS) {
-            // Start firing rounds.
+            m_feedController->start();
         }
         else {
-            // Stop firing rounds.
+            m_feedController->stop();
         }
 
         delay(10);
