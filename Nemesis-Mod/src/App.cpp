@@ -53,5 +53,5 @@ void App::waitForWakeEvent() {
         return;
     }
 
-    hardware->sleep();
+    hardware->sleepSafe();
 }
