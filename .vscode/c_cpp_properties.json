@@ -46,7 +46,7 @@
             },
             "compilerPath": "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-gcc.exe",
             "cStandard": "c11",
-            "cppStandard": "c++17"
+            "cppStandard": "c++11"
         }
     ],
     "version": 4
