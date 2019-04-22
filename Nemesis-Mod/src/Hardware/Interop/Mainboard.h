@@ -26,6 +26,9 @@ class Mainboard {
     public:
         // Attaches an interrupt pin with a user function callback.
         virtual void attachInterruptSafe(uint8_t pin, InterruptCallback callback, InterruptMode mode, bool wakeDeviceOnInterrupt);
+
+        // Delays the execution for the time (in milliseconds) specified.
+        virtual void delaySafe(unsigned long milliseconds);
         
         // Writes the value to the digital pin specified.
         virtual void digitalWriteSafe(uint8_t pin, uint32_t value);
@@ -43,7 +46,7 @@ class Mainboard {
         virtual int analogReadSafe(uint8_t pin);
 
         // Puts the device to sleep.
-        virtual void sleep();
+        virtual void sleepSafe();
 };
 
 #endif

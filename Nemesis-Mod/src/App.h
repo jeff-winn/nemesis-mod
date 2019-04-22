@@ -2,15 +2,17 @@
 #define APP_H
 
 #include "Controllers/FlywheelController.h"
+#include "Controllers/FeedController.h"
 #include "Hardware/InterruptButton.h"
 
 class App {
     public:
         App(
-            FlywheelController* flywheelController, 
+            FlywheelController* flywheelController,
+            FeedController* feedController,
             InterruptButton* revTrigger, 
             InterruptButton* firingTrigger,
-            HardwareAccessLayer* p_hardware);
+            HardwareAccessLayer* hardware);
         
         void run();
 
@@ -22,9 +24,10 @@ class App {
     
     private:
         FlywheelController* m_flywheelController;
+        FeedController* m_feedController;
         InterruptButton* m_revTrigger;
         InterruptButton* m_firingTrigger;
-        HardwareAccessLayer* hardware;
+        HardwareAccessLayer* m_hardware;
 };
 
 #endif

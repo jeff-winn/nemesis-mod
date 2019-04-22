@@ -12,13 +12,19 @@ void setup() {
     auto* hardware = new HardwareAccessLayer();
     
     auto* flywheelController = new FlywheelController(
+        hardware,
         new DualG2HighPowerMotorShield18v18(
             0, 0, 5, 0, A0, 0, 0, 6, 0, A1),
         new Potentiometer(
             new AnalogPin(A3, hardware)),
         new Potentiometer(
-            new AnalogPin(A4, hardware)));
+            new AnalogPin(A4, hardware)),
+        FlywheelSpeed::High);
     flywheelController->init();
+
+    auto* feedController = new FeedController(
+        new AnalogPin(A7, hardware));
+    feedController->init();
 
     auto* revTrigger = new InterruptButton(
         new InterruptPin(13, hardware));
@@ -30,13 +36,14 @@ void setup() {
 
     app = new App(
         flywheelController,
+        feedController,
         revTrigger,
         firingTrigger,
         hardware);
 }
 
 void loop() {
-    app->run();    
+    app->run();
 }
 
 void onRevTriggerStateChangedCallback() {

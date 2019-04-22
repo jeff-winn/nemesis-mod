@@ -2,6 +2,10 @@
 #include <ArduinoLowPower.h>
 #include "Mainboard.h"
 
+void Mainboard::delaySafe(unsigned long milliseconds) {
+    delay(milliseconds);
+}
+
 void Mainboard::attachInterruptSafe(uint8_t pin, InterruptCallback callback, InterruptMode mode, bool wakeDeviceOnInterrupt) {
     uint32_t modeId;
 
@@ -61,6 +65,6 @@ void Mainboard::pinModeSafe(uint8_t pin, PinMode mode) {
     pinMode(pin, modeId);
 }
 
-void Mainboard::sleep() {
+void Mainboard::sleepSafe() {
     LowPower.sleep();
 }
