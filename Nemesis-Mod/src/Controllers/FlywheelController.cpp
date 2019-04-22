@@ -50,24 +50,39 @@ void FlywheelController::start() {
         return;
     }
 
-    m_hardware->delaySafe(1);
+    m_hardware->delaySafe(1);    
 
-    int maximumSpeed = determineMotorSpeed();
+    int motor1Maximum = calculateMotorSpeed(FlywheelMotor::Motor1);
+    int motor2Maximum = calculateMotorSpeed(FlywheelMotor::Motor2);
 
-    float motor1Adjustment = getMotorSpeedAdjustment(FlywheelMotor::Motor1);
-    float motor2Adjustment = getMotorSpeedAdjustment(FlywheelMotor::Motor2);
+    int maximum = max(motor1Maximum, motor2Maximum);
+    int current = 0;
 
     // Ramp up the motor speed rather than going directly to max power.
-    for (int speed = 0; speed <= maximumSpeed; speed = speed + FLYWHEEL_STEP_INCREMENT) {
-        m_motorController->setM1Speed(speed * motor1Adjustment);
-        m_motorController->setM2Speed(speed * motor2Adjustment);
+    while (current <= maximum) {
+        if (current < motor1Maximum) {
+            m_motorController->setM1Speed(current);
+        }
+        
+        if (current < motor2Maximum) {
+            m_motorController->setM2Speed(current);
+        }
+
+        current += FLYWHEEL_STEP_INCREMENT;
     }
 
     m_isRunning = true;
     m_hardware->delaySafe(1);
 }
 
-int FlywheelController::determineMotorSpeed() {
+int FlywheelController::calculateMotorSpeed(FlywheelMotor motor) {
+    int maximumSpeed = determineMotorMaximumSpeed();
+    float adjustment = getMotorSpeedAdjustment(motor);
+
+    return maximumSpeed - ((maximumSpeed * 0.1) * adjustment);
+}
+
+int FlywheelController::determineMotorMaximumSpeed() {
     switch (m_speed) {
         case FlywheelSpeed::Low: {
             return FLYWHEEL_MIN_SPEED;
