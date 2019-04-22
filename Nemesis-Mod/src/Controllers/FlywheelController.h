@@ -22,6 +22,7 @@ enum FlywheelSpeed {
 class FlywheelController {
     public:
         FlywheelController(
+            HardwareAccessLayer* hardware,
             DualG2HighPowerMotorShield18v18* motorController, 
             Potentiometer* motor1Potentiometer,
             Potentiometer* motor2Potentiometer,
@@ -47,6 +48,7 @@ class FlywheelController {
         virtual int determineMotorSpeed();
         
     private:
+        HardwareAccessLayer* m_hardware;
         DualG2HighPowerMotorShield18v18* m_motorController;
         Potentiometer* m_motor1Adjustment;
         Potentiometer* m_motor2Adjustment;

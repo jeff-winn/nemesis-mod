@@ -12,7 +12,7 @@ class App {
             FeedController* feedController,
             InterruptButton* revTrigger, 
             InterruptButton* firingTrigger,
-            HardwareAccessLayer* p_hardware);
+            HardwareAccessLayer* hardware);
         
         void run();
 
@@ -27,7 +27,7 @@ class App {
         FeedController* m_feedController;
         InterruptButton* m_revTrigger;
         InterruptButton* m_firingTrigger;
-        HardwareAccessLayer* hardware;
+        HardwareAccessLayer* m_hardware;
 };
 
 #endif
