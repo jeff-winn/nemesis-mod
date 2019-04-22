@@ -1,7 +1,10 @@
 #include "FlywheelController.h"
 
+// Defines the trim variance amount on the maximum speed per motor.
+double TRIM_VARIANCE_AMOUNT = 0.1;
+
 // Defines the step increment when the flywheel assembly is being started.
-int FLYWHEEL_STEP_INCREMENT = 2;
+int FLYWHEEL_STEP_INCREMENT = 5;
 
 // Defines the minimum viable speed for the flywheel assembly.
 int FLYWHEEL_MIN_SPEED = 200;
@@ -50,7 +53,7 @@ void FlywheelController::start() {
         return;
     }
 
-    m_hardware->delaySafe(1);    
+    m_hardware->delaySafe(1);
 
     int motor1Maximum = calculateMotorSpeed(FlywheelMotor::Motor1);
     int motor2Maximum = calculateMotorSpeed(FlywheelMotor::Motor2);
@@ -60,11 +63,11 @@ void FlywheelController::start() {
 
     // Ramp up the motor speed rather than going directly to max power.
     while (current <= maximum) {
-        if (current < motor1Maximum) {
+        if (current <= motor1Maximum) {
             m_motorController->setM1Speed(current);
         }
         
-        if (current < motor2Maximum) {
+        if (current <= motor2Maximum) {
             m_motorController->setM2Speed(current);
         }
 
@@ -78,8 +81,9 @@ void FlywheelController::start() {
 int FlywheelController::calculateMotorSpeed(FlywheelMotor motor) {
     int maximumSpeed = determineMotorMaximumSpeed();
     float adjustment = getMotorSpeedAdjustment(motor);
-
-    return maximumSpeed - ((maximumSpeed * 0.1) * adjustment);
+    int limiter = maximumSpeed * TRIM_VARIANCE_AMOUNT;
+    
+    return (maximumSpeed - limiter) + (limiter * adjustment);
 }
 
 int FlywheelController::determineMotorMaximumSpeed() {
