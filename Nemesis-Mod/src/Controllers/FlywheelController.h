@@ -13,9 +13,10 @@ enum FlywheelMotor {
 // Defines the flywheel speeds available.
 enum FlywheelSpeed {
     Low = 0,
-    Normal,
+    Medium,
     // WARNING: This value may cause physical bruising on the intended target, use with caution!
-    High
+    High,
+    Maximum
 };
 
 // Provides a mechanism to control the flywheel assembly.

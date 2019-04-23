@@ -7,10 +7,13 @@ double TRIM_VARIANCE_AMOUNT = 0.1;
 int FLYWHEEL_STEP_INCREMENT = 5;
 
 // Defines the minimum viable speed for the flywheel assembly.
-int FLYWHEEL_MIN_SPEED = 200;
+int FLYWHEEL_MIN_SPEED = 100;
 
-// Defines the 'normal' speed for the flywheel assembly.
-int FLYWHEEL_NORMAL_SPEED = 300;
+// Defines the medium speed for the flywheel assembly.
+int FLYWHEEL_MEDIUM_SPEED = 200;
+
+// Defines the 'high' speed for the flywheel assembly.
+int FLYWHEEL_HIGH_SPEED = 300;
 
 // Defines the maximum speed for the flywheel assembly.
 int FLYWHEEL_MAX_SPEED = 400;
@@ -91,10 +94,13 @@ int FlywheelController::determineMotorMaximumSpeed() {
         case FlywheelSpeed::Low: {
             return FLYWHEEL_MIN_SPEED;
         }
-        case FlywheelSpeed::Normal: {
-            return FLYWHEEL_NORMAL_SPEED;
+        case FlywheelSpeed::Medium: {
+            return FLYWHEEL_MEDIUM_SPEED;
         }
         case FlywheelSpeed::High: {
+            return FLYWHEEL_HIGH_SPEED;
+        }
+        case FlywheelSpeed::Maximum: {
             return FLYWHEEL_MAX_SPEED;
         }
     }
