@@ -16,9 +16,6 @@ This is the toolset that is currently being used to write the code included with
 - Arduino Board Manager Packages
   - Arduino SAMD Boards (32-bits ARM Cortex-M0+)
   - Adafruit SAMD Boards
-  
-## Code Layout
-<img src="docs/code_layout.png" />
 
 ### Dependencies
 Below are the dependencies that are being used by the project.
