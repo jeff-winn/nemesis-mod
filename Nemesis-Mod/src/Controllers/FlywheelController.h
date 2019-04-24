@@ -45,6 +45,7 @@ class FlywheelController {
         virtual void stop();
 
     protected:
+        virtual int calculateLimiterForSpeed(int speed);
         virtual int calculateMotorSpeed(FlywheelMotor motor);
         virtual float getMotorSpeedAdjustment(FlywheelMotor motor);
         virtual int determineMotorMaximumSpeed();

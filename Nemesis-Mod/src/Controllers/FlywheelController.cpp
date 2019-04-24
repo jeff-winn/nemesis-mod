@@ -6,10 +6,10 @@ double TRIM_VARIANCE_AMOUNT = 0.1;
 // Defines the step increment when the flywheel assembly is being started.
 int FLYWHEEL_STEP_INCREMENT = 5;
 
-// Defines the minimum viable speed for the flywheel assembly.
+// Defines the 'minimum' viable speed for the flywheel assembly.
 int FLYWHEEL_MIN_SPEED = 100;
 
-// Defines the medium speed for the flywheel assembly.
+// Defines the 'medium' speed for the flywheel assembly.
 int FLYWHEEL_MEDIUM_SPEED = 200;
 
 // Defines the 'high' speed for the flywheel assembly.
@@ -83,10 +83,15 @@ void FlywheelController::start() {
 
 int FlywheelController::calculateMotorSpeed(FlywheelMotor motor) {
     int maximumSpeed = determineMotorMaximumSpeed();
+    
+    int limiter = calculateLimiterForSpeed(maximumSpeed);
     float adjustment = getMotorSpeedAdjustment(motor);
-    int limiter = maximumSpeed * TRIM_VARIANCE_AMOUNT;
     
     return (maximumSpeed - limiter) + (limiter * adjustment);
+}
+
+int FlywheelController::calculateLimiterForSpeed(int speed) {
+    return speed * TRIM_VARIANCE_AMOUNT;
 }
 
 int FlywheelController::determineMotorMaximumSpeed() {
