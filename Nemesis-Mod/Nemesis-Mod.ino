@@ -25,7 +25,8 @@ void setup() {
     auto* feedController = new FeedController(
         hardware,
         new G2HighPowerMotorShield18v17(
-            0, 0, 11, 0, A2));
+            0, 0, 11, 0, A2),
+            FlywheelSpeed::Low);
     feedController->init();
 
     auto* revTrigger = new InterruptButton(

@@ -1,8 +1,16 @@
-#ifndef CONTROLLER_H
-#define CONTROLLER_H
+#ifndef MOTOR_CONTROLLER_H
+#define MOTOR_CONTROLLER_H
 
-// Provides a base implementation of a controller.
-class Controller {
+// Defines the flywheel speeds available.
+enum FlywheelSpeed {
+    Low = 0,
+    Normal,
+    // WARNING: This value may cause physical bruising on the intended target, use with caution!
+    High
+};
+
+// Provides a base implementation of a motor controller.
+class MotorController {
     public:
         // Initializes the controller.
         virtual void init();

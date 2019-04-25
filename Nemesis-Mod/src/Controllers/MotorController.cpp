@@ -1,9 +1,9 @@
-#include "Controller.h"
+#include "MotorController.h"
 
-void Controller::init() {    
+void MotorController::init() {    
 }
 
-void Controller::start() {
+void MotorController::start() {
     if (m_isRunning) {
         return;
     }
@@ -12,7 +12,7 @@ void Controller::start() {
     m_isRunning = true;
 }
 
-void Controller::stop() {
+void MotorController::stop() {
     if (!m_isRunning) {
         return;
     }
@@ -21,6 +21,6 @@ void Controller::stop() {
     m_isRunning = false;
 }
 
-bool Controller::isRunning() {
+bool MotorController::isRunning() {
     return m_isRunning;
 }

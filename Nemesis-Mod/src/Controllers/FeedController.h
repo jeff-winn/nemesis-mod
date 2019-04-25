@@ -3,17 +3,19 @@
 
 #include "../Hardware/Interop/G2HighPowerMotorShield.h"
 #include "../Hardware/Interop/HardwareAccessLayer.h"
-#include "Controller.h"
+#include "MotorController.h"
 
 // Provides a mechanism to control the feed assembly.
-class FeedController : public Controller {
+class FeedController : public MotorController {
     public:
-        FeedController(HardwareAccessLayer* hardware, G2HighPowerMotorShield18v17* motorController);
+        FeedController(HardwareAccessLayer* hardware, G2HighPowerMotorShield18v17* motorController, FlywheelSpeed speed);
 
         // Initializes the controller.
         virtual void init();
 
     protected:
+        int calculateMotorSpeed();
+
         // Extension point for operations which occur on start.
         virtual void onStart();
 
@@ -23,6 +25,8 @@ class FeedController : public Controller {
     private:
         HardwareAccessLayer* m_hardware;
         G2HighPowerMotorShield18v17* m_motorController;
+
+        FlywheelSpeed m_speed;
 };
 
 #endif

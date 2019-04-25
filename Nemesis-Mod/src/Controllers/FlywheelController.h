@@ -3,7 +3,7 @@
 
 #include <DualG2HighPowerMotorShield.h>
 #include "../Hardware/Potentiometer.h"
-#include "Controller.h"
+#include "MotorController.h"
 
 // Defines the motors within the flywheel assembly.
 enum FlywheelMotor {
@@ -11,16 +11,8 @@ enum FlywheelMotor {
     Motor2
 };
 
-// Defines the flywheel speeds available.
-enum FlywheelSpeed {
-    Low = 0,
-    Normal,
-    // WARNING: This value may cause physical bruising on the intended target, use with caution!
-    High
-};
-
 // Provides a mechanism to control the flywheel assembly.
-class FlywheelController : public Controller {
+class FlywheelController : public MotorController {
     public:
         FlywheelController(
             HardwareAccessLayer* hardware,

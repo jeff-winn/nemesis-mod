@@ -1,19 +1,19 @@
 #include "FlywheelController.h"
 
 // Defines the trim variance amount on the maximum speed per motor.
-double TRIM_VARIANCE_AMOUNT = 0.1;
+const double TRIM_VARIANCE_AMOUNT = 0.1;
 
 // Defines the step increment when the flywheel assembly is being started.
-int FLYWHEEL_STEP_INCREMENT = 5;
+const int FLYWHEEL_STEP_INCREMENT = 5;
 
-// Defines the 'minimum' viable speed for the flywheel assembly.
-int FLYWHEEL_MIN_SPEED = 100;
+// Defines the 'low' viable speed for the flywheel assembly.
+const int FLYWHEEL_LOW_SPEED = 100;
 
 // Defines the 'normal' speed for the flywheel assembly.
-int FLYWHEEL_NORMAL_SPEED = 200;
+const int FLYWHEEL_NORMAL_SPEED = 200;
 
 // Defines the 'high' speed for the flywheel assembly.
-int FLYWHEEL_HIGH_SPEED = 400;
+const int FLYWHEEL_HIGH_SPEED = 400;
 
 FlywheelController::FlywheelController(
     HardwareAccessLayer* hardware, DualG2HighPowerMotorShield18v18* motorController, Potentiometer* motor1Potentiometer, Potentiometer* motor2Potentiometer, FlywheelSpeed speed) {
@@ -49,33 +49,21 @@ unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
 }
 
 void FlywheelController::onStart() {
-    int motor1Maximum = calculateMotorSpeed(FlywheelMotor::Motor1);
-    int motor2Maximum = calculateMotorSpeed(FlywheelMotor::Motor2);
+    auto motor1Maximum = calculateMotorSpeed(FlywheelMotor::Motor1);
+    auto motor2Maximum = calculateMotorSpeed(FlywheelMotor::Motor2);
 
-    int maximum = max(motor1Maximum, motor2Maximum);
-    int current = 0;
+    auto maximum = max(motor1Maximum, motor2Maximum);
+    auto current = 0;
 
-    // Ramp up the motor speed rather than going directly to max power.
-    while (current <= maximum) {
-        if (current <= motor1Maximum) {
-            m_motorController->setM1Speed(current);
-        }
-        
-        if (current <= motor2Maximum) {
-            m_motorController->setM2Speed(current);
-        }
-
-        current += FLYWHEEL_STEP_INCREMENT;
-    }
-
+    m_motorController->setSpeeds(motor1Maximum, motor2Maximum);
     m_hardware->delaySafe(1);
 }
 
 int FlywheelController::calculateMotorSpeed(FlywheelMotor motor) {
-    int maximumSpeed = determineMotorMaximumSpeed();
+    auto maximumSpeed = determineMotorMaximumSpeed();
     
-    int limiter = calculateLimiterForSpeed(maximumSpeed);
-    float adjustment = getMotorSpeedAdjustment(motor);
+    auto limiter = calculateLimiterForSpeed(maximumSpeed);
+    auto adjustment = getMotorSpeedAdjustment(motor);
     
     return (maximumSpeed - limiter) + (limiter * adjustment);
 }
@@ -87,7 +75,7 @@ int FlywheelController::calculateLimiterForSpeed(int speed) {
 int FlywheelController::determineMotorMaximumSpeed() {
     switch (m_speed) {
         case FlywheelSpeed::Low: {
-            return FLYWHEEL_MIN_SPEED;
+            return FLYWHEEL_LOW_SPEED;
         }
         case FlywheelSpeed::Normal: {
             return FLYWHEEL_NORMAL_SPEED;
