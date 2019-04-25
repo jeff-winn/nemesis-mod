@@ -9,14 +9,11 @@ int FLYWHEEL_STEP_INCREMENT = 5;
 // Defines the 'minimum' viable speed for the flywheel assembly.
 int FLYWHEEL_MIN_SPEED = 100;
 
-// Defines the 'medium' speed for the flywheel assembly.
-int FLYWHEEL_MEDIUM_SPEED = 200;
+// Defines the 'normal' speed for the flywheel assembly.
+int FLYWHEEL_NORMAL_SPEED = 200;
 
 // Defines the 'high' speed for the flywheel assembly.
-int FLYWHEEL_HIGH_SPEED = 300;
-
-// Defines the maximum speed for the flywheel assembly.
-int FLYWHEEL_MAX_SPEED = 400;
+int FLYWHEEL_HIGH_SPEED = 400;
 
 FlywheelController::FlywheelController(
     HardwareAccessLayer* hardware, DualG2HighPowerMotorShield18v18* motorController, Potentiometer* motor1Potentiometer, Potentiometer* motor2Potentiometer, FlywheelSpeed speed) {
@@ -51,13 +48,7 @@ unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
     return 0;
 }
 
-void FlywheelController::start() {
-    if (m_isRunning) {
-        return;
-    }
-
-    m_hardware->delaySafe(1);
-
+void FlywheelController::onStart() {
     int motor1Maximum = calculateMotorSpeed(FlywheelMotor::Motor1);
     int motor2Maximum = calculateMotorSpeed(FlywheelMotor::Motor2);
 
@@ -77,7 +68,6 @@ void FlywheelController::start() {
         current += FLYWHEEL_STEP_INCREMENT;
     }
 
-    m_isRunning = true;
     m_hardware->delaySafe(1);
 }
 
@@ -99,14 +89,11 @@ int FlywheelController::determineMotorMaximumSpeed() {
         case FlywheelSpeed::Low: {
             return FLYWHEEL_MIN_SPEED;
         }
-        case FlywheelSpeed::Medium: {
-            return FLYWHEEL_MEDIUM_SPEED;
+        case FlywheelSpeed::Normal: {
+            return FLYWHEEL_NORMAL_SPEED;
         }
         case FlywheelSpeed::High: {
             return FLYWHEEL_HIGH_SPEED;
-        }
-        case FlywheelSpeed::Maximum: {
-            return FLYWHEEL_MAX_SPEED;
         }
     }
 
@@ -126,14 +113,7 @@ float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
     return 0;
 }
 
-void FlywheelController::stop() {
-    if (!m_isRunning) {
-        return;
-    }
-
+void FlywheelController::onStop() {
     m_motorController->setSpeeds(0, 0);
-    m_hardware->delaySafe(1);
-
-    m_isRunning = false;
     m_hardware->delaySafe(1);
 }

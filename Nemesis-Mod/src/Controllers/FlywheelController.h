@@ -3,6 +3,7 @@
 
 #include <DualG2HighPowerMotorShield.h>
 #include "../Hardware/Potentiometer.h"
+#include "Controller.h"
 
 // Defines the motors within the flywheel assembly.
 enum FlywheelMotor {
@@ -13,14 +14,13 @@ enum FlywheelMotor {
 // Defines the flywheel speeds available.
 enum FlywheelSpeed {
     Low = 0,
-    Medium,
+    Normal,
     // WARNING: This value may cause physical bruising on the intended target, use with caution!
-    High,
-    Maximum
+    High
 };
 
 // Provides a mechanism to control the flywheel assembly.
-class FlywheelController {
+class FlywheelController : public Controller {
     public:
         FlywheelController(
             HardwareAccessLayer* hardware,
@@ -29,26 +29,26 @@ class FlywheelController {
             Potentiometer* motor2Potentiometer,
             FlywheelSpeed speed);
 
-        // Gets the current of the motor specified (in milliamps).
-        virtual unsigned int getMotorCurrentMilliamps(FlywheelMotor motor);
-
         // Initializes the controller.
         virtual void init();
 
+        // Gets the current of the motor specified (in milliamps).
+        virtual unsigned int getMotorCurrentMilliamps(FlywheelMotor motor);
+
         // Sets the flywheel motor speed.
         virtual void setSpeed(FlywheelSpeed value);
-
-        // Starts the flywheels.
-        virtual void start();
-
-        // Stops the flywheels.
-        virtual void stop();
 
     protected:
         virtual int calculateLimiterForSpeed(int speed);
         virtual int calculateMotorSpeed(FlywheelMotor motor);
         virtual float getMotorSpeedAdjustment(FlywheelMotor motor);
         virtual int determineMotorMaximumSpeed();
+        
+        // Extension point for operations which occur on start.
+        virtual void onStart();
+
+        // Extension point for operations which occur on stop.
+        virtual void onStop();
         
     private:
         HardwareAccessLayer* m_hardware;
@@ -57,7 +57,6 @@ class FlywheelController {
         Potentiometer* m_motor2Adjustment;
 
         FlywheelSpeed m_speed;
-        bool m_isRunning;
 };
 
 #endif

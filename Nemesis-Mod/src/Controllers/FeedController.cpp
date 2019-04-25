@@ -1,28 +1,23 @@
 #include "FeedController.h"
-#include <Arduino.h>
 
-FeedController::FeedController(AnalogPin* pin) {
-    m_pin = pin;
+FeedController::FeedController(HardwareAccessLayer* hardware, G2HighPowerMotorShield18v17* motorController) {
+    m_hardware = hardware;
+    m_motorController = motorController;
 }
 
 void FeedController::init() {
-    m_pin->setOutputMode();
+    m_motorController->init();
+    m_motorController->calibrateCurrentOffset();
+
+    m_hardware->delaySafe(1);    
 }
 
-void FeedController::start() {
-    if (m_isRunning) {
-        return;
-    }
-
-    m_pin->write(255);
-    m_isRunning = true;
+void FeedController::onStart() {
+    m_motorController->setSpeed(400);
+    m_hardware->delaySafe(1);
 }
 
-void FeedController::stop() {
-    if (!m_isRunning) {
-        return;
-    }
-
-    m_pin->write(0);
-    m_isRunning = false;
+void FeedController::onStop() {
+    m_motorController->setSpeed(0);
+    m_hardware->delaySafe(1);
 }
