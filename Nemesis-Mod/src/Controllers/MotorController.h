@@ -25,10 +25,7 @@ class MotorController {
         void setSpeed(MotorSpeed speed);
 
     protected:
-        // Extension point for operations which occur on start.
         virtual void onStart();
-
-        // Extension point for operations which occur on stop.
         virtual void onStop();
         
         // Identifies whether the controller is running.

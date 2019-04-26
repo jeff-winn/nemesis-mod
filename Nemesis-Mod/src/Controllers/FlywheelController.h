@@ -32,10 +32,7 @@ class FlywheelController : public MotorController {
         virtual float getMotorSpeedAdjustment(FlywheelMotor motor);
         virtual int determineMotorMaximumSpeed();
         
-        // Extension point for operations which occur on start.
         virtual void onStart();
-
-        // Extension point for operations which occur on stop.
         virtual void onStop();
         
     private:

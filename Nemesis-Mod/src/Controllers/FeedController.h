@@ -16,10 +16,7 @@ class FeedController : public MotorController {
     protected:
         int calculateMotorSpeed();
 
-        // Extension point for operations which occur on start.
         virtual void onStart();
-
-        // Extension point for operations which occur on stop.
         virtual void onStop();
 
     private:
