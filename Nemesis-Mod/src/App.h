@@ -14,6 +14,12 @@ class App {
             InterruptButton* firingTrigger,
             HardwareAccessLayer* hardware);
         
+        // Sets the rate of fire.
+        void setSpeed(MotorSpeed speed);
+
+        // Initializes the application.
+        virtual void init();
+
         void run();
 
         void onRevTriggerStateChangedCallback();
