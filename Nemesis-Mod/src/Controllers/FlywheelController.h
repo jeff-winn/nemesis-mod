@@ -19,7 +19,7 @@ class FlywheelController : public MotorController {
             DualG2HighPowerMotorShield18v18* motorController, 
             Potentiometer* motor1Potentiometer,
             Potentiometer* motor2Potentiometer,
-            FlywheelSpeed speed);
+            MotorSpeed speed);
 
         // Initializes the controller.
         virtual void init();
@@ -28,7 +28,7 @@ class FlywheelController : public MotorController {
         virtual unsigned int getMotorCurrentMilliamps(FlywheelMotor motor);
 
         // Sets the flywheel motor speed.
-        virtual void setSpeed(FlywheelSpeed value);
+        virtual void setSpeed(MotorSpeed value);
 
     protected:
         virtual int calculateLimiterForSpeed(int speed);
@@ -48,7 +48,7 @@ class FlywheelController : public MotorController {
         Potentiometer* m_motor1Adjustment;
         Potentiometer* m_motor2Adjustment;
 
-        FlywheelSpeed m_speed;
+        MotorSpeed m_speed;
 };
 
 #endif

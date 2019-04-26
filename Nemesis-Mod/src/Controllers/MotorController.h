@@ -1,8 +1,8 @@
 #ifndef MOTOR_CONTROLLER_H
 #define MOTOR_CONTROLLER_H
 
-// Defines the flywheel speeds available.
-enum FlywheelSpeed {
+// Defines the motor speeds available.
+enum MotorSpeed {
     Low = 0,
     Normal,
     // WARNING: This value may cause physical bruising on the intended target, use with caution!

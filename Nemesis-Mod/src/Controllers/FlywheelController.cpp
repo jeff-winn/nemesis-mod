@@ -16,7 +16,7 @@ const int FLYWHEEL_NORMAL_SPEED = 200;
 const int FLYWHEEL_HIGH_SPEED = 400;
 
 FlywheelController::FlywheelController(
-    HardwareAccessLayer* hardware, DualG2HighPowerMotorShield18v18* motorController, Potentiometer* motor1Potentiometer, Potentiometer* motor2Potentiometer, FlywheelSpeed speed) {
+    HardwareAccessLayer* hardware, DualG2HighPowerMotorShield18v18* motorController, Potentiometer* motor1Potentiometer, Potentiometer* motor2Potentiometer, MotorSpeed speed) {
         m_hardware = hardware;
         m_motorController = motorController;
         m_motor1Adjustment = motor1Potentiometer;
@@ -31,7 +31,7 @@ void FlywheelController::init() {
     m_hardware->delaySafe(1);
 }
 
-void FlywheelController::setSpeed(FlywheelSpeed value) {
+void FlywheelController::setSpeed(MotorSpeed value) {
     m_speed = value;
 }
 
@@ -74,13 +74,13 @@ int FlywheelController::calculateLimiterForSpeed(int speed) {
 
 int FlywheelController::determineMotorMaximumSpeed() {
     switch (m_speed) {
-        case FlywheelSpeed::Low: {
+        case MotorSpeed::Low: {
             return FLYWHEEL_LOW_SPEED;
         }
-        case FlywheelSpeed::Normal: {
+        case MotorSpeed::Normal: {
             return FLYWHEEL_NORMAL_SPEED;
         }
-        case FlywheelSpeed::High: {
+        case MotorSpeed::High: {
             return FLYWHEEL_HIGH_SPEED;
         }
     }
