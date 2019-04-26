@@ -24,3 +24,11 @@ void MotorController::stop() {
 bool MotorController::isRunning() {
     return m_isRunning;
 }
+
+void MotorController::setSpeed(MotorSpeed speed) {
+    m_speed = speed;
+}
+
+MotorSpeed MotorController::getSpeed() {
+    return m_speed;
+}
