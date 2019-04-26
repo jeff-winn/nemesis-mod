@@ -1,10 +1,7 @@
 #include "FlywheelController.h"
 
 // Defines the trim variance amount on the maximum speed per motor.
-const double TRIM_VARIANCE_AMOUNT = 0.1;
-
-// Defines the step increment when the flywheel assembly is being started.
-const int FLYWHEEL_STEP_INCREMENT = 5;
+const float TRIM_VARIANCE_AMOUNT = 0.1;
 
 // Defines the 'low' viable speed for the flywheel assembly.
 const int FLYWHEEL_LOW_SPEED = 100;
@@ -46,9 +43,6 @@ unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
 void FlywheelController::onStart() {
     auto motor1Maximum = calculateMotorSpeed(FlywheelMotor::Motor1);
     auto motor2Maximum = calculateMotorSpeed(FlywheelMotor::Motor2);
-
-    auto maximum = max(motor1Maximum, motor2Maximum);
-    auto current = 0;
 
     m_driver->setSpeeds(motor1Maximum, motor2Maximum);
     m_hardware->delaySafe(1);
