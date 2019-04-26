@@ -44,7 +44,7 @@ class FlywheelController : public MotorController {
         
     private:
         HardwareAccessLayer* m_hardware;
-        DualG2HighPowerMotorShield18v18* m_motorController;
+        DualG2HighPowerMotorShield18v18* m_driver;
         Potentiometer* m_motor1Adjustment;
         Potentiometer* m_motor2Adjustment;
 

@@ -8,7 +8,7 @@
 // Provides a mechanism to control the feed assembly.
 class FeedController : public MotorController {
     public:
-        FeedController(HardwareAccessLayer* hardware, G2HighPowerMotorShield18v17* motorController, MotorSpeed speed);
+        FeedController(HardwareAccessLayer* hardware, G2HighPowerMotorShield18v17* driver, MotorSpeed speed);
 
         // Initializes the controller.
         virtual void init();
@@ -24,7 +24,7 @@ class FeedController : public MotorController {
 
     private:
         HardwareAccessLayer* m_hardware;
-        G2HighPowerMotorShield18v17* m_motorController;
+        G2HighPowerMotorShield18v17* m_driver;
 
         MotorSpeed m_speed;
 };
