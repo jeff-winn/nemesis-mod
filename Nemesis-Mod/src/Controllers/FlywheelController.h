@@ -3,6 +3,7 @@
 
 #include <DualG2HighPowerMotorShield.h>
 #include "../Hardware/Potentiometer.h"
+#include "MotorController.h"
 
 // Defines the motors within the flywheel assembly.
 enum FlywheelMotor {
@@ -10,39 +11,20 @@ enum FlywheelMotor {
     Motor2
 };
 
-// Defines the flywheel speeds available.
-enum FlywheelSpeed {
-    Low = 0,
-    Medium,
-    // WARNING: This value may cause physical bruising on the intended target, use with caution!
-    High,
-    Maximum
-};
-
 // Provides a mechanism to control the flywheel assembly.
-class FlywheelController {
+class FlywheelController : public MotorController {
     public:
         FlywheelController(
             HardwareAccessLayer* hardware,
             DualG2HighPowerMotorShield18v18* motorController, 
             Potentiometer* motor1Potentiometer,
-            Potentiometer* motor2Potentiometer,
-            FlywheelSpeed speed);
-
-        // Gets the current of the motor specified (in milliamps).
-        virtual unsigned int getMotorCurrentMilliamps(FlywheelMotor motor);
+            Potentiometer* motor2Potentiometer);
 
         // Initializes the controller.
         virtual void init();
 
-        // Sets the flywheel motor speed.
-        virtual void setSpeed(FlywheelSpeed value);
-
-        // Starts the flywheels.
-        virtual void start();
-
-        // Stops the flywheels.
-        virtual void stop();
+        // Gets the current of the motor specified (in milliamps).
+        virtual unsigned int getMotorCurrentMilliamps(FlywheelMotor motor);
 
     protected:
         virtual int calculateLimiterForSpeed(int speed);
@@ -50,14 +32,14 @@ class FlywheelController {
         virtual float getMotorSpeedAdjustment(FlywheelMotor motor);
         virtual int determineMotorMaximumSpeed();
         
+        virtual void onStart();
+        virtual void onStop();
+        
     private:
         HardwareAccessLayer* m_hardware;
-        DualG2HighPowerMotorShield18v18* m_motorController;
+        DualG2HighPowerMotorShield18v18* m_driver;
         Potentiometer* m_motor1Adjustment;
         Potentiometer* m_motor2Adjustment;
-
-        FlywheelSpeed m_speed;
-        bool m_isRunning;
 };
 
 #endif

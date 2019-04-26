@@ -18,12 +18,13 @@ void setup() {
         new Potentiometer(
             new AnalogPin(A3, hardware)),
         new Potentiometer(
-            new AnalogPin(A4, hardware)),
-        FlywheelSpeed::High);
+            new AnalogPin(A4, hardware)));
     flywheelController->init();
 
     auto* feedController = new FeedController(
-        new AnalogPin(A7, hardware));
+        hardware,
+        new G2HighPowerMotorShield18v17(
+            0, 0, 11, 0, A2));
     feedController->init();
 
     auto* revTrigger = new InterruptButton(
@@ -40,6 +41,8 @@ void setup() {
         revTrigger,
         firingTrigger,
         hardware);
+
+    app->init();
 }
 
 void loop() {

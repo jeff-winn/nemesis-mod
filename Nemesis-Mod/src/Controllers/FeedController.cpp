@@ -1,28 +1,50 @@
 #include "FeedController.h"
-#include <Arduino.h>
 
-FeedController::FeedController(AnalogPin* pin) {
-    m_pin = pin;
+// Defines the 'low' viable speed for the feed controller assembly.
+const int MOTOR_LOW_SPEED = 100;
+
+// Defines the 'normal' speed for the feed controller assembly.
+const int MOTOR_NORMAL_SPEED = 200;
+
+// Defines the 'high' speed for the feed controller assembly.
+const int MOTOR_HIGH_SPEED = 400;
+
+FeedController::FeedController(HardwareAccessLayer* hardware, G2HighPowerMotorShield18v17* driver) {
+    m_hardware = hardware;
+    m_driver = driver;
 }
 
 void FeedController::init() {
-    m_pin->setOutputMode();
+    m_driver->init();
+    m_driver->calibrateCurrentOffset();
+
+    m_hardware->delaySafe(1);    
 }
 
-void FeedController::start() {
-    if (m_isRunning) {
-        return;
-    }
+void FeedController::onStart() {
+    auto speed = calculateMotorSpeed();
 
-    m_pin->write(255);
-    m_isRunning = true;
+    m_driver->setSpeed(speed);
+    m_hardware->delaySafe(1);
 }
 
-void FeedController::stop() {
-    if (!m_isRunning) {
-        return;
-    }
+void FeedController::onStop() {
+    m_driver->setSpeed(0);
+    m_hardware->delaySafe(1);
+}
 
-    m_pin->write(0);
-    m_isRunning = false;
+int FeedController::calculateMotorSpeed() {
+    auto speed = getSpeed();
+
+    switch (speed) {
+        case MotorSpeed::Low: {
+            return MOTOR_LOW_SPEED;
+        }
+        case MotorSpeed::Normal: {
+            return MOTOR_NORMAL_SPEED;
+        }
+        case MotorSpeed::High: {
+            return MOTOR_HIGH_SPEED;
+        }
+    }
 }

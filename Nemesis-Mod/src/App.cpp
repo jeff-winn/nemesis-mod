@@ -57,3 +57,12 @@ void App::waitForWakeEvent() {
     hardware->sleepSafe();
 #endif
 }
+
+void App::init() {
+    setSpeed(MotorSpeed::Low);
+}
+
+void App::setSpeed(MotorSpeed speed) {
+    m_flywheelController->setSpeed(speed);
+    m_feedController->setSpeed(speed);
+}

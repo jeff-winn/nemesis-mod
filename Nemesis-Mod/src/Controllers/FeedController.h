@@ -1,25 +1,27 @@
 #ifndef FEED_CONTROLLER_H
 #define FEED_CONTROLLER_H
 
-#include "../Hardware/GPIO/AnalogPin.h"
+#include "../Hardware/Interop/G2HighPowerMotorShield.h"
+#include "../Hardware/Interop/HardwareAccessLayer.h"
+#include "MotorController.h"
 
 // Provides a mechanism to control the feed assembly.
-class FeedController {
+class FeedController : public MotorController {
     public:
-        FeedController(AnalogPin* pin);
+        FeedController(HardwareAccessLayer* hardware, G2HighPowerMotorShield18v17* driver);
 
         // Initializes the controller.
         virtual void init();
 
-        // Starts the feed.
-        virtual void start();
+    protected:
+        int calculateMotorSpeed();
 
-        // Stops the feed.
-        virtual void stop();
+        virtual void onStart();
+        virtual void onStop();
 
     private:
-        AnalogPin* m_pin;
-        bool m_isRunning;
+        HardwareAccessLayer* m_hardware;
+        G2HighPowerMotorShield18v17* m_driver;
 };
 
 #endif
