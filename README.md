@@ -7,6 +7,7 @@ These are the boards and hardware being used by the project.
 - [Breadboard Trim Potentiometer (10k)](https://www.adafruit.com/product/356)
 - [Pololu Dual G2 High-Power Motor Driver 18v18 Shield for Arduino](https://www.pololu.com/product/2515)
 - [Pololu G2 High-Power Motor Driver 18v17](https://www.pololu.com/product/2991)
+- [Pololu 5V, 500mA Step-Down Voltage Regulator](https://www.pololu.com/product/2843)
 
 ## Development Environment
 This is the toolset that is currently being used to write the code included within the src folder within this repository.
