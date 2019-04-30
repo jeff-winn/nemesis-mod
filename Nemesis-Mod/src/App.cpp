@@ -59,7 +59,7 @@ void App::waitForWakeEvent() {
 }
 
 void App::init() {
-    setSpeed(MotorSpeed::Low);
+    setSpeed(MotorSpeed::Normal);
 }
 
 void App::setSpeed(MotorSpeed speed) {
