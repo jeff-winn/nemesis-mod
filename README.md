@@ -8,6 +8,7 @@ These are the boards and hardware being used by the project.
 - [Pololu Dual G2 High-Power Motor Driver 18v18 Shield for Arduino](https://www.pololu.com/product/2515)
 - [Pololu G2 High-Power Motor Driver 18v17](https://www.pololu.com/product/2991)
 - [Pololu 5V, 500mA Step-Down Voltage Regulator](https://www.pololu.com/product/2843)
+- [MaxAmps LiPo 3250 3S 11.1v Battery Pack](https://www.maxamps.com/lipo-3250-3s-11-1v-battery-pack)
 
 ## Development Environment
 This is the toolset that is currently being used to write the code included within the src folder within this repository.
