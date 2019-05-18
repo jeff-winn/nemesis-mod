@@ -17,19 +17,31 @@ FeedController::FeedController(HardwareAccessLayer* hardware, G2HighPowerMotorSh
 void FeedController::init() {
     m_driver->init();
     m_driver->calibrateCurrentOffset();
+    m_driver->disableDriver();
 
     m_hardware->delaySafe(1);    
 }
 
 void FeedController::onStart() {
-    auto speed = calculateMotorSpeed();
+    m_speed = calculateMotorSpeed();
 
-    m_driver->setSpeed(speed);
+    m_driver->enableDriver();
+    m_driver->setSpeed(m_speed);
+
     m_hardware->delaySafe(1);
 }
 
 void FeedController::onStop() {
-    m_driver->setSpeed(0);
+    auto step = calculateStepFromValue(m_speed);
+
+    for (int value = m_speed; value > 0; value -= step) {
+        m_driver->setSpeed(value);
+        m_hardware->delaySafe(1);
+    }
+
+    m_driver->setSpeed(0);   
+    m_driver->disableDriver();
+    
     m_hardware->delaySafe(1);
 }
 
@@ -47,4 +59,8 @@ int FeedController::calculateMotorSpeed() {
             return MOTOR_HIGH_SPEED;
         }
     }
+}
+
+int FeedController::calculateStepFromValue(int value) {
+    return value / 4;
 }

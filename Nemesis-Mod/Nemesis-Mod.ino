@@ -14,17 +14,17 @@ void setup() {
     auto* flywheelController = new FlywheelController(
         hardware,
         new DualG2HighPowerMotorShield18v18(
-            0, 0, 5, 9, A0, 0, 0, 6, 10, A1),
+            9, 0, 5, 0, A0, 10, 0, 6, 0, A1),
         new Potentiometer(
-            new AnalogPin(A3, hardware)),
+            new AnalogPin(0, hardware)),
         new Potentiometer(
-            new AnalogPin(A4, hardware)));
+            new AnalogPin(0, hardware)));
     flywheelController->init();
 
     auto* feedController = new FeedController(
         hardware,
         new G2HighPowerMotorShield18v17(
-            0, 0, 11, 17, A2));
+            17, 0, 11, 0, A2));
     feedController->init();
 
     auto* revTrigger = new InterruptButton(

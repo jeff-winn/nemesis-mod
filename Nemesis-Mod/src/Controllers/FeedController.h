@@ -14,7 +14,8 @@ class FeedController : public MotorController {
         virtual void init();
 
     protected:
-        int calculateMotorSpeed();
+        virtual int calculateMotorSpeed();
+        virtual int calculateStepFromValue(int value);
 
         virtual void onStart();
         virtual void onStop();
@@ -22,6 +23,8 @@ class FeedController : public MotorController {
     private:
         HardwareAccessLayer* m_hardware;
         G2HighPowerMotorShield18v17* m_driver;
+
+        int m_speed;
 };
 
 #endif

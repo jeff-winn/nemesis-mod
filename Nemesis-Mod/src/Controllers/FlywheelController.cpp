@@ -23,6 +23,7 @@ FlywheelController::FlywheelController(
 void FlywheelController::init() {
     m_driver->init();
     m_driver->calibrateCurrentOffsets();
+    m_driver->disableDrivers();
 
     m_hardware->delaySafe(1);
 }
@@ -41,11 +42,17 @@ unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
 }
 
 void FlywheelController::onStart() {
-    auto motor1Maximum = calculateMotorSpeed(FlywheelMotor::Motor1);
-    auto motor2Maximum = calculateMotorSpeed(FlywheelMotor::Motor2);
+    m_m1Speed = calculateMotorSpeed(FlywheelMotor::Motor1);
+    m_m2Speed = calculateMotorSpeed(FlywheelMotor::Motor2);
 
-    m_driver->setSpeeds(motor1Maximum, motor2Maximum);
+    m_driver->enableDrivers();
+    m_driver->setSpeeds(m_m1Speed, m_m2Speed);
+    
     m_hardware->delaySafe(1);
+}
+
+int FlywheelController::calculateStepFromValue(int value) {
+    return value / 4;
 }
 
 int FlywheelController::calculateMotorSpeed(FlywheelMotor motor) {
@@ -93,6 +100,16 @@ float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
 }
 
 void FlywheelController::onStop() {
+    auto min = min(m_m1Speed, m_m2Speed);
+    auto step = calculateStepFromValue(min);
+
+    for (int value = min; value > 0; value -= step) {
+        m_driver->setSpeeds(value, value);
+        m_hardware->delaySafe(1);
+    }
+
     m_driver->setSpeeds(0, 0);
+    m_driver->disableDrivers();
+
     m_hardware->delaySafe(1);
 }

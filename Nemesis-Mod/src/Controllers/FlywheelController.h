@@ -30,8 +30,9 @@ class FlywheelController : public MotorController {
         virtual int calculateLimiterForSpeed(int speed);
         virtual int calculateMotorSpeed(FlywheelMotor motor);
         virtual float getMotorSpeedAdjustment(FlywheelMotor motor);
-        virtual int determineMotorMaximumSpeed();
-        
+        virtual int determineMotorMaximumSpeed();    
+        virtual int calculateStepFromValue(int value);
+
         virtual void onStart();
         virtual void onStop();
         
@@ -40,6 +41,9 @@ class FlywheelController : public MotorController {
         DualG2HighPowerMotorShield18v18* m_driver;
         Potentiometer* m_motor1Adjustment;
         Potentiometer* m_motor2Adjustment;
+
+        int m_m1Speed;
+        int m_m2Speed;
 };
 
 #endif
