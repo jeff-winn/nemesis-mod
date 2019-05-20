@@ -2,26 +2,29 @@
 #define FEED_CONTROLLER_H
 
 #include "../Hardware/Interop/G2HighPowerMotorShield.h"
-#include "../Hardware/Interop/HardwareAccessLayer.h"
+#include "../Hardware/Interop/Mainboard.h"
 #include "MotorController.h"
 
 // Provides a mechanism to control the feed assembly.
 class FeedController : public MotorController {
     public:
-        FeedController(HardwareAccessLayer* hardware, G2HighPowerMotorShield18v17* driver);
+        FeedController(Mainboard* hardware, G2HighPowerMotorShield18v17* driver);
 
         // Initializes the controller.
-        virtual void init();
+        void init() override;
 
     protected:
         int calculateMotorSpeed();
+        int calculateStepFromSpeed(int speed);
 
-        virtual void onStart();
-        virtual void onStop();
+        void onStart() override;
+        void onStop() override;
 
     private:
-        HardwareAccessLayer* m_hardware;
+        Mainboard* m_hardware;
         G2HighPowerMotorShield18v17* m_driver;
+
+        int m_speed;
 };
 
 #endif
