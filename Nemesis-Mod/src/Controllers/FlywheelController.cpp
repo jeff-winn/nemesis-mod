@@ -3,11 +3,11 @@
 // Defines the trim variance amount on the maximum speed per motor.
 const float TRIM_VARIANCE_AMOUNT = 0.1;
 
-// Defines the 'low' viable speed for the flywheel assembly.
-const int FLYWHEEL_LOW_SPEED = 125;
+// Defines the 'normal' viable speed for the flywheel assembly.
+const int FLYWHEEL_NORMAL_SPEED = 125;
 
-// Defines the 'normal' speed for the flywheel assembly.
-const int FLYWHEEL_NORMAL_SPEED = 250;
+// Defines the 'medium' speed for the flywheel assembly.
+const int FLYWHEEL_MEDIUM_SPEED = 250;
 
 // Defines the 'high' speed for the flywheel assembly.
 const int FLYWHEEL_HIGH_SPEED = 400;
@@ -72,11 +72,11 @@ int FlywheelController::determineMotorMaximumSpeed() {
     auto speed = getSpeed();
 
     switch (speed) {
-        case MotorSpeed::Low: {
-            return FLYWHEEL_LOW_SPEED;
-        }
         case MotorSpeed::Normal: {
             return FLYWHEEL_NORMAL_SPEED;
+        }
+        case MotorSpeed::Medium: {
+            return FLYWHEEL_MEDIUM_SPEED;
         }
         case MotorSpeed::High: {
             return FLYWHEEL_HIGH_SPEED;

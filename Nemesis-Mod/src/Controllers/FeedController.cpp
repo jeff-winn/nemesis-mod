@@ -1,13 +1,13 @@
 #include "FeedController.h"
 
-// Defines the 'low' viable speed for the feed controller assembly.
-const int MOTOR_LOW_SPEED = 100;
-
 // Defines the 'normal' speed for the feed controller assembly.
-const int MOTOR_NORMAL_SPEED = 150;
+const int FEED_NORMAL_SPEED = 75;
+
+// Defines the 'medium' speed for the feed controller assembly.
+const int FEED_MEDIUM_SPEED = 125;
 
 // Defines the 'high' speed for the feed controller assembly.
-const int MOTOR_HIGH_SPEED = 200;
+const int FEED_HIGH_SPEED = 175;
 
 FeedController::FeedController(Mainboard* hardware, G2HighPowerMotorShield18v17* driver) {
     m_hardware = hardware;
@@ -45,14 +45,14 @@ int FeedController::calculateMotorSpeed() {
     auto speed = getSpeed();
 
     switch (speed) {
-        case MotorSpeed::Low: {
-            return MOTOR_LOW_SPEED;
-        }
         case MotorSpeed::Normal: {
-            return MOTOR_NORMAL_SPEED;
+            return FEED_NORMAL_SPEED;
+        }
+        case MotorSpeed::Medium: {
+            return FEED_MEDIUM_SPEED;
         }
         case MotorSpeed::High: {
-            return MOTOR_HIGH_SPEED;
+            return FEED_HIGH_SPEED;
         }
     }
 }

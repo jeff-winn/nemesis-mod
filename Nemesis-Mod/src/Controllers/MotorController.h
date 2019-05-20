@@ -3,8 +3,8 @@
 
 // Defines the motor speeds available.
 enum MotorSpeed {
-    Low = 0,
-    Normal,
+    Normal = 0,
+    Medium,
     // WARNING: This value may cause physical bruising on the intended target, use with caution!
     High
 };
