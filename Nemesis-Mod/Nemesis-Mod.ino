@@ -9,7 +9,7 @@ all of the real functionality to move elsewhere allowing for easier maintenance.
 App* app;
 
 void setup() {
-    auto* hardware = new HardwareAccessLayer();
+    auto* hardware = new Mainboard();
     
     auto* flywheelController = new FlywheelController(
         hardware,

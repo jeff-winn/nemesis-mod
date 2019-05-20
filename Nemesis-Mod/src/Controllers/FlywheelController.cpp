@@ -13,7 +13,7 @@ const int FLYWHEEL_NORMAL_SPEED = 200;
 const int FLYWHEEL_HIGH_SPEED = 400;
 
 FlywheelController::FlywheelController(
-    HardwareAccessLayer* hardware, DualG2HighPowerMotorShield18v18* driver, Potentiometer* motor1Potentiometer, Potentiometer* motor2Potentiometer) {
+    Mainboard* hardware, DualG2HighPowerMotorShield18v18* driver, Potentiometer* motor1Potentiometer, Potentiometer* motor2Potentiometer) {
         m_hardware = hardware;
         m_driver = driver;
         m_motor1Adjustment = motor1Potentiometer;

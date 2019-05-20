@@ -1,6 +1,6 @@
 #include "InterruptPin.h"
 
-InterruptPin::InterruptPin(uint8_t id, HardwareAccessLayer* hal) 
+InterruptPin::InterruptPin(uint8_t id, Mainboard* hal) 
     : Pin(id, hal) {
 }
 

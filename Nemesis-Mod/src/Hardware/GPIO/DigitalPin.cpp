@@ -1,6 +1,6 @@
 #include "DigitalPin.h"
 
-DigitalPin::DigitalPin(uint8_t id, HardwareAccessLayer* hal) 
+DigitalPin::DigitalPin(uint8_t id, Mainboard* hal) 
     : Pin(id, hal) {
 }
 

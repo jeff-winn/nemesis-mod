@@ -15,7 +15,7 @@ enum FlywheelMotor {
 class FlywheelController : public MotorController {
     public:
         FlywheelController(
-            HardwareAccessLayer* hardware,
+            Mainboard* hardware,
             DualG2HighPowerMotorShield18v18* motorController, 
             Potentiometer* motor1Potentiometer,
             Potentiometer* motor2Potentiometer);
@@ -37,7 +37,7 @@ class FlywheelController : public MotorController {
         void onStop() override;
         
     private:
-        HardwareAccessLayer* m_hardware;
+        Mainboard* m_hardware;
         DualG2HighPowerMotorShield18v18* m_driver;
         Potentiometer* m_motor1Adjustment;
         Potentiometer* m_motor2Adjustment;

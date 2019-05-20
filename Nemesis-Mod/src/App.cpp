@@ -9,7 +9,7 @@ volatile bool HAS_OPERATOR_AUTHENTICATED = true;
 // Indicates whether the blaster should fire rounds at the target.
 volatile bool SHOULD_FIRE_ROUNDS = false;
 
-App::App(FlywheelController* flywheelController, FeedController* feedController, InterruptButton* revTrigger, InterruptButton* firingTrigger, HardwareAccessLayer* hardware) {
+App::App(FlywheelController* flywheelController, FeedController* feedController, InterruptButton* revTrigger, InterruptButton* firingTrigger, Mainboard* hardware) {
     m_flywheelController = flywheelController;
     m_feedController = feedController;
     m_revTrigger = revTrigger;

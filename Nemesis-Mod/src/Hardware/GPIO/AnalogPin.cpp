@@ -1,6 +1,6 @@
 #include "AnalogPin.h"
 
-AnalogPin::AnalogPin(uint8_t id, HardwareAccessLayer* hal) 
+AnalogPin::AnalogPin(uint8_t id, Mainboard* hal) 
     : Pin(id, hal) {
 }
 
