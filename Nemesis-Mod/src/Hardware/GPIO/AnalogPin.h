@@ -6,7 +6,7 @@
 // Represents a GPIO analog pin.
 class AnalogPin : public Pin {
     public:
-        AnalogPin(uint8_t id, Mainboard* hal);
+        using Pin::Pin;
 
         // Reads the value of the pin.
         virtual int read();
