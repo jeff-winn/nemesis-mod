@@ -28,21 +28,17 @@ void FeedController::onStart() {
     m_driver->enableDriver();
     m_driver->setSpeed(m_speed);
 
-    m_hardware->delaySafe(1);
+    m_hardware->delaySafe(1);    
 }
 
 void FeedController::onStop() {
-    auto step = calculateStepFromValue(m_speed);
-
-    for (int value = m_speed; value > 0; value -= step) {
-        m_driver->setSpeed(value);
-        m_hardware->delaySafe(1);
-    }
+    auto step = calculateStepFromSpeed(m_speed);
 
     m_driver->setSpeed(0);   
     m_driver->disableDriver();
     
     m_hardware->delaySafe(1);
+    m_speed = 0;
 }
 
 int FeedController::calculateMotorSpeed() {
@@ -61,6 +57,6 @@ int FeedController::calculateMotorSpeed() {
     }
 }
 
-int FeedController::calculateStepFromValue(int value) {
-    return value / 4;
+int FeedController::calculateStepFromSpeed(int speed) {
+    return speed / 4;
 }

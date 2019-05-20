@@ -103,13 +103,10 @@ void FlywheelController::onStop() {
     auto min = min(m_m1Speed, m_m2Speed);
     auto step = calculateStepFromValue(min);
 
-    for (int value = min; value > 0; value -= step) {
-        m_driver->setSpeeds(value, value);
-        m_hardware->delaySafe(1);
-    }
-
     m_driver->setSpeeds(0, 0);
     m_driver->disableDrivers();
 
     m_hardware->delaySafe(1);
+    m_m1Speed = 0;
+    m_m2Speed = 0;
 }

@@ -21,20 +21,20 @@ class FlywheelController : public MotorController {
             Potentiometer* motor2Potentiometer);
 
         // Initializes the controller.
-        virtual void init();
+        void init() override;
 
         // Gets the current of the motor specified (in milliamps).
-        virtual unsigned int getMotorCurrentMilliamps(FlywheelMotor motor);
+        unsigned int getMotorCurrentMilliamps(FlywheelMotor motor);
 
     protected:
-        virtual int calculateLimiterForSpeed(int speed);
-        virtual int calculateMotorSpeed(FlywheelMotor motor);
-        virtual float getMotorSpeedAdjustment(FlywheelMotor motor);
-        virtual int determineMotorMaximumSpeed();    
-        virtual int calculateStepFromValue(int value);
+        int calculateLimiterForSpeed(int speed);
+        int calculateMotorSpeed(FlywheelMotor motor);
+        float getMotorSpeedAdjustment(FlywheelMotor motor);
+        int determineMotorMaximumSpeed();    
+        int calculateStepFromValue(int value);
 
-        virtual void onStart();
-        virtual void onStop();
+        void onStart() override;
+        void onStop() override;
         
     private:
         HardwareAccessLayer* m_hardware;

@@ -11,14 +11,14 @@ class FeedController : public MotorController {
         FeedController(HardwareAccessLayer* hardware, G2HighPowerMotorShield18v17* driver);
 
         // Initializes the controller.
-        virtual void init();
+        void init() override;
 
     protected:
-        virtual int calculateMotorSpeed();
-        virtual int calculateStepFromValue(int value);
+        int calculateMotorSpeed();
+        int calculateStepFromSpeed(int speed);
 
-        virtual void onStart();
-        virtual void onStop();
+        void onStart() override;
+        void onStop() override;
 
     private:
         HardwareAccessLayer* m_hardware;
