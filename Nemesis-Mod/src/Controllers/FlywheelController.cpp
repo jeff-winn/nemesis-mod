@@ -4,10 +4,10 @@
 const float TRIM_VARIANCE_AMOUNT = 0.1;
 
 // Defines the 'low' viable speed for the flywheel assembly.
-const int FLYWHEEL_LOW_SPEED = 100;
+const int FLYWHEEL_LOW_SPEED = 125;
 
 // Defines the 'normal' speed for the flywheel assembly.
-const int FLYWHEEL_NORMAL_SPEED = 200;
+const int FLYWHEEL_NORMAL_SPEED = 250;
 
 // Defines the 'high' speed for the flywheel assembly.
 const int FLYWHEEL_HIGH_SPEED = 400;

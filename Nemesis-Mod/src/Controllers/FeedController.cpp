@@ -4,10 +4,10 @@
 const int MOTOR_LOW_SPEED = 100;
 
 // Defines the 'normal' speed for the feed controller assembly.
-const int MOTOR_NORMAL_SPEED = 200;
+const int MOTOR_NORMAL_SPEED = 150;
 
 // Defines the 'high' speed for the feed controller assembly.
-const int MOTOR_HIGH_SPEED = 400;
+const int MOTOR_HIGH_SPEED = 200;
 
 FeedController::FeedController(Mainboard* hardware, G2HighPowerMotorShield18v17* driver) {
     m_hardware = hardware;
