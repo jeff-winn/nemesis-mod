@@ -59,10 +59,6 @@ void App::waitForWakeEvent() {
 }
 
 void App::init() {
-    setSpeed(MotorSpeed::High);
-}
-
-void App::setSpeed(MotorSpeed speed) {
-    m_flywheelController->setSpeed(speed);
-    m_feedController->setSpeed(speed);
+    m_flywheelController->setSpeed(MotorSpeed::Normal);
+    m_feedController->setSpeed(MotorSpeed::Normal);
 }
