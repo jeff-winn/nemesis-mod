@@ -13,7 +13,7 @@ const int FLYWHEEL_NORMAL_SPEED = 200;
 const int FLYWHEEL_HIGH_SPEED = 400;
 
 FlywheelController::FlywheelController(
-    HardwareAccessLayer* hardware, DualG2HighPowerMotorShield18v18* driver, Potentiometer* motor1Potentiometer, Potentiometer* motor2Potentiometer) {
+    Mainboard* hardware, DualG2HighPowerMotorShield18v18* driver, Potentiometer* motor1Potentiometer, Potentiometer* motor2Potentiometer) {
         m_hardware = hardware;
         m_driver = driver;
         m_motor1Adjustment = motor1Potentiometer;
@@ -23,6 +23,7 @@ FlywheelController::FlywheelController(
 void FlywheelController::init() {
     m_driver->init();
     m_driver->calibrateCurrentOffsets();
+    m_driver->disableDrivers();
 
     m_hardware->delaySafe(1);
 }
@@ -41,11 +42,17 @@ unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
 }
 
 void FlywheelController::onStart() {
-    auto motor1Maximum = calculateMotorSpeed(FlywheelMotor::Motor1);
-    auto motor2Maximum = calculateMotorSpeed(FlywheelMotor::Motor2);
+    m_m1Speed = calculateMotorSpeed(FlywheelMotor::Motor1);
+    m_m2Speed = calculateMotorSpeed(FlywheelMotor::Motor2);
 
-    m_driver->setSpeeds(motor1Maximum, motor2Maximum);
+    m_driver->enableDrivers();
+    m_driver->setSpeeds(m_m1Speed, m_m2Speed);
+    
     m_hardware->delaySafe(1);
+}
+
+int FlywheelController::calculateStepFromValue(int value) {
+    return value / 4;
 }
 
 int FlywheelController::calculateMotorSpeed(FlywheelMotor motor) {
@@ -93,6 +100,13 @@ float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
 }
 
 void FlywheelController::onStop() {
+    auto min = min(m_m1Speed, m_m2Speed);
+    auto step = calculateStepFromValue(min);
+
     m_driver->setSpeeds(0, 0);
+    m_driver->disableDrivers();
+
     m_hardware->delaySafe(1);
+    m_m1Speed = 0;
+    m_m2Speed = 0;
 }

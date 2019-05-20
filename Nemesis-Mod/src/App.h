@@ -12,7 +12,7 @@ class App {
             FeedController* feedController,
             InterruptButton* revTrigger, 
             InterruptButton* firingTrigger,
-            HardwareAccessLayer* hardware);
+            Mainboard* hardware);
         
         // Sets the rate of fire.
         void setSpeed(MotorSpeed speed);
@@ -33,7 +33,7 @@ class App {
         FeedController* m_feedController;
         InterruptButton* m_revTrigger;
         InterruptButton* m_firingTrigger;
-        HardwareAccessLayer* m_hardware;
+        Mainboard* m_hardware;
 };
 
 #endif
