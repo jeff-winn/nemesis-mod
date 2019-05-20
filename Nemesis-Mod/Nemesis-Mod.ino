@@ -9,30 +9,30 @@ all of the real functionality to move elsewhere allowing for easier maintenance.
 App* app;
 
 void setup() {
-    auto* hardware = new Mainboard();
+    auto* mainboard = new Mainboard();
     
     auto* flywheelController = new FlywheelController(
-        hardware,
+        mainboard,
         new DualG2HighPowerMotorShield18v18(
             9, 0, 5, 0, A0, 10, 0, 6, 0, A1),
         new Potentiometer(
-            new AnalogPin(0, hardware)),
+            new AnalogPin(0, mainboard)),
         new Potentiometer(
-            new AnalogPin(0, hardware)));
+            new AnalogPin(0, mainboard)));
     flywheelController->init();
 
     auto* feedController = new FeedController(
-        hardware,
+        mainboard,
         new G2HighPowerMotorShield18v17(
             17, 0, 11, 0, A2));
     feedController->init();
 
     auto* revTrigger = new InterruptButton(
-        new InterruptPin(13, hardware));
+        new InterruptPin(13, mainboard));
     revTrigger->init(onRevTriggerStateChangedCallback);
 
     auto* firingTrigger = new InterruptButton(
-        new InterruptPin(12, hardware));
+        new InterruptPin(12, mainboard));
     firingTrigger->init(onFiringTriggerStateChangedCallback);
 
     app = new App(
@@ -40,7 +40,7 @@ void setup() {
         feedController,
         revTrigger,
         firingTrigger,
-        hardware);
+        mainboard);
 
     app->init();
 }
