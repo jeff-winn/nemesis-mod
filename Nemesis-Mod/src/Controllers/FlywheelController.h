@@ -14,7 +14,7 @@ enum class FlywheelSpeed {
 };
 
 // Defines the motors within the flywheel assembly.
-enum FlywheelMotor {
+enum class FlywheelMotor {
     Motor1,
     Motor2
 };

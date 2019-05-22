@@ -4,7 +4,7 @@
 typedef void (*InterruptCallback)(void);
 
 // Defines the GPIO pin modes.
-enum PinMode {
+enum class PinMode {
     // This pin is used for read access.
     Read,
     // This pin is used for write access.
@@ -12,7 +12,7 @@ enum PinMode {
 };
 
 // Defines the interrupt modes for a pin.
-enum InterruptMode {
+enum class InterruptMode {
     // Execute the callback on change from off to on only.
     Rising,
     // Execute the callback on change from on to off only.
