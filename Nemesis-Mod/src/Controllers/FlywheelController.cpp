@@ -87,14 +87,18 @@ int FlywheelController::determineMotorMaximumSpeed() {
 float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
     switch (motor) {
         case FlywheelMotor::Motor1: {
-            return m_motor1Adjustment->read();
+            if (m_motor1Adjustment) {
+                return m_motor1Adjustment->read();
+            }
         }
         case FlywheelMotor::Motor2: {
-            return m_motor2Adjustment->read();
+            if (m_motor2Adjustment) {
+                return m_motor2Adjustment->read();
+            }
         }
     }
 
-    return 0;
+    return 1;
 }
 
 void FlywheelController::onStop() {
