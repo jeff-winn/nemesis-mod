@@ -59,6 +59,6 @@ void App::waitForWakeEvent() {
 }
 
 void App::init() {
-    m_flywheelController->setSpeed(MotorSpeed::Normal);
-    m_feedController->setSpeed(MotorSpeed::Normal);
+    m_flywheelController->setSpeed(FlywheelSpeed::Normal);
+    m_feedController->setSpeed(BeltSpeed::Normal);
 }

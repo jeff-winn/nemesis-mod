@@ -5,6 +5,12 @@
 #include "../Hardware/Interop/Mainboard.h"
 #include "MotorController.h"
 
+// Defines the belt speeds (rate of fire) available.
+enum class BeltSpeed {
+    Normal = 0,
+    High
+};
+
 // Provides a mechanism to control the feed assembly.
 class FeedController : public MotorController {
     public:
@@ -12,6 +18,9 @@ class FeedController : public MotorController {
 
         // Initializes the controller.
         void init() override;
+
+        // Sets the belt speed.
+        void setSpeed(BeltSpeed speed);
 
     protected:
         int calculateMotorSpeed();
@@ -24,7 +33,8 @@ class FeedController : public MotorController {
         Mainboard* m_hardware;
         G2HighPowerMotorShield18v17* m_driver;
 
-        int m_speed;
+        BeltSpeed m_speed;
+        int m_m1speed;
 };
 
 #endif

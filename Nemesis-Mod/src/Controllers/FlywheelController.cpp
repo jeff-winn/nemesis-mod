@@ -69,16 +69,14 @@ int FlywheelController::calculateLimiterForSpeed(int speed) {
 }
 
 int FlywheelController::determineMotorMaximumSpeed() {
-    auto speed = getSpeed();
-
-    switch (speed) {
-        case MotorSpeed::Normal: {
+    switch (m_speed) {
+        case FlywheelSpeed::Normal: {
             return FLYWHEEL_NORMAL_SPEED;
         }
-        case MotorSpeed::Medium: {
+        case FlywheelSpeed::Medium: {
             return FLYWHEEL_MEDIUM_SPEED;
         }
-        case MotorSpeed::High: {
+        case FlywheelSpeed::High: {
             return FLYWHEEL_HIGH_SPEED;
         }
     }
@@ -109,4 +107,8 @@ void FlywheelController::onStop() {
     m_hardware->delaySafe(1);
     m_m1Speed = 0;
     m_m2Speed = 0;
+}
+
+void FlywheelController::setSpeed(FlywheelSpeed speed) {
+    m_speed = speed;
 }
