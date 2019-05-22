@@ -3,11 +3,11 @@
 // Defines the trim variance amount on the maximum speed per motor.
 const float TRIM_VARIANCE_AMOUNT = 0.1;
 
-// Defines the 'low' viable speed for the flywheel assembly.
-const int FLYWHEEL_LOW_SPEED = 125;
+// Defines the 'normal' viable speed for the flywheel assembly.
+const int FLYWHEEL_NORMAL_SPEED = 125;
 
-// Defines the 'normal' speed for the flywheel assembly.
-const int FLYWHEEL_NORMAL_SPEED = 250;
+// Defines the 'medium' speed for the flywheel assembly.
+const int FLYWHEEL_MEDIUM_SPEED = 250;
 
 // Defines the 'high' speed for the flywheel assembly.
 const int FLYWHEEL_HIGH_SPEED = 400;
@@ -69,16 +69,14 @@ int FlywheelController::calculateLimiterForSpeed(int speed) {
 }
 
 int FlywheelController::determineMotorMaximumSpeed() {
-    auto speed = getSpeed();
-
-    switch (speed) {
-        case MotorSpeed::Low: {
-            return FLYWHEEL_LOW_SPEED;
-        }
-        case MotorSpeed::Normal: {
+    switch (m_speed) {
+        case FlywheelSpeed::Normal: {
             return FLYWHEEL_NORMAL_SPEED;
         }
-        case MotorSpeed::High: {
+        case FlywheelSpeed::Medium: {
+            return FLYWHEEL_MEDIUM_SPEED;
+        }
+        case FlywheelSpeed::High: {
             return FLYWHEEL_HIGH_SPEED;
         }
     }
@@ -89,14 +87,18 @@ int FlywheelController::determineMotorMaximumSpeed() {
 float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
     switch (motor) {
         case FlywheelMotor::Motor1: {
-            return m_motor1Adjustment->read();
+            if (m_motor1Adjustment) {
+                return m_motor1Adjustment->read();
+            }
         }
         case FlywheelMotor::Motor2: {
-            return m_motor2Adjustment->read();
+            if (m_motor2Adjustment) {
+                return m_motor2Adjustment->read();
+            }
         }
     }
 
-    return 0;
+    return 1;
 }
 
 void FlywheelController::onStop() {
@@ -109,4 +111,8 @@ void FlywheelController::onStop() {
     m_hardware->delaySafe(1);
     m_m1Speed = 0;
     m_m2Speed = 0;
+}
+
+void FlywheelController::setSpeed(FlywheelSpeed speed) {
+    m_speed = speed;
 }

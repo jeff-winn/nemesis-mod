@@ -15,10 +15,8 @@ void setup() {
         mainboard,
         new DualG2HighPowerMotorShield18v18(
             9, 0, 5, 0, A0, 10, 0, 6, 0, A1),
-        new Potentiometer(
-            new AnalogPin(0, mainboard)),
-        new Potentiometer(
-            new AnalogPin(0, mainboard)));
+        NULL, 
+        NULL);
     flywheelController->init();
 
     auto* feedController = new FeedController(

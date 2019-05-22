@@ -5,8 +5,16 @@
 #include "../Hardware/Potentiometer.h"
 #include "MotorController.h"
 
+// Defines the flywheel speeds available.
+enum class FlywheelSpeed {
+    Normal = 0,
+    Medium,
+    // WARNING: This value may cause physical bruising on the intended target, use with caution!
+    High
+};
+
 // Defines the motors within the flywheel assembly.
-enum FlywheelMotor {
+enum class FlywheelMotor {
     Motor1,
     Motor2
 };
@@ -26,6 +34,9 @@ class FlywheelController : public MotorController {
         // Gets the current of the motor specified (in milliamps).
         unsigned int getMotorCurrentMilliamps(FlywheelMotor motor);
 
+        // Sets the flywheel speed.
+        void setSpeed(FlywheelSpeed speed);
+
     protected:
         int calculateLimiterForSpeed(int speed);
         int calculateMotorSpeed(FlywheelMotor motor);
@@ -42,6 +53,7 @@ class FlywheelController : public MotorController {
         Potentiometer* m_motor1Adjustment;
         Potentiometer* m_motor2Adjustment;
 
+        FlywheelSpeed m_speed;
         int m_m1Speed;
         int m_m2Speed;
 };
