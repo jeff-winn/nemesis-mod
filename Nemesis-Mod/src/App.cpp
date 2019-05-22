@@ -54,7 +54,7 @@ void App::waitForWakeEvent() {
     }
 
 #if defined (__RELEASE__)
-    hardware->sleepSafe();
+    m_hardware->sleepSafe();
 #endif
 }
 
