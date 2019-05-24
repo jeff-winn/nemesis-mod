@@ -46,7 +46,7 @@ class Mainboard {
         virtual int analogReadSafe(uint8_t pin);
 
         // Puts the device to sleep.
-        virtual void sleepSafe();
+        virtual void sleepSafe(int timeout);
 };
 
 #endif

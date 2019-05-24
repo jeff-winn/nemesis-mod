@@ -1,11 +1,11 @@
 #ifndef APP_H
 #define APP_H
 
-#include "Controllers/BluetoothController.h"
 #include "Controllers/FlywheelController.h"
 #include "Controllers/FeedController.h"
 #include "Hardware/InterruptButton.h"
 #include "Hardware/PolledButton.h"
+#include "Hardware/Bluetooth/BluetoothAdapter.h"
 
 class App {
     public:
@@ -14,8 +14,8 @@ class App {
             FeedController* feedController,            
             InterruptButton* revTrigger, 
             PolledButton* firingTrigger,
-            BluetoothController* bluetoothController,
-            Mainboard* hardware);
+            Mainboard* hardware,
+            BluetoothAdapter* ble);
         
         // Initializes the application.
         virtual void init();
@@ -31,8 +31,8 @@ class App {
         FeedController* m_feedController;
         InterruptButton* m_revTrigger;
         PolledButton* m_firingTrigger;
-        BluetoothController* m_bluetoothController;
         Mainboard* m_hardware;
+        BluetoothAdapter* m_ble;
 };
 
 #endif

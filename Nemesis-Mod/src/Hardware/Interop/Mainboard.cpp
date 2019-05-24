@@ -65,6 +65,6 @@ void Mainboard::pinModeSafe(uint8_t pin, PinMode mode) {
     pinMode(pin, modeId);
 }
 
-void Mainboard::sleepSafe() {
-    LowPower.sleep();
+void Mainboard::sleepSafe(int timeout) {
+    LowPower.sleep(timeout);
 }

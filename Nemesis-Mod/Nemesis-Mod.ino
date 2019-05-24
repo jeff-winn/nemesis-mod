@@ -29,10 +29,10 @@ void setup() {
         new InterruptButton(irqPin),
         new PolledButton(
             new DigitalPin(12, &mainboard)),
-        new BluetoothController(
-            new Adafruit_BluefruitLE_SPI(
-                8, 7, 4)),
-        &mainboard);
+        &mainboard,
+        new BluetoothAdapter(
+            new Adafruit_BluefruitLE_SPI(8, 7, 4))
+    );
 
     app->init();
 }
