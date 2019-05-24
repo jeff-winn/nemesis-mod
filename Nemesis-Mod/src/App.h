@@ -5,6 +5,7 @@
 #include "Controllers/FlywheelController.h"
 #include "Controllers/FeedController.h"
 #include "Hardware/InterruptButton.h"
+#include "Hardware/PolledButton.h"
 
 class App {
     public:
@@ -12,7 +13,7 @@ class App {
             FlywheelController* flywheelController,
             FeedController* feedController,            
             InterruptButton* revTrigger, 
-            InterruptButton* firingTrigger,
+            PolledButton* firingTrigger,
             BluetoothController* bluetoothController,
             Mainboard* hardware);
         
@@ -20,9 +21,7 @@ class App {
         virtual void init();
 
         void run();
-
         void onRevTriggerStateChangedCallback();
-        void onFiringTriggerStateChangedCallback();
 
     protected:
         virtual void waitForWakeEvent();
@@ -31,7 +30,7 @@ class App {
         FlywheelController* m_flywheelController;
         FeedController* m_feedController;
         InterruptButton* m_revTrigger;
-        InterruptButton* m_firingTrigger;
+        PolledButton* m_firingTrigger;
         BluetoothController* m_bluetoothController;
         Mainboard* m_hardware;
 };

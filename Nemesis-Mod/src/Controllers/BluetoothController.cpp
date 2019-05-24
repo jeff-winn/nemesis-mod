@@ -4,8 +4,8 @@ BluetoothController::BluetoothController(Adafruit_BluefruitLE_SPI* ble) {
     m_ble = ble;
 }
 
-void BluetoothController::init(bool verbose, void (*onConnectedCallback)(void), void (*onDisconnectedCallback)(void)) {
-    m_ble->begin(verbose);
+void BluetoothController::init() {
+    m_ble->begin();
     m_ble->factoryReset();
 
     m_ble->setMode(BLUEFRUIT_MODE_COMMAND);

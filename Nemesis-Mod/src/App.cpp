@@ -6,20 +6,13 @@ volatile bool SHOULD_CONTINUE_EXECUTION = false;
 // Indicates whether the operator has authenticated prior to releasing the software lock.
 volatile bool HAS_OPERATOR_AUTHENTICATED = true;
 
-// Indicates whether the blaster should fire rounds at the target.
-volatile bool SHOULD_FIRE_ROUNDS = false;
-
-App::App(FlywheelController* flywheelController, FeedController* feedController, InterruptButton* revTrigger, InterruptButton* firingTrigger, BluetoothController* bluetoothController, Mainboard* hardware) {
+App::App(FlywheelController* flywheelController, FeedController* feedController, InterruptButton* revTrigger, PolledButton* firingTrigger, BluetoothController* bluetoothController, Mainboard* hardware) {
     m_flywheelController = flywheelController;
     m_feedController = feedController;
     m_revTrigger = revTrigger;
     m_firingTrigger = firingTrigger;
     m_bluetoothController = bluetoothController;
     m_hardware = hardware;    
-}
-
-void App::onFiringTriggerStateChangedCallback() {
-    SHOULD_FIRE_ROUNDS = m_firingTrigger->isPressed();    
 }
 
 void App::onRevTriggerStateChangedCallback() {
@@ -35,7 +28,7 @@ void App::run() {
     m_flywheelController->start();
     
     while (SHOULD_CONTINUE_EXECUTION) {
-        if (SHOULD_FIRE_ROUNDS) {
+        if (m_firingTrigger->isPressed()) {
             m_feedController->start();
         }
         else {
@@ -60,6 +53,10 @@ void App::waitForWakeEvent() {
 }
 
 void App::init() {
+    m_flywheelController->init();
+    m_feedController->init();
+    m_bluetoothController->init();
+    
     m_flywheelController->setSpeed(FlywheelSpeed::Normal);
     m_feedController->setSpeed(BeltSpeed::Normal);
 }
