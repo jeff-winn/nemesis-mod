@@ -1,6 +1,7 @@
 #ifndef APP_H
 #define APP_H
 
+#include "Controllers/BluetoothController.h"
 #include "Controllers/FlywheelController.h"
 #include "Controllers/FeedController.h"
 #include "Hardware/InterruptButton.h"
@@ -9,9 +10,10 @@ class App {
     public:
         App(
             FlywheelController* flywheelController,
-            FeedController* feedController,
+            FeedController* feedController,            
             InterruptButton* revTrigger, 
             InterruptButton* firingTrigger,
+            BluetoothController* bluetoothController,
             Mainboard* hardware);
         
         // Initializes the application.
@@ -30,6 +32,7 @@ class App {
         FeedController* m_feedController;
         InterruptButton* m_revTrigger;
         InterruptButton* m_firingTrigger;
+        BluetoothController* m_bluetoothController;
         Mainboard* m_hardware;
 };
 
