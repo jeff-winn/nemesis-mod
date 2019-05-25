@@ -6,7 +6,7 @@
 // Describes a packet.
 struct Packet_t {
     PacketHeader_t header;
-    byte* body;
+    byte* body = NULL;
 };
 
 #endif

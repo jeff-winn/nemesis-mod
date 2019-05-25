@@ -68,5 +68,10 @@ void App::init() {
 }
 
 void App::handleAnyExternalCommands() {
-    auto packet = m_ble->read();
+    if (!m_ble->hasDataAvailable()) {
+        return;
+    }
+    
+    auto packet = m_ble->readPacket();
+    Serial.println("Command executed.");
 }

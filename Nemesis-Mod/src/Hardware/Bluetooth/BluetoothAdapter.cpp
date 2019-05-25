@@ -16,6 +16,10 @@ void BluetoothAdapter::endInit() {
     m_ble->setMode(BLUEFRUIT_MODE_DATA);
 }
 
+bool BluetoothAdapter::hasDataAvailable() {
+    return m_ble->available() != -1;
+}
+
 void BluetoothAdapter::setName(const char name[]) {
     const auto COMMAND_TEXT = "AT+GAPDEVNAME=" + String(name);
 
@@ -25,7 +29,7 @@ void BluetoothAdapter::setName(const char name[]) {
     m_ble->sendCommandCheckOK(cmd);
 }
 
-Packet_t BluetoothAdapter::read() {
+Packet_t BluetoothAdapter::readPacket() {
     Packet_t packet;
 
     auto header = readHeader();
@@ -36,7 +40,7 @@ Packet_t BluetoothAdapter::read() {
         byte index = 0;
         byte buffer[header.len];
 
-        while (m_ble->available()) {
+        while (hasDataAvailable()) {
             if (index >= header.len) {
                 break;
             }
@@ -54,7 +58,12 @@ Packet_t BluetoothAdapter::read() {
 PacketHeader_t BluetoothAdapter::readHeader() {
     PacketHeader_t result;
 
-    result.identifier = m_ble->read();
+    char identifier = '\x00';
+    do {
+        identifier = m_ble->read();
+    }
+    while (identifier != '!');
+
     result.version = m_ble->read();
     result.type = m_ble->read();
     result.len = m_ble->read();
@@ -63,7 +72,7 @@ PacketHeader_t BluetoothAdapter::readHeader() {
 }
 
 bool BluetoothAdapter::isPacketValid(PacketHeader_t header) {
-    if (header.identifier != '!') {
+    if (header.version != '1') {
         return false;
     }
     else if (header.type != 'A') {
