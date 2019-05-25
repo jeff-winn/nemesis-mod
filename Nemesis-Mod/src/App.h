@@ -18,13 +18,14 @@ class App {
             BluetoothAdapter* ble);
         
         // Initializes the application.
-        virtual void init();
+        void init();
 
         void run();
         void onRevTriggerStateChangedCallback();
 
     protected:
-        virtual void waitForWakeEvent();
+        void handleAnyExternalCommands();
+        void waitForWakeEvent();
     
     private:
         FlywheelController* m_flywheelController;

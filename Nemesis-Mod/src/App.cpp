@@ -19,33 +19,30 @@ void App::onRevTriggerStateChangedCallback() {
     SHOULD_CONTINUE_EXECUTION = m_revTrigger->isPressed();
 }
 
-void App::run() {
-    auto packet = m_ble->read();
-    if (packet.header.identifier == '!') {
-        Serial.println("Packet received.");
+void App::run() {   
+    waitForWakeEvent();
+    handleAnyExternalCommands();
+
+    if (!HAS_OPERATOR_AUTHENTICATED || !SHOULD_CONTINUE_EXECUTION) {
+        return;
     }
-    
-    // waitForWakeEvent();
-    
-    // if (!HAS_OPERATOR_AUTHENTICATED || !SHOULD_CONTINUE_EXECUTION) {
-    //     return;
-    // }
 
-    // m_flywheelController->start();
+    m_flywheelController->start();
     
-    // while (SHOULD_CONTINUE_EXECUTION) {
-    //     if (m_firingTrigger->isPressed()) {
-    //         m_feedController->start();
-    //     }
-    //     else {
-    //         m_feedController->stop();
-    //     }
+    while (SHOULD_CONTINUE_EXECUTION) {
 
-    //     m_hardware->delaySafe(10);
-    // }
+        if (m_firingTrigger->isPressed()) {
+            m_feedController->start();
+        }
+        else {
+            m_feedController->stop();
+        }
 
-    // m_feedController->stop();
-    // m_flywheelController->stop();
+        m_hardware->delaySafe(10);
+    }
+
+    m_feedController->stop();
+    m_flywheelController->stop();
 }
 
 void App::waitForWakeEvent() {
@@ -68,4 +65,8 @@ void App::init() {
     
     m_flywheelController->setSpeed(FlywheelSpeed::Normal);
     m_feedController->setSpeed(BeltSpeed::Normal);
+}
+
+void App::handleAnyExternalCommands() {
+    auto packet = m_ble->read();
 }
