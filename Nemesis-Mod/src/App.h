@@ -1,6 +1,7 @@
 #ifndef APP_H
 #define APP_H
 
+#include "Commands/Command.h"
 #include "Controllers/FlywheelController.h"
 #include "Controllers/FeedController.h"
 #include "Hardware/InterruptButton.h"
@@ -24,6 +25,8 @@ class App {
         void onRevTriggerStateChangedCallback();
 
     protected:
+        Command* createCommandFromPacket(Packet_t packet);
+
         void handleAnyExternalCommands();
         void waitForWakeEvent();
     

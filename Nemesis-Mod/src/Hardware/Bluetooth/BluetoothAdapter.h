@@ -13,9 +13,7 @@ class BluetoothAdapter {
 
         void beginInit();
         void endInit();
-
-        bool hasDataAvailable();
-
+        
         Packet_t readPacket();
 
     protected:

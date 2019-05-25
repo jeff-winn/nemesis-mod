@@ -16,10 +16,6 @@ void BluetoothAdapter::endInit() {
     m_ble->setMode(BLUEFRUIT_MODE_DATA);
 }
 
-bool BluetoothAdapter::hasDataAvailable() {
-    return m_ble->available() != -1;
-}
-
 void BluetoothAdapter::setName(const char name[]) {
     const auto COMMAND_TEXT = "AT+GAPDEVNAME=" + String(name);
 
@@ -40,11 +36,7 @@ Packet_t BluetoothAdapter::readPacket() {
         byte index = 0;
         byte buffer[header.len];
 
-        while (hasDataAvailable()) {
-            if (index >= header.len) {
-                break;
-            }
-
+        while (index < header.len) {
             buffer[index] = m_ble->read();
             index++;
         }

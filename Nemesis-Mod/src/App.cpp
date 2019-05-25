@@ -1,3 +1,5 @@
+#include "Commands/ChangeFlywheelSpeedCommand.h"
+#include "Commands/ChangeBeltSpeedCommand.h"
 #include "App.h"
 
 // Indicates whether the blaster should continue execution.
@@ -67,11 +69,25 @@ void App::init() {
     m_feedController->setSpeed(BeltSpeed::Normal);
 }
 
-void App::handleAnyExternalCommands() {
-    if (!m_ble->hasDataAvailable()) {
-        return;
-    }
-    
+void App::handleAnyExternalCommands() {   
     auto packet = m_ble->readPacket();
-    Serial.println("Command executed.");
+
+    auto command = createCommandFromPacket(packet);
+    if (command) {
+        command->handle(packet);
+        Serial.println("Command executed.");
+    }
+}
+
+Command* App::createCommandFromPacket(Packet_t packet) {
+    switch (packet.header.type) {
+        case 'F': {
+            return new ChangeFlywheelSpeedCommand(m_flywheelController);
+        }
+        case 'B': {
+            return new ChangeBeltSpeedCommand(m_feedController);
+        }
+    }
+
+    return NULL;
 }
