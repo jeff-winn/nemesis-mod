@@ -17,7 +17,6 @@ class BluetoothAdapter {
         Packet_t readPacket();
 
     protected:
-        bool isPacketValid(PacketHeader_t header);
         PacketHeader_t readHeader();
         
     private:

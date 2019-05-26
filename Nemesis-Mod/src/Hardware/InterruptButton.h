@@ -10,7 +10,7 @@ class InterruptButton : public Button {
         InterruptButton(InterruptPin* pin);
         
         // Intializes the button.
-        void init();
+        void init() override;
 
         // Returns a value indicating whether the button is pressed.
         bool isPressed() override;

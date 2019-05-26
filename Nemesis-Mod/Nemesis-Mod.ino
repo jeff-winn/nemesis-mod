@@ -1,36 +1,32 @@
 #include <Arduino.h>
 #include "src/App.h"
 
-/* 
-NOTE: This file intentionally serves as nothing more than an adapter to the Arduino tool chain requirements while allowing
-all of the real functionality to move elsewhere allowing for easier maintenance.
-*/
-
 App* app;
+
+// Defines the driver which controls the flywheel motors.
+DualG2HighPowerMotorShield18v18 flywheelDriver(9, -1, 5, -1, A0, 10, -1, 6, -1, A1);
+
+// Defines the driver which controls the belt feed motor.
+G2HighPowerMotorShield18v17 beltDriver(17, -1, 11, -1, A2);
+
+// Defines the driver for the onboard bluetooth module.
+Adafruit_BluefruitLE_SPI bluetoothDriver(8, 7, 4);
+
+// Defines the wrapper for the MCU functionality.
 Mainboard mainboard;
 
 void setup() {
     Serial.begin(115200);
-    
+        
     app = new App(
-        new FlywheelController(
-            &mainboard,
-            new DualG2HighPowerMotorShield18v18(
-                9, -1, 5, -1, A0, 10, -1, 6, -1, A1),
-            NULL, 
-            NULL),
-        new FeedController(
-            &mainboard,
-            new G2HighPowerMotorShield18v17(
-                17, -1, 11, -1, A2)),
-        new InterruptButton(
-            new InterruptPin(
-                13, onRevTriggerStateChangedCallback, InterruptMode::All, &mainboard)),
+        new FlywheelController(&mainboard, &flywheelDriver, NULL, NULL),
+        new FeedController(&mainboard, &beltDriver),
+        new PolledButton(
+            new DigitalPin(13, &mainboard)),
         new PolledButton(
             new DigitalPin(12, &mainboard)),
         &mainboard,
-        new BluetoothAdapter(
-            new Adafruit_BluefruitLE_SPI(8, 7, 4))
+        new BluetoothAdapter(&bluetoothDriver)
     );
 
     app->init();
@@ -38,8 +34,4 @@ void setup() {
 
 void loop() {
     app->run();
-}
-
-void onRevTriggerStateChangedCallback() {
-    app->onRevTriggerStateChangedCallback();
 }

@@ -28,15 +28,14 @@ void BluetoothAdapter::setName(const char name[]) {
 Packet_t BluetoothAdapter::readPacket() {
     Packet_t packet;
 
-    auto header = readHeader();
-
-    if (isPacketValid(header)) {
-        packet.header = header;
+    if (m_ble->isConnected()) {
+        Serial.println("reading packet...");
+        packet.header = readHeader();
 
         byte index = 0;
-        byte buffer[header.len];
+        byte buffer[packet.header.len];
 
-        while (index < header.len) {
+        while (index < packet.header.len) {
             buffer[index] = m_ble->read();
             index++;
         }
@@ -50,26 +49,17 @@ Packet_t BluetoothAdapter::readPacket() {
 PacketHeader_t BluetoothAdapter::readHeader() {
     PacketHeader_t result;
 
-    char identifier = '\x00';
-    do {
-        identifier = m_ble->read();
-    }
-    while (identifier != '!');
+    char identifier = m_ble->read();
+    if (identifier == '!') {
+        result.version = m_ble->read();
+        Serial.println(result.version);
 
-    result.version = m_ble->read();
-    result.type = m_ble->read();
-    result.len = m_ble->read();
+        result.type = m_ble->read();
+        Serial.println(result.type);
+
+        result.len = m_ble->read();
+        Serial.println(result.len);
+    }
 
     return result;
-}
-
-bool BluetoothAdapter::isPacketValid(PacketHeader_t header) {
-    if (header.version != '1') {
-        return false;
-    }
-    else if (header.type != 'A') {
-        return false;
-    }
-
-    return true;
 }

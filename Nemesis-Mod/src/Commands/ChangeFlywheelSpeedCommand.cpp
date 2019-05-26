@@ -5,8 +5,5 @@ ChangeFlywheelSpeedCommand::ChangeFlywheelSpeedCommand(FlywheelController* contr
 }
 
 void ChangeFlywheelSpeedCommand::handle(Packet_t packet) {
-    auto speed = (FlywheelSpeed)packet.body[0];
-    Serial.println((byte)speed);
-
-    m_controller->setSpeed(speed);
+    m_controller->setSpeed(FlywheelSpeed::High);
 }
