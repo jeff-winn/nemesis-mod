@@ -5,6 +5,7 @@
 #include <Adafruit_BluefruitLE_SPI.h>
 #include "Packet.h"
 
+// Provides an adapter to the onboard bluetooth module.
 class BluetoothAdapter {
     public:
         BluetoothAdapter(Adafruit_BluefruitLE_SPI* ble);
