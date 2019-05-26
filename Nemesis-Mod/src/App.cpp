@@ -3,8 +3,12 @@
 #include "Commands/ChangeBeltSpeedCommand.h"
 #include "App.h"
 
-// Indicates whether the operator has authenticated prior to releasing the software lock.
-bool HAS_OPERATOR_AUTHENTICATED = false;
+#ifdef __RELEASE__
+    bool HAS_OPERATOR_AUTHENTICATED = false;
+#else
+    // Indicates whether the operator has authenticated (allowing the release of the software lock).
+    bool HAS_OPERATOR_AUTHENTICATED = true;
+#endif
 
 App::App(FlywheelController* flywheelController, FeedController* feedController, PolledButton* revTrigger, PolledButton* firingTrigger, BluetoothAdapter* ble, Mainboard* hardware) {
     m_flywheelController = flywheelController;

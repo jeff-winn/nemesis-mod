@@ -24,7 +24,7 @@ class App {
         // Runs the application.
         void run();
 
-        // Authenticates the operator.
+        // Authenticates the operator (thereby releasing the software lock).
         void authenticate();
 
     protected:        
