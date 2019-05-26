@@ -12,9 +12,6 @@ Mainboard mainboard;
 void setup() {
     Serial.begin(115200);
     
-    auto* irqPin = new InterruptPin(13, &mainboard);
-    irqPin->init(onRevTriggerStateChangedCallback, InterruptMode::All);
-
     app = new App(
         new FlywheelController(
             &mainboard,
@@ -26,7 +23,9 @@ void setup() {
             &mainboard,
             new G2HighPowerMotorShield18v17(
                 17, -1, 11, -1, A2)),
-        new InterruptButton(irqPin),
+        new InterruptButton(
+            new InterruptPin(
+                13, onRevTriggerStateChangedCallback, InterruptMode::All, &mainboard)),
         new PolledButton(
             new DigitalPin(12, &mainboard)),
         &mainboard,

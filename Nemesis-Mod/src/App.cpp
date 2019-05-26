@@ -62,6 +62,8 @@ void App::init() {
     m_ble->setName("Nerf Nemesis MXVII-10K\n");
     m_ble->endInit();
 
+    m_firingTrigger->init();
+    m_revTrigger->init();
     m_flywheelController->init();
     m_feedController->init();
     

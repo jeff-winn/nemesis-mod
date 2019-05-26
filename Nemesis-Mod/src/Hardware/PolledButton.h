@@ -9,6 +9,9 @@ class PolledButton : public Button {
     public:
         PolledButton(DigitalPin* pin);
 
+        // Intializes the button.
+        void init();
+        
         // Returns a value indicating whether the button is pressed.
         bool isPressed() override;
 

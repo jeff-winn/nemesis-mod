@@ -1,8 +1,9 @@
 #include "InterruptPin.h"
 
-void InterruptPin::init(InterruptCallback onInterruptCallback, InterruptMode mode) {
-    hardware->attachInterruptSafe(m_Id, onInterruptCallback, mode, true);
-}
+InterruptPin::InterruptPin(uint8_t id, InterruptCallback onInterruptCallback, InterruptMode mode, Mainboard* mainboard) 
+    : Pin(id, mainboard) {
+        mainboard->attachInterruptSafe(id, onInterruptCallback, mode, true);
+    }
 
 int InterruptPin::read() {
     return hardware->digitalReadSafe(m_Id);
