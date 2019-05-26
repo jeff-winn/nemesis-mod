@@ -24,7 +24,10 @@ class App {
         // Runs the application.
         void run();
 
-    protected:
+        // Authenticates the operator.
+        void authenticate();
+
+    protected:        
         Command* createCommandFromPacket(Packet_t packet);
         void handleAnyExternalCommands();
     

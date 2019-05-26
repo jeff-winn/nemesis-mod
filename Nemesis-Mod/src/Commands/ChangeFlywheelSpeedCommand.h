@@ -9,6 +9,7 @@ class ChangeFlywheelSpeedCommand : public Command {
     public:
         ChangeFlywheelSpeedCommand(FlywheelController* controller);
 
+        // Handles the packet.
         void handle(Packet_t packet) override;
     
     private:

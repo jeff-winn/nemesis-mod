@@ -9,6 +9,7 @@ class ChangeBeltSpeedCommand : public Command {
     public:
         ChangeBeltSpeedCommand(FeedController* controller);
 
+        // Handles the packet.
         void handle(Packet_t packet) override;
 
     private:

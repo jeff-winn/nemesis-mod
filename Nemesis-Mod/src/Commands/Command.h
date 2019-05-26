@@ -6,6 +6,7 @@
 // Provides a base class for commands.
 class Command {
     public:
+        // Handles the packet.
         virtual void handle(Packet_t packet) = 0;
 };
 

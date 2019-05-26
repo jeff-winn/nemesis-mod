@@ -1,9 +1,10 @@
+#include "Commands/AuthenticateOperatorCommand.h"
 #include "Commands/ChangeFlywheelSpeedCommand.h"
 #include "Commands/ChangeBeltSpeedCommand.h"
 #include "App.h"
 
 // Indicates whether the operator has authenticated prior to releasing the software lock.
-bool HAS_OPERATOR_AUTHENTICATED = true;
+bool HAS_OPERATOR_AUTHENTICATED = false;
 
 App::App(FlywheelController* flywheelController, FeedController* feedController, PolledButton* revTrigger, PolledButton* firingTrigger, BluetoothAdapter* ble, Mainboard* hardware) {
     m_flywheelController = flywheelController;
@@ -59,8 +60,15 @@ void App::handleAnyExternalCommands() {
     }
 }
 
+void App::authenticate() {
+    HAS_OPERATOR_AUTHENTICATED = true;
+}
+
 Command* App::createCommandFromPacket(Packet_t packet) {
     switch (packet.header.type) {
+        case 'A': {
+            return new AuthenticateOperatorCommand(this);
+        }
         case 'F': {
             return new ChangeFlywheelSpeedCommand(m_flywheelController);
         }
