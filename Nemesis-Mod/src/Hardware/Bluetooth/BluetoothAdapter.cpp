@@ -29,7 +29,6 @@ Packet_t BluetoothAdapter::readPacket() {
     Packet_t packet;
 
     if (m_ble->isConnected()) {
-        Serial.println("reading packet...");
         packet.header = readHeader();
 
         byte index = 0;
@@ -52,13 +51,8 @@ PacketHeader_t BluetoothAdapter::readHeader() {
     char identifier = m_ble->read();
     if (identifier == '!') {
         result.version = m_ble->read();
-        Serial.println(result.version);
-
         result.type = m_ble->read();
-        Serial.println(result.type);
-
         result.len = m_ble->read();
-        Serial.println(result.len);
     }
 
     return result;

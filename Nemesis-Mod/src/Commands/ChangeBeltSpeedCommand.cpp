@@ -5,8 +5,5 @@ ChangeBeltSpeedCommand::ChangeBeltSpeedCommand(FeedController* controller) {
 }
 
 void ChangeBeltSpeedCommand::handle(Packet_t packet) {
-    auto speed = (BeltSpeed)packet.body[0];
-    Serial.println((byte)speed);
-
-    m_controller->setSpeed(speed);
+    m_controller->setSpeed(BeltSpeed::High);
 }

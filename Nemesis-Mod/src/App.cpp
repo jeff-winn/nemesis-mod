@@ -55,7 +55,6 @@ void App::handleAnyExternalCommands() {
     auto command = createCommandFromPacket(packet);
     if (command) {
         command->handle(packet);
-        Serial.println("Command executed.");
     }
 }
 

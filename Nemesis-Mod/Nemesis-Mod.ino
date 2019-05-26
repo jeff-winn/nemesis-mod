@@ -15,9 +15,7 @@ Adafruit_BluefruitLE_SPI bluetoothDriver(8, 7, 4);
 // Defines the wrapper for the MCU functionality.
 Mainboard mainboard;
 
-void setup() {
-    Serial.begin(115200);
-        
+void setup() {        
     app = new App(
         new FlywheelController(&mainboard, &flywheelDriver, NULL, NULL),
         new FeedController(&mainboard, &beltDriver),
