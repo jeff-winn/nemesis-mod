@@ -17,14 +17,17 @@ Mainboard mainboard;
 
 void setup() {        
     app = new App(
-        new FlywheelController(&mainboard, &flywheelDriver, NULL, NULL),
-        new FeedController(&mainboard, &beltDriver),
+        new FlywheelController(
+            &mainboard, &flywheelDriver, NULL, NULL),
+        new FeedController(
+            &mainboard, &beltDriver),
         new PolledButton(
             new DigitalPin(13, &mainboard)),
         new PolledButton(
             new DigitalPin(12, &mainboard)),
-        &mainboard,
-        new BluetoothAdapter(&bluetoothDriver)
+        new BluetoothAdapter(
+            &bluetoothDriver),
+        &mainboard
     );
 
     app->init();

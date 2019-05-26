@@ -15,8 +15,8 @@ class App {
             FeedController* feedController,            
             PolledButton* revTrigger, 
             PolledButton* firingTrigger,
-            Mainboard* hardware,
-            BluetoothAdapter* ble);
+            BluetoothAdapter* ble,
+            Mainboard* hardware);
         
         // Initializes the application.
         void init();

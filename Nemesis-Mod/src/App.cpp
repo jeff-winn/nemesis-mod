@@ -5,13 +5,13 @@
 // Indicates whether the operator has authenticated prior to releasing the software lock.
 bool HAS_OPERATOR_AUTHENTICATED = true;
 
-App::App(FlywheelController* flywheelController, FeedController* feedController, PolledButton* revTrigger, PolledButton* firingTrigger, Mainboard* hardware, BluetoothAdapter* ble) {
+App::App(FlywheelController* flywheelController, FeedController* feedController, PolledButton* revTrigger, PolledButton* firingTrigger, BluetoothAdapter* ble, Mainboard* hardware) {
     m_flywheelController = flywheelController;
     m_feedController = feedController;
     m_revTrigger = revTrigger;
     m_firingTrigger = firingTrigger;
-    m_hardware = hardware;    
     m_ble = ble;
+    m_hardware = hardware;    
 }
 
 void App::run() {   
@@ -27,6 +27,7 @@ void App::run() {
             }
 
             m_feedController->stop();
+            m_hardware->delaySafe(10);
         }
 
         m_flywheelController->stop();
