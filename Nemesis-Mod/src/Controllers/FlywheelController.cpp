@@ -12,12 +12,9 @@ const int FLYWHEEL_MEDIUM_SPEED = 250;
 // Defines the 'high' speed for the flywheel assembly.
 const int FLYWHEEL_HIGH_SPEED = 400;
 
-FlywheelController::FlywheelController(
-    Mainboard* hardware, DualG2HighPowerMotorShield18v18* driver, Potentiometer* motor1Potentiometer, Potentiometer* motor2Potentiometer) {
+FlywheelController::FlywheelController(Mainboard* hardware, DualG2HighPowerMotorShield18v18* driver) {
         m_hardware = hardware;
         m_driver = driver;
-        m_motor1Adjustment = motor1Potentiometer;
-        m_motor2Adjustment = motor2Potentiometer;
 }
 
 void FlywheelController::init() {
@@ -87,14 +84,10 @@ int FlywheelController::determineMotorMaximumSpeed() {
 float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
     switch (motor) {
         case FlywheelMotor::Motor1: {
-            if (m_motor1Adjustment) {
-                return m_motor1Adjustment->read();
-            }
+            return m_m1MotorAdjustment;
         }
         case FlywheelMotor::Motor2: {
-            if (m_motor2Adjustment) {
-                return m_motor2Adjustment->read();
-            }
+            return m_m2MotorAdjustment;
         }
     }
 

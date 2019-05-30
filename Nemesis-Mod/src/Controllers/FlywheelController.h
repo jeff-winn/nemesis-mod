@@ -2,7 +2,7 @@
 #define FLYWHEEL_CONTROLLER_H
 
 #include <DualG2HighPowerMotorShield.h>
-#include "../Hardware/Potentiometer.h"
+#include "../Hardware//Interop/Mainboard.h"
 #include "MotorController.h"
 
 // Defines the flywheel speeds available.
@@ -24,10 +24,8 @@ class FlywheelController : public MotorController {
     public:
         FlywheelController(
             Mainboard* hardware,
-            DualG2HighPowerMotorShield18v18* motorController, 
-            Potentiometer* motor1Potentiometer,
-            Potentiometer* motor2Potentiometer);
-
+            DualG2HighPowerMotorShield18v18* motorController);
+            
         // Initializes the controller.
         void init() override;
 
@@ -36,6 +34,9 @@ class FlywheelController : public MotorController {
 
         // Sets the flywheel speed.
         void setSpeed(FlywheelSpeed speed);
+
+        // Sets the motor speed adjustment.
+        void setMotorSpeedAdjustment(FlywheelMotor motor, float adjustment);
 
     protected:
         int calculateLimiterForSpeed(int speed);
@@ -50,12 +51,12 @@ class FlywheelController : public MotorController {
     private:
         Mainboard* m_hardware;
         DualG2HighPowerMotorShield18v18* m_driver;
-        Potentiometer* m_motor1Adjustment;
-        Potentiometer* m_motor2Adjustment;
 
         FlywheelSpeed m_speed;
         int m_m1Speed;
         int m_m2Speed;
+        float m_m1MotorAdjustment;
+        float m_m2MotorAdjustment;
 };
 
 #endif

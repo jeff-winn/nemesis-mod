@@ -1,4 +1,5 @@
 #include "Commands/AuthenticateOperatorCommand.h"
+#include "Commands/ChangeFlywheelMotorAdjustmentCommand.h"
 #include "Commands/ChangeFlywheelSpeedCommand.h"
 #include "Commands/ChangeBeltSpeedCommand.h"
 #include "App.h"
@@ -72,12 +73,14 @@ Command* App::createCommandFromPacket(Packet_t packet) {
     switch (packet.header.type) {
         case 'A': {
             return new AuthenticateOperatorCommand(this);
+        }        
+        case 'B': {
+            return new ChangeBeltSpeedCommand(m_feedController);
         }
         case 'F': {
             return new ChangeFlywheelSpeedCommand(m_flywheelController);
         }
-        case 'B': {
-            return new ChangeBeltSpeedCommand(m_feedController);
+        case 'M': {
         }
     }
 

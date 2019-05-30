@@ -18,7 +18,7 @@ Mainboard mainboard;
 void setup() {        
     app = new App(
         new FlywheelController(
-            &mainboard, &flywheelDriver, NULL, NULL),
+            &mainboard, &flywheelDriver),
         new FeedController(
             &mainboard, &beltDriver),
         new PolledButton(
