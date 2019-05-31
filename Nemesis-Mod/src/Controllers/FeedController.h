@@ -8,6 +8,7 @@
 // Defines the belt speeds (rate of fire) available.
 enum class BeltSpeed {
     Normal = 0,
+    High,
     Max
 };
 

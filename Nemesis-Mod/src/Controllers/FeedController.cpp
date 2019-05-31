@@ -46,6 +46,9 @@ int FeedController::calculateMotorSpeed() {
         case BeltSpeed::Normal: {
             return FEED_NORMAL_SPEED;
         }
+        case BeltSpeed::High: {
+            return FEED_HIGH_SPEED;
+        }
         case BeltSpeed::Max: {
             return FEED_MAX_SPEED;
         }
