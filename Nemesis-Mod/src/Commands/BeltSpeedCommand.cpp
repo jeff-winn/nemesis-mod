@@ -5,5 +5,5 @@ BeltSpeedCommand::BeltSpeedCommand(FeedController* controller) {
 }
 
 void BeltSpeedCommand::handle(Packet_t packet) {
-    m_controller->setSpeed(BeltSpeed::High);
+    m_controller->setSpeed(BeltSpeed::Max);
 }

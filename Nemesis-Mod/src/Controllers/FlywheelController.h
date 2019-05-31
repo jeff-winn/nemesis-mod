@@ -10,7 +10,7 @@ enum class FlywheelSpeed {
     Normal = 0,
     Medium,
     // WARNING: This value may cause physical bruising on the intended target, use with caution!
-    High
+    Max
 };
 
 // Defines the motors within the flywheel assembly.

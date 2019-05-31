@@ -9,8 +9,8 @@ const int FLYWHEEL_NORMAL_SPEED = 125;
 // Defines the 'medium' speed for the flywheel assembly.
 const int FLYWHEEL_MEDIUM_SPEED = 250;
 
-// Defines the 'high' speed for the flywheel assembly.
-const int FLYWHEEL_HIGH_SPEED = 400;
+// Defines the 'maximum' speed for the flywheel assembly.
+const int FLYWHEEL_MAX_SPEED = 400;
 
 FlywheelController::FlywheelController(Mainboard* hardware, DualG2HighPowerMotorShield18v18* driver) {
         m_hardware = hardware;
@@ -73,8 +73,8 @@ int FlywheelController::determineMotorMaximumSpeed() {
         case FlywheelSpeed::Medium: {
             return FLYWHEEL_MEDIUM_SPEED;
         }
-        case FlywheelSpeed::High: {
-            return FLYWHEEL_HIGH_SPEED;
+        case FlywheelSpeed::Max: {
+            return FLYWHEEL_MAX_SPEED;
         }
     }
 

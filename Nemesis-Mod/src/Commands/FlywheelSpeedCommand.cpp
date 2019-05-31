@@ -5,5 +5,5 @@ FlywheelSpeedCommand::FlywheelSpeedCommand(FlywheelController* controller) {
 }
 
 void FlywheelSpeedCommand::handle(Packet_t packet) {
-    m_controller->setSpeed(FlywheelSpeed::High);
+    m_controller->setSpeed(FlywheelSpeed::Max);
 }

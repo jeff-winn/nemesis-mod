@@ -6,6 +6,9 @@ const int FEED_NORMAL_SPEED = 100;
 // Defines the 'high' speed for the feed controller assembly.
 const int FEED_HIGH_SPEED = 175;
 
+// Defines the 'maximum' speed for the feed controller assembly.
+const int FEED_MAX_SPEED = 400;
+
 FeedController::FeedController(Mainboard* hardware, G2HighPowerMotorShield18v17* driver) {
     m_hardware = hardware;
     m_driver = driver;
@@ -43,8 +46,8 @@ int FeedController::calculateMotorSpeed() {
         case BeltSpeed::Normal: {
             return FEED_NORMAL_SPEED;
         }
-        case BeltSpeed::High: {
-            return FEED_HIGH_SPEED;
+        case BeltSpeed::Max: {
+            return FEED_MAX_SPEED;
         }
     }
 }
