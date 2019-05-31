@@ -1,5 +1,5 @@
-#ifndef CHANGE_BELT_SPEED_COMMAND_H
-#define CHANGE_BELT_SPEED_COMMAND_H
+#ifndef BELT_SPEED_COMMAND_H
+#define BELT_SPEED_COMMAND_H
 
 #include "../Controllers/FeedController.h"
 #include "Command.h"

@@ -1,5 +1,5 @@
-#ifndef CHANGE_FLYWHEEL_SPEED_COMMAND_H
-#define CHANGE_FLYWHEEL_SPEED_COMMAND_H
+#ifndef FLYWHEEL_SPEED_COMMAND_H
+#define FLYWHEEL_SPEED_COMMAND_H
 
 #include "../Controllers/FlywheelController.h"
 #include "Command.h"
