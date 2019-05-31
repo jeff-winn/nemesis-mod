@@ -5,9 +5,9 @@
 #include "Command.h"
 
 // Provides a command to change the belt speed.
-class ChangeBeltSpeedCommand : public Command {
+class BeltSpeedCommand : public Command {
     public:
-        ChangeBeltSpeedCommand(FeedController* controller);
+        BeltSpeedCommand(FeedController* controller);
 
         // Handles the packet.
         void handle(Packet_t packet) override;

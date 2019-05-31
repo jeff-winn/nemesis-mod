@@ -1,7 +1,7 @@
 #include "Commands/AuthenticateOperatorCommand.h"
-#include "Commands/ChangeFlywheelMotorAdjustmentCommand.h"
-#include "Commands/ChangeFlywheelSpeedCommand.h"
-#include "Commands/ChangeBeltSpeedCommand.h"
+#include "Commands/FlywheelTrimAdjustmentCommand.h"
+#include "Commands/FlywheelSpeedCommand.h"
+#include "Commands/BeltSpeedCommand.h"
 #include "App.h"
 
 #ifdef __RELEASE__
@@ -75,12 +75,13 @@ Command* App::createCommandFromPacket(Packet_t packet) {
             return new AuthenticateOperatorCommand(this);
         }        
         case 'B': {
-            return new ChangeBeltSpeedCommand(m_feedController);
+            return new BeltSpeedCommand(m_feedController);
         }
         case 'F': {
-            return new ChangeFlywheelSpeedCommand(m_flywheelController);
+            return new FlywheelSpeedCommand(m_flywheelController);
         }
-        case 'M': {
+        case 'T': {
+            return new FlywheelTrimAdjustmentCommand(m_flywheelController);        
         }
     }
 

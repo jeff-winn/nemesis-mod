@@ -109,3 +109,18 @@ void FlywheelController::onStop() {
 void FlywheelController::setSpeed(FlywheelSpeed speed) {
     m_speed = speed;
 }
+
+void FlywheelController::setMotorSpeedAdjustment(FlywheelMotor motor, float adjustment) {
+    if (adjustment < 0) {
+        return;
+    }
+    
+    switch (motor) {
+        case FlywheelMotor::Motor1: {
+            m_m1MotorAdjustment = adjustment;
+        }
+        case FlywheelMotor::Motor2: {
+            m_m2MotorAdjustment = adjustment;
+        }
+    }
+}

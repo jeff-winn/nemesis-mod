@@ -5,9 +5,9 @@
 #include "Command.h"
 
 // Provides a command which handles flywheel speed changes.
-class ChangeFlywheelSpeedCommand : public Command {
+class FlywheelSpeedCommand : public Command {
     public:
-        ChangeFlywheelSpeedCommand(FlywheelController* controller);
+        FlywheelSpeedCommand(FlywheelController* controller);
 
         // Handles the packet.
         void handle(Packet_t packet) override;
