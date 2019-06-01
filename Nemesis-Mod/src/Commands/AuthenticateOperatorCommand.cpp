@@ -8,6 +8,6 @@ AuthenticateOperatorCommand::~AuthenticateOperatorCommand() {
     m_app = NULL;
 }
 
-void AuthenticateOperatorCommand::handle(Packet_t packet) {
+void AuthenticateOperatorCommand::handleImpl(Packet_t packet) {
     m_app->authenticate();
 }

@@ -6,10 +6,14 @@
 // Provides a base class for commands.
 class Command {
     public:       
-        virtual ~Command() { }
+        virtual ~Command();
 
         // Handles the packet.
-        virtual void handle(Packet_t packet) { };
+        void handle(Packet_t packet);
+
+    protected:
+        virtual void handleImpl(Packet_t packet);
+        virtual bool validate(Packet_t packet);
 };
 
 #endif

@@ -8,6 +8,6 @@ BeltSpeedCommand::~BeltSpeedCommand() {
     m_controller = NULL;
 }
 
-void BeltSpeedCommand::handle(Packet_t packet) {
+void BeltSpeedCommand::handleImpl(Packet_t packet) {
     m_controller->setSpeed(BeltSpeed::Max);
 }

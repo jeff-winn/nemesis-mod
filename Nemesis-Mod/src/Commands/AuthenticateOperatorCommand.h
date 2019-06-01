@@ -11,8 +11,8 @@ class AuthenticateOperatorCommand : public Command {
 
         ~AuthenticateOperatorCommand() override;
 
-        // Handles the packet.    
-        void handle(Packet_t packet) override;
+    protected:
+        void handleImpl(Packet_t packet) override;
 
     private:
         App* m_app;

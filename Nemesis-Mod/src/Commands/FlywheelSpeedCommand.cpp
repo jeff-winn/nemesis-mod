@@ -8,6 +8,6 @@ FlywheelSpeedCommand::~FlywheelSpeedCommand() {
     m_controller = NULL;
 }
 
-void FlywheelSpeedCommand::handle(Packet_t packet) {
+void FlywheelSpeedCommand::handleImpl(Packet_t packet) {
     m_controller->setSpeed(FlywheelSpeed::Max);
 }

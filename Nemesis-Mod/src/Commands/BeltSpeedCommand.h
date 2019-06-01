@@ -11,8 +11,8 @@ class BeltSpeedCommand : public Command {
 
         ~BeltSpeedCommand() override;
 
-        // Handles the packet.
-        void handle(Packet_t packet) override;
+    protected:
+        void handleImpl(Packet_t packet) override;
 
     private:
         FeedController* m_controller;
