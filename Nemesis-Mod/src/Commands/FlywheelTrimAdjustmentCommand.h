@@ -12,11 +12,11 @@ class FlywheelTrimAdjustmentCommand : public Command {
         ~FlywheelTrimAdjustmentCommand() override;
 
     protected:
+        void handleImpl(Packet_t packet) override;
+
         FlywheelMotor getMotorFromPacket(Packet_t packet);
         byte getAdjustmentFromPacket(Packet_t packet);
         
-        void handleImpl(Packet_t packet) override;
-
     private:
         FlywheelController* m_controller;
 };
