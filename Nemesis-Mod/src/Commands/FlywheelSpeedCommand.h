@@ -12,8 +12,8 @@ class FlywheelSpeedCommand : public Command {
         ~FlywheelSpeedCommand() override;
 
     protected:
-        FlywheelSpeed getSpeedFromPacket(Packet_t packet);
         void handleImpl(Packet_t packet) override;
+        FlywheelSpeed getSpeedFromPacket(Packet_t packet);
     
     private:
         FlywheelController* m_controller;

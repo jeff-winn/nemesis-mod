@@ -9,7 +9,8 @@ FlywheelSpeedCommand::~FlywheelSpeedCommand() {
 }
 
 void FlywheelSpeedCommand::handleImpl(Packet_t packet) {
-    m_controller->setSpeed(FlywheelSpeed::Max);
+    auto newSpeed = getSpeedFromPacket(packet);
+    m_controller->setSpeed(newSpeed);
 }
 
 FlywheelSpeed FlywheelSpeedCommand::getSpeedFromPacket(Packet_t packet) {
