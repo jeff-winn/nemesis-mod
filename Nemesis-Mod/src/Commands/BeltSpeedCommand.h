@@ -13,6 +13,7 @@ class BeltSpeedCommand : public Command {
 
     protected:
         void handleImpl(Packet_t packet) override;
+        BeltSpeed getSpeedFromPacket(Packet_t packet);
 
     private:
         FeedController* m_controller;
