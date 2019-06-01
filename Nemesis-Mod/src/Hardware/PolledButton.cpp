@@ -4,6 +4,10 @@ PolledButton::PolledButton(DigitalPin* pin) {
     m_pin = pin;
 }
 
+PolledButton::~PolledButton() {
+    m_pin = NULL;
+}
+
 void PolledButton::init() {
     m_pin->setInputMode();
 }

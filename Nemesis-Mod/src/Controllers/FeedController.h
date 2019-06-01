@@ -17,6 +17,8 @@ class FeedController : public MotorController {
     public:
         FeedController(Mainboard* hardware, G2HighPowerMotorShield18v17* driver);
 
+        ~FeedController();
+        
         // Initializes the controller.
         void init() override;
 

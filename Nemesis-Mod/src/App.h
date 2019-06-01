@@ -17,6 +17,8 @@ class App {
             PolledButton* firingTrigger,
             BluetoothAdapter* ble,
             Mainboard* hardware);
+
+        ~App();
         
         // Initializes the application.
         void init();

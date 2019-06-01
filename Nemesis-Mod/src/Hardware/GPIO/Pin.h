@@ -1,6 +1,7 @@
 #ifndef PIN_H
 #define PIN_H
 
+#include <stddef.h>
 #include <stdint.h>
 #include "../Interop/Mainboard.h"
 
@@ -8,6 +9,8 @@
 class Pin {
     public:
         Pin(uint8_t id, Mainboard* hal);
+
+        ~Pin();
 
         // Sets the pin for read access.
         virtual void setInputMode();

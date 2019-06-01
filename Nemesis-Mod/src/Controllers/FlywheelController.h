@@ -25,6 +25,8 @@ class FlywheelController : public MotorController {
         FlywheelController(
             Mainboard* hardware,
             DualG2HighPowerMotorShield18v18* motorController);
+
+        ~FlywheelController();
             
         // Initializes the controller.
         void init() override;

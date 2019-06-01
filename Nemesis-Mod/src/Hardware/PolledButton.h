@@ -9,6 +9,8 @@ class PolledButton : public Button {
     public:
         PolledButton(DigitalPin* pin);
 
+        ~PolledButton();
+
         // Intializes the button.
         void init() override;
         

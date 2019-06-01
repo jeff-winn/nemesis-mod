@@ -20,6 +20,15 @@ App::App(FlywheelController* flywheelController, FeedController* feedController,
     m_hardware = hardware;    
 }
 
+App::~App() {
+    m_flywheelController = NULL;
+    m_feedController = NULL;
+    m_revTrigger = NULL;
+    m_firingTrigger = NULL;
+    m_ble = NULL;
+    m_hardware = NULL;
+}
+
 void App::run() {   
     handleAnyExternalCommands();
 

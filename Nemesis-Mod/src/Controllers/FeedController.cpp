@@ -14,6 +14,11 @@ FeedController::FeedController(Mainboard* hardware, G2HighPowerMotorShield18v17*
     m_driver = driver;
 }
 
+FeedController::~FeedController() {
+    m_hardware = NULL;
+    m_driver = NULL;
+}
+
 void FeedController::init() {
     m_driver->init();
     m_driver->calibrateCurrentOffset();

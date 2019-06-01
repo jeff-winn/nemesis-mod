@@ -4,6 +4,10 @@ BluetoothAdapter::BluetoothAdapter(Adafruit_BluefruitLE_SPI* ble) {
     m_ble = ble;
 }
 
+BluetoothAdapter::~BluetoothAdapter() {
+    m_ble = NULL;
+}
+
 void BluetoothAdapter::beginInit() {
     m_ble->begin();    
     m_ble->factoryReset();

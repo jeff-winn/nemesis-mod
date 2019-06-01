@@ -1,3 +1,4 @@
+#include <stddef.h>
 #include "FlywheelController.h"
 
 // Defines the trim variance amount on the maximum speed per motor.
@@ -13,8 +14,13 @@ const int FLYWHEEL_MEDIUM_SPEED = 250;
 const int FLYWHEEL_MAX_SPEED = 400;
 
 FlywheelController::FlywheelController(Mainboard* hardware, DualG2HighPowerMotorShield18v18* driver) {
-        m_hardware = hardware;
-        m_driver = driver;
+    m_hardware = hardware;
+    m_driver = driver;
+}
+
+FlywheelController::~FlywheelController() {
+    m_hardware = NULL;
+    m_driver = NULL;
 }
 
 void FlywheelController::init() {

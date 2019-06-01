@@ -8,6 +8,8 @@
 class InterruptButton : public Button {
     public:
         InterruptButton(InterruptPin* pin);
+
+        ~InterruptButton();
         
         // Intializes the button.
         void init() override;

@@ -10,6 +10,8 @@ class BluetoothAdapter {
     public:
         BluetoothAdapter(Adafruit_BluefruitLE_SPI* ble);
 
+        ~BluetoothAdapter();
+
         void setName(const char name[]);
 
         void beginInit();
