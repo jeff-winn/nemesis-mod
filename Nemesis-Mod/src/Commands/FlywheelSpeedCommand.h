@@ -9,6 +9,8 @@ class FlywheelSpeedCommand : public Command {
     public:
         FlywheelSpeedCommand(FlywheelController* controller);
 
+        ~FlywheelSpeedCommand() override;
+
         // Handles the packet.
         void handle(Packet_t packet) override;
     

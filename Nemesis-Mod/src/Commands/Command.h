@@ -5,9 +5,11 @@
 
 // Provides a base class for commands.
 class Command {
-    public:
+    public:       
+        virtual ~Command() { }
+
         // Handles the packet.
-        virtual void handle(Packet_t packet) = 0;
+        virtual void handle(Packet_t packet) { };
 };
 
 #endif

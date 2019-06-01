@@ -9,6 +9,8 @@ class AuthenticateOperatorCommand : public Command {
     public:
         AuthenticateOperatorCommand(App* app);
 
+        ~AuthenticateOperatorCommand() override;
+
         // Handles the packet.    
         void handle(Packet_t packet) override;
 

@@ -58,10 +58,11 @@ void App::init() {
 
 void App::handleAnyExternalCommands() {
     auto packet = m_ble->readPacket();
-
+    
     auto command = createCommandFromPacket(packet);
     if (command) {
         command->handle(packet);
+        delete command;
     }
 }
 

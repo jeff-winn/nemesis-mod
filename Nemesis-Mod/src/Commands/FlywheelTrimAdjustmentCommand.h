@@ -9,6 +9,8 @@ class FlywheelTrimAdjustmentCommand : public Command {
     public:
         FlywheelTrimAdjustmentCommand(FlywheelController* controller);
 
+        ~FlywheelTrimAdjustmentCommand() override;
+
         // Handles the packet.
         void handle(Packet_t packet) override;
 

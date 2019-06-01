@@ -4,6 +4,10 @@ FlywheelTrimAdjustmentCommand::FlywheelTrimAdjustmentCommand(FlywheelController*
     m_controller = controller;
 }
 
+FlywheelTrimAdjustmentCommand::~FlywheelTrimAdjustmentCommand() {
+    m_controller = NULL;
+}
+
 void FlywheelTrimAdjustmentCommand::handle(Packet_t packet) {
     m_controller->setMotorSpeedAdjustment(FlywheelMotor::Motor1, 1.0F);
     m_controller->setMotorSpeedAdjustment(FlywheelMotor::Motor2, 1.0F);

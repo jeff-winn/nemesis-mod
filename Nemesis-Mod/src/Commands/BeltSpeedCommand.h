@@ -9,6 +9,8 @@ class BeltSpeedCommand : public Command {
     public:
         BeltSpeedCommand(FeedController* controller);
 
+        ~BeltSpeedCommand() override;
+
         // Handles the packet.
         void handle(Packet_t packet) override;
 
