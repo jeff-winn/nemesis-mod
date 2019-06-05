@@ -9,7 +9,10 @@ These are the boards and hardware being used by the project.
 - [MaxAmps LiPo 3250 3S 11.1v Battery Pack](https://www.maxamps.com/lipo-3250-3s-11-1v-battery-pack)
 
 ## Development Environment
-This is the toolset that is currently being used to write the code included within the src folder within this repository.
+This is the development environment setup that is currently being used to write the code included within this repository.
+
+### Toolset
+Below are the software which must be installed to compile the source code.
 - Visual Studio Code
   - C/C++ extension
   - Arduino Extension
