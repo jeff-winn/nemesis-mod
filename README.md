@@ -23,3 +23,9 @@ Below are the dependencies that are being used by the project.
 - [Adafruit PWM Servo Driver Library](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
 - [Arduino Low-Power Library](https://github.com/arduino-libraries/ArduinoLowPower)
 - [RTCZero](https://github.com/arduino-libraries/RTCZero)
+
+## Extras (optional)
+Below are some additional items purchased which are external to the primary hardware used by the project.
+- [Semedea M-Lok Picatinny Rail](https://www.amazon.com/gp/product/B07PBV6SSJ)
+- [TACFUN Picatinny Style 45 Degree Offset Angle Rail Mount](https://www.amazon.com/gp/product/B00RSMZGC0)
+- [Fyland Red/Green Reflex Sight Scope](https://www.amazon.com/gp/product/B075MCP3WQ)
