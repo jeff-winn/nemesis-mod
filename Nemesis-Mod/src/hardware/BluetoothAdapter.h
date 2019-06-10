@@ -3,7 +3,7 @@
 
 #include <Adafruit_BLE.h>
 #include <Adafruit_BluefruitLE_SPI.h>
-#include "Packet.h"
+#include "../Packet.h"
 
 // Provides an adapter to the onboard bluetooth module.
 class BluetoothAdapter {

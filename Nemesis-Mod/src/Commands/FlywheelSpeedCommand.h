@@ -1,8 +1,8 @@
 #ifndef FLYWHEEL_SPEED_COMMAND_H
 #define FLYWHEEL_SPEED_COMMAND_H
 
-#include "../Controllers/FlywheelController.h"
-#include "Command.h"
+#include "../FlywheelController.h"
+#include "../Command.h"
 
 // Provides a command which handles flywheel speed changes.
 class FlywheelSpeedCommand : public Command {

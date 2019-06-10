@@ -1,7 +1,7 @@
-#include "Commands/AuthenticateOperatorCommand.h"
-#include "Commands/FlywheelTrimAdjustmentCommand.h"
-#include "Commands/FlywheelSpeedCommand.h"
-#include "Commands/BeltSpeedCommand.h"
+#include "commands/AuthenticateOperatorCommand.h"
+#include "commands/FlywheelTrimAdjustmentCommand.h"
+#include "commands/FlywheelSpeedCommand.h"
+#include "commands/BeltSpeedCommand.h"
 #include "App.h"
 
 #ifdef __RELEASE__

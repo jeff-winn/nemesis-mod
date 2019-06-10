@@ -2,7 +2,7 @@
 #define AUTHENTICATE_OPERATOR_COMMAND_H
 
 #include "../App.h"
-#include "Command.h"
+#include "../Command.h"
 
 // Provides a command to authenticate the operator.
 class AuthenticateOperatorCommand : public Command {

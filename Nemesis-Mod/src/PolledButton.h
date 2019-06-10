@@ -1,7 +1,7 @@
 #ifndef POLLED_BUTTON_H
 #define POLLED_BUTTON_H
 
-#include "GPIO/DigitalPin.h"
+#include "DigitalPin.h"
 #include "Button.h"
 
 // Provides a button which is polled for state.
