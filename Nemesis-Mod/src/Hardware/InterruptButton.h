@@ -8,12 +8,14 @@
 class InterruptButton : public Button {
     public:
         InterruptButton(InterruptPin* pin);
+
+        ~InterruptButton();
         
-        // Intializes the button with the callback specified.
-        virtual void init(void (*onStateChangedCallback)(void));
+        // Intializes the button.
+        void init() override;
 
         // Returns a value indicating whether the button is pressed.
-        virtual bool isPressed() override;
+        bool isPressed() override;
 
     private:
         InterruptPin* m_pin;

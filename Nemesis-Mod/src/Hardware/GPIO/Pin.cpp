@@ -1,8 +1,13 @@
+#include <stddef.h>
 #include "Pin.h"
 
 Pin::Pin(uint8_t id, Mainboard* hal) {
     m_Id = id;
     hardware = hal;
+}
+
+Pin::~Pin() {
+    hardware = NULL;
 }
 
 void Pin::setOutputMode() {

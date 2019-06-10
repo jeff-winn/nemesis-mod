@@ -21,7 +21,7 @@ enum class InterruptMode {
     All
 };
 
-// Provides hardware control for the mainboard.
+// Provides a wrapper for hardware control of the mainboard.
 class Mainboard {
     public:
         // Attaches an interrupt pin with a user function callback.
@@ -46,7 +46,7 @@ class Mainboard {
         virtual int analogReadSafe(uint8_t pin);
 
         // Puts the device to sleep.
-        virtual void sleepSafe();
+        virtual void sleepSafe(int timeout);
 };
 
 #endif

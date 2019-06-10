@@ -31,7 +31,8 @@
 			"xlocnum": "cpp",
 			"xloctime": "cpp",
 			"ios": "cpp",
-			"cstdbool": "cpp"
+			"cstdbool": "cpp",
+			"cstdint": "cpp"
 		}
 	}
 }

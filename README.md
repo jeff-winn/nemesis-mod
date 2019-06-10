@@ -22,6 +22,7 @@ Below are the software which must be installed to compile the source code.
 
 ### Dependencies
 Below are the dependencies that are being used by the project and must be installed using the Arduino IDE Library Manager.
+- [Adafruit BluefruitLE nRF51](https://github.com/adafruit/Adafruit_BluefruitLE_nRF51)
 - [Pololu Dual G2 High-Power Motor Driver Library for Arduino](https://github.com/pololu/dual-g2-high-power-motor-shield)
 - [Adafruit PWM Servo Driver Library](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
 - [Arduino Low-Power Library](https://github.com/arduino-libraries/ArduinoLowPower)

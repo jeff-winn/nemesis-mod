@@ -1,64 +1,99 @@
+#include "Commands/AuthenticateOperatorCommand.h"
+#include "Commands/FlywheelTrimAdjustmentCommand.h"
+#include "Commands/FlywheelSpeedCommand.h"
+#include "Commands/BeltSpeedCommand.h"
 #include "App.h"
 
-// Indicates whether the blaster should continue execution.
-volatile bool SHOULD_CONTINUE_EXECUTION = false;
+#ifdef __RELEASE__
+    bool HAS_OPERATOR_AUTHENTICATED = false;
+#else
+    // Indicates whether the operator has authenticated (allowing the release of the software lock).
+    bool HAS_OPERATOR_AUTHENTICATED = true;
+#endif
 
-// Indicates whether the operator has authenticated prior to releasing the software lock.
-volatile bool HAS_OPERATOR_AUTHENTICATED = true;
-
-// Indicates whether the blaster should fire rounds at the target.
-volatile bool SHOULD_FIRE_ROUNDS = false;
-
-App::App(FlywheelController* flywheelController, FeedController* feedController, InterruptButton* revTrigger, InterruptButton* firingTrigger, Mainboard* hardware) {
+App::App(FlywheelController* flywheelController, FeedController* feedController, PolledButton* revTrigger, PolledButton* firingTrigger, BluetoothAdapter* ble, Mainboard* hardware) {
     m_flywheelController = flywheelController;
     m_feedController = feedController;
     m_revTrigger = revTrigger;
     m_firingTrigger = firingTrigger;
+    m_ble = ble;
     m_hardware = hardware;    
 }
 
-void App::onFiringTriggerStateChangedCallback() {
-    SHOULD_FIRE_ROUNDS = m_firingTrigger->isPressed();    
+App::~App() {
+    m_flywheelController = NULL;
+    m_feedController = NULL;
+    m_revTrigger = NULL;
+    m_firingTrigger = NULL;
+    m_ble = NULL;
+    m_hardware = NULL;
 }
 
-void App::onRevTriggerStateChangedCallback() {
-    SHOULD_CONTINUE_EXECUTION = m_revTrigger->isPressed();
-}
+void App::run() {   
+    handleAnyExternalCommands();
 
-void App::run() {
-    waitForWakeEvent();
-    if (!HAS_OPERATOR_AUTHENTICATED || !SHOULD_CONTINUE_EXECUTION) {
-        return;
-    }
+    if (HAS_OPERATOR_AUTHENTICATED) {
+        while (m_revTrigger->isPressed()) {
+            m_flywheelController->start();
 
-    m_flywheelController->start();
-    
-    while (SHOULD_CONTINUE_EXECUTION) {
-        if (SHOULD_FIRE_ROUNDS) {
-            m_feedController->start();
-        }
-        else {
+            while (m_firingTrigger->isPressed()) {
+                m_feedController->start();
+                m_hardware->delaySafe(10);
+            }
+
             m_feedController->stop();
+            m_hardware->delaySafe(10);
         }
 
-        m_hardware->delaySafe(10);
+        m_flywheelController->stop();
     }
 
-    m_feedController->stop();
-    m_flywheelController->stop();
-}
-
-void App::waitForWakeEvent() {
-    if (SHOULD_CONTINUE_EXECUTION) {
-        return;
-    }
-
-#if defined (__RELEASE__)
-    m_hardware->sleepSafe();
-#endif
+    m_hardware->delaySafe(50);
 }
 
 void App::init() {
+    m_ble->beginInit();
+    m_ble->setName("Nerf Nemesis MXVII-10K\n");
+    m_ble->endInit();
+
+    m_firingTrigger->init();
+    m_revTrigger->init();
+    m_flywheelController->init();
+    m_feedController->init();
+    
     m_flywheelController->setSpeed(FlywheelSpeed::Normal);
     m_feedController->setSpeed(BeltSpeed::Normal);
+}
+
+void App::handleAnyExternalCommands() {
+    auto packet = m_ble->readPacket();
+    
+    auto command = createCommandFromPacket(packet);
+    if (command) {
+        command->handle(packet);
+        delete command;
+    }
+}
+
+void App::authenticate() {
+    HAS_OPERATOR_AUTHENTICATED = true;
+}
+
+Command* App::createCommandFromPacket(Packet_t packet) {
+    switch (packet.header.type) {
+        case 'A': {
+            return new AuthenticateOperatorCommand(this);
+        }        
+        case 'B': {
+            return new BeltSpeedCommand(m_feedController);
+        }
+        case 'F': {
+            return new FlywheelSpeedCommand(m_flywheelController);
+        }
+        case 'T': {
+            return new FlywheelTrimAdjustmentCommand(m_flywheelController);        
+        }
+    }
+
+    return NULL;
 }

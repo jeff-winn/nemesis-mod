@@ -1,3 +1,4 @@
+#include <stddef.h>
 #include "FlywheelController.h"
 
 // Defines the trim variance amount on the maximum speed per motor.
@@ -9,15 +10,17 @@ const int FLYWHEEL_NORMAL_SPEED = 125;
 // Defines the 'medium' speed for the flywheel assembly.
 const int FLYWHEEL_MEDIUM_SPEED = 250;
 
-// Defines the 'high' speed for the flywheel assembly.
-const int FLYWHEEL_HIGH_SPEED = 400;
+// Defines the 'maximum' speed for the flywheel assembly.
+const int FLYWHEEL_MAX_SPEED = 400;
 
-FlywheelController::FlywheelController(
-    Mainboard* hardware, DualG2HighPowerMotorShield18v18* driver, Potentiometer* motor1Potentiometer, Potentiometer* motor2Potentiometer) {
-        m_hardware = hardware;
-        m_driver = driver;
-        m_motor1Adjustment = motor1Potentiometer;
-        m_motor2Adjustment = motor2Potentiometer;
+FlywheelController::FlywheelController(Mainboard* hardware, DualG2HighPowerMotorShield18v18* driver) {
+    m_hardware = hardware;
+    m_driver = driver;
+}
+
+FlywheelController::~FlywheelController() {
+    m_hardware = NULL;
+    m_driver = NULL;
 }
 
 void FlywheelController::init() {
@@ -76,8 +79,8 @@ int FlywheelController::determineMotorMaximumSpeed() {
         case FlywheelSpeed::Medium: {
             return FLYWHEEL_MEDIUM_SPEED;
         }
-        case FlywheelSpeed::High: {
-            return FLYWHEEL_HIGH_SPEED;
+        case FlywheelSpeed::Max: {
+            return FLYWHEEL_MAX_SPEED;
         }
     }
 
@@ -87,14 +90,10 @@ int FlywheelController::determineMotorMaximumSpeed() {
 float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
     switch (motor) {
         case FlywheelMotor::Motor1: {
-            if (m_motor1Adjustment) {
-                return m_motor1Adjustment->read();
-            }
+            return m_m1MotorAdjustment;
         }
         case FlywheelMotor::Motor2: {
-            if (m_motor2Adjustment) {
-                return m_motor2Adjustment->read();
-            }
+            return m_m2MotorAdjustment;
         }
     }
 
@@ -115,4 +114,19 @@ void FlywheelController::onStop() {
 
 void FlywheelController::setSpeed(FlywheelSpeed speed) {
     m_speed = speed;
+}
+
+void FlywheelController::setMotorSpeedAdjustment(FlywheelMotor motor, float adjustment) {
+    if (adjustment < 0) {
+        return;
+    }
+    
+    switch (motor) {
+        case FlywheelMotor::Motor1: {
+            m_m1MotorAdjustment = adjustment;
+        }
+        case FlywheelMotor::Motor2: {
+            m_m2MotorAdjustment = adjustment;
+        }
+    }
 }

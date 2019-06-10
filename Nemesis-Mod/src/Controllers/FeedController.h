@@ -8,7 +8,8 @@
 // Defines the belt speeds (rate of fire) available.
 enum class BeltSpeed {
     Normal = 0,
-    High
+    High,
+    Max
 };
 
 // Provides a mechanism to control the feed assembly.
@@ -16,6 +17,8 @@ class FeedController : public MotorController {
     public:
         FeedController(Mainboard* hardware, G2HighPowerMotorShield18v17* driver);
 
+        ~FeedController();
+        
         // Initializes the controller.
         void init() override;
 
