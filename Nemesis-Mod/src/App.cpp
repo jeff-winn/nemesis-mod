@@ -81,16 +81,16 @@ void App::authenticate() {
 
 Command* App::createCommandFromPacket(Packet_t packet) {
     switch (packet.header.type) {
-        case 'A': {
+        case 1: {
             return new AuthenticateOperatorCommand(this);
-        }        
-        case 'B': {
+        }
+        case 100: {
             return new BeltSpeedCommand(m_feedController);
         }
-        case 'F': {
+        case 200: {
             return new FlywheelSpeedCommand(m_flywheelController);
         }
-        case 'T': {
+        case 201: {
             return new FlywheelTrimAdjustmentCommand(m_flywheelController);        
         }
     }
