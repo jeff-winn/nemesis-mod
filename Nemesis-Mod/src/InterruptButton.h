@@ -1,7 +1,7 @@
 #ifndef INTERRUPT_BUTTON_H
 #define INTERRUPT_BUTTON_H
 
-#include "GPIO/InterruptPin.h"
+#include "InterruptPin.h"
 #include "Button.h"
 
 // Provides a button which will trigger an interrupt pin.

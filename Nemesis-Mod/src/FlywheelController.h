@@ -2,7 +2,7 @@
 #define FLYWHEEL_CONTROLLER_H
 
 #include <DualG2HighPowerMotorShield.h>
-#include "../Hardware//Interop/Mainboard.h"
+#include "hardware/Mainboard.h"
 #include "MotorController.h"
 
 // Defines the flywheel speeds available.

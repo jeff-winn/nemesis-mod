@@ -1,11 +1,11 @@
 #ifndef APP_H
 #define APP_H
 
-#include "Commands/Command.h"
-#include "Controllers/FlywheelController.h"
-#include "Controllers/FeedController.h"
-#include "Hardware/PolledButton.h"
-#include "Hardware/Bluetooth/BluetoothAdapter.h"
+#include "Command.h"
+#include "FlywheelController.h"
+#include "FeedController.h"
+#include "PolledButton.h"
+#include "hardware/BluetoothAdapter.h"
 
 // Represents the main application.
 class App {

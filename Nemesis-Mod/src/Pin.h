@@ -3,7 +3,7 @@
 
 #include <stddef.h>
 #include <stdint.h>
-#include "../Interop/Mainboard.h"
+#include "hardware/Mainboard.h"
 
 // Represents a GPIO pin.
 class Pin {

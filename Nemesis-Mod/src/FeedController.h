@@ -1,8 +1,8 @@
 #ifndef FEED_CONTROLLER_H
 #define FEED_CONTROLLER_H
 
-#include "../Hardware/Interop/G2HighPowerMotorShield.h"
-#include "../Hardware/Interop/Mainboard.h"
+#include "hardware/G2HighPowerMotorShield.h"
+#include "hardware/Mainboard.h"
 #include "MotorController.h"
 
 // Defines the belt speeds (rate of fire) available.

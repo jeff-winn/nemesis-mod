@@ -1,7 +1,7 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include "../Hardware/Bluetooth/Packet.h"
+#include "Packet.h"
 
 // Provides a base class for commands.
 class Command {
