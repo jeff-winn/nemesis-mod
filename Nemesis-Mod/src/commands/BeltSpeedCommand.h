@@ -1,8 +1,8 @@
 #ifndef BELT_SPEED_COMMAND_H
 #define BELT_SPEED_COMMAND_H
 
-#include "../FeedController.h"
 #include "../Command.h"
+#include "../FeedController.h"
 
 // Provides a command to change the belt speed.
 class BeltSpeedCommand : public Command {

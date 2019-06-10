@@ -1,24 +1,19 @@
 #ifndef FLYWHEEL_TRIM_ADJUSTMENT_COMMAND_H
 #define FLYWHEEL_TRIM_ADJUSTMENT_COMMAND_H
 
-#include "../FlywheelController.h"
 #include "../Command.h"
+#include "FlywheelCommand.h"
 
 // Provides a command which handles flywheel trim adjustment changes.
-class FlywheelTrimAdjustmentCommand : public Command {
+class FlywheelTrimAdjustmentCommand : public FlywheelCommand {
     public:
-        FlywheelTrimAdjustmentCommand(FlywheelController* controller);
-
-        ~FlywheelTrimAdjustmentCommand() override;
+        using FlywheelCommand::FlywheelCommand;
 
     protected:
         void handleImpl(Packet_t packet) override;
 
         FlywheelMotor getMotorFromPacket(Packet_t packet);
-        byte getAdjustmentFromPacket(Packet_t packet);
-        
-    private:
-        FlywheelController* m_controller;
+        byte getAdjustmentFromPacket(Packet_t packet);        
 };
 
 #endif
