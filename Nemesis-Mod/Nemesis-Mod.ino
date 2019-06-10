@@ -25,7 +25,7 @@ void setup() {
             new DigitalPin(13, &mainboard)),
         new PolledButton(
             new DigitalPin(12, &mainboard)),
-        new BluetoothAdapter(
+        new BluetoothManager(
             &bluetoothDriver),
         &mainboard
     );

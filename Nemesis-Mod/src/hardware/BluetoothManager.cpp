@@ -1,14 +1,14 @@
-#include "BluetoothAdapter.h"
+#include "BluetoothManager.h"
 
-BluetoothAdapter::BluetoothAdapter(Adafruit_BluefruitLE_SPI* ble) {
+BluetoothManager::BluetoothManager(Adafruit_BluefruitLE_SPI* ble) {
     m_ble = ble;
 }
 
-BluetoothAdapter::~BluetoothAdapter() {
+BluetoothManager::~BluetoothManager() {
     m_ble = NULL;
 }
 
-void BluetoothAdapter::beginInit() {
+void BluetoothManager::beginInit() {
     m_ble->begin();    
     m_ble->factoryReset();
     m_ble->echo(false);
@@ -16,11 +16,11 @@ void BluetoothAdapter::beginInit() {
     m_ble->setMode(BLUEFRUIT_MODE_COMMAND);
 }
 
-void BluetoothAdapter::endInit() {
+void BluetoothManager::endInit() {
     m_ble->setMode(BLUEFRUIT_MODE_DATA);
 }
 
-void BluetoothAdapter::setName(const char name[]) {
+void BluetoothManager::setName(const char name[]) {
     const auto COMMAND_TEXT = "AT+GAPDEVNAME=" + String(name);
 
     char cmd[COMMAND_TEXT.length()];
@@ -29,7 +29,7 @@ void BluetoothAdapter::setName(const char name[]) {
     m_ble->sendCommandCheckOK(cmd);
 }
 
-Packet_t BluetoothAdapter::readPacket() {
+Packet_t BluetoothManager::readPacket() {
     Packet_t packet;
 
     if (m_ble->isConnected()) {
@@ -49,7 +49,7 @@ Packet_t BluetoothAdapter::readPacket() {
     return packet;
 }
 
-PacketHeader_t BluetoothAdapter::readHeader() {
+PacketHeader_t BluetoothManager::readHeader() {
     PacketHeader_t result;
 
     char identifier = m_ble->read();

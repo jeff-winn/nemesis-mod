@@ -1,7 +1,7 @@
 #ifndef APP_H
 #define APP_H
 
-#include "hardware/BluetoothAdapter.h"
+#include "hardware/BluetoothManager.h"
 #include "Command.h"
 #include "FlywheelController.h"
 #include "FeedController.h"
@@ -15,7 +15,7 @@ class App {
             FeedController* feedController,            
             PolledButton* revTrigger, 
             PolledButton* firingTrigger,
-            BluetoothAdapter* ble,
+            BluetoothManager* ble,
             Mainboard* hardware);
 
         ~App();
@@ -39,7 +39,7 @@ class App {
         PolledButton* m_revTrigger;
         PolledButton* m_firingTrigger;
         Mainboard* m_hardware;
-        BluetoothAdapter* m_ble;
+        BluetoothManager* m_ble;
 };
 
 #endif

@@ -11,7 +11,7 @@
     bool HAS_OPERATOR_AUTHENTICATED = true;
 #endif
 
-App::App(FlywheelController* flywheelController, FeedController* feedController, PolledButton* revTrigger, PolledButton* firingTrigger, BluetoothAdapter* ble, Mainboard* hardware) {
+App::App(FlywheelController* flywheelController, FeedController* feedController, PolledButton* revTrigger, PolledButton* firingTrigger, BluetoothManager* ble, Mainboard* hardware) {
     m_flywheelController = flywheelController;
     m_feedController = feedController;
     m_revTrigger = revTrigger;

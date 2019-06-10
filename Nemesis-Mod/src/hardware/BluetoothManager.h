@@ -1,16 +1,16 @@
-#ifndef BLUETOOTH_ADAPTER_H
-#define BLUETOOTH_ADAPTER_H
+#ifndef BLUETOOTH_MANAGER_H
+#define BLUETOOTH_MANAGER_H
 
 #include <Adafruit_BLE.h>
 #include <Adafruit_BluefruitLE_SPI.h>
 #include "../Packet.h"
 
 // Provides an adapter to the onboard bluetooth module.
-class BluetoothAdapter {
+class BluetoothManager {
     public:
-        BluetoothAdapter(Adafruit_BluefruitLE_SPI* ble);
+        BluetoothManager(Adafruit_BluefruitLE_SPI* ble);
 
-        ~BluetoothAdapter();
+        ~BluetoothManager();
 
         void setName(const char name[]);
 
