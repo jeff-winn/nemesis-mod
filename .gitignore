@@ -6,6 +6,7 @@
 **/build/*
 **/*.elf
 **/*.hex
+**/*.bin
 
 # Documentation temporary files
 docs/*.~*
