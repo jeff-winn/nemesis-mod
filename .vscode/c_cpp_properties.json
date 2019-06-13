@@ -21,7 +21,6 @@
                 "${workspaceFolder}/**",
                 "${librariesPath}/Adafruit_BluefruitLE_nRF51",
                 "${librariesPath}/DualG2HighPowerMotorShield",
-                "${librariesPath}/Adafruit_PWM_Servo_Driver_Library",
                 "${librariesPath}/Arduino_Low_Power/src",
                 "${librariesPath}/RTCZero/src",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.5.0/cores/arduino",
@@ -37,7 +36,6 @@
                 "path": [
                     "${librariesPath}/Adafruit_BluefruitLE_nRF51/*",
                     "${librariesPath}/DualG2HighPowerMotorShield/*",
-                    "${librariesPath}/Adafruit_PWM_Servo_Driver_Library/*",
                     "${librariesPath}/Arduino_Low_Power/src/*",
                     "${librariesPath}/RTCZero/src/*",
                     "${arduinoDataPath}/adafruit/hardware/samd/1.5.0/cores/arduino/*",
@@ -51,6 +49,15 @@
             "compilerPath": "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-gcc.exe",
             "cStandard": "c11",
             "cppStandard": "c++11"
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:\\Users\\jeffw\\AppData\\Local\\Arduino15\\packages\\adafruit\\hardware\\samd\\1.5.0\\**"
+            ],
+            "forcedInclude": [
+                "C:\\Users\\jeffw\\AppData\\Local\\Arduino15\\packages\\adafruit\\hardware\\samd\\1.5.0\\cores\\arduino\\Arduino.h"
+            ]
         }
     ],
     "version": 4
