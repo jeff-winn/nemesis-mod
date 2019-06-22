@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name Nemesis-Mod)(type Legacy)(uri ${KIPRJMOD}/Nemesis-Mod.lib)(options "")(descr ""))
+  (lib (name Nemesis-Mod-rescue)(type Legacy)(uri ${KIPRJMOD}/Nemesis-Mod-rescue.lib)(options "")(descr ""))
 )
