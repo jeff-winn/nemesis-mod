@@ -3,6 +3,7 @@
 
 #include "hardware/BluetoothManager.h"
 #include "Command.h"
+#include "ConfigurationSettings.h"
 #include "FlywheelController.h"
 #include "FeedController.h"
 #include "PolledButton.h"
@@ -16,6 +17,7 @@ class App {
             PolledButton* revTrigger, 
             PolledButton* firingTrigger,
             BluetoothManager* ble,
+            ConfigurationSettings* config,
             Mainboard* hardware);
 
         ~App();
@@ -38,8 +40,9 @@ class App {
         FeedController* m_feedController;
         PolledButton* m_revTrigger;
         PolledButton* m_firingTrigger;
-        Mainboard* m_hardware;
         BluetoothManager* m_ble;
+        ConfigurationSettings* m_config;
+        Mainboard* m_hardware;
 };
 
 #endif

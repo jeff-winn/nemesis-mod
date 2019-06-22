@@ -12,10 +12,13 @@ G2HighPowerMotorShield18v17 beltDriver(17, -1, 11, -1, A2);
 // Defines the driver for the onboard bluetooth module.
 Adafruit_BluefruitLE_SPI bluetoothDriver(8, 7, 4);
 
+// Defines the I2C FRAM module.
+Adafruit_FRAM_I2C fram;
+
 // Defines the wrapper for the MCU functionality.
 Mainboard mainboard;
 
-void setup() {        
+void setup() {     
     app = new App(
         new FlywheelController(
             &mainboard, &flywheelDriver),
@@ -27,6 +30,8 @@ void setup() {
             new DigitalPin(12, &mainboard)),
         new BluetoothManager(
             &bluetoothDriver),
+        new ConfigurationSettings(
+            &fram),
         &mainboard
     );
 

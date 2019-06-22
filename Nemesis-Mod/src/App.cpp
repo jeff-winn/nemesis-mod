@@ -11,13 +11,14 @@
     bool HAS_OPERATOR_AUTHENTICATED = true;
 #endif
 
-App::App(FlywheelController* flywheelController, FeedController* feedController, PolledButton* revTrigger, PolledButton* firingTrigger, BluetoothManager* ble, Mainboard* hardware) {
+App::App(FlywheelController* flywheelController, FeedController* feedController, PolledButton* revTrigger, PolledButton* firingTrigger, BluetoothManager* ble, ConfigurationSettings* config, Mainboard* hardware) {
     m_flywheelController = flywheelController;
     m_feedController = feedController;
     m_revTrigger = revTrigger;
     m_firingTrigger = firingTrigger;
     m_ble = ble;
-    m_hardware = hardware;    
+    m_config = config;
+    m_hardware = hardware;
 }
 
 App::~App() {
@@ -26,6 +27,7 @@ App::~App() {
     m_revTrigger = NULL;
     m_firingTrigger = NULL;
     m_ble = NULL;
+    m_config = NULL;
     m_hardware = NULL;
 }
 
@@ -60,6 +62,7 @@ void App::init() {
     m_revTrigger->init();
     m_flywheelController->init();
     m_feedController->init();
+    m_config->init();
     
     m_flywheelController->setSpeed(FlywheelSpeed::Normal);
     m_feedController->setSpeed(BeltSpeed::Normal);
