@@ -8,6 +8,8 @@ class ConfigurationSettings {
     public:
         ConfigurationSettings(Adafruit_FRAM_I2C* fram);
 
+        ~ConfigurationSettings();
+
         // Initializes the configuration settings.
         void init();
     private:
