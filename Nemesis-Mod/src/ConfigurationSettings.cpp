@@ -12,6 +12,10 @@ void ConfigurationSettings::init() {
     m_fram->begin();
 }
 
+void ConfigurationSettings::reset() {
+    
+}
+
 int ConfigurationSettings::getFeedNormalSpeed() {
     return 100;
 }

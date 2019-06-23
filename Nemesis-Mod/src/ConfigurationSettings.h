@@ -21,6 +21,10 @@ class ConfigurationSettings {
 
         // Initializes the configuration settings.
         void init();
+
+        // Resets the configuration settings.
+        void reset();
+        
     private:
         Adafruit_FRAM_I2C* m_fram;
 };

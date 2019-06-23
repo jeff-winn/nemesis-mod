@@ -1,7 +1,8 @@
 #include "commands/AuthenticateOperatorCommand.h"
+#include "commands/BeltSpeedCommand.h"
 #include "commands/FlywheelTrimAdjustmentCommand.h"
 #include "commands/FlywheelSpeedCommand.h"
-#include "commands/BeltSpeedCommand.h"
+#include "commands/ResetConfigurationCommand.h"
 #include "App.h"
 
 #ifdef __RELEASE__
@@ -86,6 +87,9 @@ Command* App::createCommandFromPacket(Packet_t packet) {
     switch (packet.header.type) {
         case 1: {
             return new AuthenticateOperatorCommand(this);
+        }
+        case 10: {
+            return new ResetConfigurationCommand(m_config);
         }
         case 100: {
             return new BeltSpeedCommand(m_feedController);
