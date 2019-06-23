@@ -10,6 +10,15 @@ class ConfigurationSettings {
 
         ~ConfigurationSettings();
 
+        int getFeedNormalSpeed();
+        int getFeedHighSpeed();
+        int getFeedMaxSpeed();
+
+        float getFlywheelTrimVariance();
+        int getFlywheelNormalSpeed();
+        int getFlywheelMediumSpeed();
+        int getFlywheelMaxSpeed();
+
         // Initializes the configuration settings.
         void init();
     private:

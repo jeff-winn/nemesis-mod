@@ -1,18 +1,6 @@
 #include <stddef.h>
 #include "FlywheelController.h"
 
-// Defines the trim variance amount on the maximum speed per motor.
-const float TRIM_VARIANCE_AMOUNT = 0.1;
-
-// Defines the 'normal' viable speed for the flywheel assembly.
-const int FLYWHEEL_NORMAL_SPEED = 125;
-
-// Defines the 'medium' speed for the flywheel assembly.
-const int FLYWHEEL_MEDIUM_SPEED = 250;
-
-// Defines the 'maximum' speed for the flywheel assembly.
-const int FLYWHEEL_MAX_SPEED = 400;
-
 FlywheelController::FlywheelController(Mainboard* hardware, DualG2HighPowerMotorShield18v18* driver, ConfigurationSettings* config) {
     m_hardware = hardware;
     m_driver = driver;
@@ -70,19 +58,19 @@ int FlywheelController::calculateMotorSpeed(FlywheelMotor motor) {
 }
 
 int FlywheelController::calculateLimiterForSpeed(int speed) {
-    return speed * TRIM_VARIANCE_AMOUNT;
+    return speed * m_config->getFlywheelTrimVariance();
 }
 
 int FlywheelController::determineMotorMaximumSpeed() {
     switch (m_speed) {
         case FlywheelSpeed::Normal: {
-            return FLYWHEEL_NORMAL_SPEED;
+            return m_config->getFlywheelNormalSpeed();
         }
         case FlywheelSpeed::Medium: {
-            return FLYWHEEL_MEDIUM_SPEED;
+            return m_config->getFlywheelMediumSpeed();
         }
         case FlywheelSpeed::Max: {
-            return FLYWHEEL_MAX_SPEED;
+            return m_config->getFlywheelMaxSpeed();
         }
     }
 
