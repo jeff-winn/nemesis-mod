@@ -3,6 +3,7 @@
 
 #include <DualG2HighPowerMotorShield.h>
 #include "hardware/Mainboard.h"
+#include "ConfigurationSettings.h"
 #include "MotorController.h"
 
 // Defines the flywheel speeds available.
@@ -24,7 +25,8 @@ class FlywheelController : public MotorController {
     public:
         FlywheelController(
             Mainboard* hardware,
-            DualG2HighPowerMotorShield18v18* motorController);
+            DualG2HighPowerMotorShield18v18* motorController,
+            ConfigurationSettings* config);
 
         ~FlywheelController();
             
@@ -53,7 +55,8 @@ class FlywheelController : public MotorController {
     private:
         Mainboard* m_hardware;
         DualG2HighPowerMotorShield18v18* m_driver;
-
+        ConfigurationSettings* m_config;
+        
         FlywheelSpeed m_speed;
         int m_m1Speed;
         int m_m2Speed;

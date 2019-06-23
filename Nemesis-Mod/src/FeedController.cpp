@@ -9,14 +9,16 @@ const int FEED_HIGH_SPEED = 175;
 // Defines the 'maximum' speed for the feed controller assembly.
 const int FEED_MAX_SPEED = 400;
 
-FeedController::FeedController(Mainboard* hardware, G2HighPowerMotorShield18v17* driver) {
+FeedController::FeedController(Mainboard* hardware, G2HighPowerMotorShield18v17* driver, ConfigurationSettings* config) {
     m_hardware = hardware;
     m_driver = driver;
+    m_config = config;
 }
 
 FeedController::~FeedController() {
     m_hardware = NULL;
     m_driver = NULL;
+    m_config = NULL;
 }
 
 void FeedController::init() {

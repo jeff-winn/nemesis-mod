@@ -13,14 +13,16 @@ const int FLYWHEEL_MEDIUM_SPEED = 250;
 // Defines the 'maximum' speed for the flywheel assembly.
 const int FLYWHEEL_MAX_SPEED = 400;
 
-FlywheelController::FlywheelController(Mainboard* hardware, DualG2HighPowerMotorShield18v18* driver) {
+FlywheelController::FlywheelController(Mainboard* hardware, DualG2HighPowerMotorShield18v18* driver, ConfigurationSettings* config) {
     m_hardware = hardware;
     m_driver = driver;
+    m_config = config;
 }
 
 FlywheelController::~FlywheelController() {
     m_hardware = NULL;
     m_driver = NULL;
+    m_config = NULL;
 }
 
 void FlywheelController::init() {
