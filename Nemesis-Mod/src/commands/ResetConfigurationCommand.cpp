@@ -9,5 +9,5 @@ ResetConfigurationCommand::~ResetConfigurationCommand() {
 }
 
 void ResetConfigurationCommand::handleImpl(Packet_t packet) {
-    m_config->reset();
+    m_config->defaultSettings();
 }

@@ -2,11 +2,12 @@
 #define CONFIGURATION_SETTINGS_H
 
 #include <Adafruit_FRAM_I2C.h>
+#include "BitConverter.h"
 
 // Provides access to the configuration settings.
 class ConfigurationSettings {
     public:
-        ConfigurationSettings(Adafruit_FRAM_I2C* fram);
+        ConfigurationSettings(Adafruit_FRAM_I2C* fram, BitConverter* convert);
 
         ~ConfigurationSettings();
 
@@ -20,7 +21,6 @@ class ConfigurationSettings {
         void setFeedMaxSpeed(int value);
 
         float getFlywheelTrimVariance();
-        void setFlywheelTrimVariance(float value);
 
         int getFlywheelNormalSpeed();
         void setFlywheelNormalSpeed(int value);
@@ -34,11 +34,19 @@ class ConfigurationSettings {
         // Initializes the configuration settings.
         void init();
 
-        // Resets the configuration settings.
-        void reset();
-        
+        // Defaults all of the configuration settings.
+        void defaultSettings();
+
+    protected:
+        bool initialized();
+        void setInitialized(bool value);
+
+        int readInt32(short address);
+        void writeInt32(short address, int value);
+
     private:
         Adafruit_FRAM_I2C* m_fram;
+        BitConverter* m_convert;
 };
 
 #endif

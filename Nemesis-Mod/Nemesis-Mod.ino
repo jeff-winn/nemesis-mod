@@ -13,12 +13,16 @@ G2HighPowerMotorShield18v17 beltDriver(17, -1, 11, -1, A2);
 Adafruit_BluefruitLE_SPI bluetoothDriver(8, 7, 4);
 
 // Defines the FRAM module for persistent data storage.
-Adafruit_FRAM_I2C framModule;
+Adafruit_FRAM_I2C fram;
 
-ConfigurationSettings config(&framModule);
+BitConverter convert;
+ConfigurationSettings config(&fram, &convert);
+
 Mainboard mainboard;
 
-void setup() {     
+void setup() {
+    Serial.begin(9600);
+    
     app = new App(
         new FlywheelController(
             &mainboard, &flywheelDriver, &config),
@@ -30,8 +34,7 @@ void setup() {
             new DigitalPin(12, &mainboard)),
         new BluetoothManager(
             &bluetoothDriver),
-        new ConfigurationSettings(
-            &framModule),
+        &config,
         &mainboard
     );
 
