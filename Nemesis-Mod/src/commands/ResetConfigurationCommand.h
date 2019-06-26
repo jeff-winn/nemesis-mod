@@ -3,6 +3,7 @@
 
 #include "ConfigurationCommand.h"
 
+// Provides a command used to reset the configuration.
 class ResetConfigurationCommand : public ConfigurationCommand {
     public:
         using ConfigurationCommand::ConfigurationCommand;

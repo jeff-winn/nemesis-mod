@@ -4,9 +4,11 @@
 #include "../Command.h"
 #include "../ConfigurationSettings.h"
 
+// Provides a base class for handling configuration commands.
 class ConfigurationCommand : public Command {
     public:
         ConfigurationCommand(ConfigurationSettings* config);
+        
         ~ConfigurationCommand() override;
 
     protected:

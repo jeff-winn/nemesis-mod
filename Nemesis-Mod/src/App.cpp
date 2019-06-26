@@ -1,5 +1,6 @@
 #include "commands/AuthenticateOperatorCommand.h"
 #include "commands/BeltSpeedCommand.h"
+#include "commands/ChangeConfigurationSettingCommand.h"
 #include "commands/FlywheelTrimAdjustmentCommand.h"
 #include "commands/FlywheelSpeedCommand.h"
 #include "commands/ResetConfigurationCommand.h"
@@ -90,6 +91,9 @@ Command* App::createCommandFromPacket(Packet_t packet) {
         }
         case 10: {
             return new ResetConfigurationCommand(m_config);
+        }
+        case 11: {
+            return new ChangeConfigurationSettingCommand(m_config);
         }
         case 100: {
             return new BeltSpeedCommand(m_feedController);
