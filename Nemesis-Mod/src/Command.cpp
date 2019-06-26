@@ -17,3 +17,7 @@ bool Command::validate(Packet_t packet) {
 
 void Command::handleImpl(Packet_t packet) {
 }
+
+bool Command::requiresAuthentication() {
+    return true;
+}

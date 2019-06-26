@@ -75,7 +75,11 @@ void App::handleAnyExternalCommands() {
     
     auto command = createCommandFromPacket(packet);
     if (command) {
-        command->handle(packet);
+        auto requiresAuthentication = command->requiresAuthentication();
+        if (!requiresAuthentication || (requiresAuthentication && HAS_OPERATOR_AUTHENTICATED)) {
+            command->handle(packet);
+        }
+        
         delete command;
     }
 }
