@@ -1,20 +1,14 @@
 #ifndef RESET_CONFIGURATION_COMMAND_H
 #define RESET_CONFIGURATION_COMMAND_H
 
-#include "../Command.h"
-#include "../ConfigurationSettings.h"
+#include "ConfigurationCommand.h"
 
-class ResetConfigurationCommand : public Command {
+class ResetConfigurationCommand : public ConfigurationCommand {
     public:
-        ResetConfigurationCommand(ConfigurationSettings* config);
-
-        ~ResetConfigurationCommand() override;
+        using ConfigurationCommand::ConfigurationCommand;
 
     protected:
         void handleImpl(Packet_t packet) override;
-        
-    private:
-        ConfigurationSettings* m_config;
 };
 
 #endif
