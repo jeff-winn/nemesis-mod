@@ -15,14 +15,11 @@ Adafruit_BluefruitLE_SPI bluetoothDriver(8, 7, 4);
 // Defines the FRAM module for persistent data storage.
 Adafruit_FRAM_I2C fram;
 
-BitConverter convert;
-ConfigurationSettings config(&fram, &convert);
+ConfigurationSettings config(&fram);
 
 Mainboard mainboard;
 
-void setup() {
-    Serial.begin(9600);
-    
+void setup() {    
     app = new App(
         new FlywheelController(
             &mainboard, &flywheelDriver, &config),

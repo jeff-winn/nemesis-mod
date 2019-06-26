@@ -1,5 +1,7 @@
 #include "BitConverter.h"
 
+BitConverter Convert;
+
 int BitConverter::toInt32(const byte* address) {
     int result = 0;
     
@@ -10,8 +12,8 @@ int BitConverter::toInt32(const byte* address) {
     return result;
 }
 
-byte* BitConverter::toArray(const int value) {
-    static byte result[4];
+byte* BitConverter::toByteArray(const int value) {
+    byte* result = new byte[4];
 
     for (int index = 0; index < 4; index++) {
         result[index] = (value >> (index * 8)) & 0xFF;

@@ -9,8 +9,11 @@ class BitConverter {
         // Converts the binary array to an int32_t type.
         int toInt32(const byte* address);
 
-        // Converts the integer to a byte array.
-        byte* toArray(const int value);
+        // Converts the value to a byte array.
+        byte* toByteArray(const int value);
 };
+
+// Performs conversions between data types.
+extern BitConverter Convert;
 
 #endif

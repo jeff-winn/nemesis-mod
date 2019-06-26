@@ -1,4 +1,5 @@
 #include "ConfigurationSettings.h"
+#include "BitConverter.h"
 
 const short FEED_NORMAL_SPEED_ADDR = 0x04;
 const short FEED_HIGH_SPEED_ADDR = 0x08;
@@ -7,9 +8,8 @@ const short FLYWHEEL_NORMAL_SPEED_ADDR = 0x16;
 const short FLYWHEEL_MEDIUM_SPEED_ADDR = 0x20;
 const short FLYWHEEL_MAX_SPEED_ADDR = 0x24;
 
-ConfigurationSettings::ConfigurationSettings(Adafruit_FRAM_I2C* fram, BitConverter* convert) {
+ConfigurationSettings::ConfigurationSettings(Adafruit_FRAM_I2C* fram) {
     m_fram = fram;
-    m_convert = convert;
 }
 
 ConfigurationSettings::~ConfigurationSettings() {
@@ -96,19 +96,21 @@ float ConfigurationSettings::getFlywheelTrimVariance() {
 }
 
 int ConfigurationSettings::readInt32(short address) {
-    uint8_t raw[4];
+    byte raw[4];
 
     for (auto index = 0; index < 4; index++) {
         raw[index] = m_fram->read8(address + index);
     }
 
-    return m_convert->toInt32(raw);
+    return Convert.toInt32(raw);
 }
 
 void ConfigurationSettings::writeInt32(short address, int value) {
-    uint8_t* raw = m_convert->toArray(value);
+    byte* raw = Convert.toByteArray(value);
 
     for (auto index = 0; index < 4; index++) {
         m_fram->write8(address + index, raw[index]);
     }
+
+    delete[] raw;
 }

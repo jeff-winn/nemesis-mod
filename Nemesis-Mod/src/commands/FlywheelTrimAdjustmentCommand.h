@@ -13,7 +13,7 @@ class FlywheelTrimAdjustmentCommand : public FlywheelCommand {
         void handleImpl(Packet_t packet) override;
 
         FlywheelMotor getMotorFromPacket(Packet_t packet);
-        byte getAdjustmentFromPacket(Packet_t packet);        
+        int getAdjustmentFromPacket(Packet_t packet);        
 };
 
 #endif

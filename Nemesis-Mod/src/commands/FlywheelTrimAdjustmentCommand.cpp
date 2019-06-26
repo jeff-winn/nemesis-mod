@@ -1,8 +1,9 @@
 #include "FlywheelTrimAdjustmentCommand.h"
+#include "../BitConverter.h"
 
 void FlywheelTrimAdjustmentCommand::handleImpl(Packet_t packet) {
     auto motor = getMotorFromPacket(packet);
-    auto adjustment = getAdjustmentFromPacket(packet) / 255.0F;
+    auto adjustment = getAdjustmentFromPacket(packet) / 1024.0F;
 
     m_controller->setMotorSpeedAdjustment(motor, adjustment);
 }
@@ -20,6 +21,6 @@ FlywheelMotor FlywheelTrimAdjustmentCommand::getMotorFromPacket(Packet_t packet)
     }
 }
 
-byte FlywheelTrimAdjustmentCommand::getAdjustmentFromPacket(Packet_t packet) {
-    return packet.body[1];
+int FlywheelTrimAdjustmentCommand::getAdjustmentFromPacket(Packet_t packet) {
+    return Convert.toInt32(packet.body + 1);
 }
