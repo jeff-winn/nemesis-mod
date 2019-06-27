@@ -1,15 +1,15 @@
 #include "ConfigurationSettings.h"
 #include "BitConverter.h"
 
-const short FEED_NORMAL_SPEED_ADDR = 0x04;
-const short FEED_HIGH_SPEED_ADDR = 0x08;
-const short FEED_MAX_SPEED_ADDR = 0x12;
-const short FLYWHEEL_NORMAL_SPEED_ADDR = 0x16;
-const short FLYWHEEL_MEDIUM_SPEED_ADDR = 0x20;
-const short FLYWHEEL_MAX_SPEED_ADDR = 0x24;
-const short FLYWHEEL_TRIM_VARIANCE_ADDR = 0x28;
-const short FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR = 0x32;
-const short FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR = 0x36;
+const short FEED_NORMAL_SPEED_ADDR = 0x100;
+const short FEED_HIGH_SPEED_ADDR = 0x104;
+const short FEED_MAX_SPEED_ADDR = 0x108;
+const short FLYWHEEL_NORMAL_SPEED_ADDR = 0x112;
+const short FLYWHEEL_MEDIUM_SPEED_ADDR = 0x116;
+const short FLYWHEEL_MAX_SPEED_ADDR = 0x120;
+const short FLYWHEEL_TRIM_VARIANCE_ADDR = 0x124;
+const short FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR = 0x128;
+const short FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR = 0x132;
 
 ConfigurationSettings::ConfigurationSettings(Adafruit_FRAM_I2C* fram) {
     m_fram = fram;
