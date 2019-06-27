@@ -31,6 +31,12 @@ class ConfigurationSettings {
         int getFlywheelMaxSpeed();
         void setFlywheelMaxSpeed(int value);
 
+        float getFlywheelM1TrimAdjustment();
+        void setFlywheelM1TrimAdjustment(float value);
+
+        float getFlywheelM2TrimAdjustment();
+        void setFlywheelM2TrimAdjustment(float value);
+
         // Initializes the configuration settings.
         void init();
 

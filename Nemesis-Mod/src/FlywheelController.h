@@ -49,6 +49,8 @@ class FlywheelController : public MotorController {
         int determineMotorMaximumSpeed();    
         int calculateStepFromValue(int value);
 
+        void updateDrivers();
+
         void onStart() override;
         void onStop() override;
         
@@ -60,8 +62,6 @@ class FlywheelController : public MotorController {
         FlywheelSpeed m_speed;
         int m_m1Speed;
         int m_m2Speed;
-        float m_m1MotorAdjustment;
-        float m_m2MotorAdjustment;
 };
 
 #endif

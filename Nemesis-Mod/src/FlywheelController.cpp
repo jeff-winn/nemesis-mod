@@ -35,10 +35,13 @@ unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
 }
 
 void FlywheelController::onStart() {
+    m_driver->enableDrivers();
+    updateDrivers();
+}
+
+void FlywheelController::updateDrivers() {
     m_m1Speed = calculateMotorSpeed(FlywheelMotor::Motor1);
     m_m2Speed = calculateMotorSpeed(FlywheelMotor::Motor2);
-
-    m_driver->enableDrivers();
     m_driver->setSpeeds(m_m1Speed, m_m2Speed);
     
     m_hardware->delaySafe(1);
@@ -80,10 +83,10 @@ int FlywheelController::determineMotorMaximumSpeed() {
 float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
     switch (motor) {
         case FlywheelMotor::Motor1: {
-            return m_m1MotorAdjustment;
+            return m_config->getFlywheelM1TrimAdjustment();
         }
         case FlywheelMotor::Motor2: {
-            return m_m2MotorAdjustment;
+            return m_config->getFlywheelM2TrimAdjustment();
         }
     }
 
@@ -113,10 +116,16 @@ void FlywheelController::setMotorSpeedAdjustment(FlywheelMotor motor, float adju
     
     switch (motor) {
         case FlywheelMotor::Motor1: {
-            m_m1MotorAdjustment = adjustment;
+            m_config->setFlywheelM1TrimAdjustment(adjustment);
+            break;
         }
         case FlywheelMotor::Motor2: {
-            m_m2MotorAdjustment = adjustment;
+            m_config->setFlywheelM2TrimAdjustment(adjustment);
+            break;
         }
+    }
+
+    if (isRunning()) {
+        updateDrivers();
     }
 }

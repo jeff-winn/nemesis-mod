@@ -3,8 +3,8 @@
 
 void FlywheelTrimAdjustmentCommand::handleImpl(Packet_t packet) {
     auto motor = getMotorFromPacket(packet);
-    auto adjustment = getAdjustmentFromPacket(packet) / 1024.0F;
 
+    auto adjustment = getAdjustmentFromPacket(packet);
     m_controller->setMotorSpeedAdjustment(motor, adjustment);
 }
 
@@ -21,6 +21,6 @@ FlywheelMotor FlywheelTrimAdjustmentCommand::getMotorFromPacket(Packet_t packet)
     }
 }
 
-int FlywheelTrimAdjustmentCommand::getAdjustmentFromPacket(Packet_t packet) {
-    return Convert.toInt32(packet.body + 1);
+float FlywheelTrimAdjustmentCommand::getAdjustmentFromPacket(Packet_t packet) {
+    return Convert.toFloat(packet.body + 1);
 }

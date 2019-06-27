@@ -8,6 +8,8 @@ const short FLYWHEEL_NORMAL_SPEED_ADDR = 0x16;
 const short FLYWHEEL_MEDIUM_SPEED_ADDR = 0x20;
 const short FLYWHEEL_MAX_SPEED_ADDR = 0x24;
 const short FLYWHEEL_TRIM_VARIANCE_ADDR = 0x28;
+const short FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR = 0x32;
+const short FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR = 0x36;
 
 ConfigurationSettings::ConfigurationSettings(Adafruit_FRAM_I2C* fram) {
     m_fram = fram;
@@ -43,6 +45,8 @@ void ConfigurationSettings::defaultSettings() {
     setFlywheelMediumSpeed(250);
     setFlywheelMaxSpeed(400);
     setFlywheelTrimVariance(0.1F);
+    setFlywheelM1TrimAdjustment(1.0F);
+    setFlywheelM2TrimAdjustment(1.0F);
 }
 
 int ConfigurationSettings::getFeedNormalSpeed() {
@@ -99,6 +103,22 @@ float ConfigurationSettings::getFlywheelTrimVariance() {
 
 void ConfigurationSettings::setFlywheelTrimVariance(float value) {
     writeFloat(FLYWHEEL_TRIM_VARIANCE_ADDR, value);
+}
+
+float ConfigurationSettings::getFlywheelM1TrimAdjustment() {
+    return readFloat(FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR);
+}
+
+void ConfigurationSettings::setFlywheelM1TrimAdjustment(float value) {
+    writeFloat(FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR, value);
+}
+
+float ConfigurationSettings::getFlywheelM2TrimAdjustment() {
+    return readFloat(FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR);
+}
+
+void ConfigurationSettings::setFlywheelM2TrimAdjustment(float value) {
+    writeFloat(FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR, value);
 }
 
 int ConfigurationSettings::readInt32(short address) {
