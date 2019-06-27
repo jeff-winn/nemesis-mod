@@ -9,6 +9,10 @@ class ConfigurationSettings {
         ConfigurationSettings(Adafruit_FRAM_I2C* fram);
 
         ~ConfigurationSettings();
+    
+        byte* getOperatorAuthenticationToken();
+        void setOperatorAuthenticationToken(byte* value);
+        void resetOperatorAuthenticationToken();
 
         int getFeedNormalSpeed();
         void setFeedNormalSpeed(int value);

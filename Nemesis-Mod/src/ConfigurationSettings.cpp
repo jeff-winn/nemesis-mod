@@ -1,6 +1,7 @@
 #include "ConfigurationSettings.h"
 #include "BitConverter.h"
 
+const short OPERATOR_TOKEN_ADDR = 0x10;
 const short FEED_NORMAL_SPEED_ADDR = 0x100;
 const short FEED_HIGH_SPEED_ADDR = 0x104;
 const short FEED_MAX_SPEED_ADDR = 0x108;
@@ -24,6 +25,8 @@ void ConfigurationSettings::init() {
 
     if (!initialized()) {
         defaultSettings();
+        resetOperatorAuthenticationToken();
+
         setInitialized(true);
     }
 }
@@ -47,6 +50,19 @@ void ConfigurationSettings::defaultSettings() {
     setFlywheelTrimVariance(0.1F);
     setFlywheelM1TrimAdjustment(1.0F);
     setFlywheelM2TrimAdjustment(1.0F);
+}
+
+byte* ConfigurationSettings::getOperatorAuthenticationToken() {
+    return NULL;
+}
+
+void ConfigurationSettings::setOperatorAuthenticationToken(byte* value) {
+}
+
+void ConfigurationSettings::resetOperatorAuthenticationToken() {
+    for (uint16_t addr = 16; addr < 256; addr++) {
+        m_fram->write8(addr, 0x00);
+    }
 }
 
 int ConfigurationSettings::getFeedNormalSpeed() {
