@@ -11,6 +11,8 @@ class AuthenticateOperatorCommand : public Command {
 
         ~AuthenticateOperatorCommand() override;
 
+        bool requiresAuthentication() override;
+
     protected:
         void handleImpl(Packet_t packet) override;
 

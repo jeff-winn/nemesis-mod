@@ -1,26 +1,16 @@
 #include <stddef.h>
 #include "FlywheelController.h"
 
-// Defines the trim variance amount on the maximum speed per motor.
-const float TRIM_VARIANCE_AMOUNT = 0.1;
-
-// Defines the 'normal' viable speed for the flywheel assembly.
-const int FLYWHEEL_NORMAL_SPEED = 125;
-
-// Defines the 'medium' speed for the flywheel assembly.
-const int FLYWHEEL_MEDIUM_SPEED = 250;
-
-// Defines the 'maximum' speed for the flywheel assembly.
-const int FLYWHEEL_MAX_SPEED = 400;
-
-FlywheelController::FlywheelController(Mainboard* hardware, DualG2HighPowerMotorShield18v18* driver) {
+FlywheelController::FlywheelController(Mainboard* hardware, DualG2HighPowerMotorShield18v18* driver, ConfigurationSettings* config) {
     m_hardware = hardware;
     m_driver = driver;
+    m_config = config;
 }
 
 FlywheelController::~FlywheelController() {
     m_hardware = NULL;
     m_driver = NULL;
+    m_config = NULL;
 }
 
 void FlywheelController::init() {
@@ -45,10 +35,13 @@ unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
 }
 
 void FlywheelController::onStart() {
+    m_driver->enableDrivers();
+    updateDrivers();
+}
+
+void FlywheelController::updateDrivers() {
     m_m1Speed = calculateMotorSpeed(FlywheelMotor::Motor1);
     m_m2Speed = calculateMotorSpeed(FlywheelMotor::Motor2);
-
-    m_driver->enableDrivers();
     m_driver->setSpeeds(m_m1Speed, m_m2Speed);
     
     m_hardware->delaySafe(1);
@@ -68,19 +61,19 @@ int FlywheelController::calculateMotorSpeed(FlywheelMotor motor) {
 }
 
 int FlywheelController::calculateLimiterForSpeed(int speed) {
-    return speed * TRIM_VARIANCE_AMOUNT;
+    return speed * m_config->getFlywheelTrimVariance();
 }
 
 int FlywheelController::determineMotorMaximumSpeed() {
     switch (m_speed) {
         case FlywheelSpeed::Normal: {
-            return FLYWHEEL_NORMAL_SPEED;
+            return m_config->getFlywheelNormalSpeed();
         }
         case FlywheelSpeed::Medium: {
-            return FLYWHEEL_MEDIUM_SPEED;
+            return m_config->getFlywheelMediumSpeed();
         }
         case FlywheelSpeed::Max: {
-            return FLYWHEEL_MAX_SPEED;
+            return m_config->getFlywheelMaxSpeed();
         }
     }
 
@@ -90,10 +83,10 @@ int FlywheelController::determineMotorMaximumSpeed() {
 float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
     switch (motor) {
         case FlywheelMotor::Motor1: {
-            return m_m1MotorAdjustment;
+            return m_config->getFlywheelM1TrimAdjustment();
         }
         case FlywheelMotor::Motor2: {
-            return m_m2MotorAdjustment;
+            return m_config->getFlywheelM2TrimAdjustment();
         }
     }
 
@@ -123,10 +116,16 @@ void FlywheelController::setMotorSpeedAdjustment(FlywheelMotor motor, float adju
     
     switch (motor) {
         case FlywheelMotor::Motor1: {
-            m_m1MotorAdjustment = adjustment;
+            m_config->setFlywheelM1TrimAdjustment(adjustment);
+            break;
         }
         case FlywheelMotor::Motor2: {
-            m_m2MotorAdjustment = adjustment;
+            m_config->setFlywheelM2TrimAdjustment(adjustment);
+            break;
         }
+    }
+
+    if (isRunning()) {
+        updateDrivers();
     }
 }

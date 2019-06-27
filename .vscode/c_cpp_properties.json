@@ -20,6 +20,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${librariesPath}/Adafruit_BluefruitLE_nRF51",
+                "${librariesPath}/Adafruit_FRAM_I2C",
                 "${librariesPath}/DualG2HighPowerMotorShield",
                 "${librariesPath}/Arduino_Low_Power/src",
                 "${librariesPath}/RTCZero/src",
@@ -35,6 +36,7 @@
                 "databaseFilename": "${workspaceFolder}/.vscode/temp/cache",
                 "path": [
                     "${librariesPath}/Adafruit_BluefruitLE_nRF51/*",
+                    "${librariesPath}/Adafruit_FRAM_I2C/*",
                     "${librariesPath}/DualG2HighPowerMotorShield/*",
                     "${librariesPath}/Arduino_Low_Power/src/*",
                     "${librariesPath}/RTCZero/src/*",
