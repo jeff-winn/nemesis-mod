@@ -7,6 +7,7 @@ const short FEED_MAX_SPEED_ADDR = 0x12;
 const short FLYWHEEL_NORMAL_SPEED_ADDR = 0x16;
 const short FLYWHEEL_MEDIUM_SPEED_ADDR = 0x20;
 const short FLYWHEEL_MAX_SPEED_ADDR = 0x24;
+const short FLYWHEEL_TRIM_VARIANCE_ADDR = 0x28;
 
 ConfigurationSettings::ConfigurationSettings(Adafruit_FRAM_I2C* fram) {
     m_fram = fram;
@@ -41,6 +42,7 @@ void ConfigurationSettings::defaultSettings() {
     setFlywheelNormalSpeed(125);
     setFlywheelMediumSpeed(250);
     setFlywheelMaxSpeed(400);
+    setFlywheelTrimVariance(0.1F);
 }
 
 int ConfigurationSettings::getFeedNormalSpeed() {
@@ -88,11 +90,15 @@ int ConfigurationSettings::getFlywheelMaxSpeed() {
 }
 
 void ConfigurationSettings::setFlywheelMaxSpeed(int value) {
-    return writeInt32(FLYWHEEL_MAX_SPEED_ADDR, value);
+    writeInt32(FLYWHEEL_MAX_SPEED_ADDR, value);
 }
 
 float ConfigurationSettings::getFlywheelTrimVariance() {
-    return 0.1F;
+    return readFloat(FLYWHEEL_TRIM_VARIANCE_ADDR);
+}
+
+void ConfigurationSettings::setFlywheelTrimVariance(float value) {
+    writeFloat(FLYWHEEL_TRIM_VARIANCE_ADDR, value);
 }
 
 int ConfigurationSettings::readInt32(short address) {
@@ -106,7 +112,27 @@ int ConfigurationSettings::readInt32(short address) {
 }
 
 void ConfigurationSettings::writeInt32(short address, int value) {
-    byte* raw = Convert.toByteArray(value);
+    byte* raw = Convert.toInt32Array(value);
+
+    for (auto index = 0; index < 4; index++) {
+        m_fram->write8(address + index, raw[index]);
+    }
+
+    delete[] raw;
+}
+
+float ConfigurationSettings::readFloat(short address) {
+    byte raw[4];
+
+    for (auto index = 0; index < 4; index++) {
+        raw[index] = m_fram->read8(address + index);
+    }
+
+    return Convert.toFloat(raw);
+}
+
+void ConfigurationSettings::writeFloat(short address, float value) {
+    byte* raw = Convert.toFloatArray(value);
 
     for (auto index = 0; index < 4; index++) {
         m_fram->write8(address + index, raw[index]);

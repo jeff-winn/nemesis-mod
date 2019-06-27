@@ -10,7 +10,9 @@ class ChangeConfigurationSettingCommand : public ConfigurationCommand {
 
     protected:
         void handleImpl(Packet_t packet) override;
-        int getValueFromPacket(Packet_t packet);
+
+        int getInt32ValueFromPacket(Packet_t packet);
+        float getFloatValueFromPacket(Packet_t packet);
 };
 
 #endif

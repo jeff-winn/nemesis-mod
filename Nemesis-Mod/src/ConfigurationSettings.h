@@ -20,6 +20,7 @@ class ConfigurationSettings {
         void setFeedMaxSpeed(int value);
 
         float getFlywheelTrimVariance();
+        void setFlywheelTrimVariance(float value);
 
         int getFlywheelNormalSpeed();
         void setFlywheelNormalSpeed(int value);
@@ -42,6 +43,9 @@ class ConfigurationSettings {
 
         int readInt32(short address);
         void writeInt32(short address, int value);
+
+        float readFloat(short address);
+        void writeFloat(short address, float value);
 
     private:
         Adafruit_FRAM_I2C* m_fram;
