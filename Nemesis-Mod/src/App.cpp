@@ -13,11 +13,18 @@
     bool HAS_OPERATOR_AUTHENTICATED = true;
 #endif
 
-App::App(FlywheelController* flywheelController, FeedController* feedController, PolledButton* revTrigger, PolledButton* firingTrigger, BluetoothManager* ble, ConfigurationSettings* config, Mainboard* hardware) {
+// Indicates whether the 
+volatile bool SOFTWARE_RESET_PRESSED = false;
+
+// Identifies when the reset button was pressed.
+volatile int RESET_PRESSED_ON = 0;
+
+App::App(FlywheelController* const flywheelController, FeedController* feedController, PolledButton* revTrigger, PolledButton* firingTrigger, InterruptButton* resetButton, BluetoothManager* ble, ConfigurationSettings* config, Mainboard* hardware) {
     m_flywheelController = flywheelController;
     m_feedController = feedController;
     m_revTrigger = revTrigger;
     m_firingTrigger = firingTrigger;
+    m_resetButton = resetButton;
     m_ble = ble;
     m_config = config;
     m_hardware = hardware;
@@ -28,31 +35,49 @@ App::~App() {
     m_feedController = NULL;
     m_revTrigger = NULL;
     m_firingTrigger = NULL;
+    m_resetButton = NULL;
     m_ble = NULL;
     m_config = NULL;
     m_hardware = NULL;
 }
 
-void App::run() {   
-    handleAnyExternalCommands();
+void App::run() {
+    if (SOFTWARE_RESET_PRESSED) {
+        if (shouldHandleReset()) {
+            handleReset();
+        }
+    }
+    else {
+        handleAnyExternalCommands();
 
-    if (HAS_OPERATOR_AUTHENTICATED) {
-        while (m_revTrigger->isPressed()) {
-            m_flywheelController->start();
+        if (HAS_OPERATOR_AUTHENTICATED) {
+            while (m_revTrigger->isPressed()) {
+                m_flywheelController->start();
 
-            while (m_firingTrigger->isPressed()) {
-                m_feedController->start();
+                while (m_firingTrigger->isPressed()) {
+                    m_feedController->start();
+                    m_hardware->delaySafe(10);
+                }
+
+                m_feedController->stop();
                 m_hardware->delaySafe(10);
             }
 
-            m_feedController->stop();
-            m_hardware->delaySafe(10);
+            m_flywheelController->stop();
         }
-
-        m_flywheelController->stop();
     }
 
     m_hardware->delaySafe(50);
+}
+
+int resetPressedOn = 0;
+
+bool App::shouldHandleReset() {
+    Serial.println(resetPressedOn);
+
+    if (m_resetButton->isPressed() && resetPressedOn == 0) {
+        resetPressedOn = millis();
+    }
 }
 
 void App::init() {
@@ -62,6 +87,7 @@ void App::init() {
 
     m_firingTrigger->init();
     m_revTrigger->init();
+    m_resetButton->init();
     m_flywheelController->init();
     m_feedController->init();
     m_config->init();
@@ -111,4 +137,19 @@ Command* App::createCommandFromPacket(Packet_t packet) {
     }
 
     return NULL;
+}
+
+void App::onResetButtonStateChangedCallback() {
+    SOFTWARE_RESET_PRESSED = true;
+}
+
+void App::handleReset() {
+    m_config->resetOperatorAuthenticationToken();
+    m_config->defaultSettings();
+
+#if __RELEASE__
+    HAS_OPERATOR_AUTHENTICATED = false;
+#endif
+
+    SOFTWARE_RESET_PRESSED = false;
 }

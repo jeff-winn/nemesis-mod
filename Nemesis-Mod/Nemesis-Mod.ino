@@ -1,8 +1,6 @@
 #include <Arduino.h>
 #include "src/App.h"
 
-App* app;
-
 // Defines the driver which controls the flywheel motors.
 DualG2HighPowerMotorShield18v18 flywheelDriver(9, -1, 5, -1, A0, 10, -1, 6, -1, A1);
 
@@ -16,10 +14,11 @@ Adafruit_BluefruitLE_SPI bluetoothDriver(8, 7, 4);
 Adafruit_FRAM_I2C fram;
 
 ConfigurationSettings config(&fram);
-
 Mainboard mainboard;
 
-void setup() {    
+App* app;
+
+void setup() {
     app = new App(
         new FlywheelController(
             &mainboard, &flywheelDriver, &config),
@@ -29,6 +28,8 @@ void setup() {
             new DigitalPin(13, &mainboard)),
         new PolledButton(
             new DigitalPin(12, &mainboard)),
+        new InterruptButton(
+            new InterruptPin(A4, onResetButtonInterruptCallback, InterruptMode::Falling, &mainboard)),
         new BluetoothManager(
             &bluetoothDriver),
         &config,
@@ -40,4 +41,8 @@ void setup() {
 
 void loop() {
     app->run();
+}
+
+void onResetButtonInterruptCallback() {
+    app->onResetButtonStateChangedCallback();
 }

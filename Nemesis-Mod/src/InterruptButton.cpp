@@ -9,9 +9,10 @@ InterruptButton::~InterruptButton() {
 }
 
 void InterruptButton::init() {
+    m_pin->init();
     m_pin->setInputMode();
 }
 
 bool InterruptButton::isPressed() {
-    return m_pin->read() == 1;
+    return m_pin->read() == 0;
 }
