@@ -92,13 +92,17 @@ void App::handleAnyExternalCommands() {
 }
 
 void App::authenticate(AuthenticationToken_t token) {
-    auto existingToken = m_config->getAuthenticationToken();
-    if (existingToken.length != token.length) {
-        return;
-    }
-
     auto authenticated = true;
-    if (existingToken.length > 0) {
+    auto existingToken = m_config->getAuthenticationToken();
+
+    if (token.length > 0 && existingToken.length == 0) {
+        // The user has not stored the authentication data yet, update it.
+        m_config->setAuthenticationToken(token);        
+    }
+    else if (existingToken.length != token.length) {
+        authenticated = false;
+    }
+    else if (existingToken.length > 0) {
         for (byte index = 0; index < existingToken.length; index++) {
             authenticated &= existingToken.data[index] == token.data[index];
         }
