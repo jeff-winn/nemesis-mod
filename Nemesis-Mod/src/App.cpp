@@ -10,7 +10,12 @@ const uint16_t CLEAR_HOLD_IN_MSECS = 30000;
 const uint16_t RESET_HOLD_IN_MSECS = 5000;
 
 // Indicates whether the operator has authenticated (allowing the release of the software lock).
-bool HAS_OPERATOR_AUTHENTICATED = false;
+bool HAS_OPERATOR_AUTHENTICATED = 
+#ifndef __RELEASE__
+    true;
+#else
+    false;
+#endif
 
 App::App(FlywheelController* const flywheelController, FeedController* feedController, Button* revTrigger, Button* firingTrigger, Button* resetButton, BluetoothManager* ble, ConfigurationSettings* config, Mainboard* hardware) {
     m_flywheelController = flywheelController;
