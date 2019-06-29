@@ -13,13 +13,7 @@
     bool HAS_OPERATOR_AUTHENTICATED = true;
 #endif
 
-// Indicates whether the 
-volatile bool SOFTWARE_RESET_PRESSED = false;
-
-// Identifies when the reset button was pressed.
-volatile int RESET_PRESSED_ON = 0;
-
-App::App(FlywheelController* const flywheelController, FeedController* feedController, PolledButton* revTrigger, PolledButton* firingTrigger, InterruptButton* resetButton, BluetoothManager* ble, ConfigurationSettings* config, Mainboard* hardware) {
+App::App(FlywheelController* const flywheelController, FeedController* feedController, Button* revTrigger, Button* firingTrigger, Button* resetButton, BluetoothManager* ble, ConfigurationSettings* config, Mainboard* hardware) {
     m_flywheelController = flywheelController;
     m_feedController = feedController;
     m_revTrigger = revTrigger;
@@ -42,10 +36,8 @@ App::~App() {
 }
 
 void App::run() {
-    if (SOFTWARE_RESET_PRESSED) {
-        if (shouldHandleReset()) {
-            handleReset();
-        }
+    if (m_resetButton->isPressed()) {
+        handleResetAttempt();
     }
     else {
         handleAnyExternalCommands();
@@ -68,16 +60,6 @@ void App::run() {
     }
 
     m_hardware->delaySafe(50);
-}
-
-int resetPressedOn = 0;
-
-bool App::shouldHandleReset() {
-    Serial.println(resetPressedOn);
-
-    if (m_resetButton->isPressed() && resetPressedOn == 0) {
-        resetPressedOn = millis();
-    }
 }
 
 void App::init() {
@@ -139,17 +121,18 @@ Command* App::createCommandFromPacket(Packet_t packet) {
     return NULL;
 }
 
-void App::onResetButtonStateChangedCallback() {
-    SOFTWARE_RESET_PRESSED = true;
-}
+void App::handleResetAttempt() {    
+    auto started = millis();
+    while (m_resetButton->isPressed()) {
+        m_hardware->delaySafe(50);
+    }
 
-void App::handleReset() {
-    m_config->resetOperatorAuthenticationToken();
-    m_config->defaultSettings();
+    if ((millis() - started) >= 5000) {        
+        m_config->resetOperatorAuthenticationToken();
+        m_config->defaultSettings();
 
 #if __RELEASE__
-    HAS_OPERATOR_AUTHENTICATED = false;
+        HAS_OPERATOR_AUTHENTICATED = false;
 #endif
-
-    SOFTWARE_RESET_PRESSED = false;
+    }
 }

@@ -24,12 +24,12 @@ void setup() {
             &mainboard, &flywheelDriver, &config),
         new FeedController(
             &mainboard, &beltDriver, &config),
-        new PolledButton(
+        new Button(
             new DigitalPin(13, &mainboard)),
-        new PolledButton(
+        new Button(
             new DigitalPin(12, &mainboard)),
-        new InterruptButton(
-            new InterruptPin(A4, onResetButtonInterruptCallback, InterruptMode::Falling, &mainboard)),
+        new Button(
+            new DigitalPin(18, &mainboard), true),
         new BluetoothManager(
             &bluetoothDriver),
         &config,
@@ -41,8 +41,4 @@ void setup() {
 
 void loop() {
     app->run();
-}
-
-void onResetButtonInterruptCallback() {
-    app->onResetButtonStateChangedCallback();
 }
