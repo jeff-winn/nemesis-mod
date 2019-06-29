@@ -91,8 +91,20 @@ void App::handleAnyExternalCommands() {
     }
 }
 
-void App::authenticate() {
-    HAS_OPERATOR_AUTHENTICATED = true;
+void App::authenticate(AuthenticationToken_t token) {
+    auto existingToken = m_config->getAuthenticationToken();
+    if (existingToken.length != token.length) {
+        return;
+    }
+
+    auto authenticated = true;
+    if (existingToken.length > 0) {
+        for (byte index = 0; index < existingToken.length; index++) {
+            authenticated &= existingToken.data[index] == token.data[index];
+        }
+    }
+
+    HAS_OPERATOR_AUTHENTICATED = authenticated;
 }
 
 Command* App::createCommandFromPacket(Packet_t packet) {
@@ -134,7 +146,7 @@ void App::handleResetAttempt() {
         successful = true;
     }
     else if (diff >= RESET_HOLD_IN_MSECS) {
-        m_config->resetOperatorAuthenticationToken();
+        m_config->resetAuthenticationToken();
         m_config->defaultSettings();
         successful = true;
     }

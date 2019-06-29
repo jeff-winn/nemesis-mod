@@ -3,16 +3,22 @@
 
 #include <Adafruit_FRAM_I2C.h>
 
+// Describes an authentication token.
+struct AuthenticationToken_t {
+    byte length;
+    byte* data;
+};
+
 // Provides access to the configuration settings.
 class ConfigurationSettings {
     public:
         ConfigurationSettings(Adafruit_FRAM_I2C* fram);
 
         ~ConfigurationSettings();
-    
-        byte* getOperatorAuthenticationToken();
-        void setOperatorAuthenticationToken(byte* value);
-        void resetOperatorAuthenticationToken();
+
+        AuthenticationToken_t getAuthenticationToken();
+        void setAuthenticationToken(AuthenticationToken_t token);
+        void resetAuthenticationToken();
 
         int getFeedNormalSpeed();
         void setFeedNormalSpeed(int value);

@@ -1,7 +1,8 @@
 #include "ConfigurationSettings.h"
 #include "BitConverter.h"
 
-const short OPERATOR_TOKEN_ADDR = 0x10;
+const short OPERATOR_TOKEN_LENGTH_ADDR = 0x10;
+const short OPERATOR_TOKEN_ADDR = 0x11;
 const short FEED_NORMAL_SPEED_ADDR = 0x100;
 const short FEED_HIGH_SPEED_ADDR = 0x104;
 const short FEED_MAX_SPEED_ADDR = 0x108;
@@ -25,7 +26,7 @@ void ConfigurationSettings::init() {
 
     if (!initialized()) {
         defaultSettings();
-        resetOperatorAuthenticationToken();
+        resetAuthenticationToken();
 
         setInitialized(true);
     }
@@ -58,15 +59,31 @@ void ConfigurationSettings::clear() {
     }
 }
 
-byte* ConfigurationSettings::getOperatorAuthenticationToken() {
-    return NULL;
+AuthenticationToken_t ConfigurationSettings::getAuthenticationToken() {
+    AuthenticationToken_t result;
+
+    result.length = m_fram->read8(OPERATOR_TOKEN_LENGTH_ADDR);
+    if (result.length > 0) {
+        result.data = new byte[result.length];
+
+        for (byte index = 0; index < result.length; index++) {
+            result.data[index] = m_fram->read8(OPERATOR_TOKEN_ADDR + index);
+        }
+    }
+
+    return result;
 }
 
-void ConfigurationSettings::setOperatorAuthenticationToken(byte* value) {
+void ConfigurationSettings::setAuthenticationToken(AuthenticationToken_t token) {
+    m_fram->write8(OPERATOR_TOKEN_ADDR, token.length);
+
+    for (byte index = 0; index < token.length; index++) {
+        m_fram->write8(OPERATOR_TOKEN_ADDR + index, token.data[index]);
+    }
 }
 
-void ConfigurationSettings::resetOperatorAuthenticationToken() {
-    for (uint16_t addr = 16; addr < 256; addr++) {
+void ConfigurationSettings::resetAuthenticationToken() {
+    for (uint16_t addr = OPERATOR_TOKEN_ADDR; addr < FEED_NORMAL_SPEED_ADDR; addr++) {
         m_fram->write8(addr, 0x00);
     }
 }

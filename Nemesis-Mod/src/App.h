@@ -30,7 +30,7 @@ class App {
         void run();
 
         // Authenticates the operator (thereby releasing the software lock).
-        void authenticate();
+        void authenticate(AuthenticationToken_t token);
 
         // Deauthenticates the operator (thereby restoring the software lock).
         void deauthenticate();
