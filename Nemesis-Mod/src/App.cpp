@@ -1,9 +1,9 @@
 #include "commands/AuthenticateOperatorCommand.h"
 #include "commands/BeltSpeedCommand.h"
 #include "commands/ChangeConfigurationSettingCommand.h"
+#include "commands/DefaultConfigurationSettingsCommand.h"
 #include "commands/FlywheelTrimAdjustmentCommand.h"
 #include "commands/FlywheelSpeedCommand.h"
-#include "commands/ResetConfigurationCommand.h"
 #include "App.h"
 
 const uint16_t CLEAR_HOLD_IN_MSECS = 30000;
@@ -117,7 +117,7 @@ Command* App::createCommandFromPacket(Packet_t packet) {
             return new AuthenticateOperatorCommand(this);
         }
         case 10: {
-            return new ResetConfigurationCommand(m_config);
+            return new DefaultConfigurationSettingsCommand(m_config);
         }
         case 11: {
             return new ChangeConfigurationSettingCommand(m_config);
