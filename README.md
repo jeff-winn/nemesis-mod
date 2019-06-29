@@ -27,8 +27,6 @@ Below are the dependencies that are being used by the project and must be instal
 - [Adafruit BluefruitLE nRF51](https://github.com/adafruit/Adafruit_BluefruitLE_nRF51)
 - [Adafruit FRAM I2C](https://github.com/adafruit/Adafruit_FRAM_I2C)
 - [DualG2HighPowerMotorShield](https://github.com/pololu/dual-g2-high-power-motor-shield)
-- [Arduino Low Power](https://github.com/arduino-libraries/ArduinoLowPower)
-- [RTCZero](https://github.com/arduino-libraries/RTCZero)
 
 ## Extras (optional)
 Below are some additional items purchased which are external to the primary hardware used by the project.
