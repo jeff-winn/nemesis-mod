@@ -52,6 +52,12 @@ void ConfigurationSettings::defaultSettings() {
     setFlywheelM2TrimAdjustment(1.0F);
 }
 
+void ConfigurationSettings::clear() {
+    for (int addr = 0; addr < 32000; addr++) {
+        m_fram->write8(addr, 0x00);
+    }
+}
+
 byte* ConfigurationSettings::getOperatorAuthenticationToken() {
     return NULL;
 }

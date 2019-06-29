@@ -47,6 +47,9 @@ class ConfigurationSettings {
         // Defaults all of the configuration settings.
         void defaultSettings();
 
+        // Clears the configuration settings.
+        void clear();
+
     protected:
         bool initialized();
         void setInitialized(bool value);

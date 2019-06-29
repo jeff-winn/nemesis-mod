@@ -37,6 +37,11 @@ void setup() {
     );
 
     app->init();
+
+#ifndef __RELEASE__
+    // Always allow the user to be authenticated during development by default.
+    app->authenticate();
+#endif
 }
 
 void loop() {
