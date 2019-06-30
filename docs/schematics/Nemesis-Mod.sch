@@ -129,8 +129,6 @@ Wire Wire Line
 Wire Wire Line
 	4750 2600 2850 2600
 Wire Wire Line
-	2850 2600 2850 3450
-Wire Wire Line
 	2850 3450 3050 3450
 Wire Wire Line
 	4450 4500 5200 4500
@@ -305,8 +303,6 @@ Connection ~ 3300 5750
 Wire Wire Line
 	3300 5750 5000 5750
 Wire Wire Line
-	3050 3150 2950 3150
-Wire Wire Line
 	2950 3150 2950 5000
 Wire Wire Line
 	2950 5700 3400 5700
@@ -386,31 +382,53 @@ Wire Wire Line
 	4750 5500 4750 5250
 Wire Wire Line
 	4750 5250 4450 5250
-$Comp
-L Switch:SW_Push RESET
-U 1 1 5D15A0F1
-P 1900 3150
-F 0 "RESET" H 1900 3435 50  0000 C CNN
-F 1 "SW_Button" H 1900 3344 50  0000 C CNN
-F 2 "" H 1900 3350 50  0001 C CNN
-F 3 "~" H 1900 3350 50  0001 C CNN
-	1    1900 3150
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3050 4200 2350 4200
-Wire Wire Line
-	2950 3150 2100 3150
-Connection ~ 2950 3150
-Wire Wire Line
-	2350 4200 2350 3250
-Wire Wire Line
-	2350 3250 1700 3250
-Wire Wire Line
-	1700 3250 1700 3150
 Wire Wire Line
 	9150 3750 9150 1900
 Wire Wire Line
 	9150 3750 9800 3750
 Connection ~ 9150 3750
+Wire Wire Line
+	2850 2600 2850 3450
+Wire Wire Line
+	2050 2800 2050 2900
+$Comp
+L Device:R_Small_US Resistor
+U 1 1 5D19815F
+P 2050 3050
+F 0 "Resistor" H 2100 3100 50  0000 L CNN
+F 1 "10K" H 2118 3005 50  0000 L CNN
+F 2 "" H 2050 3050 50  0001 C CNN
+F 3 "~" H 2050 3050 50  0001 C CNN
+	1    2050 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Push RESET
+U 1 1 5D15A0F1
+P 1850 2800
+F 0 "RESET" H 1850 3085 50  0000 C CNN
+F 1 "Tactile_SW_Button" H 1850 2994 50  0000 C CNN
+F 2 "" H 1850 3000 50  0001 C CNN
+F 3 "~" H 1850 3000 50  0001 C CNN
+	1    1850 2800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2050 3150 2950 3150
+Connection ~ 2950 3150
+Wire Wire Line
+	2850 3450 1650 3450
+Wire Wire Line
+	1650 3450 1650 2800
+Wire Wire Line
+	2050 2900 1900 2900
+Wire Wire Line
+	1900 2900 1900 4200
+Connection ~ 2050 2900
+Wire Wire Line
+	2050 2900 2050 2950
+Wire Wire Line
+	1900 4200 3050 4200
+Wire Wire Line
+	2950 3150 3050 3150
 $EndSCHEMATC
