@@ -2,11 +2,11 @@
 #define APP_H
 
 #include "hardware/BluetoothManager.h"
+#include "Button.h"
 #include "Command.h"
 #include "ConfigurationSettings.h"
-#include "FlywheelController.h"
 #include "FeedController.h"
-#include "PolledButton.h"
+#include "FlywheelController.h"
 
 // Represents the main application.
 class App {
@@ -14,8 +14,9 @@ class App {
         App(
             FlywheelController* flywheelController,
             FeedController* feedController,            
-            PolledButton* revTrigger, 
-            PolledButton* firingTrigger,
+            Button* revTrigger, 
+            Button* firingTrigger,
+            Button* resetButton,
             BluetoothManager* ble,
             ConfigurationSettings* config,
             Mainboard* hardware);
@@ -29,17 +30,22 @@ class App {
         void run();
 
         // Authenticates the operator (thereby releasing the software lock).
-        void authenticate();
+        void authenticate(AuthenticationToken_t token);
+
+        // Deauthenticates the operator (thereby restoring the software lock).
+        void deauthenticate();
 
     protected:        
         Command* createCommandFromPacket(Packet_t packet);
         void handleAnyExternalCommands();
+        void handleResetAttempt();
     
     private:
         FlywheelController* m_flywheelController;
         FeedController* m_feedController;
-        PolledButton* m_revTrigger;
-        PolledButton* m_firingTrigger;
+        Button* m_revTrigger;
+        Button* m_firingTrigger;
+        Button* m_resetButton;
         BluetoothManager* m_ble;
         ConfigurationSettings* m_config;
         Mainboard* m_hardware;

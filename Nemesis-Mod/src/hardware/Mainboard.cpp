@@ -1,35 +1,8 @@
 #include <Arduino.h>
-#include <ArduinoLowPower.h>
 #include "Mainboard.h"
 
 void Mainboard::delaySafe(unsigned long milliseconds) {
     delay(milliseconds);
-}
-
-void Mainboard::attachInterruptSafe(uint8_t pin, InterruptCallback callback, InterruptMode mode, bool wakeDeviceOnInterrupt) {
-    uint32_t modeId;
-
-    switch (mode) {
-        case InterruptMode::Falling: {
-            modeId = LOW;
-            break;
-        }
-        case InterruptMode::Rising: {
-            modeId = HIGH;
-            break;
-        }
-        case InterruptMode::All: {
-            modeId = CHANGE;
-            break;
-        }
-    }
-
-    if (wakeDeviceOnInterrupt) {
-        LowPower.attachInterruptWakeup(pin ,callback, modeId);
-    }
-    else {
-        attachInterrupt(digitalPinToInterrupt(pin), callback, modeId);
-    }
 }
 
 int Mainboard::analogReadSafe(uint8_t pin) {
@@ -63,8 +36,4 @@ void Mainboard::pinModeSafe(uint8_t pin, PinMode mode) {
     }
 
     pinMode(pin, modeId);
-}
-
-void Mainboard::sleepSafe(int timeout) {
-    LowPower.sleep(timeout);
 }

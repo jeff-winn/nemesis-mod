@@ -1,15 +1,17 @@
 #include "ConfigurationSettings.h"
 #include "BitConverter.h"
 
-const short FEED_NORMAL_SPEED_ADDR = 0x04;
-const short FEED_HIGH_SPEED_ADDR = 0x08;
-const short FEED_MAX_SPEED_ADDR = 0x12;
-const short FLYWHEEL_NORMAL_SPEED_ADDR = 0x16;
-const short FLYWHEEL_MEDIUM_SPEED_ADDR = 0x20;
-const short FLYWHEEL_MAX_SPEED_ADDR = 0x24;
-const short FLYWHEEL_TRIM_VARIANCE_ADDR = 0x28;
-const short FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR = 0x32;
-const short FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR = 0x36;
+const short OPERATOR_TOKEN_LENGTH_ADDR = 0x10;
+const short OPERATOR_TOKEN_ADDR = 0x11;
+const short FEED_NORMAL_SPEED_ADDR = 0x100;
+const short FEED_HIGH_SPEED_ADDR = 0x104;
+const short FEED_MAX_SPEED_ADDR = 0x108;
+const short FLYWHEEL_NORMAL_SPEED_ADDR = 0x112;
+const short FLYWHEEL_MEDIUM_SPEED_ADDR = 0x116;
+const short FLYWHEEL_MAX_SPEED_ADDR = 0x120;
+const short FLYWHEEL_TRIM_VARIANCE_ADDR = 0x124;
+const short FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR = 0x128;
+const short FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR = 0x132;
 
 ConfigurationSettings::ConfigurationSettings(Adafruit_FRAM_I2C* fram) {
     m_fram = fram;
@@ -24,6 +26,8 @@ void ConfigurationSettings::init() {
 
     if (!initialized()) {
         defaultSettings();
+        resetAuthenticationToken();
+
         setInitialized(true);
     }
 }
@@ -47,6 +51,41 @@ void ConfigurationSettings::defaultSettings() {
     setFlywheelTrimVariance(0.1F);
     setFlywheelM1TrimAdjustment(1.0F);
     setFlywheelM2TrimAdjustment(1.0F);
+}
+
+void ConfigurationSettings::clear() {
+    for (int addr = 0; addr < 32000; addr++) {
+        m_fram->write8(addr, 0x00);
+    }
+}
+
+AuthenticationToken_t ConfigurationSettings::getAuthenticationToken() {
+    AuthenticationToken_t result;
+
+    result.length = m_fram->read8(OPERATOR_TOKEN_LENGTH_ADDR);
+    if (result.length > 0) {
+        result.data = new byte[result.length];
+
+        for (byte index = 0; index < result.length; index++) {
+            result.data[index] = m_fram->read8(OPERATOR_TOKEN_ADDR + index);
+        }
+    }
+
+    return result;
+}
+
+void ConfigurationSettings::setAuthenticationToken(AuthenticationToken_t token) {
+    m_fram->write8(OPERATOR_TOKEN_ADDR, token.length);
+
+    for (byte index = 0; index < token.length; index++) {
+        m_fram->write8(OPERATOR_TOKEN_ADDR + index, token.data[index]);
+    }
+}
+
+void ConfigurationSettings::resetAuthenticationToken() {
+    for (uint16_t addr = OPERATOR_TOKEN_ADDR; addr < FEED_NORMAL_SPEED_ADDR; addr++) {
+        m_fram->write8(addr, 0x00);
+    }
 }
 
 int ConfigurationSettings::getFeedNormalSpeed() {

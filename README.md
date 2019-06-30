@@ -4,6 +4,7 @@ These are the boards and hardware being used by the project.
 - [Adafruit Feather M0 Bluefruit LE](https://www.adafruit.com/product/2995)
 - [Adafruit FeatherWing Proto - Prototyping Add-on](https://www.adafruit.com/product/2884)
 - [Adafruit I2C Non-Volatile FRAM Breakout](https://www.adafruit.com/product/1895)
+- [Tactile Switch Button (12mm square, 6mm tall)](https://www.adafruit.com/product/1119)
 - [Pololu Dual G2 High-Power Motor Driver 18v18 Shield for Arduino](https://www.pololu.com/product/2515)
 - [Pololu G2 High-Power Motor Driver 18v17](https://www.pololu.com/product/2991)
 - [Pololu 5V, 500mA Step-Down Voltage Regulator](https://www.pololu.com/product/2843)
@@ -26,8 +27,6 @@ Below are the dependencies that are being used by the project and must be instal
 - [Adafruit BluefruitLE nRF51](https://github.com/adafruit/Adafruit_BluefruitLE_nRF51)
 - [Adafruit FRAM I2C](https://github.com/adafruit/Adafruit_FRAM_I2C)
 - [DualG2HighPowerMotorShield](https://github.com/pololu/dual-g2-high-power-motor-shield)
-- [Arduino Low Power](https://github.com/arduino-libraries/ArduinoLowPower)
-- [RTCZero](https://github.com/arduino-libraries/RTCZero)
 
 ## Extras (optional)
 Below are some additional items purchased which are external to the primary hardware used by the project.

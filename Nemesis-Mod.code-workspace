@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
+		"arduino.defaultBaudRate": 9600,
 		"arduino.additionalUrls": [
 			"https://adafruit.github.io/arduino-board-index/package_adafruit_index.json"
 		],

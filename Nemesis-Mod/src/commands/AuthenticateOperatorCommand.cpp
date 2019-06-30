@@ -13,5 +13,6 @@ bool AuthenticateOperatorCommand::requiresAuthentication() {
 }
 
 void AuthenticateOperatorCommand::handleImpl(Packet_t packet) {
-    m_app->authenticate();
+    AuthenticationToken_t token;
+    m_app->authenticate(token);
 }
