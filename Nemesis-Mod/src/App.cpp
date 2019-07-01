@@ -1,6 +1,7 @@
 #include "commands/AuthenticateOperatorCommand.h"
 #include "commands/BeltSpeedCommand.h"
 #include "commands/ChangeConfigurationSettingCommand.h"
+#include "commands/DeauthorizeOperatorCommand.h"
 #include "commands/DefaultConfigurationSettingsCommand.h"
 #include "commands/FlywheelTrimAdjustmentCommand.h"
 #include "commands/FlywheelSpeedCommand.h"
@@ -124,6 +125,9 @@ Command* App::createCommandFromPacket(Packet_t packet) {
     switch (packet.header.type) {
         case 1: {
             return new AuthenticateOperatorCommand(this);
+        }
+        case 2: {
+            return new DeauthorizeOperatorCommand(this);
         }
         case 10: {
             return new DefaultConfigurationSettingsCommand(m_config);
