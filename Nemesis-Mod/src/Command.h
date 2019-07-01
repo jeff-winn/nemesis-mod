@@ -8,8 +8,8 @@ class Command {
     public:       
         virtual ~Command();
 
-        // Indicates whether the command requires the operator to have authenticated.
-        virtual bool requiresAuthentication();
+        // Indicates whether the command requires authorization to handle.
+        virtual bool requiresAuthorization();
 
         // Handles the packet.
         void handle(Packet_t packet);

@@ -1,6 +1,7 @@
 #include "commands/AuthenticateOperatorCommand.h"
 #include "commands/BeltSpeedCommand.h"
 #include "commands/ChangeConfigurationSettingCommand.h"
+#include "commands/DeauthorizeOperatorCommand.h"
 #include "commands/DefaultConfigurationSettingsCommand.h"
 #include "commands/FlywheelTrimAdjustmentCommand.h"
 #include "commands/FlywheelSpeedCommand.h"
@@ -9,8 +10,8 @@
 const uint16_t CLEAR_HOLD_IN_MSECS = 30000;
 const uint16_t RESET_HOLD_IN_MSECS = 5000;
 
-// Indicates whether the operator has authenticated (allowing the release of the software lock).
-bool HAS_OPERATOR_AUTHENTICATED = 
+// Indicates whether the operator is authorized (allowing release of the software lock).
+bool IS_OPERATOR_AUTHORIZED = 
 #ifndef __RELEASE__
     true;
 #else
@@ -46,7 +47,7 @@ void App::run() {
     else {
         handleAnyExternalCommands();
 
-        if (HAS_OPERATOR_AUTHENTICATED) {
+        if (isAuthorized()) {
             while (m_revTrigger->isPressed()) {
                 m_flywheelController->start();
 
@@ -64,6 +65,10 @@ void App::run() {
     }
 
     m_hardware->delaySafe(50);
+}
+
+bool App::isAuthorized() {
+    return IS_OPERATOR_AUTHORIZED;
 }
 
 void App::init() {
@@ -87,8 +92,8 @@ void App::handleAnyExternalCommands() {
     
     auto command = createCommandFromPacket(packet);
     if (command) {
-        auto requiresAuthentication = command->requiresAuthentication();
-        if (!requiresAuthentication || (requiresAuthentication && HAS_OPERATOR_AUTHENTICATED)) {
+        auto requiresAuthorization = command->requiresAuthorization();
+        if (!requiresAuthorization || (requiresAuthorization && isAuthorized())) {
             command->handle(packet);
         }
         
@@ -97,7 +102,7 @@ void App::handleAnyExternalCommands() {
 }
 
 void App::authenticate(AuthenticationToken_t token) {
-    auto authenticated = true;
+    auto authorized = true;
     auto existingToken = m_config->getAuthenticationToken();
 
     if (token.length > 0 && existingToken.length == 0) {
@@ -105,21 +110,24 @@ void App::authenticate(AuthenticationToken_t token) {
         m_config->setAuthenticationToken(token);        
     }
     else if (existingToken.length != token.length) {
-        authenticated = false;
+        authorized = false;
     }
     else if (existingToken.length > 0) {
         for (byte index = 0; index < existingToken.length; index++) {
-            authenticated &= existingToken.data[index] == token.data[index];
+            authorized &= existingToken.data[index] == token.data[index];
         }
     }
 
-    HAS_OPERATOR_AUTHENTICATED = authenticated;
+    IS_OPERATOR_AUTHORIZED = authorized;
 }
 
 Command* App::createCommandFromPacket(Packet_t packet) {
     switch (packet.header.type) {
         case 1: {
             return new AuthenticateOperatorCommand(this);
+        }
+        case 2: {
+            return new DeauthorizeOperatorCommand(this);
         }
         case 10: {
             return new DefaultConfigurationSettingsCommand(m_config);
@@ -161,10 +169,10 @@ void App::handleResetAttempt() {
     }
 
     if (successful) {
-        deauthenticate();
+        deauthorize();
     }
 }
 
-void App::deauthenticate() {
-    HAS_OPERATOR_AUTHENTICATED = false;
+void App::deauthorize() {
+    IS_OPERATOR_AUTHORIZED = false;
 }

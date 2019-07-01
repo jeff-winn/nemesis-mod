@@ -32,8 +32,11 @@ class App {
         // Authenticates the operator (thereby releasing the software lock).
         void authenticate(AuthenticationToken_t token);
 
-        // Deauthenticates the operator (thereby restoring the software lock).
-        void deauthenticate();
+        // Identifies whether the user is authorized.
+        bool isAuthorized();
+
+        // Deauthorizes the operator.
+        void deauthorize();
 
     protected:        
         Command* createCommandFromPacket(Packet_t packet);
