@@ -8,7 +8,7 @@ AuthenticateOperatorCommand::~AuthenticateOperatorCommand() {
     m_app = NULL;
 }
 
-bool AuthenticateOperatorCommand::requiresAuthentication() {
+bool AuthenticateOperatorCommand::requiresAuthorization() {
     return false;
 }
 
