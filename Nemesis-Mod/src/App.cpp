@@ -1,10 +1,10 @@
 #include "commands/AuthenticateOperatorCommand.h"
 #include "commands/BeltSpeedCommand.h"
 #include "commands/ChangeConfigurationSettingCommand.h"
-#include "commands/DeauthorizeOperatorCommand.h"
 #include "commands/DefaultConfigurationSettingsCommand.h"
 #include "commands/FlywheelTrimAdjustmentCommand.h"
 #include "commands/FlywheelSpeedCommand.h"
+#include "commands/RevokeOperatorAuthorizationCommand.h"
 #include "App.h"
 
 const uint16_t CLEAR_HOLD_IN_MSECS = 30000;
@@ -127,7 +127,7 @@ Command* App::createCommandFromPacket(Packet_t packet) {
             return new AuthenticateOperatorCommand(this);
         }
         case 2: {
-            return new DeauthorizeOperatorCommand(this);
+            return new RevokeOperatorAuthorizationCommand(this);
         }
         case 10: {
             return new DefaultConfigurationSettingsCommand(m_config);
@@ -169,10 +169,10 @@ void App::handleResetAttempt() {
     }
 
     if (successful) {
-        deauthorize();
+        revokeAuthorization();
     }
 }
 
-void App::deauthorize() {
+void App::revokeAuthorization() {
     IS_OPERATOR_AUTHORIZED = false;
 }
