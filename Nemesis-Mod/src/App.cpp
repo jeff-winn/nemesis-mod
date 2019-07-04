@@ -47,16 +47,17 @@ void App::run() {
     else {
         handleAnyExternalCommands();
 
-        if (isAuthorized()) {
-            while (m_revTrigger->isPressed()) {
-                m_flywheelController->start();
+        if (isAuthorized() && m_revTrigger->isPressed()) {
+            m_flywheelController->start();
 
-                while (m_firingTrigger->isPressed()) {
+            while (m_revTrigger->isPressed()) {
+                if (m_firingTrigger->isPressed()) {
                     m_feedController->start();
-                    m_hardware->delaySafe(10);
+                }
+                else {
+                    m_feedController->stop();
                 }
 
-                m_feedController->stop();
                 m_hardware->delaySafe(10);
             }
 
