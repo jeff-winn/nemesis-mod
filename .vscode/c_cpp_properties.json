@@ -24,8 +24,8 @@
                 "${librariesPath}/DualG2HighPowerMotorShield",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/cores/arduino",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/variants/feather_m0",
-                "${arduinoDataPath}/arduino/hardware/samd/1.8.4/libraries/SPI",
-                "${arduinoDataPath}/arduino/hardware/samd/1.8.4/libraries/Wire",
+                "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/libraries/SPI",
+                "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/libraries/Wire",
                 "${arduinoDataPath}/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL",
                 "${arduinoDataPath}/arduino/tools/CMSIS/4.5.0/CMSIS/Include"
             ],
@@ -38,8 +38,8 @@
                     "${librariesPath}/DualG2HighPowerMotorShield/*",
                     "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/cores/arduino/*",
                     "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/variants/feather_m0/*",
-                    "${arduinoDataPath}/arduino/hardware/samd/1.8.4/libraries/SPI/*",
-                    "${arduinoDataPath}/arduino/hardware/samd/1.8.4/libraries/Wire/*",
+                    "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/libraries/SPI/*",
+                    "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/libraries/Wire/*",
                     "${arduinoDataPath}/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/*",
                     "${arduinoDataPath}/arduino/tools/CMSIS/4.5.0/CMSIS/Include/*"
                 ]

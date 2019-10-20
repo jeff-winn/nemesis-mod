@@ -19,8 +19,7 @@ Below are the software which must be installed to compile the source code.
   - C/C++ extension
   - Arduino Extension
 - Arduino Board Manager Packages
-  - Arduino SAMD Boards (32-bits ARM Cortex-M0+)
-  - Adafruit SAMD Boards
+  - Adafruit SAMD Boards (1.5.4)
 
 ### Dependencies
 Below are the dependencies that are being used by the project and must be installed using the Arduino IDE Library Manager.
