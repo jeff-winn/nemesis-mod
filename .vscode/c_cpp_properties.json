@@ -1,7 +1,7 @@
 {
     "env": {
-        "librariesPath": "${env:USERPROFILE}/Documents/Arduino/libraries",
-        "arduinoDataPath": "${env:LOCALAPPDATA}/Arduino15/packages"
+        "librariesPath": "${workspaceFolder}/libraries",
+        "arduinoDataPath": "${workspaceFolder}/tools/arduino-cli/arduino/packages"
     },
     "configurations": [
         {
@@ -18,7 +18,7 @@
                 "__SAMD21G18A__"
             ],
             "includePath": [
-                "${workspaceFolder}/**",
+                "${workspaceFolder}/Nemesis-Mod/**",
                 "${librariesPath}/Adafruit_BluefruitLE_nRF51",
                 "${librariesPath}/Adafruit_FRAM_I2C",
                 "${librariesPath}/DualG2HighPowerMotorShield",
@@ -33,6 +33,7 @@
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": "${workspaceFolder}/.vscode/temp/cache",
                 "path": [
+                    "${workspaceFolder}/Nemesis-Mod/*",
                     "${librariesPath}/Adafruit_BluefruitLE_nRF51/*",
                     "${librariesPath}/Adafruit_FRAM_I2C/*",
                     "${librariesPath}/DualG2HighPowerMotorShield/*",
