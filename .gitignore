@@ -18,3 +18,7 @@ docs/schematics/*-cache.lib
 
 # MacOS files
 **/.DS_Store
+
+# arduino files
+libraries/*
+tools/arduino-cli/arduino/*
