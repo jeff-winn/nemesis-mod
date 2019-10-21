@@ -1,7 +1,7 @@
 {
     "env": {
         "librariesPath": "${workspaceFolder}/libraries",
-        "arduinoDataPath": "${workspaceFolder}/tools/arduino-cli/arduino/packages"
+        "arduinoDataPath": "${workspaceFolder}/tools/arduino/packages"
     },
     "configurations": [
         {
@@ -24,6 +24,7 @@
                 "${librariesPath}/DualG2HighPowerMotorShield",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/cores/arduino",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/variants/feather_m0",
+                "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/libraries/Adafruit_ZeroDMA",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/libraries/SPI",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/libraries/Wire",
                 "${arduinoDataPath}/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL",
@@ -39,6 +40,7 @@
                     "${librariesPath}/DualG2HighPowerMotorShield/*",
                     "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/cores/arduino/*",
                     "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/variants/feather_m0/*",
+                    "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/libraries/Adafruit_ZeroDMA/*",
                     "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/libraries/SPI/*",
                     "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/libraries/Wire/*",
                     "${arduinoDataPath}/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/*",

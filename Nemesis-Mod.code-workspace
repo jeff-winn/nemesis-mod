@@ -16,10 +16,9 @@
 			"build": true,
 			"external": true,
 			"docs": true,
-			"tools": true,
+			"tools/arduino": true,
 			"**/*.elf": true,
-			"**/*.hex": true,
-			"**/*.exe": true
+			"**/*.hex": true
 		},
 		"files.associations": {
 			"xiosbase": "cpp",

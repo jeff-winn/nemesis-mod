@@ -8,6 +8,10 @@
 **/*.hex
 **/*.bin
 
+# Arduino data files
+tools/arduino/*
+libraries/*
+
 # Documentation temporary files
 docs/*.~*
 
