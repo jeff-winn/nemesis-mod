@@ -16,7 +16,6 @@
 			"build": true,
 			"external": true,
 			"docs": true,
-			"tools/arduino": true,
 			"**/*.elf": true,
 			"**/*.hex": true
 		},
