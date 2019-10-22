@@ -16,6 +16,7 @@
 			"build": true,
 			"external": true,
 			"docs": true,
+			"**/*.bin": true,
 			"**/*.elf": true,
 			"**/*.hex": true
 		},
