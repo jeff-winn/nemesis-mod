@@ -1,11 +1,14 @@
 version: 0.0.{build}
 image: Visual Studio 2015
+
 environment:
   PATH: '%PATH%;C:\MinGW\bin;C:\MinGW\msys\1.0\bin'
+
 build_script:
 - cmd: make.exe
-test: off
+
 artifacts:
-- path: Nemesis-Mod/Nemesis-Mod.adafruit.samd.adafruit_feather_m0.bin
-- path: Nemesis-Mod/Nemesis-Mod.adafruit.samd.adafruit_feather_m0.elf
+- path: Nemesis-Mod/Nemesis-Mod.ino.bin
+- path: Nemesis-Mod/Nemesis-Mod.ino.elf
+
 deploy: off
