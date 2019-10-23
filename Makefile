@@ -24,7 +24,7 @@ BUILD_FOLDER = $(WORKSPACE_FOLDER)/build
 PROJECT_NAME = Nemesis-Mod
 PROJECT_FOLDER = $(WORKSPACE_FOLDER)/$(PROJECT_NAME)
 SKETCH_PATH = $(PROJECT_FOLDER)/Nemesis-Mod.ino
-CONFIG_FILE = $(WORKSPACE_FOLDER)/arduino-cli.yaml
+CONFIG_FILE = $(WORKSPACE_FOLDER)/arduino-cli.yml
 
 all: install_prerequisites rebuild
 
