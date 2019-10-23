@@ -35,9 +35,9 @@ install_boards:
 	"$(ARDUINO_CLI)" core install $(BOARD_TYPE) --config-file "$(CONFIG_FILE)"
 
 install_libraries:
-	"$(ARDUINO_CLI)" lib install "Adafruit BluefruitLE nRF51"
-	"$(ARDUINO_CLI)" lib install "Adafruit FRAM I2C"
-	"$(ARDUINO_CLI)" lib install "DualG2HighPowerMotorShield"
+	"$(ARDUINO_CLI)" lib install "Adafruit BluefruitLE nRF51" --config-file "$(CONFIG_FILE)"
+	"$(ARDUINO_CLI)" lib install "Adafruit FRAM I2C" --config-file "$(CONFIG_FILE)"
+	"$(ARDUINO_CLI)" lib install "DualG2HighPowerMotorShield" --config-file "$(CONFIG_FILE)"
 
 rebuild: clean build
 
