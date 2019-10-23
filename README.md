@@ -1,5 +1,5 @@
-# Nemesis-Mod (The Lawgiver Mod)
-A little bit about this project... it started off as me just wanting to play with an Arduino while repurposing some old .NET Gadgeteer hardware I had laying around the house. It turned into quite a bit more than that over the months that I worked on it. Hopefully the source code will help someone interested in replicating the success I had with my project with their own. Happy coding!
+# About the Nemesis-Mod Project...
+It started off as me just wanting to play with an Arduino while repurposing some old .NET Gadgeteer hardware I had laying around the house. It turned into quite a bit more than that over the months that I worked on it. Hopefully the source code will help someone interested in replicating the success I had with my project with their own. Happy coding!
 
 | Branch | Status |
 | ------ | -------------|
