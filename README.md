@@ -1,5 +1,10 @@
 # Nemesis-Mod (The Lawgiver Mod)
-[![Build status](https://ci.appveyor.com/api/projects/status/i8yxeyigt2mpq8k4?svg=true)](https://ci.appveyor.com/project/winnster/nemesis-mod)
+A little bit about this project... it started off as me just wanting to play with an Arduino while repurposing some old .NET Gadgeteer hardware I had laying around the house. It turned into quite a bit more than that over the months that I worked on it. Hopefully the source code will help someone interested in replicating the success I had with my project with their own. Happy coding!
+
+| Branch | Status |
+| ------ | -------------|
+| master | [![Build status](https://ci.appveyor.com/api/projects/status/i8yxeyigt2mpq8k4/branch/master?svg=true)](https://ci.appveyor.com/project/winnster/nemesis-mod/branch/master) |
+| latest | [![Build status](https://ci.appveyor.com/api/projects/status/i8yxeyigt2mpq8k4?svg=true)](https://ci.appveyor.com/project/winnster/nemesis-mod) |
 
 ## Hardware Requirements
 These are the boards and hardware being used by the project.
