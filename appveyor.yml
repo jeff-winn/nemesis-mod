@@ -8,7 +8,7 @@ build_script:
 - cmd: make.exe
 
 artifacts:
-- path: Nemesis-Mod/Nemesis-Mod.ino.bin
-- path: Nemesis-Mod/Nemesis-Mod.ino.elf
+- path: Nemesis-Mod/Nemesis-Mod.adafruit.samd.adafruit_feather_m0.bin
+- path: Nemesis-Mod/Nemesis-Mod.adafruit.samd.adafruit_feather_m0.elf
 
 deploy: off
