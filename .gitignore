@@ -9,7 +9,7 @@
 **/*.bin
 
 # Arduino data files
-arduino
+tools
 libraries
 
 # Documentation temporary files
