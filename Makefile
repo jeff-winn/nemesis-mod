@@ -46,6 +46,3 @@ clean:
 
 build:
 	"$(ARDUINO_CLI)" compile $(VERBOSE) --build-path="$(BUILD_FOLDER)" --build-cache-path="$(BUILD_FOLDER)" --fqbn $(FQBN) "$(SKETCH_PATH)" --output "$(SKETCH_PATH)" --config-file "$(CONFIG_FILE)"
-
-upload:
-	"$(ARDUINO_CLI)" upload --port $(SERIAL_PORT) --fqbn $(FQBN) --verify "$(SKETCH_PATH)" --config-file "$(CONFIG_FILE)"

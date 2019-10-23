@@ -1,3 +1,6 @@
+# Nemesis-Mod (The Lawgiver Mod)
+[![Build status](https://ci.appveyor.com/api/projects/status/i8yxeyigt2mpq8k4?svg=true)](https://ci.appveyor.com/project/winnster/nemesis-mod)
+
 ## Hardware Requirements
 These are the boards and hardware being used by the project.
 - [Nerf Rival Nemesis MXVII-10K](https://shop.hasbro.com/en-us/product/nerf-rival-nemesis-mxvii-10-k-blue:04E71588-5056-9047-F5B8-940FC9A5A209)
@@ -17,7 +20,11 @@ This is the development environment setup that is currently being used to write 
 Below are the software which must be installed to compile the source code.
 - Visual Studio Code
   - C/C++ extension
-  - Arduino Extension
+- MinGW (with msys-base-bin package)
+
+### Toolset (optional)
+The below are the optional tools that could be used as a replacement for the Makefile support.
+- Arduino Extension for Visual Studio Code
 - Arduino Board Manager Packages
   - Adafruit SAMD Boards (1.5.4)
 
