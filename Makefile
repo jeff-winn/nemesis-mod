@@ -31,13 +31,13 @@ all: install_prerequisites rebuild
 install_prerequisites: install_boards install_libraries
 
 install_boards:
-	"$(ARDUINO_CLI)" core update-index --config-file "$(CONFIG_FILE)"
-	"$(ARDUINO_CLI)" core install $(BOARD_TYPE) --config-file "$(CONFIG_FILE)"
+	"$(ARDUINO_CLI)" core update-index
+	"$(ARDUINO_CLI)" core install $(BOARD_TYPE)
 
 install_libraries:
-	"$(ARDUINO_CLI)" lib install "Adafruit BluefruitLE nRF51" --config-file "$(CONFIG_FILE)"
-	"$(ARDUINO_CLI)" lib install "Adafruit FRAM I2C" --config-file "$(CONFIG_FILE)"
-	"$(ARDUINO_CLI)" lib install "DualG2HighPowerMotorShield" --config-file "$(CONFIG_FILE)"
+	"$(ARDUINO_CLI)" lib install "Adafruit BluefruitLE nRF51"
+	"$(ARDUINO_CLI)" lib install "Adafruit FRAM I2C"
+	"$(ARDUINO_CLI)" lib install "DualG2HighPowerMotorShield"
 
 rebuild: clean build
 
@@ -45,4 +45,4 @@ clean:
 	@rm -rf "$(BUILD_FOLDER)"
 
 build:
-	"$(ARDUINO_CLI)" compile $(VERBOSE) --build-path="$(BUILD_FOLDER)" --build-cache-path="$(BUILD_FOLDER)" --fqbn $(FQBN) "$(SKETCH_PATH)" --output "$(SKETCH_PATH)" --config-file "$(CONFIG_FILE)"
+	"$(ARDUINO_CLI)" compile $(VERBOSE) --build-path="$(BUILD_FOLDER)" --build-cache-path="$(BUILD_FOLDER)" --fqbn $(FQBN) "$(SKETCH_PATH)" --output "$(SKETCH_PATH)"
