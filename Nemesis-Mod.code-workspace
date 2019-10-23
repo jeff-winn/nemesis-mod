@@ -12,6 +12,7 @@
 			"build": true,
 			"external": true,
 			"docs": true,
+			"arduino-cli.*": true,
 			"**/*.bin": true,
 			"**/*.elf": true,
 			"**/*.hex": true
