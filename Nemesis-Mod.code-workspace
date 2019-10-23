@@ -5,10 +5,6 @@
 		}
 	],
 	"settings": {
-		"arduino.defaultBaudRate": 9600,
-		"arduino.additionalUrls": [
-			"https://adafruit.github.io/arduino-board-index/package_adafruit_index.json"
-		],
 		"C_Cpp.intelliSenseEngine": "Default",
 		"files.exclude": {
 			".vscode/ipch": true,
