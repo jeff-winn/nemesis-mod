@@ -4,7 +4,7 @@ It started off as me just wanting to play with an Arduino while repurposing some
 | Branch | Status |
 | ------ | -------------|
 | master | [![Build status](https://ci.appveyor.com/api/projects/status/i8yxeyigt2mpq8k4/branch/master?svg=true)](https://ci.appveyor.com/project/winnster/nemesis-mod/branch/master) |
-| latest | [![Build status](https://ci.appveyor.com/api/projects/status/i8yxeyigt2mpq8k4?svg=true)](https://ci.appveyor.com/project/winnster/nemesis-mod) |
+| develop | [![Build status](https://ci.appveyor.com/api/projects/status/i8yxeyigt2mpq8k4/branch/develop?svg=true)](https://ci.appveyor.com/project/winnster/nemesis-mod/branch/develop) |
 
 ## Hardware Requirements
 These are the boards and hardware being used by the project.
