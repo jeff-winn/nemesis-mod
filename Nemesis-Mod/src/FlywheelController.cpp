@@ -94,8 +94,8 @@ float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
 }
 
 void FlywheelController::onStop() {
-    auto min = min(m_m1Speed, m_m2Speed);
-    auto step = calculateStepFromValue(min);
+    auto minimum = min(m_m1Speed, m_m2Speed);
+    auto step = calculateStepFromValue(minimum);
 
     m_driver->setSpeeds(0, 0);
     m_driver->disableDrivers();
