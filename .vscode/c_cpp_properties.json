@@ -9,13 +9,16 @@
             "intelliSenseMode": "gcc-x64",
             "defines": [
                 "F_CPU=64000000L",
-                "ARDUINO=10808",
-                "ARDUINO_ARCH_SAMD",
-                "ARDUINO_SAMD_ZERO",
-                "ARM_MATH_CM0PLUS",
-                "ADAFRUIT_FEATHER_M0",
-                "__arm__",
-                "__SAMD21G18A__"
+                "ARDUINO=10607",
+                "ARDUINO_NRF52832_FEATHER",
+                "ARDUINO_ARCH_NRF52",
+                "ARDUINO_BSP_VERSION=\"0.14.5\"",
+                "NRF52832_XXAA",
+                "NRF52",
+                "SOFTDEVICE_PRESENT",
+                "ARDUINO_NRF52_ADAFRUIT",
+                "NRF52_SERIES",
+                "LFS_NAME_MAX=64"
             ],
             "includePath": [
                 "${workspaceFolder}/Nemesis-Mod/**",
