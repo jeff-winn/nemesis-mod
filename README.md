@@ -35,7 +35,6 @@ The below are the optional tools that could be used as a replacement for the Mak
 
 ### Dependencies
 Below are the dependencies that are being used by the project and must be installed using the Arduino IDE Library Manager.
-- [Adafruit BluefruitLE nRF51](https://github.com/adafruit/Adafruit_BluefruitLE_nRF51)
 - [Adafruit FRAM I2C](https://github.com/adafruit/Adafruit_FRAM_I2C)
 - [DualG2HighPowerMotorShield](https://github.com/pololu/dual-g2-high-power-motor-shield)
 
