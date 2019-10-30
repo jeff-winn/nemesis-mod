@@ -8,7 +8,7 @@ DualG2HighPowerMotorShield18v18 flywheelDriver(9, -1, 5, -1, A0, 10, -1, 6, -1, 
 G2HighPowerMotorShield18v17 beltDriver(17, -1, 11, -1, A2);
 
 // Defines the driver for the onboard bluetooth module.
-Adafruit_BluefruitLE_SPI bluetoothDriver(8, 7, 4);
+AdafruitBluefruit bluetoothDriver;
 
 // Defines the FRAM module for persistent data storage.
 Adafruit_FRAM_I2C fram;

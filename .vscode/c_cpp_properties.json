@@ -8,7 +8,7 @@
             "name": "ARM",
             "intelliSenseMode": "gcc-x64",
             "defines": [
-                "F_CPU=48000000L",
+                "F_CPU=64000000L",
                 "ARDUINO=10808",
                 "ARDUINO_ARCH_SAMD",
                 "ARDUINO_SAMD_ZERO",
@@ -19,32 +19,20 @@
             ],
             "includePath": [
                 "${workspaceFolder}/Nemesis-Mod/**",
-                "${librariesPath}/Adafruit_BluefruitLE_nRF51",
                 "${librariesPath}/Adafruit_FRAM_I2C",
                 "${librariesPath}/DualG2HighPowerMotorShield",
-                "${arduinoDataPath}/adafruit/hardware/samd/1.5.5/cores/arduino",
-                "${arduinoDataPath}/adafruit/hardware/samd/1.5.5/variants/feather_m0",
-                "${arduinoDataPath}/adafruit/hardware/samd/1.5.5/libraries/Adafruit_ZeroDMA",
-                "${arduinoDataPath}/adafruit/hardware/samd/1.5.5/libraries/SPI",
-                "${arduinoDataPath}/adafruit/hardware/samd/1.5.5/libraries/Wire",
-                "${arduinoDataPath}/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL",
-                "${arduinoDataPath}/arduino/tools/CMSIS/4.5.0/CMSIS/Include"
+                "${arduinoDataPath}/adafruit/hardware/nrf52/**",
+                "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/7-2017q4/**"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": "${workspaceFolder}/.vscode/temp/cache",
                 "path": [
                     "${workspaceFolder}/Nemesis-Mod/*",
-                    "${librariesPath}/Adafruit_BluefruitLE_nRF51/*",
                     "${librariesPath}/Adafruit_FRAM_I2C/*",
                     "${librariesPath}/DualG2HighPowerMotorShield/*",
-                    "${arduinoDataPath}/adafruit/hardware/samd/1.5.5/cores/arduino/*",
-                    "${arduinoDataPath}/adafruit/hardware/samd/1.5.5/variants/feather_m0/*",
-                    "${arduinoDataPath}/adafruit/hardware/samd/1.5.5/libraries/Adafruit_ZeroDMA/*",
-                    "${arduinoDataPath}/adafruit/hardware/samd/1.5.5/libraries/SPI/*",
-                    "${arduinoDataPath}/adafruit/hardware/samd/1.5.5/libraries/Wire/*",
-                    "${arduinoDataPath}/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/*",
-                    "${arduinoDataPath}/arduino/tools/CMSIS/4.5.0/CMSIS/Include/*"
+                    "${arduinoDataPath}/adafruit/hardware/nrf52/**",
+                    "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/7-2017q4/**"
                 ]
             },
             "compilerPath": "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-gcc.exe",

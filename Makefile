@@ -10,8 +10,8 @@ else
 endif
 
 # Arduino CLI Board type
-BOARD_TYPE = adafruit:samd
-FQBN = $(BOARD_TYPE):adafruit_feather_m0
+BOARD_TYPE = adafruit:nrf52
+FQBN = $(BOARD_TYPE):feather52832
 
 # Default port to upload to
 SERIAL_PORT ?= 
@@ -35,7 +35,6 @@ install_boards:
 	"$(ARDUINO_CLI)" core install $(BOARD_TYPE)
 
 install_libraries:
-	"$(ARDUINO_CLI)" lib install "Adafruit BluefruitLE nRF51"
 	"$(ARDUINO_CLI)" lib install "Adafruit FRAM I2C"
 	"$(ARDUINO_CLI)" lib install "DualG2HighPowerMotorShield"
 

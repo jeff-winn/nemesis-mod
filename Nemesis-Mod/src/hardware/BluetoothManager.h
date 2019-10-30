@@ -1,14 +1,13 @@
 #ifndef BLUETOOTH_MANAGER_H
 #define BLUETOOTH_MANAGER_H
 
-#include <Adafruit_BLE.h>
-#include <Adafruit_BluefruitLE_SPI.h>
+#include <bluefruit.h>
 #include "../Packet.h"
 
 // Provides an adapter to the onboard bluetooth module.
 class BluetoothManager {
     public:
-        BluetoothManager(Adafruit_BluefruitLE_SPI* ble);
+        BluetoothManager(AdafruitBluefruit* ble);
 
         ~BluetoothManager();
 
@@ -23,7 +22,7 @@ class BluetoothManager {
         PacketHeader_t readHeader();
         
     private:
-        Adafruit_BluefruitLE_SPI* m_ble;
+        AdafruitBluefruit* m_ble;
 };
 
 #endif
