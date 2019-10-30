@@ -2,13 +2,12 @@
 #define PIN_H
 
 #include <stddef.h>
-#include <stdint.h>
 #include "hardware/Mainboard.h"
 
 // Represents a GPIO pin.
 class Pin {
     public:
-        Pin(uint8_t id, Mainboard* hal);
+        Pin(uint32_t id, Mainboard* hal);
 
         ~Pin();
 
@@ -19,7 +18,7 @@ class Pin {
         virtual void setOutputMode();
 
     protected:
-        uint8_t m_Id;
+        int m_Id;
         Mainboard* hardware;
 };
 

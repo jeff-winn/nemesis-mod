@@ -5,23 +5,23 @@ void Mainboard::delaySafe(unsigned long milliseconds) {
     delay(milliseconds);
 }
 
-int Mainboard::analogReadSafe(uint8_t pin) {
+int Mainboard::analogReadSafe(uint32_t pin) {
     return analogRead(pin);
 }
 
-void Mainboard::analogWriteSafe(uint8_t pin, uint32_t value) {
+void Mainboard::analogWriteSafe(uint32_t pin, uint32_t value) {
     analogWrite(pin, value);
 }
 
-int Mainboard::digitalReadSafe(uint8_t pin) {
+int Mainboard::digitalReadSafe(uint32_t pin) {
     return digitalRead(pin);
 }
 
-void Mainboard::digitalWriteSafe(uint8_t pin, uint32_t value) {
+void Mainboard::digitalWriteSafe(uint32_t pin, uint32_t value) {
     digitalWrite(pin, value);
 }
 
-void Mainboard::pinModeSafe(uint8_t pin, PinMode mode) {
+void Mainboard::pinModeSafe(uint32_t pin, PinMode mode) {
     uint32_t modeId;
 
     switch (mode) {
