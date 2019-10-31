@@ -1,11 +1,16 @@
 #include "BluetoothManager.h"
 
-BluetoothManager::BluetoothManager(AdafruitBluefruit* ble) {
-    m_ble = ble;
+uint8_t UUID128_SVC_NERF_BLASTER[16] = { 0x44, 0x0b, 0xf6, 0x40, 0xe8, 0xd1, 0x83, 0x49, 0xa6, 0x72, 0x4d, 0xd7, 0x72, 0xc8, 0x7c, 0x82 };
+
+BluetoothManager::BluetoothManager(AdafruitBluefruit* driver, BLEService* nerfDeviceService, BLEDis* deviceInformationService) {
+    m_driver = driver;
+    m_nerfDeviceService = nerfDeviceService;
+    m_deviceInformationService = deviceInformationService;
 }
 
 BluetoothManager::~BluetoothManager() {
-    m_ble = NULL;
+    m_driver = NULL;
+    m_deviceInformationService = NULL;
 }
 
 void BluetoothManager::beginInit() {
@@ -21,6 +26,7 @@ void BluetoothManager::endInit() {
 }
 
 void BluetoothManager::setName(const char name[]) {
+    Bluefruit.setName(name);
     // const auto COMMAND_TEXT = "AT+GAPDEVNAME=" + String(name);
 
     // char cmd[COMMAND_TEXT.length()];

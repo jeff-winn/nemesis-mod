@@ -5,7 +5,7 @@
     },
     "configurations": [
         {
-            "name": "ARM",
+            "name": "Adafruit nRF52 Feather",
             "intelliSenseMode": "gcc-x64",
             "defines": [
                 "F_CPU=64000000L",
