@@ -2,37 +2,44 @@
 
 uint8_t UUID128_SVC_NERF_BLASTER[16] = { 0x44, 0x0b, 0xf6, 0x40, 0xe8, 0xd1, 0x83, 0x49, 0xa6, 0x72, 0x4d, 0xd7, 0x72, 0xc8, 0x7c, 0x82 };
 
-BluetoothManager::BluetoothManager(AdafruitBluefruit* driver, BLEService* nerfDeviceService, BLEDis* deviceInformationService) {
-    m_driver = driver;
-    m_nerfDeviceService = nerfDeviceService;
-    m_deviceInformationService = deviceInformationService;
+BLEService NerfDeviceService = BLEService(UUID128_SVC_NERF_BLASTER);
+BLEDis DeviceInformationService;
+
+BluetoothManager::BluetoothManager() {
 }
 
 BluetoothManager::~BluetoothManager() {
-    m_driver = NULL;
-    m_deviceInformationService = NULL;
 }
 
 void BluetoothManager::beginInit() {
-    // m_ble->begin();    
-    // m_ble->factoryReset();
-    // m_ble->echo(false);
-    
-    // m_ble->setMode(BLUEFRUIT_MODE_COMMAND);
+    Bluefruit.begin();
+    Bluefruit.setName("Nerf Lawgiver\n");
+
+    DeviceInformationService.setManufacturer("Jeff Winn");
+    DeviceInformationService.setFirmwareRev("2.0.0");
+    DeviceInformationService.setHardwareRev("1.1.0");
+    DeviceInformationService.setModel("Nerf Nemesis MXVII-10K\n");
 }
 
 void BluetoothManager::endInit() {
-    // m_ble->setMode(BLUEFRUIT_MODE_DATA);
-}
+    Bluefruit.Advertising.addFlags(BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE);
+    Bluefruit.Advertising.addTxPower();
+    Bluefruit.Advertising.addService(NerfDeviceService);
+    Bluefruit.Advertising.addName();
 
-void BluetoothManager::setName(const char name[]) {
-    Bluefruit.setName(name);
-    // const auto COMMAND_TEXT = "AT+GAPDEVNAME=" + String(name);
-
-    // char cmd[COMMAND_TEXT.length()];
-    // COMMAND_TEXT.toCharArray(cmd, COMMAND_TEXT.length());
-
-    // m_ble->sendCommandCheckOK(cmd);
+    /* Start Advertising
+     * - Enable auto advertising if disconnected
+     * - Interval:  fast mode = 20 ms, slow mode = 152.5 ms
+     * - Timeout for fast mode is 30 seconds
+     * - Start(timeout) with timeout = 0 will advertise forever (until connected)
+     * 
+     * For recommended advertising interval
+     * https://developer.apple.com/library/content/qa/qa1931/_index.html   
+    */
+    Bluefruit.Advertising.restartOnDisconnect(true);
+    Bluefruit.Advertising.setInterval(32, 244);
+    Bluefruit.Advertising.setFastTimeout(30);
+    Bluefruit.Advertising.start(0);
 }
 
 Packet_t BluetoothManager::readPacket() {

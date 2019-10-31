@@ -9,11 +9,9 @@ extern uint8_t UUID128_SVC_NERF_BLASTER[16];
 // Provides an adapter to the onboard bluetooth module.
 class BluetoothManager {
     public:
-        BluetoothManager(AdafruitBluefruit* driver, BLEService* nerfDeviceService, BLEDis* deviceInformationService);
+        BluetoothManager();
 
         ~BluetoothManager();
-
-        void setName(const char name[]);
 
         void beginInit();
         void endInit();
@@ -24,9 +22,6 @@ class BluetoothManager {
         PacketHeader_t readHeader();
 
     private:
-        AdafruitBluefruit* m_driver;
-        BLEService* m_nerfDeviceService;
-        BLEDis* m_deviceInformationService;
 };
 
 #endif

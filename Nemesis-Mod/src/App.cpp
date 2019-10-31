@@ -74,8 +74,6 @@ bool App::isAuthorized() {
 
 void App::init() {
     m_ble->beginInit();
-    m_ble->setName("Nerf Nemesis MXVII-10K\n");
-    m_ble->endInit();
 
     m_firingTrigger->init();
     m_revTrigger->init();
@@ -86,6 +84,8 @@ void App::init() {
     
     m_flywheelController->setSpeed(FlywheelSpeed::Normal);
     m_feedController->setSpeed(BeltSpeed::Normal);
+
+    m_ble->endInit();
 }
 
 void App::handleAnyExternalCommands() {
