@@ -1,7 +1,7 @@
 #ifndef APP_H
 #define APP_H
 
-#include "hardware/BluetoothManager.h"
+#include "BluetoothManager.h"
 #include "Button.h"
 #include "Command.h"
 #include "ConfigurationSettings.h"

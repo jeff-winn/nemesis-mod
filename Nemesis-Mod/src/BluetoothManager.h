@@ -1,7 +1,7 @@
 #ifndef BLUETOOTH_MANAGER_H
 #define BLUETOOTH_MANAGER_H
 
-#include "../Packet.h"
+#include "services/CustomBLEService.h"
 
 // Provides an adapter to the onboard bluetooth module.
 class BluetoothManager {

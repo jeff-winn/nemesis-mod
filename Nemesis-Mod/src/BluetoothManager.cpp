@@ -1,7 +1,8 @@
 #include <bluefruit.h>
-#include "bluetooth/CustomCharacteristics.h"
-#include "bluetooth/CustomServices.h"
 #include "BluetoothManager.h"
+
+CustomBLEService NerfDeviceService;
+BLEDis DeviceInformationService;
 
 BluetoothManager::BluetoothManager() {
 }
