@@ -4,4 +4,7 @@
 #include <bluefruit.h>
 #include "CustomUuid.h"
 
+extern BLECharacteristic FlywheelSpeed;
+extern BLECharacteristic BeltSpeed;
+
 #endif

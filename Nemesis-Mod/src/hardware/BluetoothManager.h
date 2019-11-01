@@ -12,13 +12,6 @@ class BluetoothManager {
 
         void beginInit();
         void endInit();
-        
-        Packet_t readPacket();
-
-    protected:
-        PacketHeader_t readHeader();
-
-    private:
 };
 
 #endif

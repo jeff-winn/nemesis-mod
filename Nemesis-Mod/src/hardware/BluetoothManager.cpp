@@ -39,35 +39,35 @@ void BluetoothManager::endInit() {
     Bluefruit.Advertising.start(0);
 }
 
-Packet_t BluetoothManager::readPacket() {
-    Packet_t packet;
+// Packet_t BluetoothManager::readPacket() {
+//     Packet_t packet;
 
-    // if (m_ble->isConnected()) {
-    //     packet.header = readHeader();
+//     // if (m_ble->isConnected()) {
+//     //     packet.header = readHeader();
 
-    //     byte index = 0;
-    //     byte buffer[packet.header.len];
+//     //     byte index = 0;
+//     //     byte buffer[packet.header.len];
 
-    //     while (index < packet.header.len) {
-    //         buffer[index] = m_ble->read();
-    //         index++;
-    //     }
+//     //     while (index < packet.header.len) {
+//     //         buffer[index] = m_ble->read();
+//     //         index++;
+//     //     }
 
-    //     packet.body = buffer;
-    // }
+//     //     packet.body = buffer;
+//     // }
 
-    return packet;
-}
+//     return packet;
+// }
 
-PacketHeader_t BluetoothManager::readHeader() {
-    PacketHeader_t result;
+// PacketHeader_t BluetoothManager::readHeader() {
+//     PacketHeader_t result;
 
-    // char identifier = m_ble->read();
-    // if (identifier == '!') {
-    //     result.version = m_ble->read();
-    //     result.type = m_ble->read();
-    //     result.len = m_ble->read();
-    // }
+//     // char identifier = m_ble->read();
+//     // if (identifier == '!') {
+//     //     result.version = m_ble->read();
+//     //     result.type = m_ble->read();
+//     //     result.len = m_ble->read();
+//     // }
 
-    return result;
-}
+//     return result;
+// }

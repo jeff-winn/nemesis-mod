@@ -89,17 +89,17 @@ void App::init() {
 }
 
 void App::handleAnyExternalCommands() {
-    auto packet = m_ble->readPacket();
+    // auto packet = m_ble->readPacket();
     
-    auto command = createCommandFromPacket(packet);
-    if (command) {
-        auto requiresAuthorization = command->requiresAuthorization();
-        if (!requiresAuthorization || (requiresAuthorization && isAuthorized())) {
-            command->handle(packet);
-        }
+    // auto command = createCommandFromPacket(packet);
+    // if (command) {
+    //     auto requiresAuthorization = command->requiresAuthorization();
+    //     if (!requiresAuthorization || (requiresAuthorization && isAuthorized())) {
+    //         command->handle(packet);
+    //     }
         
-        delete command;
-    }
+    //     delete command;
+    // }
 }
 
 void App::authenticate(AuthenticationToken_t token) {
