@@ -11,11 +11,12 @@ BluetoothManager::~BluetoothManager() {
 
 void BluetoothManager::beginInit() {
     Bluefruit.begin();
-    Bluefruit.setName("Nerf Nemesis\n");
+    Bluefruit.setName("Nerf Nemesis MXVII-10K");
 
     DeviceInformationService.setManufacturer("Jeff Winn");
+    DeviceInformationService.setModel("Nerf Nemesis MXVII-10K");
     DeviceInformationService.setHardwareRev("1.1.0");
-    DeviceInformationService.setModel("Nerf Nemesis MXVII-10K\n");
+    DeviceInformationService.begin();
 }
 
 void BluetoothManager::endInit() {
