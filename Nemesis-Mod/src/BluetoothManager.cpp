@@ -1,29 +1,31 @@
 #include <bluefruit.h>
 #include "BluetoothManager.h"
 
-CustomBLEService NerfDeviceService;
-BLEDis DeviceInformationService;
-
 BluetoothManager::BluetoothManager() {
+    _nerfService = NerfBLEService();
+    _discoveryService = BLEDis();
 }
 
 BluetoothManager::~BluetoothManager() {
 }
 
-void BluetoothManager::beginInit() {
+void BluetoothManager::beginInit(BLECharacteristic::write_cb_t onFlywheelSpeedChangedCallback, BLECharacteristic::write_cb_t onBeltSpeedChangedCallback) {
     Bluefruit.begin();
     Bluefruit.setName("Nerf Nemesis MXVII-10K");
 
-    DeviceInformationService.setManufacturer("Jeff Winn");
-    DeviceInformationService.setModel("Nerf Nemesis MXVII-10K");
-    DeviceInformationService.setHardwareRev("1.1.0");
-    DeviceInformationService.begin();
+    _discoveryService.setManufacturer("Jeff Winn");
+    _discoveryService.setModel("Nerf Nemesis MXVII-10K");
+    _discoveryService.setHardwareRev("1.1.0");
+    _discoveryService.begin();
+
+    _nerfService.begin();
+    _nerfService.init(onFlywheelSpeedChangedCallback, onBeltSpeedChangedCallback);
 }
 
 void BluetoothManager::endInit() {
     Bluefruit.Advertising.addFlags(BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE);
     Bluefruit.Advertising.addTxPower();
-    Bluefruit.Advertising.addService(NerfDeviceService);
+    Bluefruit.Advertising.addService(_nerfService);
     Bluefruit.Advertising.addName();
 
     /* Start Advertising
@@ -40,36 +42,3 @@ void BluetoothManager::endInit() {
     Bluefruit.Advertising.setFastTimeout(30);
     Bluefruit.Advertising.start(0);
 }
-
-// Packet_t BluetoothManager::readPacket() {
-//     Packet_t packet;
-
-//     // if (m_ble->isConnected()) {
-//     //     packet.header = readHeader();
-
-//     //     byte index = 0;
-//     //     byte buffer[packet.header.len];
-
-//     //     while (index < packet.header.len) {
-//     //         buffer[index] = m_ble->read();
-//     //         index++;
-//     //     }
-
-//     //     packet.body = buffer;
-//     // }
-
-//     return packet;
-// }
-
-// PacketHeader_t BluetoothManager::readHeader() {
-//     PacketHeader_t result;
-
-//     // char identifier = m_ble->read();
-//     // if (identifier == '!') {
-//     //     result.version = m_ble->read();
-//     //     result.type = m_ble->read();
-//     //     result.len = m_ble->read();
-//     // }
-
-//     return result;
-// }

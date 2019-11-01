@@ -1,7 +1,6 @@
 #ifndef APP_H
 #define APP_H
 
-#include "BluetoothManager.h"
 #include "Button.h"
 #include "Command.h"
 #include "ConfigurationSettings.h"
@@ -17,7 +16,6 @@ class App {
             Button* revTrigger, 
             Button* firingTrigger,
             Button* resetButton,
-            BluetoothManager* ble,
             ConfigurationSettings* config,
             Mainboard* hardware);
 
@@ -49,7 +47,6 @@ class App {
         Button* m_revTrigger;
         Button* m_firingTrigger;
         Button* m_resetButton;
-        BluetoothManager* m_ble;
         ConfigurationSettings* m_config;
         Mainboard* m_hardware;
 };

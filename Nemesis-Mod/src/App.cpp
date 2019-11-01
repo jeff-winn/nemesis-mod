@@ -18,13 +18,12 @@ bool IS_OPERATOR_AUTHORIZED =
     false;
 #endif
 
-App::App(FlywheelController* const flywheelController, FeedController* feedController, Button* revTrigger, Button* firingTrigger, Button* resetButton, BluetoothManager* ble, ConfigurationSettings* config, Mainboard* hardware) {
+App::App(FlywheelController* const flywheelController, FeedController* feedController, Button* revTrigger, Button* firingTrigger, Button* resetButton, ConfigurationSettings* config, Mainboard* hardware) {
     m_flywheelController = flywheelController;
     m_feedController = feedController;
     m_revTrigger = revTrigger;
     m_firingTrigger = firingTrigger;
     m_resetButton = resetButton;
-    m_ble = ble;
     m_config = config;
     m_hardware = hardware;
 }
@@ -35,7 +34,6 @@ App::~App() {
     m_revTrigger = NULL;
     m_firingTrigger = NULL;
     m_resetButton = NULL;
-    m_ble = NULL;
     m_config = NULL;
     m_hardware = NULL;
 }
@@ -45,8 +43,6 @@ void App::run() {
         handleResetAttempt();
     }
     else {
-        handleAnyExternalCommands();
-
         if (isAuthorized() && m_revTrigger->isPressed()) {
             m_flywheelController->start();
 
@@ -73,8 +69,6 @@ bool App::isAuthorized() {
 }
 
 void App::init() {
-    m_ble->beginInit();
-
     m_firingTrigger->init();
     m_revTrigger->init();
     m_resetButton->init();
@@ -84,8 +78,6 @@ void App::init() {
     
     m_flywheelController->setSpeed(FlywheelSpeed::Normal);
     m_feedController->setSpeed(BeltSpeed::Normal);
-
-    m_ble->endInit();
 }
 
 void App::handleAnyExternalCommands() {
