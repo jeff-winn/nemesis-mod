@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:Nemesis-Mod-cache
 EELAYER 29 0
 EELAYER END
 $Descr USLetter 11000 8500
@@ -6,7 +7,7 @@ encoding utf-8
 Sheet 1 1
 Title "Nemesis Mod"
 Date "2019-05-22"
-Rev "v1.0"
+Rev "v1.1"
 Comp "https://github.com/jeff-winn/Nemesis-Mod"
 Comment1 "For more information please visit the project website:"
 Comment2 ""
@@ -420,11 +421,11 @@ Wire Wire Line
 Wire Wire Line
 	2750 2550 2750 3600
 $Comp
-L Nemesis-Mod-rescue:Adafruit_Feather_M0-Nemesis-Mod MCU
-U 1 1 5CE64CEC
+L Nemesis-Mod:Adafruit_nRF52_Feather MCU
+U 1 1 5DBD8417
 P 3750 4150
 F 0 "MCU" H 3750 5565 50  0000 C CNN
-F 1 "Bluefruit_nRF52_Feather" H 3750 5474 50  0000 C CNN
+F 1 "Adafruit_nRF52_Feather" H 3750 5474 50  0000 C CNN
 F 2 "" H 4400 2850 50  0001 C CNN
 F 3 "" H 4400 2850 50  0001 C CNN
 	1    3750 4150
