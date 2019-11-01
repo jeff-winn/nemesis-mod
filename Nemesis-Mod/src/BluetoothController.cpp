@@ -1,15 +1,15 @@
 #include <bluefruit.h>
-#include "BluetoothManager.h"
+#include "BluetoothController.h"
 
-BluetoothManager::BluetoothManager() {
+BluetoothController::BluetoothController() {
     _nerfService = NerfBLEService();
     _discoveryService = BLEDis();
 }
 
-BluetoothManager::~BluetoothManager() {
+BluetoothController::~BluetoothController() {
 }
 
-void BluetoothManager::beginInit(BLECharacteristic::write_cb_t onFlywheelSpeedChangedCallback, BLECharacteristic::write_cb_t onBeltSpeedChangedCallback) {
+void BluetoothController::beginInit(BLECharacteristic::write_cb_t onFlywheelSpeedChangedCallback, BLECharacteristic::write_cb_t onBeltSpeedChangedCallback) {
     Bluefruit.begin();
     Bluefruit.setName("Nerf Nemesis MXVII-10K");
 
@@ -22,7 +22,7 @@ void BluetoothManager::beginInit(BLECharacteristic::write_cb_t onFlywheelSpeedCh
     _nerfService.init(onFlywheelSpeedChangedCallback, onBeltSpeedChangedCallback);
 }
 
-void BluetoothManager::endInit() {
+void BluetoothController::endInit() {
     Bluefruit.Advertising.addFlags(BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE);
     Bluefruit.Advertising.addTxPower();
     Bluefruit.Advertising.addService(_nerfService);

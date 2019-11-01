@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include "src/App.h"
-#include "src/BluetoothManager.h"
+#include "src/BluetoothController.h"
 
 // Defines the driver which controls the flywheel motors.
 DualG2HighPowerMotorShield18v18 flywheelDriver = DualG2HighPowerMotorShield18v18(31, -1, 27, -1, A0, 11, -1, 30, -1, A1);
@@ -14,11 +14,11 @@ Adafruit_FRAM_I2C fram;
 ConfigurationSettings config = ConfigurationSettings(&fram);
 Mainboard mainboard;
 
-BluetoothManager* ble;
+BluetoothController* ble;
 App* app;
 
 void setup() {
-    ble = new BluetoothManager();
+    ble = new BluetoothController();
     ble->beginInit(OnFlywheelSpeedChangedCallback, OnBeltSpeedChangedCallback);
 
     app = new App(

@@ -3,12 +3,12 @@
 
 #include "services/NerfBLEService.h"
 
-// Provides an adapter to the onboard bluetooth module.
-class BluetoothManager {
+// Provides a controller for the on-board bluetooth module.
+class BluetoothController {
     public:
-        BluetoothManager();
+        BluetoothController();
 
-        ~BluetoothManager();
+        ~BluetoothController();
 
         void beginInit(BLECharacteristic::write_cb_t onFlywheelSpeedChangedCallback, BLECharacteristic::write_cb_t onBeltSpeedChangedCallback);
         void endInit();
