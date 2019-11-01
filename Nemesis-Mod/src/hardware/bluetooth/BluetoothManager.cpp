@@ -1,7 +1,5 @@
 #include "BluetoothManager.h"
 
-uint8_t UUID128_SVC_NERF_BLASTER[16] = { 0x44, 0x0b, 0xf6, 0x40, 0xe8, 0xd1, 0x83, 0x49, 0xa6, 0x72, 0x4d, 0xd7, 0x72, 0xc8, 0x7c, 0x82 };
-
 BLEService NerfDeviceService = BLEService(UUID128_SVC_NERF_BLASTER);
 BLEDis DeviceInformationService;
 
@@ -13,10 +11,9 @@ BluetoothManager::~BluetoothManager() {
 
 void BluetoothManager::beginInit() {
     Bluefruit.begin();
-    Bluefruit.setName("Nerf Lawgiver\n");
+    Bluefruit.setName("Nerf Nemesis\n");
 
     DeviceInformationService.setManufacturer("Jeff Winn");
-    DeviceInformationService.setFirmwareRev("2.0.0");
     DeviceInformationService.setHardwareRev("1.1.0");
     DeviceInformationService.setModel("Nerf Nemesis MXVII-10K\n");
 }
