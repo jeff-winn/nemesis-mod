@@ -1,7 +1,7 @@
 #ifndef APP_H
 #define APP_H
 
-#include "ConfigurationSettings.h"
+#include "AuthenticationToken_t.h"
 #include "Command.h"
 
 // Represents the main application.

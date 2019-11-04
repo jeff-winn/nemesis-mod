@@ -2,12 +2,7 @@
 #define CONFIGURATION_SETTINGS_H
 
 #include <Arduino.h>
-
-// Describes an authentication token.
-struct AuthenticationToken_t {
-    byte length;
-    byte* data;
-};
+#include "AuthenticationToken_t.h"
 
 // Provides access to the configuration settings.
 class ConfigurationSettings {
