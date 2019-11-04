@@ -14,9 +14,9 @@
 
 FlywheelController Flywheels = FlywheelController();
 FeedController Belt = FeedController();
-Button revTrigger = Button(16);
-Button firingTrigger = Button(15);
-Button resetButton = Button(28, true);
+Button RevTrigger = Button(16);
+Button FiringTrigger = Button(15);
+Button ResetButton = Button(28, true);
 
 const uint16_t CLEAR_HOLD_IN_MSECS = 30000;
 const uint16_t RESET_HOLD_IN_MSECS = 5000;
@@ -30,15 +30,15 @@ bool IS_OPERATOR_AUTHORIZED =
 #endif
 
 void App::run() {
-    if (resetButton.isPressed()) {
+    if (ResetButton.isPressed()) {
         handleResetAttempt();
     }
     else {
-        if (isAuthorized() && revTrigger.isPressed()) {
+        if (isAuthorized() && RevTrigger.isPressed()) {
             Flywheels.start();
 
-            while (revTrigger.isPressed()) {
-                if (firingTrigger.isPressed()) {
+            while (RevTrigger.isPressed()) {
+                if (FiringTrigger.isPressed()) {
                     Belt.start();
                 }
                 else {
@@ -60,9 +60,9 @@ bool App::isAuthorized() {
 }
 
 void App::init() {
-    firingTrigger.init();
-    revTrigger.init();
-    resetButton.init();
+    FiringTrigger.init();
+    RevTrigger.init();
+    ResetButton.init();
     Flywheels.init();
     Belt.init();
     Settings.init();
@@ -135,7 +135,7 @@ Command* App::createCommandFromPacket(Packet_t packet) {
 
 void App::handleResetAttempt() {    
     auto started = millis();
-    while (resetButton.isPressed()) {
+    while (ResetButton.isPressed()) {
         MCU.delaySafe(50);
     }
 
