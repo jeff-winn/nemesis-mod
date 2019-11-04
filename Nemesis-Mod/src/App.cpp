@@ -114,10 +114,10 @@ Command* App::createCommandFromPacket(Packet_t packet) {
             return new RevokeOperatorAuthorizationCommand(this);
         }
         case 10: {
-            return new DefaultConfigurationSettingsCommand(&Settings);
+            return new DefaultConfigurationSettingsCommand();
         }
         case 11: {
-            return new ChangeConfigurationSettingCommand(&Settings);
+            return new ChangeConfigurationSettingCommand();
         }
         case 100: {
             return new BeltSpeedCommand(&Belt);

@@ -7,37 +7,37 @@ void ChangeConfigurationSettingCommand::handleImpl(Packet_t packet) {
     switch (id) {
         case 1: {
             auto value = getInt32ValueFromPacket(packet);
-            m_config->setFlywheelNormalSpeed(value);
+            Settings.setFlywheelNormalSpeed(value);
             break;
         }
         case 2: {
             auto value = getInt32ValueFromPacket(packet);
-            m_config->setFlywheelMediumSpeed(value);
+            Settings.setFlywheelMediumSpeed(value);
             break;
         }
         case 3: {
             auto value = getInt32ValueFromPacket(packet);
-            m_config->setFlywheelMaxSpeed(value);
+            Settings.setFlywheelMaxSpeed(value);
             break;
         }
         case 4: {
             auto value = getInt32ValueFromPacket(packet);
-            m_config->setFeedNormalSpeed(value);
+            Settings.setFeedNormalSpeed(value);
             break;
         }
         case 5: {
             auto value = getInt32ValueFromPacket(packet);
-            m_config->setFeedHighSpeed(value);
+            Settings.setFeedHighSpeed(value);
             break;
         }
         case 6: {
             auto value = getInt32ValueFromPacket(packet);
-            m_config->setFeedMaxSpeed(value);
+            Settings.setFeedMaxSpeed(value);
             break;
         }
         case 7: {
             auto value = getFloatValueFromPacket(packet);
-            m_config->setFlywheelTrimVariance(value);
+            Settings.setFlywheelTrimVariance(value);
             break;
         }
     }
