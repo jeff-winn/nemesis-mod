@@ -33,4 +33,7 @@ class Mainboard {
         virtual int analogReadSafe(uint32_t pin);
 };
 
+// Defines the mainboard control unit (MCU) instance.
+extern Mainboard MCU;
+
 #endif

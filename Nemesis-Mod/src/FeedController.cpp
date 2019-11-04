@@ -1,54 +1,49 @@
+#include "hardware/G2HighPowerMotorShield.h"
+#include "hardware/Mainboard.h"
+#include "ConfigurationSettings.h"
 #include "FeedController.h"
 
-FeedController::FeedController(Mainboard* hardware, G2HighPowerMotorShield18v17* driver, ConfigurationSettings* config) {
-    m_hardware = hardware;
-    m_driver = driver;
-    m_config = config;
-}
-
-FeedController::~FeedController() {
-    m_hardware = NULL;
-    m_driver = NULL;
-    m_config = NULL;
-}
+// Defines the driver which controls the belt feed motor.
+G2HighPowerMotorShield18v17 beltDriver = G2HighPowerMotorShield18v17(17, -1, 7, -1, A2);
+FeedController Feeder = FeedController();
 
 void FeedController::init() {
-    m_driver->init();
-    m_driver->calibrateCurrentOffset();
-    m_driver->disableDriver();
+    beltDriver.init();
+    beltDriver.calibrateCurrentOffset();
+    beltDriver.disableDriver();
 
-    m_hardware->delaySafe(1);    
+    MCU.delaySafe(1);    
 }
 
 void FeedController::onStart() {
     m_m1speed = calculateMotorSpeed();
 
-    m_driver->enableDriver();
-    m_driver->setSpeed(m_m1speed);
+    beltDriver.enableDriver();
+    beltDriver.setSpeed(m_m1speed);
 
-    m_hardware->delaySafe(1);    
+    MCU.delaySafe(1);    
 }
 
 void FeedController::onStop() {
     auto step = calculateStepFromSpeed(m_m1speed);
 
-    m_driver->setSpeed(0);   
-    m_driver->disableDriver();
+    beltDriver.setSpeed(0);   
+    beltDriver.disableDriver();
     
-    m_hardware->delaySafe(1);
+    MCU.delaySafe(1);
     m_m1speed = 0;
 }
 
 int FeedController::calculateMotorSpeed() {
     switch (m_speed) {
         case BeltSpeed::Normal: {
-            return m_config->getFeedNormalSpeed();
+            return Settings.getFeedNormalSpeed();
         }
         case BeltSpeed::High: {
-            return m_config->getFeedHighSpeed();
+            return Settings.getFeedHighSpeed();
         }
         case BeltSpeed::Max: {
-            return m_config->getFeedMaxSpeed();
+            return Settings.getFeedMaxSpeed();
         }
     }
 }

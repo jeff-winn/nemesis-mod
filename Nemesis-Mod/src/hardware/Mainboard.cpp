@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include "Mainboard.h"
 
+Mainboard MCU = Mainboard();
+
 void Mainboard::delaySafe(unsigned long milliseconds) {
     delay(milliseconds);
 }

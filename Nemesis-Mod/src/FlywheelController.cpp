@@ -1,33 +1,28 @@
+#include <DualG2HighPowerMotorShield.h>
 #include <stddef.h>
+#include "hardware/Mainboard.h"
 #include "FlywheelController.h"
+#include "ConfigurationSettings.h"
 
-FlywheelController::FlywheelController(Mainboard* hardware, DualG2HighPowerMotorShield18v18* driver, ConfigurationSettings* config) {
-    m_hardware = hardware;
-    m_driver = driver;
-    m_config = config;
-}
-
-FlywheelController::~FlywheelController() {
-    m_hardware = NULL;
-    m_driver = NULL;
-    m_config = NULL;
-}
+// Defines the driver which controls the flywheel motors.
+DualG2HighPowerMotorShield18v18 flywheelDriver = DualG2HighPowerMotorShield18v18(31, -1, 27, -1, A0, 11, -1, 30, -1, A1);
+FlywheelController Flywheel = FlywheelController();
 
 void FlywheelController::init() {
-    m_driver->init();
-    m_driver->calibrateCurrentOffsets();
-    m_driver->disableDrivers();
+    flywheelDriver.init();
+    flywheelDriver.calibrateCurrentOffsets();
+    flywheelDriver.disableDrivers();
 
-    m_hardware->delaySafe(1);
+    MCU.delaySafe(1);
 }
 
 unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
     switch (motor) {
         case FlywheelMotor::Motor1: {
-            return m_driver->getM1CurrentMilliamps();
+            return flywheelDriver.getM1CurrentMilliamps();
         }
         case FlywheelMotor::Motor2: {
-            return m_driver->getM2CurrentMilliamps();
+            return flywheelDriver.getM2CurrentMilliamps();
         }
     }
 
@@ -35,16 +30,16 @@ unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
 }
 
 void FlywheelController::onStart() {
-    m_driver->enableDrivers();
+    flywheelDriver.enableDrivers();
     updateDrivers();
 }
 
 void FlywheelController::updateDrivers() {
     m_m1Speed = calculateMotorSpeed(FlywheelMotor::Motor1);
     m_m2Speed = calculateMotorSpeed(FlywheelMotor::Motor2);
-    m_driver->setSpeeds(m_m1Speed, m_m2Speed);
+    flywheelDriver.setSpeeds(m_m1Speed, m_m2Speed);
     
-    m_hardware->delaySafe(1);
+    MCU.delaySafe(1);
 }
 
 int FlywheelController::calculateStepFromValue(int value) {
@@ -61,19 +56,19 @@ int FlywheelController::calculateMotorSpeed(FlywheelMotor motor) {
 }
 
 int FlywheelController::calculateLimiterForSpeed(int speed) {
-    return speed * m_config->getFlywheelTrimVariance();
+    return speed * Settings.getFlywheelTrimVariance();
 }
 
 int FlywheelController::determineMotorMaximumSpeed() {
     switch (m_speed) {
         case FlywheelSpeed::Normal: {
-            return m_config->getFlywheelNormalSpeed();
+            return Settings.getFlywheelNormalSpeed();
         }
         case FlywheelSpeed::Medium: {
-            return m_config->getFlywheelMediumSpeed();
+            return Settings.getFlywheelMediumSpeed();
         }
         case FlywheelSpeed::Max: {
-            return m_config->getFlywheelMaxSpeed();
+            return Settings.getFlywheelMaxSpeed();
         }
     }
 
@@ -83,10 +78,10 @@ int FlywheelController::determineMotorMaximumSpeed() {
 float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
     switch (motor) {
         case FlywheelMotor::Motor1: {
-            return m_config->getFlywheelM1TrimAdjustment();
+            return Settings.getFlywheelM1TrimAdjustment();
         }
         case FlywheelMotor::Motor2: {
-            return m_config->getFlywheelM2TrimAdjustment();
+            return Settings.getFlywheelM2TrimAdjustment();
         }
     }
 
@@ -97,10 +92,10 @@ void FlywheelController::onStop() {
     auto minimum = min(m_m1Speed, m_m2Speed);
     auto step = calculateStepFromValue(minimum);
 
-    m_driver->setSpeeds(0, 0);
-    m_driver->disableDrivers();
+    flywheelDriver.setSpeeds(0, 0);
+    flywheelDriver.disableDrivers();
 
-    m_hardware->delaySafe(1);
+    MCU.delaySafe(1);
     m_m1Speed = 0;
     m_m2Speed = 0;
 }
@@ -116,11 +111,11 @@ void FlywheelController::setMotorSpeedAdjustment(FlywheelMotor motor, float adju
     
     switch (motor) {
         case FlywheelMotor::Motor1: {
-            m_config->setFlywheelM1TrimAdjustment(adjustment);
+            Settings.setFlywheelM1TrimAdjustment(adjustment);
             break;
         }
         case FlywheelMotor::Motor2: {
-            m_config->setFlywheelM2TrimAdjustment(adjustment);
+            Settings.setFlywheelM2TrimAdjustment(adjustment);
             break;
         }
     }
