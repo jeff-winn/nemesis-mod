@@ -1,7 +1,7 @@
 #ifndef BLUETOOTH_MANAGER_H
 #define BLUETOOTH_MANAGER_H
 
-#include "services/NerfBLEService.h"
+#include "services/CustomBLEService.h"
 
 // Provides a controller for the on-board bluetooth module.
 class BluetoothController {
@@ -10,11 +10,11 @@ class BluetoothController {
 
         ~BluetoothController();
 
-        void beginInit(BLECharacteristic::write_cb_t onFlywheelSpeedChangedCallback, BLECharacteristic::write_cb_t onBeltSpeedChangedCallback);
+        void beginInit();
         void endInit();
 
     private:
-        NerfBLEService _nerfService;
+        CustomBLEService _customService;
         BLEDis _discoveryService;
 };
 

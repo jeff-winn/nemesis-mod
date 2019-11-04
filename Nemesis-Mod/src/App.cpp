@@ -7,11 +7,13 @@
 #include "commands/RevokeOperatorAuthorizationCommand.h"
 #include "hardware/Mainboard.h"
 #include "App.h"
+#include "BluetoothController.h"
 #include "Button.h"
 #include "Command.h"
 #include "FeedController.h"
 #include "FlywheelController.h"
 
+BluetoothController Bluetooth = BluetoothController();
 FlywheelController Flywheels = FlywheelController();
 FeedController Belt = FeedController();
 Button RevTrigger = Button(16);
@@ -60,6 +62,7 @@ bool App::isAuthorized() {
 }
 
 void App::init() {
+    Bluetooth.beginInit();
     FiringTrigger.init();
     RevTrigger.init();
     ResetButton.init();
@@ -69,6 +72,7 @@ void App::init() {
     
     Flywheels.setSpeed(FlywheelSpeed::Normal);
     Belt.setSpeed(BeltSpeed::Normal);
+    Bluetooth.endInit();
 }
 
 void App::handleAnyExternalCommands() {
