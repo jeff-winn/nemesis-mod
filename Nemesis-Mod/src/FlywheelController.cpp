@@ -6,7 +6,6 @@
 
 // Defines the driver which controls the flywheel motors.
 DualG2HighPowerMotorShield18v18 flywheelDriver = DualG2HighPowerMotorShield18v18(31, -1, 27, -1, A0, 11, -1, 30, -1, A1);
-FlywheelController Flywheel = FlywheelController();
 
 void FlywheelController::init() {
     flywheelDriver.init();

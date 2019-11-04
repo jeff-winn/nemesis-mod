@@ -50,7 +50,4 @@ class FlywheelController : public MotorController {
         int m_m2Speed;
 };
 
-// Defines the instance of the flywheel controller being used by the hardware.
-extern FlywheelController Flywheel;
-
 #endif

@@ -31,7 +31,4 @@ class FeedController : public MotorController {
         int m_m1speed;
 };
 
-// Defines the feed controller instance being used by the hardware.
-extern FeedController Feeder;
-
 #endif

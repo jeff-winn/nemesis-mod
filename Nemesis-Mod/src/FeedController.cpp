@@ -5,7 +5,6 @@
 
 // Defines the driver which controls the belt feed motor.
 G2HighPowerMotorShield18v17 beltDriver = G2HighPowerMotorShield18v17(17, -1, 7, -1, A2);
-FeedController Feeder = FeedController();
 
 void FeedController::init() {
     beltDriver.init();

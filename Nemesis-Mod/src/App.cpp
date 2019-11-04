@@ -12,7 +12,8 @@
 #include "FeedController.h"
 #include "FlywheelController.h"
 
-App app = App();
+FlywheelController Flywheels = FlywheelController();
+FeedController Feeder = FeedController();
 Button revTrigger = Button(16);
 Button firingTrigger = Button(15);
 Button resetButton = Button(28, true);
@@ -34,7 +35,7 @@ void App::run() {
     }
     else {
         if (isAuthorized() && revTrigger.isPressed()) {
-            Flywheel.start();
+            Flywheels.start();
 
             while (revTrigger.isPressed()) {
                 if (firingTrigger.isPressed()) {
@@ -47,7 +48,7 @@ void App::run() {
                 MCU.delaySafe(10);
             }
 
-            Flywheel.stop();
+            Flywheels.stop();
         }
     }
 
@@ -62,11 +63,11 @@ void App::init() {
     firingTrigger.init();
     revTrigger.init();
     resetButton.init();
-    Flywheel.init();
+    Flywheels.init();
     Feeder.init();
     Settings.init();
     
-    Flywheel.setSpeed(FlywheelSpeed::Normal);
+    Flywheels.setSpeed(FlywheelSpeed::Normal);
     Feeder.setSpeed(BeltSpeed::Normal);
 }
 
@@ -122,10 +123,10 @@ Command* App::createCommandFromPacket(Packet_t packet) {
             return new BeltSpeedCommand(&Feeder);
         }
         case 200: {
-            return new FlywheelSpeedCommand(&Flywheel);
+            return new FlywheelSpeedCommand(&Flywheels);
         }
         case 201: {
-            return new FlywheelTrimAdjustmentCommand(&Flywheel);        
+            return new FlywheelTrimAdjustmentCommand(&Flywheels);        
         }
     }
 
