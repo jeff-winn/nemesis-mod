@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
+		"arduino.defaultBaudRate": 115200,
 		"C_Cpp.intelliSenseEngine": "Default",
 		"files.exclude": {
 			".vscode/ipch": true,

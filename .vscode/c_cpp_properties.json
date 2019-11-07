@@ -1,11 +1,11 @@
 {
     "env": {
-        "librariesPath": "${workspaceFolder}/libraries",
-        "arduinoDataPath": "${workspaceFolder}/tools/arduino/packages"
+        "librariesPath": "${env:USERPROFILE}/Documents/Arduino/libraries",
+        "arduinoDataPath": "${env:LOCALAPPDATA}/Arduino15/packages"
     },
     "configurations": [
         {
-            "name": "Adafruit nRF52 Feather",
+            "name": "ARM",
             "intelliSenseMode": "gcc-x64",
             "defines": [
                 "F_CPU=64000000L",
@@ -41,6 +41,14 @@
             "compilerPath": "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-gcc.exe",
             "cStandard": "c11",
             "cppStandard": "c++11"
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:\\Users\\jeffw\\AppData\\Local\\Arduino15\\packages\\adafruit\\tools\\**",
+                "C:\\Users\\jeffw\\AppData\\Local\\Arduino15\\packages\\adafruit\\hardware\\nrf52\\0.14.6\\**"
+            ],
+            "forcedInclude": []
         }
     ],
     "version": 4
