@@ -1,11 +1,12 @@
+#include "../App.h"
 #include "BluetoothController.h"
 #include "CustomUuid.h"
 
 BluetoothController::BluetoothController() {
-    _service = BLEService(UUID128_SVC_NERF_BLASTER);
-    _flywheelSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_SPEED);
+  _service = BLEService(UUID128_SVC_NERF_BLASTER);
+  _flywheelSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_SPEED);
 
-    _discoveryService = BLEDis();
+  _discoveryService = BLEDis();
 }
 
 BluetoothController::~BluetoothController() {
@@ -15,7 +16,7 @@ void BluetoothController::beginInit() {
   Serial.println("Initializing the bluetooth controller");
   Bluefruit.begin();
   Bluefruit.setName("Nerf Nemesis MXVII-10K");
-  
+
   Bluefruit.Periph.setConnectCallback(connect_callback);
   Bluefruit.Periph.setDisconnectCallback(disconnect_callback);
   Bluefruit.Periph.begin();
@@ -26,28 +27,16 @@ void BluetoothController::beginInit() {
   _discoveryService.begin();
 
   _service.begin();
-  _flywheelSpeed.setProperties(CHR_PROPS_READ);
-  _flywheelSpeed.setPermission(SECMODE_OPEN, SECMODE_NO_ACCESS);
-  _flywheelSpeed.setFixedLen(2);
+  _flywheelSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
+  _flywheelSpeed.setPermission(SECMODE_OPEN, SECMODE_OPEN);
+  _flywheelSpeed.setFixedLen(1);
+  _flywheelSpeed.setWriteCallback(onFlywheelSpeedWriteCallback);
   _flywheelSpeed.begin();
+}
 
-  uint8_t data[2] = { 0x00, 0x00 };
-  _flywheelSpeed.write(data, 2);
-
-    // Bluefruit.begin();
-    // Bluefruit.setName("Nerf Nemesis MXVII-10K");
-
-    // Bluefruit.Periph.setConnectCallback(connect_callback);
-    // Bluefruit.Periph.setDisconnectCallback(disconnect_callback);
-    // Bluefruit.Periph.begin();
-
-    // _discoveryService.setManufacturer("Jeff Winn");
-    // _discoveryService.setModel("Nerf Nemesis MXVII-10K");
-    // _discoveryService.setHardwareRev("1.1.0");
-    // _discoveryService.begin();
-
-    // _customService.begin();
-    // _customService.init();
+void onFlywheelSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
+  Serial.println(len);
+  Serial.println(data[0]);
 }
 
 void connect_callback(uint16_t conn_handle)
@@ -72,7 +61,7 @@ void disconnect_callback(uint16_t conn_handle, uint8_t reason)
   (void) reason;
  
   Serial.print("Disconnected, reason = 0x"); Serial.println(reason, HEX);
-  Serial.println("Advertising!");
+  Serial.println("\nAdvertising...");
 }
 
 void BluetoothController::endInit() {
@@ -87,7 +76,6 @@ void BluetoothController::endInit() {
   Bluefruit.Advertising.setFastTimeout(30);
   Bluefruit.Advertising.start(0);
 
-  Serial.println("Ready Player One!!");
   Serial.println("\nAdvertising...");
   
     // Bluefruit.Advertising.addFlags(BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE);

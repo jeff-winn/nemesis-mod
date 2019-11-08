@@ -7,6 +7,7 @@
 	"settings": {
 		"arduino.defaultBaudRate": 115200,
 		"C_Cpp.intelliSenseEngine": "Default",
+		"editor.tabSize": 4,
 		"files.exclude": {
 			".vscode/ipch": true,
 			".vscode/temp": true,

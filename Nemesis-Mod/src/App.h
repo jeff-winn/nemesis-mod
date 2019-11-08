@@ -28,4 +28,6 @@ class App {
         void handleResetAttempt();
 };
 
+extern App MainApp;
+
 #endif

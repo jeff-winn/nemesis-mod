@@ -20,6 +20,8 @@ Button RevTrigger = Button(16);
 Button FiringTrigger = Button(15);
 Button ResetButton = Button(28, true);
 
+App MainApp = App();
+
 const uint16_t CLEAR_HOLD_IN_MSECS = 30000;
 const uint16_t RESET_HOLD_IN_MSECS = 5000;
 
