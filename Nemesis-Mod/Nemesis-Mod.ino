@@ -2,10 +2,10 @@
 #include <Arduino.h>
 
 void setup() {
-    Serial.begin(115200);
-    while (!Serial) delay(10);
+    // Serial.begin(115200);
+    // while (!Serial) delay(10);
 
-    Serial.println("Connected!");
+    // Serial.println("Connected!");
 
     MainApp.init();
 }

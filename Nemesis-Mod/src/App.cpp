@@ -1,4 +1,5 @@
 #include "bluetooth/BluetoothController.h"
+#include "bluetooth/RemoteCommandReceivedCallback.h"
 #include "commands/AuthenticateOperatorCommand.h"
 #include "commands/BeltSpeedCommand.h"
 #include "commands/ChangeConfigurationSettingCommand.h"
@@ -64,31 +65,41 @@ bool App::isAuthorized() {
 }
 
 void App::init() {
+    SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
     Bluetooth.beginInit();
+    
     FiringTrigger.init();
     RevTrigger.init();
     ResetButton.init();
     Flywheels.init();
     Belt.init();
     Settings.init();
-    
+
     Flywheels.setSpeed(FlywheelSpeed::Normal);
     Belt.setSpeed(BeltSpeed::Normal);
+
     Bluetooth.endInit();
 }
 
-void App::handleAnyExternalCommands() {
-    // auto packet = ble->readPacket();
-    
-    // auto command = createCommandFromPacket(packet);
-    // if (command) {
-    //     auto requiresAuthorization = command->requiresAuthorization();
-    //     if (!requiresAuthorization || (requiresAuthorization && isAuthorized())) {
-    //         command->handle(packet);
-    //     }
+void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len) {
+    Packet_t packet;
+    packet.header.type = type;
+    packet.header.len = len;
+    packet.body = data;
+
+    MainApp.onRemoteCommandReceived(packet);
+}
+
+void App::onRemoteCommandReceived(Packet_t packet) {   
+    auto command = createCommandFromPacket(packet);
+    if (command) {
+        auto requiresAuthorization = command->requiresAuthorization();
+        if (!requiresAuthorization || (requiresAuthorization && isAuthorized())) {
+            command->handle(packet);
+        }
         
-    //     delete command;
-    // }
+        delete command;
+    }
 }
 
 void App::authenticate(AuthenticationToken_t token) {

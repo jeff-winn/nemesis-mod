@@ -22,12 +22,15 @@ class App {
         // Revokes the operator authorization.
         void revokeAuthorization();
 
+        void onRemoteCommandReceived(Packet_t packet);
+
     protected:        
         Command* createCommandFromPacket(Packet_t packet);
-        void handleAnyExternalCommands();
+        
         void handleResetAttempt();
 };
 
 extern App MainApp;
+void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len);
 
 #endif
