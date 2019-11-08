@@ -1,5 +1,5 @@
 #include "BluetoothController.h"
-#include "bluefruit/CustomUuid.h"
+#include "CustomUuid.h"
 
 BluetoothController::BluetoothController() {
     _service = BLEService(UUID128_SVC_NERF_BLASTER);

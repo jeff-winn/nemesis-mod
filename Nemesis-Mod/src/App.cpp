@@ -1,3 +1,4 @@
+#include "bluetooth/BluetoothController.h"
 #include "commands/AuthenticateOperatorCommand.h"
 #include "commands/BeltSpeedCommand.h"
 #include "commands/ChangeConfigurationSettingCommand.h"
@@ -7,7 +8,6 @@
 #include "commands/RevokeOperatorAuthorizationCommand.h"
 #include "hardware/Mainboard.h"
 #include "App.h"
-#include "BluetoothController.h"
 #include "Button.h"
 #include "Command.h"
 #include "FeedController.h"
