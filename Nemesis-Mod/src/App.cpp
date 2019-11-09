@@ -13,6 +13,7 @@
 #include "Command.h"
 #include "FeedController.h"
 #include "FlywheelController.h"
+#include "Log.h"
 
 BluetoothController Bluetooth = BluetoothController();
 FlywheelController Flywheels = FlywheelController();
@@ -65,6 +66,9 @@ bool App::isAuthorized() {
 }
 
 void App::init() {
+    Log.waitForUsbConnection();
+    Log.println("Initializing application...");
+
     SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
     Bluetooth.beginInit();
     
@@ -79,6 +83,8 @@ void App::init() {
     Belt.setSpeed(BeltSpeed::Normal);
 
     Bluetooth.endInit();
+
+    Log.println("Completed application initialization.");
 }
 
 void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len) {
