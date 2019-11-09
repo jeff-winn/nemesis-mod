@@ -3,8 +3,11 @@
 
 #include <stdint.h>
 
-// Defines the custom 128-bit UUID for the Nerf Blaster GATT service.
+// Defines the custom 128-bit UUID for the Blaster Speed GATT service.
 extern uint8_t UUID128_SVC_NERF_BLASTER[16];
+
+// Defines the custom 128-bit UUID for the Configuration GATT service.
+extern uint8_t UUID128_SVC_CONFIGURATION[16];
 
 // Defines the custom 128-bit UUID for the Flywheel Speed GATT characteristic.
 extern uint8_t UUID128_CHR_FLYWHEEL_SPEED[16];

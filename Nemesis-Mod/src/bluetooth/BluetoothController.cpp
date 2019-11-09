@@ -1,5 +1,4 @@
 #include "BluetoothController.h"
-#include "CustomUuid.h"
 
 BluetoothController::BluetoothController() {
   _speedService = BlasterSpeedService();

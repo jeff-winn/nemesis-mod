@@ -2,7 +2,7 @@
 #define BLUETOOTH_CONTROLLER_H
 
 #include <bluefruit.h>
-#include "BlasterSpeedService.h"
+#include "services/BlasterSpeedService.h"
 
 // Provides a controller for the on-board bluetooth module.
 class BluetoothController {
