@@ -1,6 +1,6 @@
-#include "../RemoteCommandReceivedCallback.h"
 #include "BlasterSpeedService.h"
 #include "CustomUuid.h"
+#include "RemoteCommandReceivedCallback.h"
 
 BlasterSpeedService::BlasterSpeedService() : CustomBLEService(UUID128_SVC_NERF_BLASTER) {
     _flywheelSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_SPEED);
