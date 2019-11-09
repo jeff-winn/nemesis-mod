@@ -2,6 +2,7 @@
 
 BluetoothController::BluetoothController() {
   _speedService = BlasterSpeedService();
+  _configService = ConfigurationService();
 
   _discoveryService = BLEDis();
 }
@@ -21,6 +22,9 @@ void BluetoothController::beginInit() {
 
   _speedService.begin();
   _speedService.init();
+
+  _configService.begin();
+  _configService.init();
 }
 
 void BluetoothController::endInit() {

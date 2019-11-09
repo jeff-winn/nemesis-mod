@@ -4,3 +4,7 @@
 ConfigurationService::ConfigurationService() : CustomBLEService(UUID128_SVC_CONFIGURATION) {
 
 }
+
+void ConfigurationService::init() {
+    
+}
