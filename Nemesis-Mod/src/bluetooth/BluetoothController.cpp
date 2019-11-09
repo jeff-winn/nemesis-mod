@@ -1,11 +1,8 @@
 #include "BluetoothController.h"
 #include "CustomUuid.h"
-#include "Callbacks.h"
 
 BluetoothController::BluetoothController() {
-  _service = BLEService(UUID128_SVC_NERF_BLASTER);
-  _flywheelSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_SPEED);
-  _beltSpeed = BLECharacteristic(UUID128_CHR_BELT_SPEED);
+  _speedService = BlasterSpeedService();
 
   _discoveryService = BLEDis();
 }
@@ -23,28 +20,15 @@ void BluetoothController::beginInit() {
   _discoveryService.setModel("Nerf Nemesis MXVII-10K");
   _discoveryService.begin();
 
-  _service.begin();
-
-  _flywheelSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
-  _flywheelSpeed.setPermission(SECMODE_OPEN, SECMODE_OPEN);
-  _flywheelSpeed.setFixedLen(1);
-  _flywheelSpeed.setWriteCallback(onFlywheelSpeedWriteCallback);
-  _flywheelSpeed.begin();
-  _flywheelSpeed.write8(0x00);
-
-  _beltSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
-  _beltSpeed.setPermission(SECMODE_OPEN, SECMODE_OPEN);
-  _beltSpeed.setFixedLen(1);
-  _beltSpeed.setWriteCallback(onBeltSpeedWriteCallback);
-  _beltSpeed.begin();
-  _beltSpeed.write8(0x00);
+  _speedService.begin();
+  _speedService.init();
 }
 
 void BluetoothController::endInit() {
   Bluefruit.Advertising.addFlags(BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE);
   Bluefruit.Advertising.addTxPower();
 
-  Bluefruit.Advertising.addService(_service);
+  Bluefruit.Advertising.addService(_speedService);
   Bluefruit.Advertising.addName();
 
   /* Start Advertising
