@@ -26,12 +26,12 @@ const uint16_t CLEAR_HOLD_IN_MSECS = 30000;
 const uint16_t RESET_HOLD_IN_MSECS = 5000;
 
 // Indicates whether the operator is authorized (allowing release of the software lock).
-bool IS_OPERATOR_AUTHORIZED = 
-#ifndef __RELEASE__
-    true;
-#else
-    false;
-#endif
+bool IS_OPERATOR_AUTHORIZED = true;
+// #ifndef __RELEASE__
+//     true;
+// #else
+//     false;
+// #endif
 
 void App::run() {
     if (ResetButton.isPressed()) {

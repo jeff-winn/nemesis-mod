@@ -5,6 +5,7 @@
 BluetoothController::BluetoothController() {
   _service = BLEService(UUID128_SVC_NERF_BLASTER);
   _flywheelSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_SPEED);
+  _beltSpeed = BLECharacteristic(UUID128_CHR_BELT_SPEED);
 
   _discoveryService = BLEDis();
 }
@@ -30,6 +31,13 @@ void BluetoothController::beginInit() {
   _flywheelSpeed.setWriteCallback(onFlywheelSpeedWriteCallback);
   _flywheelSpeed.begin();
   _flywheelSpeed.write8(0x00);
+
+  _beltSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
+  _beltSpeed.setPermission(SECMODE_OPEN, SECMODE_OPEN);
+  _beltSpeed.setFixedLen(1);
+  _beltSpeed.setWriteCallback(onBeltSpeedWriteCallback);
+  _beltSpeed.begin();
+  _beltSpeed.write8(0x00);
 }
 
 void BluetoothController::endInit() {

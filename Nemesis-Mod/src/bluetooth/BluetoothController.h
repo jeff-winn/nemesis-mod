@@ -19,6 +19,7 @@ class BluetoothController {
     private:
         BLEService _service;
         BLECharacteristic _flywheelSpeed;
+        BLECharacteristic _beltSpeed;
 
         BLEDis _discoveryService;
 };
