@@ -2,6 +2,7 @@
 #include "hardware/Mainboard.h"
 #include "ConfigurationSettings.h"
 #include "FeedController.h"
+#include "Log.h"
 
 // Defines the driver which controls the belt feed motor.
 G2HighPowerMotorShield18v17 beltDriver = G2HighPowerMotorShield18v17(17, -1, 7, -1, A2);
@@ -12,6 +13,7 @@ void FeedController::init() {
     beltDriver.disableDriver();
 
     MCU.delaySafe(1);    
+    Log.println("Completed initializing feed controller.");
 }
 
 void FeedController::onStart() {
@@ -53,4 +55,5 @@ int FeedController::calculateStepFromSpeed(int speed) {
 
 void FeedController::setSpeed(BeltSpeed speed) {
     m_speed = speed;
+    Log.println("Feed speed changed.");   
 }

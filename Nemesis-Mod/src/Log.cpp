@@ -3,6 +3,8 @@
 
 Logger Log = Logger();
 
+#define size_of_array(type) (char *)(&type+1)-(char*)(&type)
+
 void Logger::println(const char value[]) {
 #ifndef __RELEASE__
     Serial.println(value);
