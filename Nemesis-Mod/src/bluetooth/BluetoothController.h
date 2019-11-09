@@ -1,5 +1,5 @@
-#ifndef BLUETOOTH_MANAGER_H
-#define BLUETOOTH_MANAGER_H
+#ifndef BLUETOOTH_CONTROLLER_H
+#define BLUETOOTH_CONTROLLER_H
 
 #include <bluefruit.h>
 #include "Packet.h"
@@ -23,4 +23,4 @@ class BluetoothController {
         BLEDis _discoveryService;
 };
 
-#endif
+#endif /* BLUETOOTH_CONTROLLER_H */

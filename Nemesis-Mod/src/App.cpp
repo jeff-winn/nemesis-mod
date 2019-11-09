@@ -1,12 +1,10 @@
 #include "bluetooth/BluetoothController.h"
 #include "bluetooth/RemoteCommandReceivedCallback.h"
-#include "commands/AuthenticateOperatorCommand.h"
 #include "commands/BeltSpeedCommand.h"
 #include "commands/ChangeConfigurationSettingCommand.h"
 #include "commands/DefaultConfigurationSettingsCommand.h"
 #include "commands/FlywheelTrimAdjustmentCommand.h"
 #include "commands/FlywheelSpeedCommand.h"
-#include "commands/RevokeOperatorAuthorizationCommand.h"
 #include "hardware/Mainboard.h"
 #include "App.h"
 #include "Button.h"
@@ -108,34 +106,28 @@ void App::onRemoteCommandReceived(Packet_t packet) {
     }
 }
 
-void App::authenticate(AuthenticationToken_t token) {
+void App::authenticate() {
     auto authorized = true;
-    auto existingToken = Settings.getAuthenticationToken();
+    // auto existingToken = Settings.getAuthenticationToken();
 
-    if (token.length > 0 && existingToken.length == 0) {
-        // The user has not stored the authentication data yet, update it.
-        Settings.setAuthenticationToken(token);        
-    }
-    else if (existingToken.length != token.length) {
-        authorized = false;
-    }
-    else if (existingToken.length > 0) {
-        for (byte index = 0; index < existingToken.length; index++) {
-            authorized &= existingToken.data[index] == token.data[index];
-        }
-    }
+    // if (token.length > 0 && existingToken.length == 0) {
+    //     // The user has not stored the authentication data yet, update it.
+    //     Settings.setAuthenticationToken(token);        
+    // }
+    // else if (existingToken.length != token.length) {
+    //     authorized = false;
+    // }
+    // else if (existingToken.length > 0) {
+    //     for (byte index = 0; index < existingToken.length; index++) {
+    //         authorized &= existingToken.data[index] == token.data[index];
+    //     }
+    // }
 
     IS_OPERATOR_AUTHORIZED = authorized;
 }
 
 Command* App::createCommandFromPacket(Packet_t packet) {
     switch (packet.header.type) {
-        case 1: {
-            return new AuthenticateOperatorCommand(this);
-        }
-        case 2: {
-            return new RevokeOperatorAuthorizationCommand(this);
-        }
         case 10: {
             return new DefaultConfigurationSettingsCommand();
         }

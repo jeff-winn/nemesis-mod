@@ -1,7 +1,6 @@
 #ifndef APP_H
 #define APP_H
 
-#include "AuthenticationToken_t.h"
 #include "Command.h"
 
 // Represents the main application.
@@ -14,7 +13,7 @@ class App {
         void run();
 
         // Authenticates the operator (thereby releasing the software lock).
-        void authenticate(AuthenticationToken_t token);
+        void authenticate();
 
         // Identifies whether the operator is authorized.
         bool isAuthorized();

@@ -2,13 +2,12 @@
 #define CONFIGURATION_SETTINGS_H
 
 #include <Arduino.h>
-#include "AuthenticationToken_t.h"
 
 // Provides access to the configuration settings.
 class ConfigurationSettings {
     public:
-        AuthenticationToken_t getAuthenticationToken();
-        void setAuthenticationToken(AuthenticationToken_t token);
+        // AuthenticationToken_t getAuthenticationToken();
+        // void setAuthenticationToken(AuthenticationToken_t token);
         void resetAuthenticationToken();
 
         int getFeedNormalSpeed();

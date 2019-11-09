@@ -57,28 +57,28 @@ void ConfigurationSettings::clear() {
     }
 }
 
-AuthenticationToken_t ConfigurationSettings::getAuthenticationToken() {
-    AuthenticationToken_t result;
+// AuthenticationToken_t ConfigurationSettings::getAuthenticationToken() {
+//     AuthenticationToken_t result;
 
-    result.length = framDriver.read8(OPERATOR_TOKEN_LENGTH_ADDR);
-    if (result.length > 0) {
-        result.data = new byte[result.length];
+//     result.length = framDriver.read8(OPERATOR_TOKEN_LENGTH_ADDR);
+//     if (result.length > 0) {
+//         result.data = new byte[result.length];
 
-        for (byte index = 0; index < result.length; index++) {
-            result.data[index] = framDriver.read8(OPERATOR_TOKEN_ADDR + index);
-        }
-    }
+//         for (byte index = 0; index < result.length; index++) {
+//             result.data[index] = framDriver.read8(OPERATOR_TOKEN_ADDR + index);
+//         }
+//     }
 
-    return result;
-}
+//     return result;
+// }
 
-void ConfigurationSettings::setAuthenticationToken(AuthenticationToken_t token) {
-    framDriver.write8(OPERATOR_TOKEN_ADDR, token.length);
+// void ConfigurationSettings::setAuthenticationToken(AuthenticationToken_t token) {
+//     framDriver.write8(OPERATOR_TOKEN_ADDR, token.length);
 
-    for (byte index = 0; index < token.length; index++) {
-        framDriver.write8(OPERATOR_TOKEN_ADDR + index, token.data[index]);
-    }
-}
+//     for (byte index = 0; index < token.length; index++) {
+//         framDriver.write8(OPERATOR_TOKEN_ADDR + index, token.data[index]);
+//     }
+// }
 
 void ConfigurationSettings::resetAuthenticationToken() {
     for (uint16_t addr = OPERATOR_TOKEN_ADDR; addr < FEED_NORMAL_SPEED_ADDR; addr++) {
