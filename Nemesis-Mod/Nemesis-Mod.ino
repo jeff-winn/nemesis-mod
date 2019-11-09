@@ -1,15 +1,20 @@
 #include <Arduino.h>
 #include "src/bluetooth/RemoteCommandReceivedCallback.h"
+#include "src/bluetooth/BluetoothController.h"
 #include "src/App.h"
 #include "src/Log.h"
 
 App Application = App();
+BluetoothController BLE = BluetoothController();
 
 void setup() {
     Log.waitForUsbConnection();
 
     SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
+
+    BLE.beginInit();
     Application.init();
+    BLE.endInit();
 }
 
 void loop() {

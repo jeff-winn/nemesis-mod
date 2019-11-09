@@ -1,4 +1,3 @@
-#include "bluetooth/BluetoothController.h"
 #include "commands/BeltSpeedCommand.h"
 #include "commands/ChangeConfigurationSettingCommand.h"
 #include "commands/DefaultConfigurationSettingsCommand.h"
@@ -12,7 +11,6 @@
 #include "FlywheelController.h"
 #include "Log.h"
 
-BluetoothController Bluetooth = BluetoothController();
 FlywheelController Flywheels = FlywheelController();
 FeedController Belt = FeedController();
 Button RevTrigger = Button(16);
@@ -62,8 +60,6 @@ bool App::isAuthorized() {
 
 void App::init() {
     Log.println("Initializing application...");
-
-    Bluetooth.beginInit();
     
     FiringTrigger.init();
     RevTrigger.init();
@@ -74,8 +70,6 @@ void App::init() {
 
     Flywheels.setSpeed(FlywheelSpeed::Normal);
     Belt.setSpeed(BeltSpeed::Normal);
-
-    Bluetooth.endInit();
 
     Log.println("Completed application initialization.");
 }
