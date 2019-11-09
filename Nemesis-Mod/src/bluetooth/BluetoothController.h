@@ -12,8 +12,8 @@ class BluetoothController {
 
         ~BluetoothController();
 
-        void beginInit();
-        void endInit();
+        void init();
+        void startAdvertising();
         
     private:
         BlasterSpeedService _speedService;

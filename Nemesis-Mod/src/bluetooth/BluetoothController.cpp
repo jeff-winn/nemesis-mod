@@ -10,7 +10,7 @@ BluetoothController::BluetoothController() {
 BluetoothController::~BluetoothController() {
 }
 
-void BluetoothController::beginInit() {
+void BluetoothController::init() {
   Bluefruit.begin();
   Bluefruit.setName("Nerf Nemesis MXVII-10K");
 
@@ -27,11 +27,12 @@ void BluetoothController::beginInit() {
   _configService.init();
 }
 
-void BluetoothController::endInit() {
+void BluetoothController::startAdvertising() {
   Bluefruit.Advertising.addFlags(BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE);
   Bluefruit.Advertising.addTxPower();
 
   Bluefruit.Advertising.addService(_speedService);
+  Bluefruit.Advertising.addService(_configService);
   Bluefruit.Advertising.addName();
 
   /* Start Advertising

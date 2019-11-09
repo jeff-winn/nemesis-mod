@@ -9,12 +9,12 @@ BluetoothController BLE = BluetoothController();
 
 void setup() {
     Log.waitForUsbConnection();
-
+    
     SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
 
-    BLE.beginInit();
+    BLE.init();
     Application.init();
-    BLE.endInit();
+    BLE.startAdvertising();
 }
 
 void loop() {
