@@ -29,6 +29,7 @@ void BluetoothController::beginInit() {
   _flywheelSpeed.setFixedLen(1);
   _flywheelSpeed.setWriteCallback(onFlywheelSpeedWriteCallback);
   _flywheelSpeed.begin();
+  _flywheelSpeed.write8(0x00);
 }
 
 void BluetoothController::endInit() {

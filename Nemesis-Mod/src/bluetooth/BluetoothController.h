@@ -15,7 +15,7 @@ class BluetoothController {
         void endInit();
 
         void notifyRemoteCommandReceived(Packet_t packet);
-
+        
     private:
         BLEService _service;
         BLECharacteristic _flywheelSpeed;

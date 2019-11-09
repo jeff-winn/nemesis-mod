@@ -13,8 +13,8 @@ enum class FlywheelSpeed {
 
 // Defines the motors within the flywheel assembly.
 enum class FlywheelMotor {
-    Motor1,
-    Motor2
+    Motor1 = 1,
+    Motor2 = 2
 };
 
 // Provides a mechanism to control the flywheel assembly.
