@@ -29,7 +29,6 @@ class App {
         void handleResetAttempt();
 };
 
-extern App MainApp;
 void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len);
 
 #endif

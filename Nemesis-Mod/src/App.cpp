@@ -1,5 +1,4 @@
 #include "bluetooth/BluetoothController.h"
-#include "bluetooth/RemoteCommandReceivedCallback.h"
 #include "commands/BeltSpeedCommand.h"
 #include "commands/ChangeConfigurationSettingCommand.h"
 #include "commands/DefaultConfigurationSettingsCommand.h"
@@ -19,8 +18,6 @@ FeedController Belt = FeedController();
 Button RevTrigger = Button(16);
 Button FiringTrigger = Button(15);
 Button ResetButton = Button(28, true);
-
-App MainApp = App();
 
 const uint16_t CLEAR_HOLD_IN_MSECS = 30000;
 const uint16_t RESET_HOLD_IN_MSECS = 5000;
@@ -64,10 +61,8 @@ bool App::isAuthorized() {
 }
 
 void App::init() {
-    Log.waitForUsbConnection();
     Log.println("Initializing application...");
 
-    SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
     Bluetooth.beginInit();
     
     FiringTrigger.init();
@@ -83,15 +78,6 @@ void App::init() {
     Bluetooth.endInit();
 
     Log.println("Completed application initialization.");
-}
-
-void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len) {
-    Packet_t packet;
-    packet.header.type = type;
-    packet.header.len = len;
-    packet.body = data;
-
-    MainApp.onRemoteCommandReceived(packet);
 }
 
 void App::onRemoteCommandReceived(Packet_t packet) {   
