@@ -60,18 +60,18 @@ bool App::isAuthorized() {
 
 void App::init() {
     Log.println("Initializing application...");
-    
+
+    Settings.init();  
     FiringTrigger.init();
     RevTrigger.init();
     ResetButton.init();
     Flywheels.init();
     Belt.init();
-    Settings.init();
 
     Flywheels.setSpeed(FlywheelSpeed::Normal);
     Belt.setSpeed(BeltSpeed::Normal);
 
-    Log.println("Completed application initialization.");
+    Log.println("Completed application initialization.\n");
 }
 
 void App::onRemoteCommandReceived(Packet_t packet) {   
@@ -123,6 +123,24 @@ Command* App::createCommandFromPacket(Packet_t packet) {
         case 201: {
             return new FlywheelTrimAdjustmentCommand(&Flywheels);        
         }
+        // case 242: {
+        //     return new ChangeConfigurationSettingCommand(2);
+        // }
+        // case 243: {
+        //     return new ChangeConfigurationSettingCommand(3);
+        // }
+        // case 244: {
+        //     return new ChangeConfigurationSettingCommand(4);
+        // }
+        // case 245: {
+        //     return new ChangeConfigurationSettingCommand(5);
+        // }
+        // case 246: {
+        //     return new ChangeConfigurationSettingCommand(6);
+        // }
+        // case 247: {
+        //     return new ChangeConfigurationSettingCommand(7);
+        // }
     }
 
     return NULL;

@@ -8,14 +8,14 @@ BlasterSpeedService::BlasterSpeedService() : CustomBLEService(UUID128_SVC_NERF_B
 }
 
 void onFlywheelSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-  onBluetoothRemoteCommandReceivedCallback(200, data, len);
+    onBluetoothRemoteCommandReceivedCallback(200, data, len, 0);
 }
 
 void onBeltSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-  onBluetoothRemoteCommandReceivedCallback(100, data, len);
+    onBluetoothRemoteCommandReceivedCallback(100, data, len, 0);
 }
 
-void BlasterSpeedService::init() {   
+void BlasterSpeedService::init() {  
     _flywheelSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     _flywheelSpeed.setPermission(SECMODE_OPEN, SECMODE_OPEN);
     _flywheelSpeed.setFixedLen(1);

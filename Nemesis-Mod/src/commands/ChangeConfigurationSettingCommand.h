@@ -6,7 +6,7 @@
 // Provides a command which changes configuration settings.
 class ChangeConfigurationSettingCommand : public ConfigurationCommand {
     public:
-        using ConfigurationCommand::ConfigurationCommand;
+        ChangeConfigurationSettingCommand();
 
     protected:
         void handleImpl(Packet_t packet) override;

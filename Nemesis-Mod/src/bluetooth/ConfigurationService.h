@@ -8,6 +8,9 @@ class ConfigurationService : public CustomBLEService {
         ConfigurationService();
 
         void init() override;
+    
+    private:
+        BLECharacteristic _flywheelNormalSpeed;
 };
 
 #endif /* CONFIGURATION_SERVICE_H */

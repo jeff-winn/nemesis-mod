@@ -1,6 +1,7 @@
 #include <Adafruit_FRAM_I2C.h>
 #include "ConfigurationSettings.h"
 #include "BitConverter.h"
+#include "Log.h"
 
 const short OPERATOR_TOKEN_LENGTH_ADDR = 0x10;
 const short OPERATOR_TOKEN_ADDR = 0x11;
@@ -31,11 +32,11 @@ void ConfigurationSettings::init() {
 }
 
 bool ConfigurationSettings::initialized() {
-    return framDriver.read8(0x0) != 0;
+    return framDriver.read8(0x1) != 0;
 }
 
 void ConfigurationSettings::setInitialized(bool value) {
-    framDriver.write8(0x0, (value ? 0xFF : 0x00));
+    framDriver.write8(0x1, (value ? 0xFF : 0x00));
 }
 
 void ConfigurationSettings::defaultSettings() {
@@ -49,6 +50,8 @@ void ConfigurationSettings::defaultSettings() {
     setFlywheelTrimVariance(0.1F);
     setFlywheelM1TrimAdjustment(1.0F);
     setFlywheelM2TrimAdjustment(1.0F);
+
+    Log.println("Configuration settings reset to defaults.");
 }
 
 void ConfigurationSettings::clear() {

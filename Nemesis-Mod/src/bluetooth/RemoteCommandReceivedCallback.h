@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 // Defines the callback method for remote command received notifications.
-typedef void (*RemoteCommandReceivedCallback) (uint8_t type, uint8_t* data, uint16_t len);
+typedef void (*RemoteCommandReceivedCallback) (uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype);
 
 // Defines the callback which will be executed whenever a bluetooth command has been received.
 extern RemoteCommandReceivedCallback onBluetoothRemoteCommandReceivedCallback;

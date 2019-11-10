@@ -13,13 +13,12 @@ union float_bytes_t {
 };
 
 int32_t BitConverter::toInt32(const byte* address) {
-    int32_bytes_t r;
-
-    for (int index = 0; index < 4; index++) {
-        r.raw[index] = address[index];
+    int32_t r = 0;
+    for (int i = 0; i < 4; i++)
+    {
+        r += address[i] << (i * 8);
     }
-
-    return r.value;
+    return r;
 }
 
 byte* BitConverter::toInt32Array(const int32_t value) {
