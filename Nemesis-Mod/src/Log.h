@@ -4,6 +4,7 @@
 class Logger {
     public:
         // Prints the value.
+        void println(const float value, const int precision = 2);
         void println(const int value);
         void println(const uint8_t value);
         void println(const char value[]);

@@ -5,6 +5,12 @@ Logger Log = Logger();
 
 #define size_of_array(type) (char *)(&type+1)-(char*)(&type)
 
+void Logger::println(const float value, const int precision) {
+#ifndef __RELEASE__
+    Serial.println(value, precision);
+#endif
+}
+
 void Logger::println(const int value) {
 #ifndef __RELEASE__
     Serial.println(value);
