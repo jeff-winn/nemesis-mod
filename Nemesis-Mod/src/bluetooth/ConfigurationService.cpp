@@ -20,7 +20,7 @@ void onFlywheelTrimVarianceWriteCallback(uint16_t conn_hdl, BLECharacteristic* c
 
 void ConfigurationService::init() {
     _flywheelNormalSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
-    _flywheelNormalSpeed.setPermission(SECMODE_OPEN, SECMODE_OPEN);
+    _flywheelNormalSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
     _flywheelNormalSpeed.setFixedLen(4);
     _flywheelNormalSpeed.setUserDescriptor("Flywheel Normal Speed");
     _flywheelNormalSpeed.setWriteCallback(onFlywheelNormalSpeedWriteCallback);
@@ -28,7 +28,7 @@ void ConfigurationService::init() {
     _flywheelNormalSpeed.write32(Settings.getFlywheelNormalSpeed());
 
     _flywheelTrimVariance.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
-    _flywheelTrimVariance.setPermission(SECMODE_OPEN, SECMODE_OPEN);
+    _flywheelTrimVariance.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
     _flywheelTrimVariance.setFixedLen(4);
     _flywheelTrimVariance.setWriteCallback(onFlywheelTrimVarianceWriteCallback);
     _flywheelTrimVariance.begin();
