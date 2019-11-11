@@ -3,17 +3,19 @@
 #include "CustomUuid.h"
 #include "RemoteCommandReceivedCallback.h"
 
+uint8_t CONFIGURATION_COMMAND_ID = 10;
+
 ConfigurationService::ConfigurationService() : CustomBLEService(UUID128_SVC_CONFIGURATION) {
     _flywheelNormalSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_NORMAL_SPEED);
     _flywheelTrimVariance = BLECharacteristic(UUID128_CHR_FLYWHEEL_TRIM_VARIANCE);
 }
 
 void onFlywheelNormalSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    onBluetoothRemoteCommandReceivedCallback(11, data, len, 1);
+    onBluetoothRemoteCommandReceivedCallback(CONFIGURATION_COMMAND_ID, data, len, 1);
 }
 
 void onFlywheelTrimVarianceWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    onBluetoothRemoteCommandReceivedCallback(11, data, len, 7);
+    onBluetoothRemoteCommandReceivedCallback(CONFIGURATION_COMMAND_ID, data, len, 7);
 }
 
 void ConfigurationService::init() {

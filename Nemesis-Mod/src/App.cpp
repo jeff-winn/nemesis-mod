@@ -1,6 +1,5 @@
 #include "commands/BeltSpeedCommand.h"
 #include "commands/ChangeConfigurationSettingCommand.h"
-#include "commands/DefaultConfigurationSettingsCommand.h"
 #include "commands/FlywheelTrimAdjustmentCommand.h"
 #include "commands/FlywheelSpeedCommand.h"
 #include "hardware/Mainboard.h"
@@ -109,9 +108,6 @@ void App::authenticate() {
 Command* App::createCommandFromPacket(Packet_t packet) {
     switch (packet.header.type) {
         case 10: {
-            return new DefaultConfigurationSettingsCommand();
-        }
-        case 11: {
             return new ChangeConfigurationSettingCommand();
         }
         case 100: {
