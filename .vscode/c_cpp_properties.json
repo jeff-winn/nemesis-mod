@@ -18,6 +18,7 @@
                 "SOFTDEVICE_PRESENT",
                 "ARDUINO_NRF52_ADAFRUIT",
                 "NRF52_SERIES",
+                "__ENABLE_LOGGING__",
                 "LFS_NAME_MAX=64"
             ],
             "includePath": [
