@@ -123,24 +123,6 @@ Command* App::createCommandFromPacket(Packet_t packet) {
         case 201: {
             return new FlywheelTrimAdjustmentCommand(&Flywheels);        
         }
-        // case 242: {
-        //     return new ChangeConfigurationSettingCommand(2);
-        // }
-        // case 243: {
-        //     return new ChangeConfigurationSettingCommand(3);
-        // }
-        // case 244: {
-        //     return new ChangeConfigurationSettingCommand(4);
-        // }
-        // case 245: {
-        //     return new ChangeConfigurationSettingCommand(5);
-        // }
-        // case 246: {
-        //     return new ChangeConfigurationSettingCommand(6);
-        // }
-        // case 247: {
-        //     return new ChangeConfigurationSettingCommand(7);
-        // }
     }
 
     return NULL;
