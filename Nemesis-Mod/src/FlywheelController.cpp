@@ -110,13 +110,17 @@ void FlywheelController::setMotorSpeedAdjustment(FlywheelMotor motor, float adju
     if (adjustment < 0) {
         return;
     }
-    
+
+    Log.println(adjustment);
+
     switch (motor) {
         case FlywheelMotor::Motor1: {
+            Log.println("Changed M1 trim speed adjustment.");
             Settings.setFlywheelM1TrimAdjustment(adjustment);
             break;
         }
         case FlywheelMotor::Motor2: {
+            Log.println("Changed M2 trim speed adjustment.");
             Settings.setFlywheelM2TrimAdjustment(adjustment);
             break;
         }

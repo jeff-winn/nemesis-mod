@@ -12,6 +12,8 @@ class BlasterService : public CustomBLEService {
 
     private:
         BLECharacteristic _flywheelSpeed;
+        BLECharacteristic _flywheelM1TrimSpeed;
+        BLECharacteristic _flywheelM2TrimSpeed;
         BLECharacteristic _beltSpeed;
 };
 
