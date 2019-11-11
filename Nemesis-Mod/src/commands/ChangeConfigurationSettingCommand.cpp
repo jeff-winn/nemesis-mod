@@ -54,6 +54,7 @@ void ChangeConfigurationSettingCommand::handleImpl(Packet_t packet) {
             auto value = getFloatValueFromPacket(packet);
             Settings.setFlywheelTrimVariance(value);
 
+            Log.println(value);
             Log.println("Changed flywheel trim variance.");
             break;
         }

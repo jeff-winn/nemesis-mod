@@ -11,6 +11,7 @@ class ConfigurationService : public CustomBLEService {
     
     private:
         BLECharacteristic _flywheelNormalSpeed;
+        BLECharacteristic _flywheelTrimVariance;
 };
 
 #endif /* CONFIGURATION_SERVICE_H */
