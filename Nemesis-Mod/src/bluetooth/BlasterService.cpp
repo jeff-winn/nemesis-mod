@@ -1,8 +1,8 @@
-#include "BlasterSpeedService.h"
+#include "BlasterService.h"
 #include "CustomUuid.h"
 #include "RemoteCommandReceivedCallback.h"
 
-BlasterSpeedService::BlasterSpeedService() : CustomBLEService(UUID128_SVC_NERF_BLASTER) {
+BlasterService::BlasterService() : CustomBLEService(UUID128_SVC_NERF_BLASTER) {
     _flywheelSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_SPEED);
     _beltSpeed = BLECharacteristic(UUID128_CHR_BELT_SPEED);
 }
@@ -15,7 +15,7 @@ void onBeltSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t
     onBluetoothRemoteCommandReceivedCallback(100, data, len, 0);
 }
 
-void BlasterSpeedService::init() {  
+void BlasterService::init() {  
     _flywheelSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     _flywheelSpeed.setPermission(SECMODE_OPEN, SECMODE_OPEN);
     _flywheelSpeed.setFixedLen(1);

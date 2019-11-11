@@ -1,12 +1,12 @@
-#ifndef BLASTER_SPEED_SERVICE_H
-#define BLASTER_SPEED_SERVICE_H
+#ifndef BLASTER_SERVICE_H
+#define BLASTER_SERVICE_H
 
 #include <bluefruit.h>
 #include "CustomBLEService.h"
 
-class BlasterSpeedService : public CustomBLEService {
+class BlasterService : public CustomBLEService {
     public:
-        BlasterSpeedService();
+        BlasterService();
 
         void init() override;
 
@@ -15,4 +15,4 @@ class BlasterSpeedService : public CustomBLEService {
         BLECharacteristic _beltSpeed;
 };
 
-#endif /* BLASTER_SPEED_SERVICE_H */
+#endif /* BLASTER_SERVICE_H */

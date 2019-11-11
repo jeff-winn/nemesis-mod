@@ -1,7 +1,7 @@
 #include "BluetoothController.h"
 
 BluetoothController::BluetoothController() {
-  _speedService = BlasterSpeedService();
+  _blasterService = BlasterService();
   _configService = ConfigurationService();
 
   _discoveryService = BLEDis();
@@ -20,8 +20,8 @@ void BluetoothController::init() {
   _discoveryService.setModel("Nerf Nemesis MXVII-10K");
   _discoveryService.begin();
 
-  _speedService.begin();
-  _speedService.init();
+  _blasterService.begin();
+  _blasterService.init();
 
   _configService.begin();
   _configService.init();
@@ -31,7 +31,7 @@ void BluetoothController::startAdvertising() {
   Bluefruit.Advertising.addFlags(BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE);
   Bluefruit.Advertising.addTxPower();
 
-  Bluefruit.Advertising.addService(_speedService);
+  Bluefruit.Advertising.addService(_blasterService);
   Bluefruit.Advertising.addService(_configService);
   Bluefruit.Advertising.addName();
 
