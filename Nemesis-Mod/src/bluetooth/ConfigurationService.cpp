@@ -20,6 +20,7 @@ void ConfigurationService::init() {
     _flywheelNormalSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     _flywheelNormalSpeed.setPermission(SECMODE_OPEN, SECMODE_OPEN);
     _flywheelNormalSpeed.setFixedLen(4);
+    _flywheelNormalSpeed.setUserDescriptor("Flywheel Normal Speed");
     _flywheelNormalSpeed.setWriteCallback(onFlywheelNormalSpeedWriteCallback);
     _flywheelNormalSpeed.begin();
     _flywheelNormalSpeed.write32(Settings.getFlywheelNormalSpeed());
