@@ -31,6 +31,9 @@ class Mainboard {
 
         // Reads the value of the analog pin specified.
         virtual int analogReadSafe(uint32_t pin);
+
+        // Places the device into sleep mode until an external event has occurred on the pin specified.
+        virtual void waitforEventSafe(uint32_t pin, uint8_t mode);
 };
 
 // Defines the mainboard control unit (MCU) instance.

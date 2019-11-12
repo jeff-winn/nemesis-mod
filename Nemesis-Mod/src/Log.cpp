@@ -11,13 +11,7 @@ void Logger::println(const float value, const int precision) {
 #endif
 }
 
-void Logger::println(const int value) {
-#ifdef __ENABLE_LOGGING__
-    Serial.println(value);
-#endif
-}
-
-void Logger::println(const uint8_t value) {
+void Logger::println(const uint32_t value) {
 #ifdef __ENABLE_LOGGING__
     Serial.println(value);
 #endif

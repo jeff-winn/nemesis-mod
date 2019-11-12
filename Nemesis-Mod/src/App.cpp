@@ -10,14 +10,19 @@
 #include "FlywheelController.h"
 #include "Log.h"
 
+const uint32_t REV_BUTTON_PIN = 16;
+const uint32_t FIRING_BUTTON_PIN = 15;
+const uint32_t RESET_BUTTON_PIN = 28;
+
 FlywheelController Flywheels = FlywheelController();
 FeedController Belt = FeedController();
-Button RevTrigger = Button(16);
-Button FiringTrigger = Button(15);
-Button ResetButton = Button(28, true);
+Button RevTrigger = Button(REV_BUTTON_PIN);
+Button FiringTrigger = Button(FIRING_BUTTON_PIN);
+Button ResetButton = Button(RESET_BUTTON_PIN, true);
 
-const uint16_t CLEAR_HOLD_IN_MSECS = 30000;
-const uint16_t RESET_HOLD_IN_MSECS = 5000;
+const uint32_t SYSTEM_OFF_IN_MSECS = 300000; // 5 minutes
+const uint16_t CLEAR_HOLD_IN_MSECS = 30000;  // 30 seconds
+const uint16_t RESET_HOLD_IN_MSECS = 5000;   // 5 seconds;
 
 // Indicates whether the operator is authorized (allowing release of the software lock).
 bool IS_OPERATOR_AUTHORIZED = true;
@@ -33,24 +38,48 @@ void App::run() {
     }
     else {
         if (isAuthorized() && RevTrigger.isPressed()) {
+            Log.println("Revving flywheels...");
+
+            revvedAtMillis = millis();
             Flywheels.start();
 
+            auto firing = false;
             while (RevTrigger.isPressed()) {
                 if (FiringTrigger.isPressed()) {
-                    Belt.start();
+                    if (!firing) {
+                        firing = true;
+
+                        Log.println("Firing!");
+                        Belt.start();
+                    }
                 }
                 else {
                     Belt.stop();
+                    firing = false;
                 }
 
                 MCU.delaySafe(10);
             }
 
             Flywheels.stop();
+            revvedAtMillis = millis();
+
+            Log.println("Flywheels stopped.");
         }
     }
 
-    MCU.delaySafe(50);
+    waitForRevTriggerToBePressed();
+}
+
+void App::waitForRevTriggerToBePressed() {
+    auto diff = millis() - revvedAtMillis;
+    if (diff >= SYSTEM_OFF_IN_MSECS) {
+        Log.println("Shutting down.");
+        MCU.waitforEventSafe(REV_BUTTON_PIN, HIGH);
+    }
+    else {
+        MCU.delaySafe(50);
+    }
 }
 
 bool App::isAuthorized() {
@@ -69,6 +98,7 @@ void App::init() {
 
     Flywheels.setSpeed(FlywheelSpeed::Normal);
     Belt.setSpeed(BeltSpeed::Normal);
+    revvedAtMillis = millis();
 
     Log.println("Completed application initialization.\n");
 }

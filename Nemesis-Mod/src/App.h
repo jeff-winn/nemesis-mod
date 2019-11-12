@@ -27,6 +27,10 @@ class App {
         Command* createCommandFromPacket(Packet_t packet);
         
         void handleResetAttempt();
+        void waitForRevTriggerToBePressed();
+
+    private:
+        uint32_t revvedAtMillis;
 };
 
 void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len);
