@@ -1,23 +1,13 @@
 #ifndef CONFIGURATION_SETTINGS_H
 #define CONFIGURATION_SETTINGS_H
 
-#include <Adafruit_FRAM_I2C.h>
-
-// Describes an authentication token.
-struct AuthenticationToken_t {
-    byte length;
-    byte* data;
-};
+#include <Arduino.h>
 
 // Provides access to the configuration settings.
 class ConfigurationSettings {
     public:
-        ConfigurationSettings(Adafruit_FRAM_I2C* fram);
-
-        ~ConfigurationSettings();
-
-        AuthenticationToken_t getAuthenticationToken();
-        void setAuthenticationToken(AuthenticationToken_t token);
+        // AuthenticationToken_t getAuthenticationToken();
+        // void setAuthenticationToken(AuthenticationToken_t token);
         void resetAuthenticationToken();
 
         int getFeedNormalSpeed();
@@ -65,9 +55,9 @@ class ConfigurationSettings {
 
         float readFloat(short address);
         void writeFloat(short address, float value);
-
-    private:
-        Adafruit_FRAM_I2C* m_fram;
 };
+
+// Defines the instance of configuration settings used by the hardware.
+extern ConfigurationSettings Settings;
 
 #endif

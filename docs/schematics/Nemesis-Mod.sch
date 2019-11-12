@@ -7,24 +7,13 @@ encoding utf-8
 Sheet 1 1
 Title "Nemesis Mod"
 Date "2019-05-22"
-Rev "v1.0"
+Rev "v1.1"
 Comp "https://github.com/jeff-winn/Nemesis-Mod"
 Comment1 "For more information please visit the project website:"
 Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Comp
-L Nemesis-Mod-rescue:Adafruit_Feather_M0-Nemesis-Mod MCU
-U 1 1 5CE64CEC
-P 3750 4150
-F 0 "MCU" H 3750 5565 50  0000 C CNN
-F 1 "Adafruit_Feather_M0" H 3750 5474 50  0000 C CNN
-F 2 "" H 4400 2850 50  0001 C CNN
-F 3 "" H 4400 2850 50  0001 C CNN
-	1    3750 4150
-	1    0    0    -1  
-$EndComp
 $Comp
 L Device:Battery BATT
 U 1 1 5CE683D1
@@ -119,8 +108,6 @@ Wire Wire Line
 Wire Wire Line
 	4650 5200 4650 3900
 Wire Wire Line
-	4650 3900 4450 3900
-Wire Wire Line
 	6750 4850 6750 5050
 Wire Wire Line
 	6750 5050 4750 5050
@@ -159,15 +146,9 @@ Wire Wire Line
 Wire Wire Line
 	5100 3800 5100 2550
 Wire Wire Line
-	5100 2550 2750 2550
-Wire Wire Line
-	2750 2550 2750 3600
-Wire Wire Line
 	2750 3600 3050 3600
 Wire Wire Line
 	3050 3750 2650 3750
-Wire Wire Line
-	2650 3750 2650 2500
 Wire Wire Line
 	2650 2500 5000 2500
 Wire Wire Line
@@ -234,25 +215,15 @@ Wire Wire Line
 Wire Wire Line
 	7800 1900 7800 1800
 Wire Wire Line
-	5950 1700 2550 1700
-Wire Wire Line
-	2550 1700 2550 3900
-Wire Wire Line
 	2550 3900 3050 3900
 Wire Wire Line
 	5950 1400 4850 1400
 Wire Wire Line
 	4850 1400 4850 4350
 Wire Wire Line
-	4850 4350 4450 4350
-Wire Wire Line
 	5950 1500 2450 1500
 Wire Wire Line
-	2450 1500 2450 4050
-Wire Wire Line
 	2450 4050 3050 4050
-Wire Wire Line
-	2850 2600 2850 1200
 Wire Wire Line
 	2850 1200 5950 1200
 Connection ~ 2850 2600
@@ -279,11 +250,7 @@ F 3 "~" H 4800 6250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4450 4200 4600 4200
-Wire Wire Line
 	4450 4050 4550 4050
-Wire Wire Line
-	4550 4050 4550 5800
 Wire Wire Line
 	4550 5800 2900 5800
 Wire Wire Line
@@ -302,8 +269,6 @@ Wire Wire Line
 Connection ~ 3300 5750
 Wire Wire Line
 	3300 5750 5000 5750
-Wire Wire Line
-	2950 3150 2950 5000
 Wire Wire Line
 	2950 5700 3400 5700
 Wire Wire Line
@@ -359,7 +324,6 @@ Wire Wire Line
 	2850 4900 2850 5750
 Wire Wire Line
 	1800 5000 2950 5000
-Connection ~ 2950 5000
 Wire Wire Line
 	2950 5000 2950 5700
 Wire Wire Line
@@ -388,8 +352,6 @@ Wire Wire Line
 	9150 3750 9800 3750
 Connection ~ 9150 3750
 Wire Wire Line
-	2850 2600 2850 3450
-Wire Wire Line
 	2050 2800 2050 2900
 $Comp
 L Device:R_Small_US Resistor
@@ -414,9 +376,6 @@ F 3 "~" H 1850 3000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2050 3150 2950 3150
-Connection ~ 2950 3150
-Wire Wire Line
 	2850 3450 1650 3450
 Wire Wire Line
 	1650 3450 1650 2800
@@ -431,4 +390,45 @@ Wire Wire Line
 	1900 4200 3050 4200
 Wire Wire Line
 	2950 3150 3050 3150
+Connection ~ 2950 3150
+Connection ~ 2950 5000
+Wire Wire Line
+	4850 4350 4450 4350
+Wire Wire Line
+	4450 4200 4600 4200
+Wire Wire Line
+	4650 3900 4450 3900
+Wire Wire Line
+	5100 2550 2750 2550
+Wire Wire Line
+	5950 1700 2550 1700
+Wire Wire Line
+	2850 2600 2850 1200
+Wire Wire Line
+	2050 3150 2950 3150
+Wire Wire Line
+	4550 4050 4550 5800
+Wire Wire Line
+	2850 2600 2850 3450
+Wire Wire Line
+	2950 3150 2950 5000
+Wire Wire Line
+	2450 1500 2450 4050
+Wire Wire Line
+	2550 1700 2550 3900
+Wire Wire Line
+	2650 3750 2650 2500
+Wire Wire Line
+	2750 2550 2750 3600
+$Comp
+L Nemesis-Mod:Adafruit_nRF52_Feather MCU
+U 1 1 5DBD8417
+P 3750 4150
+F 0 "MCU" H 3750 5565 50  0000 C CNN
+F 1 "Adafruit_nRF52_Feather" H 3750 5474 50  0000 C CNN
+F 2 "" H 4400 2850 50  0001 C CNN
+F 3 "" H 4400 2850 50  0001 C CNN
+	1    3750 4150
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

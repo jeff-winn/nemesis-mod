@@ -1,28 +1,11 @@
 #ifndef APP_H
 #define APP_H
 
-#include "hardware/BluetoothManager.h"
-#include "Button.h"
 #include "Command.h"
-#include "ConfigurationSettings.h"
-#include "FeedController.h"
-#include "FlywheelController.h"
 
 // Represents the main application.
 class App {
-    public:
-        App(
-            FlywheelController* flywheelController,
-            FeedController* feedController,            
-            Button* revTrigger, 
-            Button* firingTrigger,
-            Button* resetButton,
-            BluetoothManager* ble,
-            ConfigurationSettings* config,
-            Mainboard* hardware);
-
-        ~App();
-        
+    public:        
         // Initializes the application.
         void init();
 
@@ -30,7 +13,7 @@ class App {
         void run();
 
         // Authenticates the operator (thereby releasing the software lock).
-        void authenticate(AuthenticationToken_t token);
+        void authenticate();
 
         // Identifies whether the operator is authorized.
         bool isAuthorized();
@@ -38,20 +21,18 @@ class App {
         // Revokes the operator authorization.
         void revokeAuthorization();
 
+        void onRemoteCommandReceived(Packet_t packet);
+
     protected:        
         Command* createCommandFromPacket(Packet_t packet);
-        void handleAnyExternalCommands();
+        
         void handleResetAttempt();
-    
+        void waitForRevTriggerToBePressed();
+
     private:
-        FlywheelController* m_flywheelController;
-        FeedController* m_feedController;
-        Button* m_revTrigger;
-        Button* m_firingTrigger;
-        Button* m_resetButton;
-        BluetoothManager* m_ble;
-        ConfigurationSettings* m_config;
-        Mainboard* m_hardware;
+        uint32_t revvedAtMillis;
 };
+
+void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len);
 
 #endif

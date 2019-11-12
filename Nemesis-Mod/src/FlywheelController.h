@@ -1,9 +1,6 @@
 #ifndef FLYWHEEL_CONTROLLER_H
 #define FLYWHEEL_CONTROLLER_H
 
-#include <DualG2HighPowerMotorShield.h>
-#include "hardware/Mainboard.h"
-#include "ConfigurationSettings.h"
 #include "MotorController.h"
 
 // Defines the flywheel speeds available.
@@ -16,20 +13,13 @@ enum class FlywheelSpeed {
 
 // Defines the motors within the flywheel assembly.
 enum class FlywheelMotor {
-    Motor1,
-    Motor2
+    Motor1 = 1,
+    Motor2 = 2
 };
 
 // Provides a mechanism to control the flywheel assembly.
 class FlywheelController : public MotorController {
-    public:
-        FlywheelController(
-            Mainboard* hardware,
-            DualG2HighPowerMotorShield18v18* motorController,
-            ConfigurationSettings* config);
-
-        ~FlywheelController();
-            
+    public:            
         // Initializes the controller.
         void init() override;
 
@@ -55,10 +45,6 @@ class FlywheelController : public MotorController {
         void onStop() override;
         
     private:
-        Mainboard* m_hardware;
-        DualG2HighPowerMotorShield18v18* m_driver;
-        ConfigurationSettings* m_config;
-        
         FlywheelSpeed m_speed;
         int m_m1Speed;
         int m_m2Speed;

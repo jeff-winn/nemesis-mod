@@ -1,5 +1,7 @@
+#include <Adafruit_FRAM_I2C.h>
 #include "ConfigurationSettings.h"
 #include "BitConverter.h"
+#include "Log.h"
 
 const short OPERATOR_TOKEN_LENGTH_ADDR = 0x10;
 const short OPERATOR_TOKEN_ADDR = 0x11;
@@ -13,16 +15,13 @@ const short FLYWHEEL_TRIM_VARIANCE_ADDR = 0x124;
 const short FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR = 0x128;
 const short FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR = 0x132;
 
-ConfigurationSettings::ConfigurationSettings(Adafruit_FRAM_I2C* fram) {
-    m_fram = fram;
-}
+ConfigurationSettings Settings = ConfigurationSettings();
 
-ConfigurationSettings::~ConfigurationSettings() {
-    m_fram = NULL;
-}
+// Defines the FRAM module for persistent data storage.
+Adafruit_FRAM_I2C framDriver = Adafruit_FRAM_I2C();
 
 void ConfigurationSettings::init() {
-    m_fram->begin();
+    framDriver.begin();
 
     if (!initialized()) {
         defaultSettings();
@@ -33,11 +32,11 @@ void ConfigurationSettings::init() {
 }
 
 bool ConfigurationSettings::initialized() {
-    return m_fram->read8(0x0) != 0;
+    return framDriver.read8(0x1) != 0;
 }
 
 void ConfigurationSettings::setInitialized(bool value) {
-    m_fram->write8(0x0, (value ? 0xFF : 0x00));
+    framDriver.write8(0x1, (value ? 0xFF : 0x00));
 }
 
 void ConfigurationSettings::defaultSettings() {
@@ -51,40 +50,42 @@ void ConfigurationSettings::defaultSettings() {
     setFlywheelTrimVariance(0.1F);
     setFlywheelM1TrimAdjustment(1.0F);
     setFlywheelM2TrimAdjustment(1.0F);
+
+    Log.println("Configuration settings reset to defaults.");
 }
 
 void ConfigurationSettings::clear() {
     for (int addr = 0; addr < 32000; addr++) {
-        m_fram->write8(addr, 0x00);
+        framDriver.write8(addr, 0x00);
     }
 }
 
-AuthenticationToken_t ConfigurationSettings::getAuthenticationToken() {
-    AuthenticationToken_t result;
+// AuthenticationToken_t ConfigurationSettings::getAuthenticationToken() {
+//     AuthenticationToken_t result;
 
-    result.length = m_fram->read8(OPERATOR_TOKEN_LENGTH_ADDR);
-    if (result.length > 0) {
-        result.data = new byte[result.length];
+//     result.length = framDriver.read8(OPERATOR_TOKEN_LENGTH_ADDR);
+//     if (result.length > 0) {
+//         result.data = new byte[result.length];
 
-        for (byte index = 0; index < result.length; index++) {
-            result.data[index] = m_fram->read8(OPERATOR_TOKEN_ADDR + index);
-        }
-    }
+//         for (byte index = 0; index < result.length; index++) {
+//             result.data[index] = framDriver.read8(OPERATOR_TOKEN_ADDR + index);
+//         }
+//     }
 
-    return result;
-}
+//     return result;
+// }
 
-void ConfigurationSettings::setAuthenticationToken(AuthenticationToken_t token) {
-    m_fram->write8(OPERATOR_TOKEN_ADDR, token.length);
+// void ConfigurationSettings::setAuthenticationToken(AuthenticationToken_t token) {
+//     framDriver.write8(OPERATOR_TOKEN_ADDR, token.length);
 
-    for (byte index = 0; index < token.length; index++) {
-        m_fram->write8(OPERATOR_TOKEN_ADDR + index, token.data[index]);
-    }
-}
+//     for (byte index = 0; index < token.length; index++) {
+//         framDriver.write8(OPERATOR_TOKEN_ADDR + index, token.data[index]);
+//     }
+// }
 
 void ConfigurationSettings::resetAuthenticationToken() {
     for (uint16_t addr = OPERATOR_TOKEN_ADDR; addr < FEED_NORMAL_SPEED_ADDR; addr++) {
-        m_fram->write8(addr, 0x00);
+        framDriver.write8(addr, 0x00);
     }
 }
 
@@ -164,7 +165,7 @@ int ConfigurationSettings::readInt32(short address) {
     byte raw[4];
 
     for (auto index = 0; index < 4; index++) {
-        raw[index] = m_fram->read8(address + index);
+        raw[index] = framDriver.read8(address + index);
     }
 
     return Convert.toInt32(raw);
@@ -174,7 +175,7 @@ void ConfigurationSettings::writeInt32(short address, int value) {
     byte* raw = Convert.toInt32Array(value);
 
     for (auto index = 0; index < 4; index++) {
-        m_fram->write8(address + index, raw[index]);
+        framDriver.write8(address + index, raw[index]);
     }
 
     delete[] raw;
@@ -184,7 +185,7 @@ float ConfigurationSettings::readFloat(short address) {
     byte raw[4];
 
     for (auto index = 0; index < 4; index++) {
-        raw[index] = m_fram->read8(address + index);
+        raw[index] = framDriver.read8(address + index);
     }
 
     return Convert.toFloat(raw);
@@ -194,7 +195,7 @@ void ConfigurationSettings::writeFloat(short address, float value) {
     byte* raw = Convert.toFloatArray(value);
 
     for (auto index = 0; index < 4; index++) {
-        m_fram->write8(address + index, raw[index]);
+        framDriver.write8(address + index, raw[index]);
     }
 
     delete[] raw;

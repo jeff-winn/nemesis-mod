@@ -1,44 +1,36 @@
 #include <Arduino.h>
+#include "src/bluetooth/RemoteCommandReceivedCallback.h"
+#include "src/bluetooth/BluetoothController.h"
 #include "src/App.h"
+#include "src/Log.h"
 
-// Defines the driver which controls the flywheel motors.
-DualG2HighPowerMotorShield18v18 flywheelDriver(9, -1, 5, -1, A0, 10, -1, 6, -1, A1);
-
-// Defines the driver which controls the belt feed motor.
-G2HighPowerMotorShield18v17 beltDriver(17, -1, 11, -1, A2);
-
-// Defines the driver for the onboard bluetooth module.
-Adafruit_BluefruitLE_SPI bluetoothDriver(8, 7, 4);
-
-// Defines the FRAM module for persistent data storage.
-Adafruit_FRAM_I2C fram;
-
-ConfigurationSettings config(&fram);
-Mainboard mainboard;
-
-App* app;
+App Application = App();
+BluetoothController BLE = BluetoothController();
 
 void setup() {
-    app = new App(
-        new FlywheelController(
-            &mainboard, &flywheelDriver, &config),
-        new FeedController(
-            &mainboard, &beltDriver, &config),
-        new Button(
-            new DigitalPin(13, &mainboard)),
-        new Button(
-            new DigitalPin(12, &mainboard)),
-        new Button(
-            new DigitalPin(18, &mainboard), true),
-        new BluetoothManager(
-            &bluetoothDriver),
-        &config,
-        &mainboard
-    );
+    Log.waitForUsbConnection();
+    Application.init();
 
-    app->init();
+    setupBle();
+}
+
+void setupBle() {
+    SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
+    BLE.init();
+    BLE.startAdvertising();
+}
+
+// Receives notifications whenever a bluetooth command has been received. 
+void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {
+    Packet_t packet;
+    packet.header.type = type;
+    packet.header.subtype = subtype;
+    packet.header.len = len;
+    packet.body = data;
+
+    Application.onRemoteCommandReceived(packet);
 }
 
 void loop() {
-    app->run();
+    Application.run();
 }

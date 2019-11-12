@@ -9,7 +9,7 @@ void FlywheelTrimAdjustmentCommand::handleImpl(Packet_t packet) {
 }
 
 FlywheelMotor FlywheelTrimAdjustmentCommand::getMotorFromPacket(Packet_t packet) {
-    auto value = packet.body[0];
+    auto value = packet.header.subtype;
 
     switch (value) {
         case 1: {
@@ -22,5 +22,5 @@ FlywheelMotor FlywheelTrimAdjustmentCommand::getMotorFromPacket(Packet_t packet)
 }
 
 float FlywheelTrimAdjustmentCommand::getAdjustmentFromPacket(Packet_t packet) {
-    return Convert.toFloat(packet.body + 1);
+    return Convert.toFloat(packet.body);
 }

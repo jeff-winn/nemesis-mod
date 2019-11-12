@@ -5,8 +5,8 @@
 
 // Describes the header of a packet.
 struct PacketHeader_t {
-    byte version = 0;
     byte type = 0;
+    byte subtype = 0;
     byte len = 0;
 };
 
