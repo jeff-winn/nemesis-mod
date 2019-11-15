@@ -12,7 +12,7 @@
                 "ARDUINO=10607",
                 "ARDUINO_NRF52832_FEATHER",
                 "ARDUINO_ARCH_NRF52",
-                "ARDUINO_BSP_VERSION=\"0.14.5\"",
+                "ARDUINO_BSP_VERSION=\"0.14.6\"",
                 "NRF52832_XXAA",
                 "NRF52",
                 "SOFTDEVICE_PRESENT",

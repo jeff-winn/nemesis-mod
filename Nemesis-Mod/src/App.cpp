@@ -74,8 +74,9 @@ void App::run() {
 void App::waitForRevTriggerToBePressed() {
     auto diff = millis() - revvedAtMillis;
     if (diff >= SYSTEM_OFF_IN_MSECS) {
-        Log.println("Shutting down.");
+#if __RELEASE__
         MCU.waitforEventSafe(REV_BUTTON_PIN, HIGH);
+#endif
     }
     else {
         MCU.delaySafe(50);
