@@ -1,4 +1,5 @@
 #include "BluetoothController.h"
+#include "Log.h"
 
 BluetoothController::BluetoothController() {
   _blasterService = BlasterService();
@@ -25,16 +26,19 @@ void BluetoothController::init() {
 
   _configService.begin();
   _configService.init();
-}
 
-void BluetoothController::startAdvertising() {
   Bluefruit.Advertising.addFlags(BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE);
   Bluefruit.Advertising.addTxPower();
-
   Bluefruit.Advertising.addService(_blasterService);
   Bluefruit.Advertising.addService(_configService);
   Bluefruit.Advertising.addName();
 
+  Bluefruit.Advertising.restartOnDisconnect(true);
+  Bluefruit.Advertising.setInterval(32, 244);
+  Bluefruit.Advertising.setFastTimeout(30);
+}
+
+void BluetoothController::startAdvertising() {
   /* Start Advertising
     * - Enable auto advertising if disconnected
     * - Interval:  fast mode = 20 ms, slow mode = 152.5 ms
@@ -44,8 +48,11 @@ void BluetoothController::startAdvertising() {
     * For recommended advertising interval
     * https://developer.apple.com/library/content/qa/qa1931/_index.html   
   */
-  Bluefruit.Advertising.restartOnDisconnect(true);
-  Bluefruit.Advertising.setInterval(32, 244);
-  Bluefruit.Advertising.setFastTimeout(30);
   Bluefruit.Advertising.start(0);
+}
+
+void BluetoothController::clearBonds() {
+  Bluefruit.clearBonds();
+
+  Log.println("Cleared Bluetooth bonds.");
 }

@@ -2,8 +2,8 @@
 #define BLUETOOTH_CONTROLLER_H
 
 #include <bluefruit.h>
-#include "BlasterService.h"
-#include "ConfigurationService.h"
+#include "bluetooth/BlasterService.h"
+#include "bluetooth/ConfigurationService.h"
 
 // Provides a controller for the on-board bluetooth module.
 class BluetoothController {
@@ -14,6 +14,8 @@ class BluetoothController {
 
         void init();
         void startAdvertising();
+
+        void clearBonds();
         
     private:
         BlasterService _blasterService;

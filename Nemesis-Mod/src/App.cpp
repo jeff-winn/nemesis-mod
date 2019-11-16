@@ -10,19 +10,14 @@
 #include "FlywheelController.h"
 #include "Log.h"
 
+const uint32_t SYSTEM_OFF_IN_MSECS = 300000; // 5 minutes
 const uint32_t REV_BUTTON_PIN = 16;
 const uint32_t FIRING_BUTTON_PIN = 15;
-const uint32_t RESET_BUTTON_PIN = 28;
 
 FlywheelController Flywheels = FlywheelController();
 FeedController Belt = FeedController();
 Button RevTrigger = Button(REV_BUTTON_PIN);
 Button FiringTrigger = Button(FIRING_BUTTON_PIN);
-Button ResetButton = Button(RESET_BUTTON_PIN, true);
-
-const uint32_t SYSTEM_OFF_IN_MSECS = 300000; // 5 minutes
-const uint16_t CLEAR_HOLD_IN_MSECS = 30000;  // 30 seconds
-const uint16_t RESET_HOLD_IN_MSECS = 5000;   // 5 seconds;
 
 // Indicates whether the operator is authorized (allowing release of the software lock).
 bool IS_OPERATOR_AUTHORIZED = true;
@@ -33,39 +28,35 @@ bool IS_OPERATOR_AUTHORIZED = true;
 // #endif
 
 void App::run() {
-    if (ResetButton.isPressed()) {
-        handleResetAttempt();
-    }
-    else {
-        if (isAuthorized() && RevTrigger.isPressed()) {
-            Log.println("Revving flywheels...");
+    if (isAuthorized() && RevTrigger.isPressed()) {
+        Log.println("Revving flywheels...");
 
-            revvedAtMillis = millis();
-            Flywheels.start();
+        revvedAtMillis = millis();
+        Flywheels.start();
 
-            auto firing = false;
-            while (RevTrigger.isPressed()) {
-                if (FiringTrigger.isPressed()) {
-                    if (!firing) {
-                        firing = true;
+        auto firing = false;
+        while (RevTrigger.isPressed()) {
+            if (FiringTrigger.isPressed()) {
+                if (!firing) {
+                    firing = true;
 
-                        Log.println("Firing!");
-                        Belt.start();
-                    }
+                    Log.println("Firing!");
+                    Belt.start();
                 }
-                else {
-                    Belt.stop();
-                    firing = false;
-                }
-
-                MCU.delaySafe(10);
+            }
+            else {
+                Belt.stop();
+                firing = false;
             }
 
-            Flywheels.stop();
-            revvedAtMillis = millis();
-
-            Log.println("Flywheels stopped.");
+            MCU.delaySafe(10);
         }
+
+        Belt.stop();
+        Flywheels.stop();
+        revvedAtMillis = millis();
+
+        Log.println("Flywheels stopped.");
     }
 
     waitForRevTriggerToBePressed();
@@ -93,7 +84,6 @@ void App::init() {
     Settings.init();  
     FiringTrigger.init();
     RevTrigger.init();
-    ResetButton.init();
     Flywheels.init();
     Belt.init();
 
@@ -153,30 +143,6 @@ Command* App::createCommandFromPacket(Packet_t packet) {
     }
 
     return NULL;
-}
-
-void App::handleResetAttempt() {    
-    auto started = millis();
-    while (ResetButton.isPressed()) {
-        MCU.delaySafe(50);
-    }
-
-    auto successful = false;
-    auto diff = millis() - started;
-
-    if (diff >= CLEAR_HOLD_IN_MSECS) {
-        Settings.clear();
-        successful = true;
-    }
-    else if (diff >= RESET_HOLD_IN_MSECS) {
-        Settings.resetAuthenticationToken();
-        Settings.defaultSettings();
-        successful = true;
-    }
-
-    if (successful) {
-        revokeAuthorization();
-    }
 }
 
 void App::revokeAuthorization() {
