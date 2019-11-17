@@ -50,4 +50,6 @@ class FlywheelController : public MotorController {
         int m_m2Speed;
 };
 
+extern FlywheelController Flywheels;
+
 #endif

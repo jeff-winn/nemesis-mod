@@ -31,4 +31,6 @@ class FeedController : public MotorController {
         int m_m1speed;
 };
 
+extern FeedController Belt;
+
 #endif

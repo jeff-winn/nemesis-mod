@@ -24,4 +24,6 @@ class BluetoothController {
         BLEDis _discoveryService;
 };
 
+extern BluetoothController BLE;
+
 #endif /* BLUETOOTH_CONTROLLER_H */

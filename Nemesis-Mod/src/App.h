@@ -26,12 +26,15 @@ class App {
     protected:        
         Command* createCommandFromPacket(Packet_t packet);
         
-        void handleResetAttempt();
         void waitForRevTriggerToBePressed();
+        void sendCurrentNotifications(uint32_t interval);
 
     private:
         uint32_t revvedAtMillis;
+        uint32_t lastCurrentNotifiedAtMillis;
 };
+
+extern App Application;
 
 void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len);
 

@@ -1,6 +1,8 @@
 #include "BluetoothController.h"
 #include "Log.h"
 
+BluetoothController BLE = BluetoothController();
+
 BluetoothController::BluetoothController() {
   _blasterService = BlasterService();
   _configService = ConfigurationService();

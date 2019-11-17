@@ -1,9 +1,11 @@
 #include <Arduino.h>
-#include "src/bluetooth/RemoteCommandReceivedCallback.h"
 #include "src/hardware/Mainboard.h"
 #include "src/App.h"
 #include "src/BluetoothController.h"
+#include "src/FeedController.h"
+#include "src/FlywheelController.h"
 #include "src/Button.h"
+#include "src/Callbacks.h"
 #include "src/ConfigurationSettings.h"
 #include "src/Log.h"
 
@@ -11,13 +13,14 @@ const uint16_t CLEAR_HOLD_IN_MSECS = 30000;  // 30 seconds
 const uint16_t RESET_HOLD_IN_MSECS = 5000;   // 5 seconds
 const uint32_t RESET_BUTTON_PIN = 28;
 
-App Application = App();
-BluetoothController BLE = BluetoothController();
 Button ResetButton = Button(RESET_BUTTON_PIN, true);
 
 void setup() {
     Log.waitForUsbConnection();
 
+    Settings.init(); 
+    Flywheels.init();
+    Belt.init();
     Application.init();
     ResetButton.init();
     BLE.init();

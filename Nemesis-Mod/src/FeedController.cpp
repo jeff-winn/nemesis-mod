@@ -4,6 +4,8 @@
 #include "FeedController.h"
 #include "Log.h"
 
+FeedController Belt = FeedController();
+
 // Defines the driver which controls the belt feed motor.
 G2HighPowerMotorShield18v17 beltDriver = G2HighPowerMotorShield18v17(17, -1, 7, -1, A2);
 

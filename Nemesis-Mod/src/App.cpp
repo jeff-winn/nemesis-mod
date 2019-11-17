@@ -10,12 +10,15 @@
 #include "FlywheelController.h"
 #include "Log.h"
 
+App Application = App();
+
 const uint32_t SYSTEM_OFF_IN_MSECS = 300000; // 5 minutes
+const uint32_t NOTIFICATION_INTERVAL_IN_MSECS = 10000; // 5 seconds
+const uint32_t NOTIFICATION_INTERVAL_WHILE_ACTIVE_IN_MSECS = 1000; // 1 second
+
 const uint32_t REV_BUTTON_PIN = 16;
 const uint32_t FIRING_BUTTON_PIN = 15;
 
-FlywheelController Flywheels = FlywheelController();
-FeedController Belt = FeedController();
 Button RevTrigger = Button(REV_BUTTON_PIN);
 Button FiringTrigger = Button(FIRING_BUTTON_PIN);
 
@@ -28,6 +31,8 @@ bool IS_OPERATOR_AUTHORIZED = true;
 // #endif
 
 void App::run() {
+    sendCurrentNotifications(NOTIFICATION_INTERVAL_IN_MSECS);
+
     if (isAuthorized() && RevTrigger.isPressed()) {
         Log.println("Revving flywheels...");
 
@@ -36,6 +41,8 @@ void App::run() {
 
         auto firing = false;
         while (RevTrigger.isPressed()) {
+            sendCurrentNotifications(NOTIFICATION_INTERVAL_WHILE_ACTIVE_IN_MSECS);
+
             if (FiringTrigger.isPressed()) {
                 if (!firing) {
                     firing = true;
@@ -81,15 +88,15 @@ bool App::isAuthorized() {
 void App::init() {
     Log.println("Initializing application...");
 
-    Settings.init();  
     FiringTrigger.init();
     RevTrigger.init();
-    Flywheels.init();
-    Belt.init();
 
     Flywheels.setSpeed(FlywheelSpeed::Normal);
     Belt.setSpeed(BeltSpeed::Normal);
-    revvedAtMillis = millis();
+
+    auto current = millis();
+    revvedAtMillis = current;
+    lastCurrentNotifiedAtMillis = current;
 
     Log.println("Completed application initialization.\n");
 }
@@ -147,4 +154,16 @@ Command* App::createCommandFromPacket(Packet_t packet) {
 
 void App::revokeAuthorization() {
     IS_OPERATOR_AUTHORIZED = false;
+}
+
+void App::sendCurrentNotifications(uint32_t interval) {
+    auto diff = millis() - lastCurrentNotifiedAtMillis;
+    if (diff < interval) {
+        return;
+    }
+
+    auto m1 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor1);
+    auto m2 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor2);    
+
+    lastCurrentNotifiedAtMillis = millis();
 }
