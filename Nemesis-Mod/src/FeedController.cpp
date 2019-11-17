@@ -1,8 +1,8 @@
 #include "hardware/G2HighPowerMotorShield.h"
-#include "hardware/Mainboard.h"
 #include "ConfigurationSettings.h"
 #include "FeedController.h"
 #include "Log.h"
+#include "Mainboard.h"
 
 FeedController Belt = FeedController();
 

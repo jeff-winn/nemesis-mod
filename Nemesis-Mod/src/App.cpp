@@ -2,7 +2,6 @@
 #include "commands/ChangeConfigurationSettingCommand.h"
 #include "commands/FlywheelTrimAdjustmentCommand.h"
 #include "commands/FlywheelSpeedCommand.h"
-#include "hardware/Mainboard.h"
 #include "App.h"
 #include "BluetoothController.h"
 #include "Button.h"
@@ -11,6 +10,7 @@
 #include "FeedController.h"
 #include "FlywheelController.h"
 #include "Log.h"
+#include "Mainboard.h"
 
 App Application = App();
 

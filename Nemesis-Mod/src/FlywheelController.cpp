@@ -1,9 +1,9 @@
 #include <DualG2HighPowerMotorShield.h>
 #include <stddef.h>
-#include "hardware/Mainboard.h"
 #include "ConfigurationSettings.h"
 #include "FlywheelController.h"
 #include "Log.h"
+#include "Mainboard.h"
 
 FlywheelController Flywheels = FlywheelController();
 

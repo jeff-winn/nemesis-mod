@@ -1,4 +1,4 @@
-#include "hardware/Mainboard.h"
+#include "Mainboard.h"
 #include "Button.h"
 
 Button::Button(uint32_t pin, bool inverted) {
