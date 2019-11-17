@@ -4,7 +4,9 @@
 #include "commands/FlywheelSpeedCommand.h"
 #include "hardware/Mainboard.h"
 #include "App.h"
+#include "BluetoothController.h"
 #include "Button.h"
+#include "Callbacks.h"
 #include "Command.h"
 #include "FeedController.h"
 #include "FlywheelController.h"
@@ -85,8 +87,28 @@ bool App::isAuthorized() {
     return IS_OPERATOR_AUTHORIZED;
 }
 
+// Receives notifications whenever a bluetooth command has been received. 
+void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {
+    Packet_t packet;
+    packet.header.type = type;
+    packet.header.subtype = subtype;
+    packet.header.len = len;
+    packet.body = data;
+
+    Application.onRemoteCommandReceived(packet);
+}
+
 void App::init() {
     Log.println("Initializing application...");
+
+    Settings.init(); 
+    Flywheels.init();
+    Belt.init();
+
+    SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
+
+    BLE.init();
+    BLE.startAdvertising();
 
     FiringTrigger.init();
     RevTrigger.init();
@@ -166,4 +188,22 @@ void App::sendCurrentNotifications(uint32_t interval) {
     auto m2 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor2);    
 
     lastCurrentNotifiedAtMillis = millis();
+}
+
+void App::clear() {
+    Settings.clear();
+
+    resetCore();
+}
+
+void App::reset() {
+    Settings.resetAuthenticationToken();
+    Settings.defaultSettings();
+
+    resetCore();
+}
+
+void App::resetCore() {
+    revokeAuthorization();
+    BLE.clearBonds();
 }

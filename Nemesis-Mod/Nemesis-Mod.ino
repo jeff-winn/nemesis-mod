@@ -1,12 +1,7 @@
 #include <Arduino.h>
 #include "src/hardware/Mainboard.h"
 #include "src/App.h"
-#include "src/BluetoothController.h"
-#include "src/FeedController.h"
-#include "src/FlywheelController.h"
 #include "src/Button.h"
-#include "src/Callbacks.h"
-#include "src/ConfigurationSettings.h"
 #include "src/Log.h"
 
 const uint16_t CLEAR_HOLD_IN_MSECS = 30000;  // 30 seconds
@@ -17,27 +12,9 @@ Button ResetButton = Button(RESET_BUTTON_PIN, true);
 
 void setup() {
     Log.waitForUsbConnection();
-
-    Settings.init(); 
-    Flywheels.init();
-    Belt.init();
-    Application.init();
+    
     ResetButton.init();
-    BLE.init();
-
-    SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
-    BLE.startAdvertising();
-}
-
-// Receives notifications whenever a bluetooth command has been received. 
-void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {
-    Packet_t packet;
-    packet.header.type = type;
-    packet.header.subtype = subtype;
-    packet.header.len = len;
-    packet.body = data;
-
-    Application.onRemoteCommandReceived(packet);
+    Application.init();
 }
 
 void loop() {
@@ -59,17 +36,9 @@ void handleResetAttempt() {
     auto diff = millis() - started;
 
     if (diff >= CLEAR_HOLD_IN_MSECS) {
-        Settings.clear();
-        successful = true;
+        Application.clear();
     }
     else if (diff >= RESET_HOLD_IN_MSECS) {
-        Settings.resetAuthenticationToken();
-        Settings.defaultSettings();
-        successful = true;
-    }
-
-    if (successful) {
-        Application.revokeAuthorization();
-        BLE.clearBonds();
+        Application.reset();
     }
 }
