@@ -1,7 +1,7 @@
 #include "BluetoothController.h"
 #include "Log.h"
 
-const uint32_t NOTIFICATION_INTERVAL_IN_MSECS = 10000; // 5 seconds
+const uint32_t NOTIFICATION_INTERVAL_IN_MSECS = 10000; // 10 seconds
 const uint32_t NOTIFICATION_INTERVAL_WHILE_ACTIVE_IN_MSECS = 1000; // 1 second
 
 BluetoothController BLE = BluetoothController();
@@ -63,6 +63,10 @@ void BluetoothController::clearBonds() {
 }
 
 void BluetoothController::notifyBeltCurrentMilliamps(uint32_t m1, bool isActive) {
+  if (!Bluefruit.connected()) {
+    return;
+  }
+
   auto sendNotification = false;
   if (isActive && shouldSendNotification(lastBeltMilliampsNotifyAtMillis, NOTIFICATION_INTERVAL_WHILE_ACTIVE_IN_MSECS)) {
     sendNotification = true;
@@ -78,6 +82,10 @@ void BluetoothController::notifyBeltCurrentMilliamps(uint32_t m1, bool isActive)
 }
 
 void BluetoothController::notifyFlywheelCurrentMilliamps(uint32_t m1, uint32_t m2, bool isActive) {
+  if (!Bluefruit.connected()) {
+    return;
+  }
+
   auto sendNotification = false;
   if (isActive && shouldSendNotification(lastFlywheelMilliampsNotifyAtMillis, NOTIFICATION_INTERVAL_WHILE_ACTIVE_IN_MSECS)) {
     sendNotification = true;
