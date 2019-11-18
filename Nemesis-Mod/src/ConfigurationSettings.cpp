@@ -3,6 +3,7 @@
 #include "BitConverter.h"
 #include "Log.h"
 
+const short HAS_EXISTING_PAIRING_ADDR = 0x02;
 const short OPERATOR_TOKEN_LENGTH_ADDR = 0x10;
 const short OPERATOR_TOKEN_ADDR = 0x11;
 const short FEED_NORMAL_SPEED_ADDR = 0x100;
@@ -40,6 +41,7 @@ void ConfigurationSettings::setInitialized(bool value) {
 }
 
 void ConfigurationSettings::defaultSettings() {
+    setExistingPairing(false);
     setFeedNormalSpeed(100);
     setFeedHighSpeed(175);
     setFeedMaxSpeed(400);
@@ -82,6 +84,19 @@ void ConfigurationSettings::clear() {
 //         framDriver.write8(OPERATOR_TOKEN_ADDR + index, token.data[index]);
 //     }
 // }
+
+bool ConfigurationSettings::hasExistingPairing() {
+    return framDriver.read8(HAS_EXISTING_PAIRING_ADDR) != 0x00;
+}
+
+void ConfigurationSettings::setExistingPairing(bool value) {
+    uint8_t raw = 0x00;
+    if (value) {
+        raw = 0xFF;
+    }
+
+    framDriver.write8(HAS_EXISTING_PAIRING_ADDR, raw);
+}
 
 void ConfigurationSettings::resetAuthenticationToken() {
     for (uint16_t addr = OPERATOR_TOKEN_ADDR; addr < FEED_NORMAL_SPEED_ADDR; addr++) {

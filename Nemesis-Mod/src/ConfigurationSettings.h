@@ -10,6 +10,9 @@ class ConfigurationSettings {
         // void setAuthenticationToken(AuthenticationToken_t token);
         void resetAuthenticationToken();
 
+        void setExistingPairing(bool value);
+        bool hasExistingPairing();
+
         int getFeedNormalSpeed();
         void setFeedNormalSpeed(int value);
 
