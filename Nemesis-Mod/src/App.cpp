@@ -15,9 +15,6 @@
 App Application = App();
 
 const uint32_t SYSTEM_OFF_IN_MSECS = 300000; // 5 minutes
-const uint32_t NOTIFICATION_INTERVAL_IN_MSECS = 10000; // 5 seconds
-const uint32_t NOTIFICATION_INTERVAL_WHILE_ACTIVE_IN_MSECS = 1000; // 1 second
-
 const uint32_t REV_BUTTON_PIN = 16;
 const uint32_t FIRING_BUTTON_PIN = 15;
 
@@ -33,7 +30,7 @@ bool IS_OPERATOR_AUTHORIZED = true;
 // #endif
 
 void App::run() {
-    sendCurrentNotifications(NOTIFICATION_INTERVAL_IN_MSECS);
+    sendCurrentNotifications();
 
     if (isAuthorized() && RevTrigger.isPressed()) {
         Log.println("Revving flywheels...");
@@ -43,7 +40,7 @@ void App::run() {
 
         auto firing = false;
         while (RevTrigger.isPressed()) {
-            sendCurrentNotifications(NOTIFICATION_INTERVAL_WHILE_ACTIVE_IN_MSECS);
+            sendCurrentNotifications();
 
             if (FiringTrigger.isPressed()) {
                 if (!firing) {
@@ -116,9 +113,7 @@ void App::init() {
     Flywheels.setSpeed(FlywheelSpeed::Normal);
     Belt.setSpeed(BeltSpeed::Normal);
 
-    auto current = millis();
-    revvedAtMillis = current;
-    lastCurrentNotifiedAtMillis = current;
+    revvedAtMillis = millis();
 
     Log.println("Completed application initialization.\n");
 }
@@ -178,16 +173,13 @@ void App::revokeAuthorization() {
     IS_OPERATOR_AUTHORIZED = false;
 }
 
-void App::sendCurrentNotifications(uint32_t interval) {
-    auto diff = millis() - lastCurrentNotifiedAtMillis;
-    if (diff < interval) {
-        return;
-    }
+void App::sendCurrentNotifications() {
+    auto flywheel1 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor1);
+    auto flywheel2 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor2);
+    BLE.notifyFlywheelCurrentMilliamps(flywheel1, flywheel2, RevTrigger.isPressed());
 
-    auto m1 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor1);
-    auto m2 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor2);    
-
-    lastCurrentNotifiedAtMillis = millis();
+    auto feed = Belt.getMotorCurrentMilliamps();
+    BLE.notifyBeltCurrentMilliamps(feed, FiringTrigger.isPressed());
 }
 
 void App::clear() {

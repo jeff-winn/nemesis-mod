@@ -31,13 +31,12 @@ class App {
         Command* createCommandFromPacket(Packet_t packet);
         
         void waitForRevTriggerToBePressed();
-        void sendCurrentNotifications(uint32_t interval);
+        void sendCurrentNotifications();
 
         void resetCore();
 
     private:
         uint32_t revvedAtMillis;
-        uint32_t lastCurrentNotifiedAtMillis;
 };
 
 extern App Application;

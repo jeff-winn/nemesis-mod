@@ -18,6 +18,10 @@ void FeedController::init() {
     Log.println("Completed initializing feed controller.");
 }
 
+unsigned int FeedController::getMotorCurrentMilliamps() {
+    return beltDriver.getCurrentMilliamps();
+}
+
 void FeedController::onStart() {
     m_m1speed = calculateMotorSpeed();
 

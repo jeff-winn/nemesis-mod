@@ -16,6 +16,9 @@ class FeedController : public MotorController {
         // Initializes the controller.
         void init() override;
 
+        // Gets the current of the motor specified (in milliamps).
+        unsigned int getMotorCurrentMilliamps();
+
         // Sets the belt speed.
         void setSpeed(BeltSpeed speed);
 

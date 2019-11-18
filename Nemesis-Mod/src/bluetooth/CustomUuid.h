@@ -18,6 +18,15 @@ extern uint8_t UUID128_CHR_FLYWHEEL_M1TRIM_SPEED[16];
 // Defines the custom 128-bit UUID for the Flywheel M2 Trim Speed GATT characteristic.
 extern uint8_t UUID128_CHR_FLYWHEEL_M2TRIM_SPEED[16];
 
+// Defines the custom 128-bit UUID for the Flywheel M1 current (in milliamps) GATT characteristic.
+extern uint8_t UUID128_CHR_FLYWHEEL_M1_CURRENT_MILLIAMPS[16];
+
+// Defines the custom 128-bit UUID for the Flywheel M2 current (in milliamps) GATT characteristic.
+extern uint8_t UUID128_CHR_FLYWHEEL_M2_CURRENT_MILLIAMPS[16];
+
+// Defines the custom 128-bit UUID for the Belt M1 current (in milliamps) GATT characteristic.
+extern uint8_t UUID128_CHR_BELT_M1_CURRENT_MILLIAMPS[16];
+
 // Defines the custom 128-bit UUID for the Configuration GATT service.
 extern uint8_t UUID128_SVC_CONFIGURATION[16];
 
