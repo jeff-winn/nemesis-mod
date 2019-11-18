@@ -19,7 +19,7 @@ BluetoothController::~BluetoothController() {
 void BluetoothController::init() {
   Bluefruit.begin();
   Bluefruit.setName("Nerf Nemesis MXVII-10K");
-
+  
   Bluefruit.Periph.begin();
 
   _discoveryService.setManufacturer("Jeff Winn");
@@ -59,7 +59,7 @@ void BluetoothController::startAdvertising() {
 void BluetoothController::clearBonds() {
   Bluefruit.clearBonds();
 
-  Log.println("Cleared Bluetooth bonds.");
+  Log.println("Cleared bluetooth bonds.");
 }
 
 void BluetoothController::notifyBeltCurrentMilliamps(uint32_t m1, bool isActive) {
