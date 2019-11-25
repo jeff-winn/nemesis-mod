@@ -90,18 +90,10 @@ void BlasterService::init() {
 }
 
 void BlasterService::notifyBeltCurrentMilliamps(uint32_t m1) {
-    if (!Bluefruit.connected()) {
-        return;
-    }
-
     _beltM1CurrentMilliamps.notify32(m1);
 }
 
 void BlasterService::notifyFlywheelCurrentMilliamps(uint32_t m1, uint32_t m2) {
-    if (!Bluefruit.connected()) {
-        return;
-    }
-
     _flywheelM1CurrentMilliamps.notify32(m1);
     _flywheelM2CurrentMilliamps.notify32(m2);    
 }
