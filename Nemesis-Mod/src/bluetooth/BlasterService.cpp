@@ -37,7 +37,7 @@ void BlasterService::init() {
     _flywheelSpeed.setUserDescriptor("Flywheel Speed");
     _flywheelSpeed.setWriteCallback(onFlywheelSpeedWriteCallback);
     _flywheelSpeed.begin();
-    _flywheelSpeed.write8(0x00);
+    _flywheelSpeed.write8(0x01);
 
     _flywheelM1TrimSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     _flywheelM1TrimSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
@@ -65,7 +65,7 @@ void BlasterService::init() {
     _beltSpeed.setUserDescriptor("Belt Speed");
     _beltSpeed.setWriteCallback(onBeltSpeedWriteCallback);
     _beltSpeed.begin();
-    _beltSpeed.write8(0x00);
+    _beltSpeed.write8(0x01);
 
     _flywheelM1CurrentMilliamps.setProperties(CHR_PROPS_NOTIFY);
     _flywheelM1CurrentMilliamps.setPermission(SECMODE_ENC_NO_MITM, SECMODE_NO_ACCESS);

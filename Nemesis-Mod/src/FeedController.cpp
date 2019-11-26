@@ -59,6 +59,10 @@ int FeedController::calculateStepFromSpeed(int speed) {
     return speed / 4;
 }
 
+BeltSpeed FeedController::getSpeed() {
+    return m_speed;
+}
+
 void FeedController::setSpeed(BeltSpeed speed) {
     m_speed = speed;
     Log.println("Feed speed changed.");   

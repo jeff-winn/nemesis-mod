@@ -103,6 +103,10 @@ void FlywheelController::onStop() {
     m_m2Speed = 0;
 }
 
+FlywheelSpeed FlywheelController::getSpeed() {
+    return m_speed;
+}
+
 void FlywheelController::setSpeed(FlywheelSpeed speed) {
     m_speed = speed;
     Log.println("Flywheel speed changed.");
