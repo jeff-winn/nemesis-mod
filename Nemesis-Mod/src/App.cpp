@@ -100,18 +100,17 @@ void App::init() {
 
     Settings.init(); 
     Flywheels.init();
+    Flywheels.setSpeed(FlywheelSpeed::Normal);
+
     Belt.init();
+    Belt.setSpeed(BeltSpeed::Normal);
 
     SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
-
     BLE.init();
     BLE.startAdvertising();
 
     FiringTrigger.init();
     RevTrigger.init();
-
-    Flywheels.setSpeed(FlywheelSpeed::Normal);
-    Belt.setSpeed(BeltSpeed::Normal);
 
     revvedAtMillis = millis();
 
