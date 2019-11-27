@@ -12,6 +12,10 @@ class App {
         // Runs the application.
         void run();
 
+        void reset();
+
+        void clear();
+
         // Authenticates the operator (thereby releasing the software lock).
         void authenticate();
 
@@ -26,13 +30,15 @@ class App {
     protected:        
         Command* createCommandFromPacket(Packet_t packet);
         
-        void handleResetAttempt();
         void waitForRevTriggerToBePressed();
+        void sendCurrentNotifications();
+
+        void resetCore();
 
     private:
         uint32_t revvedAtMillis;
 };
 
-void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len);
+extern App Application;
 
 #endif

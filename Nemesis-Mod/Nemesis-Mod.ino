@@ -1,36 +1,44 @@
 #include <Arduino.h>
-#include "src/bluetooth/RemoteCommandReceivedCallback.h"
-#include "src/bluetooth/BluetoothController.h"
 #include "src/App.h"
+#include "src/Button.h"
 #include "src/Log.h"
+#include "src/Mainboard.h"
 
-App Application = App();
-BluetoothController BLE = BluetoothController();
+const uint16_t CLEAR_HOLD_IN_MSECS = 30000;  // 30 seconds
+const uint16_t RESET_HOLD_IN_MSECS = 5000;   // 5 seconds
+const uint32_t RESET_BUTTON_PIN = 28;
+
+Button ResetButton = Button(RESET_BUTTON_PIN, true);
 
 void setup() {
     Log.waitForUsbConnection();
+    
+    ResetButton.init();
     Application.init();
-
-    setupBle();
-}
-
-void setupBle() {
-    SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
-    BLE.init();
-    BLE.startAdvertising();
-}
-
-// Receives notifications whenever a bluetooth command has been received. 
-void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {
-    Packet_t packet;
-    packet.header.type = type;
-    packet.header.subtype = subtype;
-    packet.header.len = len;
-    packet.body = data;
-
-    Application.onRemoteCommandReceived(packet);
 }
 
 void loop() {
-    Application.run();
+    if (ResetButton.isPressed()) {
+        handleResetAttempt();
+    }
+    else {
+        Application.run();
+    }
+}
+
+void handleResetAttempt() {    
+    auto started = millis();
+    while (ResetButton.isPressed()) {
+        MCU.delaySafe(50);
+    }
+
+    auto successful = false;
+    auto diff = millis() - started;
+
+    if (diff >= CLEAR_HOLD_IN_MSECS) {
+        Application.clear();
+    }
+    else if (diff >= RESET_HOLD_IN_MSECS) {
+        Application.reset();
+    }
 }

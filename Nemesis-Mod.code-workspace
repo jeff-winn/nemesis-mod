@@ -32,7 +32,8 @@
 			"xloctime": "cpp",
 			"ios": "cpp",
 			"cstdbool": "cpp",
-			"cstdint": "cpp"
+			"cstdint": "cpp",
+			"random": "cpp"
 		}
 	}
 }

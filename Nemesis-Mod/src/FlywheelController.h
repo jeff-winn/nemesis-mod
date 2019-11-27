@@ -5,10 +5,10 @@
 
 // Defines the flywheel speeds available.
 enum class FlywheelSpeed {
-    Normal = 0,
-    Medium,
+    Normal = 1,
+    Medium = 2,
     // WARNING: This value may cause physical bruising on the intended target, use with caution!
-    Max
+    Max = 255
 };
 
 // Defines the motors within the flywheel assembly.
@@ -25,6 +25,9 @@ class FlywheelController : public MotorController {
 
         // Gets the current of the motor specified (in milliamps).
         unsigned int getMotorCurrentMilliamps(FlywheelMotor motor);
+
+        // Gets the flywheel speed.
+        FlywheelSpeed getSpeed();
 
         // Sets the flywheel speed.
         void setSpeed(FlywheelSpeed speed);
@@ -49,5 +52,7 @@ class FlywheelController : public MotorController {
         int m_m1Speed;
         int m_m2Speed;
 };
+
+extern FlywheelController Flywheels;
 
 #endif

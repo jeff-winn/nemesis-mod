@@ -1,8 +1,10 @@
 #include "hardware/G2HighPowerMotorShield.h"
-#include "hardware/Mainboard.h"
 #include "ConfigurationSettings.h"
 #include "FeedController.h"
 #include "Log.h"
+#include "Mainboard.h"
+
+FeedController Belt = FeedController();
 
 // Defines the driver which controls the belt feed motor.
 G2HighPowerMotorShield18v17 beltDriver = G2HighPowerMotorShield18v17(17, -1, 7, -1, A2);
@@ -14,6 +16,10 @@ void FeedController::init() {
 
     MCU.delaySafe(1);    
     Log.println("Completed initializing feed controller.");
+}
+
+unsigned int FeedController::getMotorCurrentMilliamps() {
+    return beltDriver.getCurrentMilliamps();
 }
 
 void FeedController::onStart() {
@@ -51,6 +57,10 @@ int FeedController::calculateMotorSpeed() {
 
 int FeedController::calculateStepFromSpeed(int speed) {
     return speed / 4;
+}
+
+BeltSpeed FeedController::getSpeed() {
+    return m_speed;
 }
 
 void FeedController::setSpeed(BeltSpeed speed) {

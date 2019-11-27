@@ -1,9 +1,11 @@
 #include <DualG2HighPowerMotorShield.h>
 #include <stddef.h>
-#include "hardware/Mainboard.h"
 #include "ConfigurationSettings.h"
 #include "FlywheelController.h"
 #include "Log.h"
+#include "Mainboard.h"
+
+FlywheelController Flywheels = FlywheelController();
 
 // Defines the driver which controls the flywheel motors.
 DualG2HighPowerMotorShield18v18 flywheelDriver = DualG2HighPowerMotorShield18v18(31, -1, 27, -1, A0, 11, -1, 30, -1, A1);
@@ -99,6 +101,10 @@ void FlywheelController::onStop() {
     MCU.delaySafe(1);
     m_m1Speed = 0;
     m_m2Speed = 0;
+}
+
+FlywheelSpeed FlywheelController::getSpeed() {
+    return m_speed;
 }
 
 void FlywheelController::setSpeed(FlywheelSpeed speed) {

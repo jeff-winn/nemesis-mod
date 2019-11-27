@@ -1,7 +1,7 @@
 #ifndef MAINBOARD_H
 #define MAINBOARD_H
 
-#include <sys/_stdint.h>
+#include <stdint.h>
 
 // Defines the GPIO pin modes.
 enum class PinMode {

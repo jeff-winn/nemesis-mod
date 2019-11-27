@@ -2,27 +2,24 @@
 #include "commands/ChangeConfigurationSettingCommand.h"
 #include "commands/FlywheelTrimAdjustmentCommand.h"
 #include "commands/FlywheelSpeedCommand.h"
-#include "hardware/Mainboard.h"
 #include "App.h"
+#include "BluetoothController.h"
 #include "Button.h"
+#include "Callbacks.h"
 #include "Command.h"
 #include "FeedController.h"
 #include "FlywheelController.h"
 #include "Log.h"
+#include "Mainboard.h"
 
-const uint32_t REV_BUTTON_PIN = 16;
-const uint32_t FIRING_BUTTON_PIN = 15;
-const uint32_t RESET_BUTTON_PIN = 28;
-
-FlywheelController Flywheels = FlywheelController();
-FeedController Belt = FeedController();
-Button RevTrigger = Button(REV_BUTTON_PIN);
-Button FiringTrigger = Button(FIRING_BUTTON_PIN);
-Button ResetButton = Button(RESET_BUTTON_PIN, true);
+App Application = App();
 
 const uint32_t SYSTEM_OFF_IN_MSECS = 300000; // 5 minutes
-const uint16_t CLEAR_HOLD_IN_MSECS = 30000;  // 30 seconds
-const uint16_t RESET_HOLD_IN_MSECS = 5000;   // 5 seconds;
+const uint32_t REV_BUTTON_PIN = 16;
+const uint32_t FIRING_BUTTON_PIN = 15;
+
+Button RevTrigger = Button(REV_BUTTON_PIN);
+Button FiringTrigger = Button(FIRING_BUTTON_PIN);
 
 // Indicates whether the operator is authorized (allowing release of the software lock).
 bool IS_OPERATOR_AUTHORIZED = true;
@@ -33,39 +30,39 @@ bool IS_OPERATOR_AUTHORIZED = true;
 // #endif
 
 void App::run() {
-    if (ResetButton.isPressed()) {
-        handleResetAttempt();
-    }
-    else {
-        if (isAuthorized() && RevTrigger.isPressed()) {
-            Log.println("Revving flywheels...");
+    sendCurrentNotifications();
 
-            revvedAtMillis = millis();
-            Flywheels.start();
+    if (isAuthorized() && RevTrigger.isPressed()) {
+        Log.println("Revving flywheels...");
 
-            auto firing = false;
-            while (RevTrigger.isPressed()) {
-                if (FiringTrigger.isPressed()) {
-                    if (!firing) {
-                        firing = true;
+        revvedAtMillis = millis();
+        Flywheels.start();
 
-                        Log.println("Firing!");
-                        Belt.start();
-                    }
+        auto firing = false;
+        while (RevTrigger.isPressed()) {
+            sendCurrentNotifications();
+
+            if (FiringTrigger.isPressed()) {
+                if (!firing) {
+                    firing = true;
+
+                    Log.println("Firing!");
+                    Belt.start();
                 }
-                else {
-                    Belt.stop();
-                    firing = false;
-                }
-
-                MCU.delaySafe(10);
+            }
+            else {
+                Belt.stop();
+                firing = false;
             }
 
-            Flywheels.stop();
-            revvedAtMillis = millis();
-
-            Log.println("Flywheels stopped.");
+            MCU.delaySafe(10);
         }
+
+        Belt.stop();
+        Flywheels.stop();
+        revvedAtMillis = millis();
+
+        Log.println("Flywheels stopped.");
     }
 
     waitForRevTriggerToBePressed();
@@ -74,8 +71,9 @@ void App::run() {
 void App::waitForRevTriggerToBePressed() {
     auto diff = millis() - revvedAtMillis;
     if (diff >= SYSTEM_OFF_IN_MSECS) {
-        Log.println("Shutting down.");
+#if __RELEASE__
         MCU.waitforEventSafe(REV_BUTTON_PIN, HIGH);
+#endif
     }
     else {
         MCU.delaySafe(50);
@@ -86,18 +84,34 @@ bool App::isAuthorized() {
     return IS_OPERATOR_AUTHORIZED;
 }
 
+// Receives notifications whenever a bluetooth command has been received. 
+void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {
+    Packet_t packet;
+    packet.header.type = type;
+    packet.header.subtype = subtype;
+    packet.header.len = len;
+    packet.body = data;
+
+    Application.onRemoteCommandReceived(packet);
+}
+
 void App::init() {
     Log.println("Initializing application...");
 
-    Settings.init();  
+    Settings.init(); 
+    Flywheels.init();
+    Flywheels.setSpeed(FlywheelSpeed::Normal);
+
+    Belt.init();
+    Belt.setSpeed(BeltSpeed::Normal);
+
+    SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
+    BLE.init();
+    BLE.startAdvertising();
+
     FiringTrigger.init();
     RevTrigger.init();
-    ResetButton.init();
-    Flywheels.init();
-    Belt.init();
 
-    Flywheels.setSpeed(FlywheelSpeed::Normal);
-    Belt.setSpeed(BeltSpeed::Normal);
     revvedAtMillis = millis();
 
     Log.println("Completed application initialization.\n");
@@ -154,30 +168,33 @@ Command* App::createCommandFromPacket(Packet_t packet) {
     return NULL;
 }
 
-void App::handleResetAttempt() {    
-    auto started = millis();
-    while (ResetButton.isPressed()) {
-        MCU.delaySafe(50);
-    }
-
-    auto successful = false;
-    auto diff = millis() - started;
-
-    if (diff >= CLEAR_HOLD_IN_MSECS) {
-        Settings.clear();
-        successful = true;
-    }
-    else if (diff >= RESET_HOLD_IN_MSECS) {
-        Settings.resetAuthenticationToken();
-        Settings.defaultSettings();
-        successful = true;
-    }
-
-    if (successful) {
-        revokeAuthorization();
-    }
-}
-
 void App::revokeAuthorization() {
     IS_OPERATOR_AUTHORIZED = false;
+}
+
+void App::sendCurrentNotifications() {
+    auto flywheel1 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor1);
+    auto flywheel2 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor2);
+    BLE.notifyFlywheelCurrentMilliamps(flywheel1, flywheel2, RevTrigger.isPressed());
+
+    auto feed = Belt.getMotorCurrentMilliamps();
+    BLE.notifyBeltCurrentMilliamps(feed, FiringTrigger.isPressed());
+}
+
+void App::clear() {
+    Settings.clear();
+
+    resetCore();
+}
+
+void App::reset() {
+    Settings.resetAuthenticationToken();
+    Settings.defaultSettings();
+
+    resetCore();
+}
+
+void App::resetCore() {
+    revokeAuthorization();
+    BLE.clearBonds();
 }
