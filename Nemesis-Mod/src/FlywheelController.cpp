@@ -35,6 +35,8 @@ unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
 void FlywheelController::onStart() {
     flywheelDriver.enableDrivers();
     updateDrivers();
+
+    m_running = true;
 }
 
 void FlywheelController::updateDrivers() {
@@ -101,6 +103,7 @@ void FlywheelController::onStop() {
     MCU.delaySafe(1);
     m_m1Speed = 0;
     m_m2Speed = 0;
+    m_running = false;
 }
 
 FlywheelSpeed FlywheelController::getSpeed() {
@@ -109,6 +112,11 @@ FlywheelSpeed FlywheelController::getSpeed() {
 
 void FlywheelController::setSpeed(FlywheelSpeed speed) {
     m_speed = speed;
+
+    if (m_running) {
+        updateDrivers();
+    }
+
     Log.println("Flywheel speed changed.");
 }
 
