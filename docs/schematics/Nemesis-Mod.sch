@@ -102,20 +102,6 @@ Wire Wire Line
 Wire Wire Line
 	7050 5100 7050 4850
 Wire Wire Line
-	7050 5450 7050 5200
-Wire Wire Line
-	7050 5200 4650 5200
-Wire Wire Line
-	4650 5200 4650 3900
-Wire Wire Line
-	6750 4850 6750 5050
-Wire Wire Line
-	6750 5050 4750 5050
-Wire Wire Line
-	4750 5050 4750 2600
-Wire Wire Line
-	4750 2600 2850 2600
-Wire Wire Line
 	2850 3450 3050 3450
 Wire Wire Line
 	4450 4500 5200 4500
@@ -226,7 +212,6 @@ Wire Wire Line
 	2450 4050 3050 4050
 Wire Wire Line
 	2850 1200 5950 1200
-Connection ~ 2850 2600
 $Comp
 L Switch:SW_Push_SPDT Rev_Trigger
 U 1 1 5CEA8643
@@ -397,19 +382,13 @@ Wire Wire Line
 Wire Wire Line
 	4450 4200 4600 4200
 Wire Wire Line
-	4650 3900 4450 3900
-Wire Wire Line
 	5100 2550 2750 2550
 Wire Wire Line
 	5950 1700 2550 1700
 Wire Wire Line
-	2850 2600 2850 1200
-Wire Wire Line
 	2050 3150 2950 3150
 Wire Wire Line
 	4550 4050 4550 5800
-Wire Wire Line
-	2850 2600 2850 3450
 Wire Wire Line
 	2950 3150 2950 5000
 Wire Wire Line
@@ -431,4 +410,81 @@ F 3 "" H 4400 2850 50  0001 C CNN
 	1    3750 4150
 	1    0    0    -1  
 $EndComp
+$Comp
+L Nemesis-Mod:Nerf_Hopper_Lock Power_Lock
+U 1 1 5DDF54E1
+P 8200 6650
+F 0 "Power_Lock" H 8150 7750 50  0000 C CNN
+F 1 "Nerf_Hopper_Lock" H 8150 7850 50  0000 C CNN
+F 2 "" H 8200 7750 50  0001 C CNN
+F 3 "" H 8200 7750 50  0001 C CNN
+	1    8200 6650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7050 5450 7600 5450
+Wire Wire Line
+	7600 6250 8150 6250
+Wire Wire Line
+	7600 5450 7600 6250
+Wire Wire Line
+	2850 1200 2850 2600
+Wire Wire Line
+	6750 4850 6750 5050
+Wire Wire Line
+	6750 5050 7750 5050
+Wire Wire Line
+	7750 5050 7750 5750
+Wire Wire Line
+	8550 5750 8550 5350
+Wire Wire Line
+	8550 5350 4900 5350
+Wire Wire Line
+	4900 5350 4900 2600
+Wire Wire Line
+	4900 2600 2850 2600
+Connection ~ 2850 2600
+Wire Wire Line
+	2850 2600 2850 3450
+Wire Wire Line
+	8550 5950 8600 5950
+Wire Wire Line
+	8600 5950 8600 5300
+Wire Wire Line
+	8600 5300 4950 5300
+Wire Wire Line
+	4950 5300 4950 3900
+Wire Wire Line
+	4950 3900 4450 3900
+NoConn ~ 7750 5950
+NoConn ~ 6600 5450
+NoConn ~ 5300 4250
+NoConn ~ 5300 3950
+NoConn ~ 5300 3500
+NoConn ~ 5300 3200
+NoConn ~ 5300 3050
+NoConn ~ 5300 2900
+NoConn ~ 5300 2750
+NoConn ~ 5300 2600
+NoConn ~ 4450 3750
+NoConn ~ 4450 3600
+NoConn ~ 3050 3300
+NoConn ~ 3050 3000
+NoConn ~ 3050 4350
+NoConn ~ 3050 4500
+NoConn ~ 3050 4650
+NoConn ~ 3050 4800
+NoConn ~ 3050 4950
+NoConn ~ 3050 5100
+NoConn ~ 3050 5250
+NoConn ~ 1800 4800
+NoConn ~ 1800 4500
+NoConn ~ 1800 4400
+NoConn ~ 1800 4300
+NoConn ~ 6450 4850
+NoConn ~ 6600 4850
+NoConn ~ 5950 1900
+NoConn ~ 5950 1800
+NoConn ~ 5950 1600
+NoConn ~ 5950 1300
 $EndSCHEMATC

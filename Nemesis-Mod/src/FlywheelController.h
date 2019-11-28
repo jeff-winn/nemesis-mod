@@ -51,6 +51,8 @@ class FlywheelController : public MotorController {
         FlywheelSpeed m_speed;
         int m_m1Speed;
         int m_m2Speed;
+
+        bool m_running;
 };
 
 extern FlywheelController Flywheels;
