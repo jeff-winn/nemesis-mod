@@ -21,7 +21,7 @@ BeltSpeed BeltSpeedCommand::getSpeedFromPacket(Packet_t packet) {
             return BeltSpeed::Normal;
         }
         case 2: {
-            return BeltSpeed::High;            
+            return BeltSpeed::Medium;            
         }
         case 255: {
             return BeltSpeed::Max;

@@ -16,8 +16,8 @@ class ConfigurationSettings {
         int getFeedNormalSpeed();
         void setFeedNormalSpeed(int value);
 
-        int getFeedHighSpeed();
-        void setFeedHighSpeed(int value);
+        int getFeedMediumSpeed();
+        void setFeedMediumSpeed(int value);
 
         int getFeedMaxSpeed();
         void setFeedMaxSpeed(int value);

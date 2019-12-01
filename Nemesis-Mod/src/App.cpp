@@ -99,10 +99,10 @@ void App::init() {
     Log.println("Initializing application...");
 
     Settings.init(); 
-    Flywheels.init();
+    Flywheels.init(&Settings);
     Flywheels.setSpeed(FlywheelSpeed::Normal);
 
-    Belt.init();
+    Belt.init(&Settings);
     Belt.setSpeed(BeltSpeed::Normal);
 
     SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);

@@ -43,7 +43,7 @@ void ConfigurationSettings::setInitialized(bool value) {
 void ConfigurationSettings::defaultSettings() {
     setExistingPairing(false);
     setFeedNormalSpeed(100);
-    setFeedHighSpeed(175);
+    setFeedMediumSpeed(175);
     setFeedMaxSpeed(400);
 
     setFlywheelNormalSpeed(125);
@@ -112,11 +112,11 @@ void ConfigurationSettings::setFeedNormalSpeed(int value) {
     writeInt32(FEED_NORMAL_SPEED_ADDR, value);
 }
 
-int ConfigurationSettings::getFeedHighSpeed() {
+int ConfigurationSettings::getFeedMediumSpeed() {
     return readInt32(FEED_HIGH_SPEED_ADDR);
 }
 
-void ConfigurationSettings::setFeedHighSpeed(int value) {
+void ConfigurationSettings::setFeedMediumSpeed(int value) {
     writeInt32(FEED_HIGH_SPEED_ADDR, value);
 }
 

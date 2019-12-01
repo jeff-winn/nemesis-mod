@@ -21,7 +21,7 @@ enum class FlywheelMotor {
 class FlywheelController : public MotorController {
     public:            
         // Initializes the controller.
-        void init() override;
+        void init(ConfigurationSettings* settings) override;
 
         // Gets the current of the motor specified (in milliamps).
         unsigned int getMotorCurrentMilliamps(FlywheelMotor motor);
@@ -51,6 +51,13 @@ class FlywheelController : public MotorController {
         FlywheelSpeed m_speed;
         int m_m1Speed;
         int m_m2Speed;
+
+        int m_normalSpeed;
+        int m_mediumSpeed;
+        int m_maxSpeed;
+        float m_trimVariance;
+        float m_m1TrimAdjustment;
+        float m_m2TrimAdjustment;
 
         bool m_running;
 };

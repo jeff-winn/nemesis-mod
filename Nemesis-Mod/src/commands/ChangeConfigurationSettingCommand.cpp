@@ -38,9 +38,9 @@ void ChangeConfigurationSettingCommand::handleImpl(Packet_t packet) {
         }
         case 5: {
             auto value = getInt32ValueFromPacket(packet);
-            Settings.setFeedHighSpeed(value);
+            Settings.setFeedMediumSpeed(value);
 
-            Log.println("Changed feed high speed.");
+            Log.println("Changed feed medium speed.");
             break;
         }
         case 6: {

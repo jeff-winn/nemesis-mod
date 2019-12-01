@@ -1,5 +1,4 @@
 #include "hardware/G2HighPowerMotorShield.h"
-#include "ConfigurationSettings.h"
 #include "FeedController.h"
 #include "Log.h"
 #include "Mainboard.h"
@@ -9,10 +8,14 @@ FeedController Belt = FeedController();
 // Defines the driver which controls the belt feed motor.
 G2HighPowerMotorShield18v17 beltDriver = G2HighPowerMotorShield18v17(17, -1, 7, -1, A2);
 
-void FeedController::init() {
+void FeedController::init(ConfigurationSettings* settings) {
     beltDriver.init();
     beltDriver.calibrateCurrentOffset();
     beltDriver.disableDriver();
+
+    m_normalSpeed = settings->getFeedNormalSpeed();
+    m_mediumSpeed = settings->getFeedMediumSpeed();
+    m_maxSpeed = settings->getFeedMaxSpeed();
 
     MCU.delaySafe(1);    
     Log.println("Completed initializing feed controller.");
@@ -44,13 +47,13 @@ void FeedController::onStop() {
 int FeedController::calculateMotorSpeed() {
     switch (m_speed) {
         case BeltSpeed::Normal: {
-            return Settings.getFeedNormalSpeed();
+            return m_normalSpeed;
         }
-        case BeltSpeed::High: {
-            return Settings.getFeedHighSpeed();
+        case BeltSpeed::Medium: {
+            return m_mediumSpeed;
         }
         case BeltSpeed::Max: {
-            return Settings.getFeedMaxSpeed();
+            return m_maxSpeed;
         }
     }
 }

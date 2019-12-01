@@ -1,6 +1,5 @@
 #include <DualG2HighPowerMotorShield.h>
 #include <stddef.h>
-#include "ConfigurationSettings.h"
 #include "FlywheelController.h"
 #include "Log.h"
 #include "Mainboard.h"
@@ -10,10 +9,17 @@ FlywheelController Flywheels = FlywheelController();
 // Defines the driver which controls the flywheel motors.
 DualG2HighPowerMotorShield18v18 flywheelDriver = DualG2HighPowerMotorShield18v18(31, -1, 27, -1, A0, 11, -1, 30, -1, A1);
 
-void FlywheelController::init() {
+void FlywheelController::init(ConfigurationSettings* settings) {
     flywheelDriver.init();
     flywheelDriver.calibrateCurrentOffsets();
     flywheelDriver.disableDrivers();
+
+    m_normalSpeed = settings->getFlywheelNormalSpeed();
+    m_mediumSpeed = settings->getFlywheelMediumSpeed();
+    m_maxSpeed = settings->getFlywheelMaxSpeed();
+    m_trimVariance = settings->getFlywheelTrimVariance();
+    m_m1TrimAdjustment = settings->getFlywheelM1TrimAdjustment();
+    m_m2TrimAdjustment = settings->getFlywheelM2TrimAdjustment();
 
     MCU.delaySafe(1);
     Log.println("Completed initializing flywheel controller.");
@@ -61,19 +67,19 @@ int FlywheelController::calculateMotorSpeed(FlywheelMotor motor) {
 }
 
 int FlywheelController::calculateLimiterForSpeed(int speed) {
-    return speed * Settings.getFlywheelTrimVariance();
+    return speed * m_trimVariance;
 }
 
 int FlywheelController::determineMotorMaximumSpeed() {
     switch (m_speed) {
         case FlywheelSpeed::Normal: {
-            return Settings.getFlywheelNormalSpeed();
+            return m_normalSpeed;
         }
         case FlywheelSpeed::Medium: {
-            return Settings.getFlywheelMediumSpeed();
+            return m_mediumSpeed;
         }
         case FlywheelSpeed::Max: {
-            return Settings.getFlywheelMaxSpeed();
+            return m_maxSpeed;
         }
     }
 
@@ -83,10 +89,10 @@ int FlywheelController::determineMotorMaximumSpeed() {
 float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
     switch (motor) {
         case FlywheelMotor::Motor1: {
-            return Settings.getFlywheelM1TrimAdjustment();
+            return m_m1TrimAdjustment;
         }
         case FlywheelMotor::Motor2: {
-            return Settings.getFlywheelM2TrimAdjustment();
+            return m_m2TrimAdjustment;
         }
     }
 
@@ -130,12 +136,12 @@ void FlywheelController::setMotorSpeedAdjustment(FlywheelMotor motor, float adju
     switch (motor) {
         case FlywheelMotor::Motor1: {
             Log.println("Changed M1 trim speed adjustment.");
-            Settings.setFlywheelM1TrimAdjustment(adjustment);
+            m_m1TrimAdjustment = adjustment;
             break;
         }
         case FlywheelMotor::Motor2: {
             Log.println("Changed M2 trim speed adjustment.");
-            Settings.setFlywheelM2TrimAdjustment(adjustment);
+            m_m2TrimAdjustment = adjustment;
             break;
         }
     }

@@ -6,7 +6,7 @@
 // Defines the belt speeds (rate of fire) available.
 enum class BeltSpeed {
     Normal = 1,
-    High = 2,
+    Medium = 2,
     Max = 255
 };
 
@@ -14,7 +14,7 @@ enum class BeltSpeed {
 class FeedController : public MotorController {
     public:        
         // Initializes the controller.
-        void init() override;
+        void init(ConfigurationSettings* settings) override;
 
         // Gets the current of the motor specified (in milliamps).
         unsigned int getMotorCurrentMilliamps();
@@ -32,7 +32,11 @@ class FeedController : public MotorController {
         void onStart() override;
         void onStop() override;
 
-    private:        
+    private:
+        int m_normalSpeed;
+        int m_mediumSpeed;
+        int m_maxSpeed;
+
         BeltSpeed m_speed;
         int m_m1speed;
 };
