@@ -6,11 +6,11 @@
 #include "bluetooth/ConfigurationService.h"
 
 // Provides a controller for the on-board bluetooth module.
-class BluetoothController {
+class BLEController {
     public:
-        BluetoothController();
+        BLEController();
 
-        ~BluetoothController();
+        ~BLEController();
 
         void init();
         void startAdvertising();
@@ -34,6 +34,6 @@ class BluetoothController {
         uint32_t lastBeltMilliampsNotifyAtMillis;
 };
 
-extern BluetoothController BLE;
+extern BLEController BLE;
 
 #endif /* BLUETOOTH_CONTROLLER_H */

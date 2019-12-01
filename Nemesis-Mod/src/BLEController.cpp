@@ -1,22 +1,22 @@
-#include "BluetoothController.h"
+#include "BLEController.h"
 #include "Log.h"
 
 const uint32_t NOTIFICATION_INTERVAL_IN_MSECS = 10000; // 10 seconds
 const uint32_t NOTIFICATION_INTERVAL_WHILE_ACTIVE_IN_MSECS = 1000; // 1 second
 
-BluetoothController BLE = BluetoothController();
+BLEController BLE = BLEController();
 
-BluetoothController::BluetoothController() {
+BLEController::BLEController() {
   _blasterService = BlasterService();
   _configService = ConfigurationService();
 
   _discoveryService = BLEDis();
 }
 
-BluetoothController::~BluetoothController() {
+BLEController::~BLEController() {
 }
 
-void BluetoothController::init() {
+void BLEController::init() {
   Bluefruit.begin();
   Bluefruit.setName("Nerf Nemesis MXVII-10K");
   
@@ -43,7 +43,7 @@ void BluetoothController::init() {
   Bluefruit.Advertising.setFastTimeout(30);
 }
 
-void BluetoothController::startAdvertising() {
+void BLEController::startAdvertising() {
   /* Start Advertising
     * - Enable auto advertising if disconnected
     * - Interval:  fast mode = 20 ms, slow mode = 152.5 ms
@@ -56,13 +56,13 @@ void BluetoothController::startAdvertising() {
   Bluefruit.Advertising.start(0);
 }
 
-void BluetoothController::clearBonds() {
+void BLEController::clearBonds() {
   Bluefruit.clearBonds();
 
   Log.println("Cleared bluetooth bonds.");
 }
 
-void BluetoothController::notifyBeltCurrentMilliamps(uint32_t m1, bool isActive) {
+void BLEController::notifyBeltCurrentMilliamps(uint32_t m1, bool isActive) {
   if (!Bluefruit.connected()) {
     return;
   }
@@ -81,7 +81,7 @@ void BluetoothController::notifyBeltCurrentMilliamps(uint32_t m1, bool isActive)
   }
 }
 
-void BluetoothController::notifyFlywheelCurrentMilliamps(uint32_t m1, uint32_t m2, bool isActive) {
+void BLEController::notifyFlywheelCurrentMilliamps(uint32_t m1, uint32_t m2, bool isActive) {
   if (!Bluefruit.connected()) {
     return;
   }
@@ -100,7 +100,7 @@ void BluetoothController::notifyFlywheelCurrentMilliamps(uint32_t m1, uint32_t m
   }
 }
 
-bool BluetoothController::shouldSendNotification(uint32_t lastNotificationAtMillis, uint32_t interval) {
+bool BLEController::shouldSendNotification(uint32_t lastNotificationAtMillis, uint32_t interval) {
   auto diff = millis() - lastNotificationAtMillis;
   return diff >= interval;
 }

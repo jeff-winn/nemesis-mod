@@ -3,7 +3,7 @@
 #include "commands/FlywheelTrimAdjustmentCommand.h"
 #include "commands/FlywheelSpeedCommand.h"
 #include "App.h"
-#include "BluetoothController.h"
+#include "BLEController.h"
 #include "Button.h"
 #include "Callbacks.h"
 #include "Command.h"
