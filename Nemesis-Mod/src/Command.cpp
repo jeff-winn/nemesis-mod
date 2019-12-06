@@ -3,19 +3,19 @@
 Command::~Command() {
 }
 
-void Command::handle(Packet_t packet) {
-    if (!validate(packet)) {
+void Command::handle(uint8_t* data, uint16_t len) {
+    if (!validate(data, len)) {
         return;
     }
 
-    handleImpl(packet);
+    handleImpl(data, len);
 }
 
-bool Command::validate(Packet_t packet) {
+bool Command::validate(uint8_t* data, uint16_t len) {
     return true;
 }
 
-void Command::handleImpl(Packet_t packet) {
+void Command::handleImpl(uint8_t* data, uint16_t len) {
 }
 
 bool Command::requiresAuthorization() {

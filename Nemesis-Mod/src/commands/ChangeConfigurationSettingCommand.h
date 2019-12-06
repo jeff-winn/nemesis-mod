@@ -6,13 +6,16 @@
 // Provides a command which changes configuration settings.
 class ChangeConfigurationSettingCommand : public ConfigurationCommand {
     public:
-        ChangeConfigurationSettingCommand();
+        ChangeConfigurationSettingCommand(uint8_t subtype);
 
     protected:
-        void handleImpl(Packet_t packet) override;
+        void handleImpl(uint8_t* data, uint16_t len) override;
 
-        int getInt32ValueFromPacket(Packet_t packet);
-        float getFloatValueFromPacket(Packet_t packet);
+        int getInt32ValueFromPacket(uint8_t* data);
+        float getFloatValueFromPacket(uint8_t* data);
+
+    private:
+        uint8_t m_subtype;
 };
 
 #endif

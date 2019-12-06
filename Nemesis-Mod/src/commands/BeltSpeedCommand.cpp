@@ -8,13 +8,13 @@ BeltSpeedCommand::~BeltSpeedCommand() {
     m_controller = NULL;
 }
 
-void BeltSpeedCommand::handleImpl(Packet_t packet) {
-    auto newSpeed = getSpeedFromPacket(packet);
+void BeltSpeedCommand::handleImpl(uint8_t* data, uint16_t len) {
+    auto newSpeed = getSpeedFromPacket(data);
     m_controller->setSpeed(newSpeed);
 }
 
-BeltSpeed BeltSpeedCommand::getSpeedFromPacket(Packet_t packet) {
-    auto value = packet.body[0];
+BeltSpeed BeltSpeedCommand::getSpeedFromPacket(uint8_t* data) {
+    auto value = data[0];
 
     switch (value) {
         case 1: {

@@ -1,7 +1,7 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include "Packet.h"
+#include <stdint.h>
 
 // Provides a base class for commands.
 class Command {
@@ -12,11 +12,11 @@ class Command {
         virtual bool requiresAuthorization();
 
         // Handles the packet.
-        void handle(Packet_t packet);
+        void handle(uint8_t* data, uint16_t len);
 
     protected:
-        virtual void handleImpl(Packet_t packet);
-        virtual bool validate(Packet_t packet);
+        virtual void handleImpl(uint8_t* data, uint16_t len);
+        virtual bool validate(uint8_t* data, uint16_t len);
 };
 
 #endif

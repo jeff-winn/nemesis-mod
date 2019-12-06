@@ -1,12 +1,12 @@
 #include "FlywheelSpeedCommand.h"
 
-void FlywheelSpeedCommand::handleImpl(Packet_t packet) {
-    auto newSpeed = getSpeedFromPacket(packet);
+void FlywheelSpeedCommand::handleImpl(uint8_t* data, uint16_t len) {
+    auto newSpeed = getSpeedFromPacket(data);
     m_controller->setSpeed(newSpeed);
 }
 
-FlywheelSpeed FlywheelSpeedCommand::getSpeedFromPacket(Packet_t packet) {
-    auto value = packet.body[0];
+FlywheelSpeed FlywheelSpeedCommand::getSpeedFromPacket(uint8_t* data) {
+    auto value = data[0];
 
     switch (value) {
         case 1: {

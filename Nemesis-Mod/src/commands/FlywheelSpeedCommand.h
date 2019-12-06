@@ -9,8 +9,8 @@ class FlywheelSpeedCommand : public FlywheelCommand {
         using FlywheelCommand::FlywheelCommand;
 
     protected:
-        void handleImpl(Packet_t packet) override;
-        FlywheelSpeed getSpeedFromPacket(Packet_t packet);
+        void handleImpl(uint8_t* data, uint16_t len) override;
+        FlywheelSpeed getSpeedFromPacket(uint8_t* data);
 };
 
 #endif

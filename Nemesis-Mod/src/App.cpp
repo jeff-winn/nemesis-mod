@@ -86,13 +86,7 @@ bool App::isAuthorized() {
 
 // Receives notifications whenever a bluetooth command has been received. 
 void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {
-    Packet_t packet;
-    packet.header.type = type;
-    packet.header.subtype = subtype;
-    packet.header.len = len;
-    packet.body = data;
-
-    Application.onRemoteCommandReceived(packet);
+    Application.onRemoteCommandReceived(type, data, len, subtype);
 }
 
 void App::init() {
@@ -117,12 +111,12 @@ void App::init() {
     Log.println("Completed application initialization.\n");
 }
 
-void App::onRemoteCommandReceived(Packet_t packet) {   
-    auto command = createCommandFromPacket(packet);
+void App::onRemoteCommandReceived(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {   
+    auto command = createCommandFromPacket(type, subtype);
     if (command) {
         auto requiresAuthorization = command->requiresAuthorization();
         if (!requiresAuthorization || (requiresAuthorization && isAuthorized())) {
-            command->handle(packet);
+            command->handle(data, len);
         }
         
         delete command;
@@ -149,10 +143,10 @@ void App::authenticate() {
     IS_OPERATOR_AUTHORIZED = authorized;
 }
 
-Command* App::createCommandFromPacket(Packet_t packet) {
-    switch (packet.header.type) {
+Command* App::createCommandFromPacket(uint8_t type, uint8_t subtype) {
+    switch (type) {
         case 10: {
-            return new ChangeConfigurationSettingCommand();
+            return new ChangeConfigurationSettingCommand(subtype);
         }
         case 100: {
             return new BeltSpeedCommand(&Belt);
@@ -161,7 +155,7 @@ Command* App::createCommandFromPacket(Packet_t packet) {
             return new FlywheelSpeedCommand(&Flywheels);
         }
         case 201: {
-            return new FlywheelTrimAdjustmentCommand(&Flywheels);        
+            return new FlywheelTrimAdjustmentCommand(subtype, &Flywheels);        
         }
     }
 
