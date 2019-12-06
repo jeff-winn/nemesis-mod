@@ -1,17 +1,17 @@
-#include "hardware/G2HighPowerMotorShield.h"
 #include "FeedController.h"
 #include "Log.h"
 #include "Mainboard.h"
 
 FeedController Belt = FeedController();
 
-// Defines the driver which controls the belt feed motor.
-G2HighPowerMotorShield18v17 beltDriver = G2HighPowerMotorShield18v17(17, -1, 7, -1, A2);
+FeedController::FeedController() {
+    m_driver = G2HighPowerMotorShield18v17(17, -1, 7, -1, A2);
+}
 
 void FeedController::init(ConfigurationSettings* settings) {
-    beltDriver.init();
-    beltDriver.calibrateCurrentOffset();
-    beltDriver.disableDriver();
+    m_driver.init();
+    m_driver.calibrateCurrentOffset();
+    m_driver.disableDriver();
 
     m_normalSpeed = settings->getFeedNormalSpeed();
     m_mediumSpeed = settings->getFeedMediumSpeed();
@@ -22,17 +22,17 @@ void FeedController::init(ConfigurationSettings* settings) {
 }
 
 unsigned int FeedController::getMotorCurrentMilliamps() {
-    return beltDriver.getCurrentMilliamps();
+    return m_driver.getCurrentMilliamps();
 }
 
 void FeedController::onStart() {
-    beltDriver.enableDriver();
+    m_driver.enableDriver();
     updateDriver();
 }
 
 void FeedController::updateDriver() {
     m_m1speed = calculateMotorSpeed();
-    beltDriver.setSpeed(m_m1speed);
+    m_driver.setSpeed(m_m1speed);
 
     MCU.delaySafe(1);    
 }
@@ -40,8 +40,8 @@ void FeedController::updateDriver() {
 void FeedController::onStop() {
     auto step = calculateStepFromSpeed(m_m1speed);
 
-    beltDriver.setSpeed(0);   
-    beltDriver.disableDriver();
+    m_driver.setSpeed(0);   
+    m_driver.disableDriver();
     
     MCU.delaySafe(1);
     m_m1speed = 0;

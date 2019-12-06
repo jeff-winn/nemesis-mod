@@ -1,4 +1,3 @@
-#include <DualG2HighPowerMotorShield.h>
 #include <stddef.h>
 #include "FlywheelController.h"
 #include "Log.h"
@@ -6,13 +5,14 @@
 
 FlywheelController Flywheels = FlywheelController();
 
-// Defines the driver which controls the flywheel motors.
-DualG2HighPowerMotorShield18v18 flywheelDriver = DualG2HighPowerMotorShield18v18(31, -1, 27, -1, A0, 11, -1, 30, -1, A1);
+FlywheelController::FlywheelController() {
+    m_driver = DualG2HighPowerMotorShield18v18(31, -1, 27, -1, A0, 11, -1, 30, -1, A1);
+}
 
 void FlywheelController::init(ConfigurationSettings* settings) {
-    flywheelDriver.init();
-    flywheelDriver.calibrateCurrentOffsets();
-    flywheelDriver.disableDrivers();
+    m_driver.init();
+    m_driver.calibrateCurrentOffsets();
+    m_driver.disableDrivers();
 
     m_normalSpeed = settings->getFlywheelNormalSpeed();
     m_mediumSpeed = settings->getFlywheelMediumSpeed();
@@ -28,10 +28,10 @@ void FlywheelController::init(ConfigurationSettings* settings) {
 unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
     switch (motor) {
         case FlywheelMotor::Motor1: {
-            return flywheelDriver.getM1CurrentMilliamps();
+            return m_driver.getM1CurrentMilliamps();
         }
         case FlywheelMotor::Motor2: {
-            return flywheelDriver.getM2CurrentMilliamps();
+            return m_driver.getM2CurrentMilliamps();
         }
     }
 
@@ -39,14 +39,14 @@ unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
 }
 
 void FlywheelController::onStart() {
-    flywheelDriver.enableDrivers();
+    m_driver.enableDrivers();
     updateDrivers();
 }
 
 void FlywheelController::updateDrivers() {
     m_m1Speed = calculateMotorSpeed(FlywheelMotor::Motor1);
     m_m2Speed = calculateMotorSpeed(FlywheelMotor::Motor2);
-    flywheelDriver.setSpeeds(m_m1Speed, m_m2Speed);
+    m_driver.setSpeeds(m_m1Speed, m_m2Speed);
     
     MCU.delaySafe(1);
 }
@@ -101,8 +101,8 @@ void FlywheelController::onStop() {
     auto minimum = min(m_m1Speed, m_m2Speed);
     auto step = calculateStepFromValue(minimum);
 
-    flywheelDriver.setSpeeds(0, 0);
-    flywheelDriver.disableDrivers();
+    m_driver.setSpeeds(0, 0);
+    m_driver.disableDrivers();
 
     MCU.delaySafe(1);
     m_m1Speed = 0;

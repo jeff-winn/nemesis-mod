@@ -1,6 +1,7 @@
 #ifndef FEED_CONTROLLER_H
 #define FEED_CONTROLLER_H
 
+#include "hardware/G2HighPowerMotorShield.h"
 #include "MotorController.h"
 
 // Defines the belt speeds (rate of fire) available.
@@ -12,7 +13,9 @@ enum class BeltSpeed {
 
 // Provides a mechanism to control the feed assembly.
 class FeedController : public MotorController {
-    public:        
+    public:
+        FeedController();
+
         // Initializes the controller.
         void init(ConfigurationSettings* settings) override;
 
@@ -35,6 +38,8 @@ class FeedController : public MotorController {
         void updateDriver();
         
     private:
+        G2HighPowerMotorShield18v17 m_driver;
+
         int m_normalSpeed;
         int m_mediumSpeed;
         int m_maxSpeed;
