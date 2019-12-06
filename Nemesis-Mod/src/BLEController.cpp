@@ -9,6 +9,7 @@ BLEController BLE = BLEController();
 BLEController::BLEController() {
   _blasterService = BlasterService();
   _configService = ConfigurationService();
+  _notificationService = NotificationService();
 
   _discoveryService = BLEDis();
 }
@@ -31,6 +32,9 @@ void BLEController::init() {
 
   _configService.begin();
   _configService.init();
+
+  _notificationService.begin();
+  _notificationService.init();
 
   Bluefruit.Advertising.addFlags(BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE);
   Bluefruit.Advertising.addTxPower();
@@ -76,7 +80,7 @@ void BLEController::notifyBeltCurrentMilliamps(uint32_t m1, bool isActive) {
   }
 
   if (sendNotification) {
-    _blasterService.notifyBeltCurrentMilliamps(m1);
+    _notificationService.notifyBeltCurrentMilliamps(m1);
     lastBeltMilliampsNotifyAtMillis = millis();
   }
 }
@@ -95,7 +99,7 @@ void BLEController::notifyFlywheelCurrentMilliamps(uint32_t m1, uint32_t m2, boo
   }
 
   if (sendNotification) {
-    _blasterService.notifyFlywheelCurrentMilliamps(m1, m2);
+    _notificationService.notifyFlywheelCurrentMilliamps(m1, m2);
     lastFlywheelMilliampsNotifyAtMillis = millis();
   }
 }

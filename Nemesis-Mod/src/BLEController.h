@@ -4,6 +4,7 @@
 #include <bluefruit.h>
 #include "bluetooth/BlasterService.h"
 #include "bluetooth/ConfigurationService.h"
+#include "bluetooth/NotificationService.h"
 
 // Provides a controller for the on-board bluetooth module.
 class BLEController {
@@ -27,6 +28,7 @@ class BLEController {
     private:
         BlasterService _blasterService;
         ConfigurationService _configService;
+        NotificationService _notificationService;
 
         BLEDis _discoveryService;
 
