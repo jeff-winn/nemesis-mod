@@ -32,6 +32,8 @@ class FeedController : public MotorController {
         void onStart() override;
         void onStop() override;
 
+        void updateDriver();
+        
     private:
         int m_normalSpeed;
         int m_mediumSpeed;

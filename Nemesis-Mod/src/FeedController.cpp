@@ -26,9 +26,12 @@ unsigned int FeedController::getMotorCurrentMilliamps() {
 }
 
 void FeedController::onStart() {
-    m_m1speed = calculateMotorSpeed();
-
     beltDriver.enableDriver();
+    updateDriver();
+}
+
+void FeedController::updateDriver() {
+    m_m1speed = calculateMotorSpeed();
     beltDriver.setSpeed(m_m1speed);
 
     MCU.delaySafe(1);    
@@ -68,5 +71,10 @@ BeltSpeed FeedController::getSpeed() {
 
 void FeedController::setSpeed(BeltSpeed speed) {
     m_speed = speed;
+
+    if (isRunning()) {
+        updateDriver();
+    }
+
     Log.println("Feed speed changed.");   
 }
