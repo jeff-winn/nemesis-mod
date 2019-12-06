@@ -19,4 +19,4 @@ class BeltSpeedCommand : public Command {
         FeedController* m_controller;
 };
 
-#endif
+#endif /* BELT_SPEED_COMMAND_H */

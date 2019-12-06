@@ -18,4 +18,4 @@ class ChangeConfigurationSettingCommand : public ConfigurationCommand {
         uint8_t m_subtype;
 };
 
-#endif
+#endif /* CHANGE_CONFIGURATION_SETTING_COMMAND_H */

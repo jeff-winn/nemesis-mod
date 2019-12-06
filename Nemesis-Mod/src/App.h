@@ -41,4 +41,4 @@ class App {
 
 extern App Application;
 
-#endif
+#endif /* APP_H */

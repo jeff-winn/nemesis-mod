@@ -43,4 +43,4 @@ class FeedController : public MotorController {
 
 extern FeedController Belt;
 
-#endif
+#endif /* FEED_CONTROLLER_H */

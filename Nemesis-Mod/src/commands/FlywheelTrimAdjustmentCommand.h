@@ -19,4 +19,4 @@ class FlywheelTrimAdjustmentCommand : public FlywheelCommand {
         uint8_t m_subtype;
 };
 
-#endif
+#endif /* FLYWHEEL_TRIM_ADJUSTMENT_COMMAND_H */

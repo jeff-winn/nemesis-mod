@@ -64,4 +64,4 @@ class FlywheelController : public MotorController {
 
 extern FlywheelController Flywheels;
 
-#endif
+#endif /* FLYWHEEL_CONTROLLER_H */

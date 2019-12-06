@@ -14,4 +14,4 @@ class Logger {
 
 extern Logger Log;
 
-#endif
+#endif /* LOG_H */

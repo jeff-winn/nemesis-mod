@@ -44,4 +44,4 @@ class G2HighPowerMotorShield18v17 : public G2HighPowerMotorShield {
     unsigned int getCurrentMilliamps();
 };
 
-#endif
+#endif /* G2_HIGH_POWER_MOTOR_SHIELD_H */

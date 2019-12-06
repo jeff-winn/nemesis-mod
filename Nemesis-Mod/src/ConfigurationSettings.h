@@ -63,4 +63,4 @@ class ConfigurationSettings {
 // Defines the instance of configuration settings used by the hardware.
 extern ConfigurationSettings Settings;
 
-#endif
+#endif /* CONFIGURATION_SETTINGS_H */

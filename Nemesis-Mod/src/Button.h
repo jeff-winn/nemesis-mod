@@ -20,4 +20,4 @@ class Button {
     
 };
 
-#endif
+#endif /* BUTTON_H */

@@ -22,4 +22,4 @@ class BitConverter {
 // Performs conversions between data types.
 extern BitConverter Convert;
 
-#endif
+#endif /* BIT_CONVERTER_H */

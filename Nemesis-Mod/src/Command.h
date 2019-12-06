@@ -19,4 +19,4 @@ class Command {
         virtual bool validate(uint8_t* data, uint16_t len);
 };
 
-#endif
+#endif /* COMMAND_H */

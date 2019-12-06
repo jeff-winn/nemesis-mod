@@ -39,4 +39,4 @@ class Mainboard {
 // Defines the mainboard control unit (MCU) instance.
 extern Mainboard MCU;
 
-#endif
+#endif /* MAINBOARD_H */

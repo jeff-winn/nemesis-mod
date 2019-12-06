@@ -13,4 +13,4 @@ class FlywheelSpeedCommand : public FlywheelCommand {
         FlywheelSpeed getSpeedFromPacket(uint8_t* data);
 };
 
-#endif
+#endif /* FLYWHEEL_SPEED_COMMAND_H */

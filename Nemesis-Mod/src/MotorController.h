@@ -25,4 +25,4 @@ class MotorController {
         bool m_isRunning;
 };
 
-#endif
+#endif /* MOTOR_CONTROLLER_H */

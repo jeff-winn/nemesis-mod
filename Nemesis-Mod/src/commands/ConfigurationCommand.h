@@ -9,4 +9,4 @@ class ConfigurationCommand : public Command {
 
 };
 
-#endif
+#endif /* CONFIGURATION_COMMAND_H */
