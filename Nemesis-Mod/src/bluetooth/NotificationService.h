@@ -13,9 +13,9 @@ class NotificationService : public CustomBLEService  {
         void notifyBeltCurrentMilliamps(uint32_t m1);
 
     private:
-        BLECharacteristic _flywheelM1CurrentMilliamps;
-        BLECharacteristic _flywheelM2CurrentMilliamps;
-        BLECharacteristic _beltM1CurrentMilliamps;
+        BLECharacteristic m_flywheelM1CurrentMilliamps;
+        BLECharacteristic m_flywheelM2CurrentMilliamps;
+        BLECharacteristic m_beltM1CurrentMilliamps;
 };
 
 #endif /* NOTIFICATION_SERVICE_H */

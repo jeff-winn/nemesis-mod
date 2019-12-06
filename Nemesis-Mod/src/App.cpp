@@ -35,7 +35,7 @@ void App::run() {
     if (isAuthorized() && RevTrigger.isPressed()) {
         Log.println("Revving flywheels...");
 
-        revvedAtMillis = millis();
+        m_revvedAtMillis = millis();
         Flywheels.start();
 
         auto firing = false;
@@ -60,7 +60,7 @@ void App::run() {
 
         Belt.stop();
         Flywheels.stop();
-        revvedAtMillis = millis();
+        m_revvedAtMillis = millis();
 
         Log.println("Flywheels stopped.");
     }
@@ -69,7 +69,7 @@ void App::run() {
 }
 
 void App::waitForRevTriggerToBePressed() {
-    auto diff = millis() - revvedAtMillis;
+    auto diff = millis() - m_revvedAtMillis;
     if (diff >= SYSTEM_OFF_IN_MSECS) {
 #if __RELEASE__
         MCU.waitforEventSafe(REV_BUTTON_PIN, HIGH);
@@ -106,7 +106,7 @@ void App::init() {
     FiringTrigger.init();
     RevTrigger.init();
 
-    revvedAtMillis = millis();
+    m_revvedAtMillis = millis();
 
     Log.println("Completed application initialization.\n");
 }

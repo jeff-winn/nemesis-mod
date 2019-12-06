@@ -10,9 +10,9 @@ class ConfigurationService : public CustomBLEService {
         void init() override;
     
     private:
-        BLECharacteristic _flywheelNormalSpeed;
-        BLECharacteristic _flywheelTrimVariance;
-        BLECharacteristic _beltMaxSpeed;
+        BLECharacteristic m_flywheelNormalSpeed;
+        BLECharacteristic m_flywheelTrimVariance;
+        BLECharacteristic m_beltMaxSpeed;
 };
 
 #endif /* CONFIGURATION_SERVICE_H */

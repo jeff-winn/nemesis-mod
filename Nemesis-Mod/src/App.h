@@ -36,7 +36,7 @@ class App {
         void resetCore();
 
     private:
-        uint32_t revvedAtMillis;
+        uint32_t m_revvedAtMillis;
 };
 
 extern App Application;
