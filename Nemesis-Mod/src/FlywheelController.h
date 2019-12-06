@@ -58,8 +58,6 @@ class FlywheelController : public MotorController {
         float m_trimVariance;
         float m_m1TrimAdjustment;
         float m_m2TrimAdjustment;
-
-        bool m_running;
 };
 
 extern FlywheelController Flywheels;
