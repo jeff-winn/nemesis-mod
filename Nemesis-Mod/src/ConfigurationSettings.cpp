@@ -46,9 +46,9 @@ void ConfigurationSettings::defaultSettings() {
     setFeedMediumSpeed(175);
     setFeedMaxSpeed(400);
 
-    setFlywheelNormalSpeed(125);
-    setFlywheelMediumSpeed(250);
-    setFlywheelMaxSpeed(400);
+    setFlywheelKidSpeed(125);
+    setFlywheelNormalSpeed(250);
+    setFlywheelLudicrousSpeed(400);
     setFlywheelTrimVariance(0.1F);
     setFlywheelM1TrimAdjustment(1.0F);
     setFlywheelM2TrimAdjustment(1.0F);
@@ -128,27 +128,27 @@ void ConfigurationSettings::setFeedMaxSpeed(int value) {
     writeInt32(FEED_MAX_SPEED_ADDR, value);
 }
 
-int ConfigurationSettings::getFlywheelNormalSpeed() {
+int ConfigurationSettings::getFlywheelKidSpeed() {
     return readInt32(FLYWHEEL_NORMAL_SPEED_ADDR);
 }
 
-void ConfigurationSettings::setFlywheelNormalSpeed(int value) {
+void ConfigurationSettings::setFlywheelKidSpeed(int value) {
     writeInt32(FLYWHEEL_NORMAL_SPEED_ADDR, value);
 }
 
-int ConfigurationSettings::getFlywheelMediumSpeed() {
+int ConfigurationSettings::getFlywheelNormalSpeed() {
     return readInt32(FLYWHEEL_MEDIUM_SPEED_ADDR);
 }
 
-void ConfigurationSettings::setFlywheelMediumSpeed(int value) {    
+void ConfigurationSettings::setFlywheelNormalSpeed(int value) {    
     writeInt32(FLYWHEEL_MEDIUM_SPEED_ADDR, value);
 }
 
-int ConfigurationSettings::getFlywheelMaxSpeed() {
+int ConfigurationSettings::getFlywheelLudicrousSpeed() {
     return readInt32(FLYWHEEL_MAX_SPEED_ADDR);
 }
 
-void ConfigurationSettings::setFlywheelMaxSpeed(int value) {
+void ConfigurationSettings::setFlywheelLudicrousSpeed(int value) {
     writeInt32(FLYWHEEL_MAX_SPEED_ADDR, value);
 }
 

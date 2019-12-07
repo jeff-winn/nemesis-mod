@@ -6,10 +6,10 @@
 
 // Defines the flywheel speeds available.
 enum class FlywheelSpeed {
-    Normal = 1,
-    Medium = 2,
+    Kid = 1,
+    Normal = 2,
     // WARNING: This value may cause physical bruising on the intended target, use with caution!
-    Max = 255
+    Ludicrous = 255
 };
 
 // Defines the motors within the flywheel assembly.
@@ -57,9 +57,9 @@ class FlywheelController : public MotorController {
         int m_m1Speed;
         int m_m2Speed;
 
+        int m_kidSpeed;
         int m_normalSpeed;
-        int m_mediumSpeed;
-        int m_maxSpeed;
+        int m_ludicrousSpeed;
         float m_trimVariance;
         float m_m1TrimAdjustment;
         float m_m2TrimAdjustment;

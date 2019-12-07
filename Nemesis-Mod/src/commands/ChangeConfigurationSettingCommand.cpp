@@ -10,24 +10,24 @@ void ChangeConfigurationSettingCommand::handleImpl(uint8_t* data, uint16_t len) 
     switch (m_subtype) {
         case 1: {
             auto value = getInt32ValueFromPacket(data);
-            Settings.setFlywheelNormalSpeed(value);
+            Settings.setFlywheelKidSpeed(value);
 
             Log.println(value);
-            Log.println("Changed flywheel normal speed.");
+            Log.println("Changed flywheel kid speed.");
             break;
         }
         case 2: {
             auto value = getInt32ValueFromPacket(data);
-            Settings.setFlywheelMediumSpeed(value);
+            Settings.setFlywheelNormalSpeed(value);
 
-            Log.println("Changed flywheel medium speed.");
+            Log.println("Changed flywheel normal speed.");
             break;
         }
         case 3: {
             auto value = getInt32ValueFromPacket(data);
-            Settings.setFlywheelMaxSpeed(value);
+            Settings.setFlywheelLudicrousSpeed(value);
 
-            Log.println("Changed flywheel max speed.");
+            Log.println("Changed flywheel ludicrous speed.");
             break;
         }
         case 4: {

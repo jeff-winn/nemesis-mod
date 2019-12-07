@@ -14,9 +14,9 @@ void FlywheelController::init(ConfigurationSettings* settings) {
     m_driver.calibrateCurrentOffsets();
     m_driver.disableDrivers();
 
+    m_kidSpeed = settings->getFlywheelKidSpeed();
     m_normalSpeed = settings->getFlywheelNormalSpeed();
-    m_mediumSpeed = settings->getFlywheelMediumSpeed();
-    m_maxSpeed = settings->getFlywheelMaxSpeed();
+    m_ludicrousSpeed = settings->getFlywheelLudicrousSpeed();
     m_trimVariance = settings->getFlywheelTrimVariance();
     m_m1TrimAdjustment = settings->getFlywheelM1TrimAdjustment();
     m_m2TrimAdjustment = settings->getFlywheelM2TrimAdjustment();
@@ -70,14 +70,14 @@ int FlywheelController::calculateLimiterForSpeed(int speed) {
 
 int FlywheelController::determineMotorMaximumSpeed() {
     switch (m_speed) {
+        case FlywheelSpeed::Kid: {
+            return m_kidSpeed;
+        }
         case FlywheelSpeed::Normal: {
             return m_normalSpeed;
         }
-        case FlywheelSpeed::Medium: {
-            return m_mediumSpeed;
-        }
-        case FlywheelSpeed::Max: {
-            return m_maxSpeed;
+        case FlywheelSpeed::Ludicrous: {
+            return m_ludicrousSpeed;
         }
     }
 
