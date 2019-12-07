@@ -9,9 +9,9 @@ const short OPERATOR_TOKEN_ADDR = 0x11;
 const short FEED_NORMAL_SPEED_ADDR = 0x100;
 const short FEED_MEDIUM_SPEED_ADDR = 0x104;
 const short FEED_MAX_SPEED_ADDR = 0x108;
-const short FLYWHEEL_NORMAL_SPEED_ADDR = 0x112;
-const short FLYWHEEL_MEDIUM_SPEED_ADDR = 0x116;
-const short FLYWHEEL_MAX_SPEED_ADDR = 0x120;
+const short FLYWHEEL_KID_SPEED_ADDR = 0x112;
+const short FLYWHEEL_NORMAL_SPEED_ADDR = 0x116;
+const short FLYWHEEL_LUDICROUS_SPEED_ADDR = 0x120;
 const short FLYWHEEL_TRIM_VARIANCE_ADDR = 0x124;
 const short FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR = 0x128;
 const short FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR = 0x132;
@@ -129,27 +129,27 @@ void ConfigurationSettings::setFeedMaxSpeed(int value) {
 }
 
 int ConfigurationSettings::getFlywheelKidSpeed() {
-    return readInt32(FLYWHEEL_NORMAL_SPEED_ADDR);
+    return readInt32(FLYWHEEL_KID_SPEED_ADDR);
 }
 
 void ConfigurationSettings::setFlywheelKidSpeed(int value) {
-    writeInt32(FLYWHEEL_NORMAL_SPEED_ADDR, value);
+    writeInt32(FLYWHEEL_KID_SPEED_ADDR, value);
 }
 
 int ConfigurationSettings::getFlywheelNormalSpeed() {
-    return readInt32(FLYWHEEL_MEDIUM_SPEED_ADDR);
+    return readInt32(FLYWHEEL_NORMAL_SPEED_ADDR);
 }
 
 void ConfigurationSettings::setFlywheelNormalSpeed(int value) {    
-    writeInt32(FLYWHEEL_MEDIUM_SPEED_ADDR, value);
+    writeInt32(FLYWHEEL_NORMAL_SPEED_ADDR, value);
 }
 
 int ConfigurationSettings::getFlywheelLudicrousSpeed() {
-    return readInt32(FLYWHEEL_MAX_SPEED_ADDR);
+    return readInt32(FLYWHEEL_LUDICROUS_SPEED_ADDR);
 }
 
 void ConfigurationSettings::setFlywheelLudicrousSpeed(int value) {
-    writeInt32(FLYWHEEL_MAX_SPEED_ADDR, value);
+    writeInt32(FLYWHEEL_LUDICROUS_SPEED_ADDR, value);
 }
 
 float ConfigurationSettings::getFlywheelTrimVariance() {
