@@ -33,7 +33,16 @@
 			"ios": "cpp",
 			"cstdbool": "cpp",
 			"cstdint": "cpp",
-			"random": "cpp"
+			"random": "cpp",
+			"type_traits": "cpp",
+			"optional": "cpp",
+			"istream": "cpp",
+			"ostream": "cpp",
+			"system_error": "cpp",
+			"array": "cpp",
+			"functional": "cpp",
+			"tuple": "cpp",
+			"utility": "cpp"
 		}
 	}
 }

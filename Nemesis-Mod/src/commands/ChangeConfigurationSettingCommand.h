@@ -11,8 +11,8 @@ class ChangeConfigurationSettingCommand : public ConfigurationCommand {
     protected:
         void handleImpl(uint8_t* data, uint16_t len) override;
 
-        int getInt32ValueFromPacket(uint8_t* data);
-        float getFloatValueFromPacket(uint8_t* data);
+        int getInt32ValueFromPacket(const uint8_t* data);
+        float getFloatValueFromPacket(const uint8_t* data);
 
     private:
         uint8_t m_subtype;

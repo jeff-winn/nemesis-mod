@@ -7,20 +7,30 @@ uint8_t CONFIGURATION_COMMAND_ID = 10;
 
 ConfigurationService::ConfigurationService() : CustomBLEService(UUID128_SVC_CONFIGURATION) {
     m_flywheelNormalSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_NORMAL_SPEED);
+    m_flywheelKidSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_KID_SPEED);
+    m_flywheelLudicrousSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_LUDICROUS_SPEED);
     m_flywheelTrimVariance = BLECharacteristic(UUID128_CHR_FLYWHEEL_TRIM_VARIANCE);
     m_beltMaxSpeed = BLECharacteristic(UUID128_CHR_BELT_MAX_SPEED);
 }
 
-void onFlywheelNormalSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
+void onFlywheelKidSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
     NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 1);
 }
 
-void onFlywheelTrimVarianceWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 7);
+void onFlywheelNormalSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
+    NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 2);
+}
+
+void onFlywheelLudicrousSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
+    NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 3);
 }
 
 void onBeltMaxSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
     NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 6);
+}
+
+void onFlywheelTrimVarianceWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
+    NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 7);
 }
 
 void ConfigurationService::init() {
@@ -31,6 +41,22 @@ void ConfigurationService::init() {
     m_flywheelNormalSpeed.setWriteCallback(onFlywheelNormalSpeedWriteCallback);
     m_flywheelNormalSpeed.begin();
     m_flywheelNormalSpeed.write32(Settings.getFlywheelNormalSpeed());
+
+    m_flywheelKidSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
+    m_flywheelKidSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
+    m_flywheelKidSpeed.setFixedLen(4);
+    m_flywheelKidSpeed.setUserDescriptor("Flywheel Kid Speed");
+    m_flywheelKidSpeed.setWriteCallback(onFlywheelKidSpeedWriteCallback);
+    m_flywheelKidSpeed.begin();
+    m_flywheelKidSpeed.write32(Settings.getFlywheelKidSpeed());
+
+    m_flywheelLudicrousSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
+    m_flywheelLudicrousSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
+    m_flywheelLudicrousSpeed.setFixedLen(4);
+    m_flywheelLudicrousSpeed.setUserDescriptor("Flywheel Ludicrous Speed");
+    m_flywheelLudicrousSpeed.setWriteCallback(onFlywheelLudicrousSpeedWriteCallback);
+    m_flywheelLudicrousSpeed.begin();
+    m_flywheelLudicrousSpeed.write32(Settings.getFlywheelLudicrousSpeed());
 
     m_flywheelTrimVariance.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_flywheelTrimVariance.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);

@@ -11,21 +11,21 @@ void NotificationService::init() {
     m_flywheelM1CurrentMilliamps.setProperties(CHR_PROPS_NOTIFY);
     m_flywheelM1CurrentMilliamps.setPermission(SECMODE_ENC_NO_MITM, SECMODE_NO_ACCESS);
     m_flywheelM1CurrentMilliamps.setFixedLen(4);
-    m_flywheelM1CurrentMilliamps.setUserDescriptor("Flywheel M1 Current (in milliamps)");
+    m_flywheelM1CurrentMilliamps.setUserDescriptor("Flywheel M1 Current (mA)");
     m_flywheelM1CurrentMilliamps.begin();
     m_flywheelM1CurrentMilliamps.write32(0);
 
     m_flywheelM2CurrentMilliamps.setProperties(CHR_PROPS_NOTIFY);
     m_flywheelM2CurrentMilliamps.setPermission(SECMODE_ENC_NO_MITM, SECMODE_NO_ACCESS);
     m_flywheelM2CurrentMilliamps.setFixedLen(4);
-    m_flywheelM2CurrentMilliamps.setUserDescriptor("Flywheel M2 Current (in milliamps)");
+    m_flywheelM2CurrentMilliamps.setUserDescriptor("Flywheel M2 Current (mA)");
     m_flywheelM2CurrentMilliamps.begin();
     m_flywheelM2CurrentMilliamps.write32(0);
 
     m_beltM1CurrentMilliamps.setProperties(CHR_PROPS_NOTIFY);
     m_beltM1CurrentMilliamps.setPermission(SECMODE_ENC_NO_MITM, SECMODE_NO_ACCESS);
     m_beltM1CurrentMilliamps.setFixedLen(4);
-    m_beltM1CurrentMilliamps.setUserDescriptor("Belt M1 Current (in milliamps)");
+    m_beltM1CurrentMilliamps.setUserDescriptor("Belt M1 Current (mA)");
     m_beltM1CurrentMilliamps.begin();
     m_beltM1CurrentMilliamps.write32(0);
 }
