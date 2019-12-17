@@ -1,5 +1,5 @@
-#ifndef BLUETOOTH_CONTROLLER_H
-#define BLUETOOTH_CONTROLLER_H
+#ifndef BLE_CONTROLLER_H
+#define BLE_CONTROLLER_H
 
 #include <bluefruit.h>
 #include "bluetooth/BlasterService.h"
@@ -38,4 +38,4 @@ class BLEController {
 
 extern BLEController BLE;
 
-#endif /* BLUETOOTH_CONTROLLER_H */
+#endif /* BLE_CONTROLLER_H */
