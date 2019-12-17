@@ -9,58 +9,58 @@ ChangeConfigurationSettingCommand::ChangeConfigurationSettingCommand(uint8_t sub
 void ChangeConfigurationSettingCommand::handleImpl(uint8_t* data, uint16_t len) { 
     switch (m_subtype) {
         case 1: {
-            auto flywheelKidSpeed = getInt32ValueFromPacket(data);
-            Settings.setFlywheelKidSpeed(flywheelKidSpeed);
+            auto value = getInt32ValueFromPacket(data);
+            Settings.setFlywheelKidSpeed(value);
 
-            Log.println(flywheelKidSpeed);
+            Log.println(value);
             Log.println("Changed flywheel kid speed.");
             break;
         }
         case 2: {
-            auto flywheelNormalSpeed = getInt32ValueFromPacket(data);
-            Settings.setFlywheelNormalSpeed(flywheelNormalSpeed);
+            auto value = getInt32ValueFromPacket(data);
+            Settings.setFlywheelNormalSpeed(value);
 
-            Log.println(flywheelNormalSpeed);
+            Log.println(value);
             Log.println("Changed flywheel normal speed.");
             break;
         }
         case 3: {
-            auto flywheelLudicrousSpeed = getInt32ValueFromPacket(data);
-            Settings.setFlywheelLudicrousSpeed(flywheelLudicrousSpeed);
+            auto value = getInt32ValueFromPacket(data);
+            Settings.setFlywheelLudicrousSpeed(value);
 
-            Log.println(flywheelLudicrousSpeed);
+            Log.println(value);
             Log.println("Changed flywheel ludicrous speed.");
             break;
         }
         case 4: {
-            auto feedNormalSpeed = getInt32ValueFromPacket(data);
-            Settings.setFeedNormalSpeed(feedNormalSpeed);
+            auto value = getInt32ValueFromPacket(data);
+            Settings.setFeedNormalSpeed(value);
 
-            Log.println(feedNormalSpeed);
+            Log.println(value);
             Log.println("Changed feed normal speed.");
             break;
         }
         case 5: {
-            auto feedMediumSpeed = getInt32ValueFromPacket(data);
-            Settings.setFeedMediumSpeed(feedMediumSpeed);
+            auto value = getInt32ValueFromPacket(data);
+            Settings.setFeedMediumSpeed(value);
 
-            Log.println(feedMediumSpeed);
+            Log.println(value);
             Log.println("Changed feed medium speed.");
             break;
         }
         case 6: {
-            auto feedMaxSpeed = getInt32ValueFromPacket(data);
-            Settings.setFeedMaxSpeed(feedMaxSpeed);
+            auto value = getInt32ValueFromPacket(data);
+            Settings.setFeedMaxSpeed(value);
 
-            Log.println(feedMaxSpeed);
+            Log.println(value);
             Log.println("Changed feed max speed.");
             break;
         }
         case 7: {
-            auto flywheelTrimVariance = getFloatValueFromPacket(data);
-            Settings.setFlywheelTrimVariance(flywheelTrimVariance);
+            auto value = getFloatValueFromPacket(data);
+            Settings.setFlywheelTrimVariance(value);
 
-            Log.println(flywheelTrimVariance);
+            Log.println(value, 5);
             Log.println("Changed flywheel trim variance.");
             break;
         }
