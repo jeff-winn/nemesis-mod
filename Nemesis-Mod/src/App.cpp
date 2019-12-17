@@ -12,12 +12,11 @@
 #include "Log.h"
 #include "Mainboard.h"
 
-App Application = App();
-
-const uint32_t SYSTEM_OFF_IN_MSECS = 300000; // 5 minutes
+const uint32_t SYSTEM_OFF_IN_MSECS = 600000; // 10 minutes
 const uint32_t REV_BUTTON_PIN = 16;
 const uint32_t FIRING_BUTTON_PIN = 15;
 
+App Application = App();
 Button RevTrigger = Button(REV_BUTTON_PIN);
 Button FiringTrigger = Button(FIRING_BUTTON_PIN);
 
