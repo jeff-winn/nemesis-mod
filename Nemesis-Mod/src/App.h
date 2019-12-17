@@ -1,11 +1,13 @@
 #ifndef APP_H
 #define APP_H
 
-#include "Command.h"
+#include "CommandFactory.h"
 
 // Represents the main application.
 class App {
-    public:        
+    public:
+        App();
+        
         // Initializes the application.
         void init();
 
@@ -27,9 +29,7 @@ class App {
 
         void onRemoteCommandReceived(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype);
 
-    protected:        
-        Command* createCommandFromPacket(uint8_t type, uint8_t subtype);
-        
+    protected:       
         void waitForRevTriggerToBePressed();
         void sendCurrentNotifications();
 
@@ -37,6 +37,7 @@ class App {
 
     private:
         uint32_t m_revvedAtMillis;
+        CommandFactory m_commandFactory;
 };
 
 extern App Application;

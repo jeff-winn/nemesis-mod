@@ -1,12 +1,8 @@
-#include "commands/BeltSpeedCommand.h"
-#include "commands/ChangeConfigurationSettingCommand.h"
-#include "commands/FlywheelTrimAdjustmentCommand.h"
-#include "commands/FlywheelSpeedCommand.h"
 #include "App.h"
 #include "BLEController.h"
 #include "Button.h"
 #include "Callbacks.h"
-#include "Command.h"
+#include "CommandFactory.h"
 #include "FeedController.h"
 #include "FlywheelController.h"
 #include "Log.h"
@@ -27,6 +23,10 @@ bool IS_OPERATOR_AUTHORIZED = true;
 // #else
 //     false;
 // #endif
+
+App::App() {
+    m_commandFactory = CommandFactory();
+}
 
 void App::run() {
     sendCurrentNotifications();
@@ -111,7 +111,7 @@ void App::init() {
 }
 
 void App::onRemoteCommandReceived(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {   
-    auto command = createCommandFromPacket(type, subtype);
+    auto command = m_commandFactory.createCommand(type, subtype);
     if (command) {
         auto requiresAuthorization = command->requiresAuthorization();
         if (!requiresAuthorization || (requiresAuthorization && isAuthorized())) {
@@ -140,25 +140,6 @@ void App::authenticate() {
     // }
 
     IS_OPERATOR_AUTHORIZED = authorized;
-}
-
-Command* App::createCommandFromPacket(uint8_t type, uint8_t subtype) {
-    switch (type) {
-        case 10: {
-            return new ChangeConfigurationSettingCommand(subtype);
-        }
-        case 100: {
-            return new BeltSpeedCommand(&Belt);
-        }
-        case 200: {
-            return new FlywheelSpeedCommand(&Flywheels);
-        }
-        case 201: {
-            return new FlywheelTrimAdjustmentCommand(subtype, &Flywheels);        
-        }
-    }
-
-    return NULL;
 }
 
 void App::revokeAuthorization() {
