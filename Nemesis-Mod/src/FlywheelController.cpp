@@ -134,11 +134,15 @@ void FlywheelController::setMotorSpeedAdjustment(FlywheelMotor motor, float adju
         case FlywheelMotor::Motor1: {
             Log.println("Changed M1 trim speed adjustment.");
             m_m1TrimAdjustment = adjustment;
+
+            Settings.setFlywheelM1TrimAdjustment(adjustment);
             break;
         }
         case FlywheelMotor::Motor2: {
             Log.println("Changed M2 trim speed adjustment.");
             m_m2TrimAdjustment = adjustment;
+
+            Settings.setFlywheelM2TrimAdjustment(adjustment);
             break;
         }
     }
