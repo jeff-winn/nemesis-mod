@@ -128,7 +128,7 @@ void FlywheelController::setMotorSpeedAdjustment(FlywheelMotor motor, float adju
         return;
     }
 
-    Log.println(adjustment);
+    Log.println(adjustment, 5);
 
     switch (motor) {
         case FlywheelMotor::Motor1: {
