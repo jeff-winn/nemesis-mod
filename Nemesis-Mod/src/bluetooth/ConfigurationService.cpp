@@ -10,6 +10,8 @@ ConfigurationService::ConfigurationService() : CustomBLEService(UUID128_SVC_CONF
     m_flywheelKidSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_KID_SPEED);
     m_flywheelLudicrousSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_LUDICROUS_SPEED);
     m_flywheelTrimVariance = BLECharacteristic(UUID128_CHR_FLYWHEEL_TRIM_VARIANCE);
+    m_beltNormalSpeed = BLECharacteristic(UUID128_CHR_BELT_NORMAL_SPEED);
+    m_beltMediumSpeed = BLECharacteristic(UUID128_CHR_BELT_MEDIUM_SPEED);
     m_beltMaxSpeed = BLECharacteristic(UUID128_CHR_BELT_MAX_SPEED);
 }
 
@@ -23,6 +25,14 @@ void onFlywheelNormalSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* ch
 
 void onFlywheelLudicrousSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
     NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 3);
+}
+
+void onBeltNormalSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
+    NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 4);
+}
+
+void onBeltMediumSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
+    NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 5);
 }
 
 void onBeltMaxSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
@@ -67,6 +77,26 @@ void ConfigurationService::init() {
 
     auto flywheelTrimVariance = Settings.getFlywheelTrimVariance();
     m_flywheelTrimVariance.write(&flywheelTrimVariance, 4);
+
+    m_beltNormalSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
+    m_beltNormalSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
+    m_beltNormalSpeed.setFixedLen(4);
+    m_beltNormalSpeed.setUserDescriptor("Belt Feed Normal Speed");
+    m_beltNormalSpeed.setWriteCallback(onBeltNormalSpeedWriteCallback);
+    m_beltNormalSpeed.begin();
+
+    auto feedNormalSpeed = Settings.getFeedNormalSpeed();
+    m_beltNormalSpeed.write(&feedNormalSpeed, 4);
+
+    m_beltMediumSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
+    m_beltMediumSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
+    m_beltMediumSpeed.setFixedLen(4);
+    m_beltMediumSpeed.setUserDescriptor("Belt Feed Medium Speed");
+    m_beltMediumSpeed.setWriteCallback(onBeltMediumSpeedWriteCallback);
+    m_beltMediumSpeed.begin();
+
+    auto feedMediumSpeed = Settings.getFeedMediumSpeed();
+    m_beltMediumSpeed.write(&feedMediumSpeed, 4);
 
     m_beltMaxSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_beltMaxSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
