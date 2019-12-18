@@ -3,6 +3,7 @@
 #include "Button.h"
 #include "Callbacks.h"
 #include "CommandFactory.h"
+#include "ConfigurationSettings.h"
 #include "FeedController.h"
 #include "FlywheelController.h"
 #include "Log.h"
@@ -92,10 +93,10 @@ void App::init() {
     Log.println("Initializing application...");
 
     Settings.init(); 
-    Flywheels.init(&Settings);
+    Flywheels.init();
     Flywheels.setSpeed(FlywheelSpeed::Normal);
 
-    Belt.init(&Settings);
+    Belt.init();
     Belt.setSpeed(BeltSpeed::Normal);
 
     SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);

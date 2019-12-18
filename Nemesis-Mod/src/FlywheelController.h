@@ -24,7 +24,7 @@ class FlywheelController : public MotorController {
         FlywheelController();
         
         // Initializes the controller.
-        void init(ConfigurationSettings* settings) override;
+        void init() override;
 
         // Gets the current of the motor specified (in milliamps).
         unsigned int getMotorCurrentMilliamps(FlywheelMotor motor);
@@ -56,13 +56,6 @@ class FlywheelController : public MotorController {
         FlywheelSpeed m_speed;
         int m_m1Speed;
         int m_m2Speed;
-
-        int m_kidSpeed;
-        int m_normalSpeed;
-        int m_ludicrousSpeed;
-        float m_trimVariance;
-        float m_m1TrimAdjustment;
-        float m_m2TrimAdjustment;
 };
 
 extern FlywheelController Flywheels;

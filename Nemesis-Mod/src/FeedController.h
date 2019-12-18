@@ -17,7 +17,7 @@ class FeedController : public MotorController {
         FeedController();
 
         // Initializes the controller.
-        void init(ConfigurationSettings* settings) override;
+        void init() override;
 
         // Gets the current of the motor specified (in milliamps).
         unsigned int getMotorCurrentMilliamps();
@@ -39,10 +39,6 @@ class FeedController : public MotorController {
         
     private:
         G2HighPowerMotorShield18v17 m_driver;
-
-        int m_normalSpeed;
-        int m_mediumSpeed;
-        int m_maxSpeed;
 
         BeltSpeed m_speed;
         int m_m1speed;

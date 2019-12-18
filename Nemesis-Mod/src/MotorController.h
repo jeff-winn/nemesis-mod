@@ -1,12 +1,10 @@
 #ifndef MOTOR_CONTROLLER_H
 #define MOTOR_CONTROLLER_H
 
-#include "ConfigurationSettings.h"
-
 // Provides a base implementation of a motor controller.
 class MotorController {
     public:
-        virtual void init(ConfigurationSettings* settings);
+        virtual void init();
 
         // Starts the controller.
         void start();

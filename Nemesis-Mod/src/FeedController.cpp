@@ -1,3 +1,4 @@
+#include "ConfigurationSettings.h"
 #include "FeedController.h"
 #include "Log.h"
 #include "Mainboard.h"
@@ -8,14 +9,10 @@ FeedController::FeedController() {
     m_driver = G2HighPowerMotorShield18v17(17, -1, 7, -1, A2);
 }
 
-void FeedController::init(ConfigurationSettings* settings) {
+void FeedController::init() {
     m_driver.init();
     m_driver.calibrateCurrentOffset();
     m_driver.disableDriver();
-
-    m_normalSpeed = settings->getFeedNormalSpeed();
-    m_mediumSpeed = settings->getFeedMediumSpeed();
-    m_maxSpeed = settings->getFeedMaxSpeed();
 
     MCU.delaySafe(1);    
     Log.println("Completed initializing feed controller.");
@@ -50,13 +47,13 @@ void FeedController::onStop() {
 int FeedController::calculateMotorSpeed() {
     switch (m_speed) {
         case BeltSpeed::Normal: {
-            return m_normalSpeed;
+            return Settings.getFeedNormalSpeed();
         }
         case BeltSpeed::Medium: {
-            return m_mediumSpeed;
+            return Settings.getFeedMediumSpeed();
         }
         case BeltSpeed::Max: {
-            return m_maxSpeed;
+            return Settings.getFeedMaxSpeed();
         }
     }
 }

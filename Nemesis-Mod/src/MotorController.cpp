@@ -1,6 +1,6 @@
 #include "MotorController.h"
 
-void MotorController::init(ConfigurationSettings* settings) {    
+void MotorController::init() {    
 }
 
 void MotorController::start() {
