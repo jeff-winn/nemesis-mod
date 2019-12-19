@@ -46,8 +46,8 @@ void ConfigurationSettings::defaultSettings() {
     setFeedMediumSpeed(175);
     setFeedMaxSpeed(400);
 
-    setFlywheelKidSpeed(125);
-    setFlywheelNormalSpeed(250);
+    setFlywheelKidSpeed(195);
+    setFlywheelNormalSpeed(215);
     setFlywheelLudicrousSpeed(400);
     setFlywheelTrimVariance(0.1F);
     setFlywheelM1TrimAdjustment(1.0F);
