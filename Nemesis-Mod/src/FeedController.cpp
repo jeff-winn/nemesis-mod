@@ -14,6 +14,8 @@ void FeedController::init() {
     m_driver.calibrateCurrentOffset();
     m_driver.disableDriver();
 
+    setSpeed(BeltSpeed::Normal);
+    
     MCU.delaySafe(1);    
     Log.println("Completed initializing feed controller.");
 }

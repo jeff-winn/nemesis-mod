@@ -12,10 +12,12 @@
 const uint32_t SYSTEM_OFF_IN_MSECS = 600000; // 10 minutes
 const uint32_t REV_BUTTON_PIN = 16;
 const uint32_t FIRING_BUTTON_PIN = 15;
+const uint32_t HOPPER_LOCK_BUTTON_PIN = 29;
 
 App Application = App();
 Button RevTrigger = Button(REV_BUTTON_PIN);
 Button FiringTrigger = Button(FIRING_BUTTON_PIN);
+Button HopperLock = Button(HOPPER_LOCK_BUTTON_PIN);
 
 // Indicates whether the operator is authorized (allowing release of the software lock).
 bool IS_OPERATOR_AUTHORIZED = true;
@@ -32,17 +34,17 @@ App::App() {
 void App::run() {
     sendCurrentNotifications();
 
-    if (isAuthorized() && RevTrigger.isPressed()) {
+    if (shouldAllowRevvingFlywheels()) {
         Log.println("Revving flywheels...");
 
         m_revvedAtMillis = millis();
         Flywheels.start();
 
         auto firing = false;
-        while (RevTrigger.isPressed()) {
+        while (shouldAllowRevvingFlywheels()) {
             sendCurrentNotifications();
 
-            if (FiringTrigger.isPressed()) {
+            if (shouldAllowFiringRounds()) {
                 if (!firing) {
                     firing = true;
 
@@ -66,6 +68,14 @@ void App::run() {
     }
 
     waitForRevTriggerToBePressed();
+}
+
+bool App::shouldAllowRevvingFlywheels() {
+    return isAuthorized() && HopperLock.isPressed() && RevTrigger.isPressed();
+}
+
+bool App::shouldAllowFiringRounds() {
+    return isAuthorized() && HopperLock.isPressed() && FiringTrigger.isPressed();
 }
 
 void App::waitForRevTriggerToBePressed() {
@@ -94,10 +104,7 @@ void App::init() {
 
     Settings.init(); 
     Flywheels.init();
-    Flywheels.setSpeed(FlywheelSpeed::Normal);
-
     Belt.init();
-    Belt.setSpeed(BeltSpeed::Normal);
 
     SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
     BLE.init();

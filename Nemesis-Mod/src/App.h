@@ -33,6 +33,9 @@ class App {
         void waitForRevTriggerToBePressed();
         void sendCurrentNotifications();
 
+        bool shouldAllowRevvingFlywheels();
+        bool shouldAllowFiringRounds();
+
         void resetCore();
 
     private:
