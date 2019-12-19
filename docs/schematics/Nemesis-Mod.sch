@@ -36,34 +36,8 @@ F 3 "~" H 8400 2760 50  0001 C CNN
 	1    8400 2850
 	1    0    0    -1  
 $EndComp
-$Comp
-L Motor:Motor_DC Flywheel_M2
-U 1 1 5CE70E23
-P 8400 4250
-F 0 "Flywheel_M2" H 8558 4246 50  0000 L CNN
-F 1 "Motor_DC" H 8558 4155 50  0000 L CNN
-F 2 "" H 8400 4160 50  0001 C CNN
-F 3 "~" H 8400 4160 50  0001 C CNN
-	1    8400 4250
-	1    0    0    -1  
-$EndComp
-$Comp
-L Nemesis-Mod:Pololu_G2_HighPower_18v18 Motor_Driver1
-U 1 1 5CE740FA
-P 6550 3550
-F 0 "Motor_Driver1" H 6550 4815 50  0000 C CNN
-F 1 "Pololu_G2_HighPower_18v18" H 6550 4724 50  0000 C CNN
-F 2 "" H 6500 4750 50  0001 C CNN
-F 3 "" H 6500 4750 50  0001 C CNN
-	1    6550 3550
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	7800 4350 8050 4350
-Wire Wire Line
-	8050 4350 8050 4550
-Wire Wire Line
-	8050 4550 8400 4550
 Wire Wire Line
 	7800 4200 8050 4200
 Wire Wire Line
@@ -82,17 +56,6 @@ Wire Wire Line
 	8050 2800 8050 2650
 Wire Wire Line
 	8050 2650 8400 2650
-$Comp
-L Nemesis-Mod:Pololu_5V_Step_Down_Regulator Voltage_Regulator
-U 1 1 5CE79472
-P 7000 6450
-F 0 "Voltage_Regulator" H 6500 6500 50  0000 L CNN
-F 1 "Pololu_5V_Step_Down_Regulator" H 6300 6600 50  0000 L CNN
-F 2 "" H 6850 6500 50  0001 C CNN
-F 3 "" H 6850 6500 50  0001 C CNN
-	1    7000 6450
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	6900 4850 6900 5450
 Wire Wire Line
@@ -410,31 +373,12 @@ F 3 "" H 4400 2850 50  0001 C CNN
 	1    3750 4150
 	1    0    0    -1  
 $EndComp
-$Comp
-L Nemesis-Mod:Nerf_Hopper_Lock Power_Lock
-U 1 1 5DDF54E1
-P 8200 6650
-F 0 "Power_Lock" H 8150 7750 50  0000 C CNN
-F 1 "Nerf_Hopper_Lock" H 8150 7850 50  0000 C CNN
-F 2 "" H 8200 7750 50  0001 C CNN
-F 3 "" H 8200 7750 50  0001 C CNN
-	1    8200 6650
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	7050 5450 7600 5450
-Wire Wire Line
-	7600 6250 8150 6250
-Wire Wire Line
-	7600 5450 7600 6250
 Wire Wire Line
 	2850 1200 2850 2600
 Wire Wire Line
 	6750 4850 6750 5050
 Wire Wire Line
 	6750 5050 7750 5050
-Wire Wire Line
-	7750 5050 7750 5750
 Wire Wire Line
 	8550 5750 8550 5350
 Wire Wire Line
@@ -448,15 +392,6 @@ Wire Wire Line
 	2850 2600 2850 3450
 Wire Wire Line
 	8550 5950 8600 5950
-Wire Wire Line
-	8600 5950 8600 5300
-Wire Wire Line
-	8600 5300 4950 5300
-Wire Wire Line
-	4950 5300 4950 3900
-Wire Wire Line
-	4950 3900 4450 3900
-NoConn ~ 7750 5950
 NoConn ~ 6600 5450
 NoConn ~ 5300 4250
 NoConn ~ 5300 3950
@@ -470,7 +405,6 @@ NoConn ~ 4450 3750
 NoConn ~ 4450 3600
 NoConn ~ 3050 3300
 NoConn ~ 3050 3000
-NoConn ~ 3050 4350
 NoConn ~ 3050 4500
 NoConn ~ 3050 4650
 NoConn ~ 3050 4800
@@ -487,4 +421,84 @@ NoConn ~ 5950 1900
 NoConn ~ 5950 1800
 NoConn ~ 5950 1600
 NoConn ~ 5950 1300
+$Comp
+L Nemesis-Mod:Pololu_5V_Step_Down_Regulator Voltage_Regulator
+U 1 1 5CE79472
+P 7000 6450
+F 0 "Voltage_Regulator" H 6500 6500 50  0000 L CNN
+F 1 "Pololu_5V_Step_Down_Regulator" H 6300 6600 50  0000 L CNN
+F 2 "" H 6850 6500 50  0001 C CNN
+F 3 "" H 6850 6500 50  0001 C CNN
+	1    7000 6450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7050 5450 7050 5300
+Wire Wire Line
+	7050 5300 4950 5300
+Wire Wire Line
+	4950 5300 4950 3900
+Wire Wire Line
+	4950 3900 4450 3900
+Wire Wire Line
+	8600 5950 8600 5250
+Wire Wire Line
+	8600 5250 5250 5250
+Wire Wire Line
+	5250 5250 5250 5650
+Wire Wire Line
+	5250 5650 2750 5650
+Wire Wire Line
+	2750 5650 2750 4350
+Wire Wire Line
+	2750 4350 3050 4350
+Wire Wire Line
+	8150 6250 8150 6500
+Wire Wire Line
+	8150 6500 5350 6500
+Wire Wire Line
+	5350 6500 5350 5700
+Wire Wire Line
+	5350 5700 5100 5700
+Connection ~ 5100 5700
+$Comp
+L Nemesis-Mod:SW_Push_SPDT Hopper_Lock
+U 1 1 5DFFE3C8
+P 8150 5850
+F 0 "Hopper_Lock" H 8150 6200 50  0000 C CNN
+F 1 "SW_Push_SPDT" H 8150 6300 50  0000 C CNN
+F 2 "" H 8150 6950 50  0001 C CNN
+F 3 "" H 8150 6950 50  0001 C CNN
+	1    8150 5850
+	1    0    0    -1  
+$EndComp
+NoConn ~ 7750 5950
+Wire Wire Line
+	7750 5050 7750 5750
+Wire Wire Line
+	8050 4550 8400 4550
+Wire Wire Line
+	8050 4350 8050 4550
+$Comp
+L Nemesis-Mod:Pololu_G2_HighPower_18v18 Motor_Driver1
+U 1 1 5CE740FA
+P 6550 3550
+F 0 "Motor_Driver1" H 6550 4815 50  0000 C CNN
+F 1 "Pololu_G2_HighPower_18v18" H 6550 4724 50  0000 C CNN
+F 2 "" H 6500 4750 50  0001 C CNN
+F 3 "" H 6500 4750 50  0001 C CNN
+	1    6550 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Motor:Motor_DC Flywheel_M2
+U 1 1 5CE70E23
+P 8400 4250
+F 0 "Flywheel_M2" H 8558 4246 50  0000 L CNN
+F 1 "Motor_DC" H 8558 4155 50  0000 L CNN
+F 2 "" H 8400 4160 50  0001 C CNN
+F 3 "~" H 8400 4160 50  0001 C CNN
+	1    8400 4250
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
