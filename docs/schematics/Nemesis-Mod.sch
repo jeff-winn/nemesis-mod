@@ -376,10 +376,6 @@ $EndComp
 Wire Wire Line
 	2850 1200 2850 2600
 Wire Wire Line
-	6750 4850 6750 5050
-Wire Wire Line
-	6750 5050 7750 5050
-Wire Wire Line
 	8550 5750 8550 5350
 Wire Wire Line
 	8550 5350 4900 5350
@@ -474,8 +470,6 @@ F 3 "" H 8150 6950 50  0001 C CNN
 $EndComp
 NoConn ~ 7750 5950
 Wire Wire Line
-	7750 5050 7750 5750
-Wire Wire Line
 	8050 4550 8400 4550
 Wire Wire Line
 	8050 4350 8050 4550
@@ -501,4 +495,13 @@ F 3 "~" H 8400 4160 50  0001 C CNN
 	1    8400 4250
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	6750 4850 6750 5050
+Wire Wire Line
+	6750 5050 5450 5050
+Wire Wire Line
+	5450 5050 5450 5750
+Wire Wire Line
+	5450 5750 5000 5750
+Connection ~ 5000 5750
 $EndSCHEMATC
