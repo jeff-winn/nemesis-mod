@@ -39,7 +39,7 @@ void App::run() {
 
         m_revvedAtMillis = millis();
         Flywheels.start();
-
+        
         auto firing = false;
         while (shouldAllowRevvingFlywheels()) {
             sendCurrentNotifications();
@@ -112,6 +112,7 @@ void App::init() {
 
     FiringTrigger.init();
     RevTrigger.init();
+    HopperLock.init();
 
     m_revvedAtMillis = millis();
 
