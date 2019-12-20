@@ -12,10 +12,12 @@
 const uint32_t SYSTEM_OFF_IN_MSECS = 600000; // 10 minutes
 const uint32_t REV_BUTTON_PIN = 16;
 const uint32_t FIRING_BUTTON_PIN = 15;
+const uint32_t HOPPER_LOCK_BUTTON_PIN = 29;
 
 App Application = App();
 Button RevTrigger = Button(REV_BUTTON_PIN);
 Button FiringTrigger = Button(FIRING_BUTTON_PIN);
+Button HopperLock = Button(HOPPER_LOCK_BUTTON_PIN);
 
 App::App() {
     m_commandFactory = CommandFactory();
@@ -25,13 +27,13 @@ App::App() {
 void App::run() {
     sendAmperesNotifications();
 
-    if (isAuthorized() && RevTrigger.isPressed()) {
+    if (shouldAllowRevvingFlywheels()) {
         revFlywheels();
 
-        while (RevTrigger.isPressed()) {
+        while (shouldAllowRevvingFlywheels()) {
             sendAmperesNotifications();
 
-            if (FiringTrigger.isPressed()) {
+            if (shouldAllowFiringRounds()) {
                 if (!m_firing) {
                     startFiring();
                 }
@@ -72,6 +74,14 @@ void App::stopFlywheels() {
     Log.println("Flywheels stopped.");
 }
 
+bool App::shouldAllowRevvingFlywheels() {
+    return isAuthorized() && HopperLock.isPressed() && RevTrigger.isPressed();
+}
+
+bool App::shouldAllowFiringRounds() {
+    return isAuthorized() && HopperLock.isPressed() && FiringTrigger.isPressed();
+}
+
 void App::waitForRevTriggerToBePressed() {
     MCU.delaySafe(50);
 }
@@ -90,10 +100,7 @@ void App::init() {
 
     Settings.init(); 
     Flywheels.init();
-    Flywheels.setSpeed(FlywheelSpeed::Normal);
-
     Belt.init();
-    Belt.setSpeed(BeltSpeed::Normal);
 
     SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
     BLE.init();
@@ -101,6 +108,7 @@ void App::init() {
 
     FiringTrigger.init();
     RevTrigger.init();
+    HopperLock.init();
 
     Log.println("Completed application initialization.\n");
 }

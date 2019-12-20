@@ -39,6 +39,9 @@ class App {
         void startFiring();
         void stopFiring();
 
+        bool shouldAllowRevvingFlywheels();
+        bool shouldAllowFiringRounds();
+
         void resetCore();
 
     private:
