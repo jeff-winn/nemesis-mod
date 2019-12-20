@@ -34,7 +34,7 @@ void App::run() {
             sendAmperesNotifications();
 
             if (shouldAllowFiringRounds()) {
-                if (!m_firing) {
+                if (!isAlreadyFiring()) {
                     startFiring();
                 }
             }
@@ -54,6 +54,10 @@ void App::run() {
 void App::revFlywheels() {
     Log.println("Revving flywheels...");
     Flywheels.start();
+}
+
+bool App::isAlreadyFiring() {
+    return m_firing;
 }
 
 void App::startFiring() {

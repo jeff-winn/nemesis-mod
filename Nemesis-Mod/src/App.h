@@ -41,6 +41,7 @@ class App {
 
         bool shouldAllowRevvingFlywheels();
         bool shouldAllowFiringRounds();
+        bool isAlreadyFiring();
 
         void resetCore();
 
