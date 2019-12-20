@@ -17,71 +17,67 @@ App Application = App();
 Button RevTrigger = Button(REV_BUTTON_PIN);
 Button FiringTrigger = Button(FIRING_BUTTON_PIN);
 
-// Indicates whether the operator is authorized (allowing release of the software lock).
-bool IS_OPERATOR_AUTHORIZED = true;
-// #ifndef __RELEASE__
-//     true;
-// #else
-//     false;
-// #endif
-
 App::App() {
     m_commandFactory = CommandFactory();
+    m_isAuthorized = true;
 }
 
 void App::run() {
-    sendCurrentNotifications();
+    sendAmperesNotifications();
 
     if (isAuthorized() && RevTrigger.isPressed()) {
-        Log.println("Revving flywheels...");
+        revFlywheels();
 
-        m_revvedAtMillis = millis();
-        Flywheels.start();
-
-        auto firing = false;
         while (RevTrigger.isPressed()) {
-            sendCurrentNotifications();
+            sendAmperesNotifications();
 
             if (FiringTrigger.isPressed()) {
-                if (!firing) {
-                    firing = true;
-
-                    Log.println("Firing!");
-                    Belt.start();
+                if (!m_firing) {
+                    startFiring();
                 }
             }
             else {
-                Belt.stop();
-                firing = false;
+                stopFiring();
             }
 
             MCU.delaySafe(10);
         }
 
-        Belt.stop();
-        Flywheels.stop();
-        m_revvedAtMillis = millis();
-
-        Log.println("Flywheels stopped.");
+        stopFlywheels();
     }
 
     waitForRevTriggerToBePressed();
 }
 
+void App::revFlywheels() {
+    Log.println("Revving flywheels...");
+    Flywheels.start();
+}
+
+void App::startFiring() {
+    m_firing = true;
+
+    Log.println("Firing!");
+    Belt.start();
+}
+
+void App::stopFiring() {
+    Belt.stop();
+
+    m_firing = false;
+}
+
+void App::stopFlywheels() {
+    Flywheels.stop();
+    Log.println("Flywheels stopped.");
+}
+
 void App::waitForRevTriggerToBePressed() {
-    auto diff = millis() - m_revvedAtMillis;
-    if (diff >= SYSTEM_OFF_IN_MSECS) {
-#if __RELEASE__
-        MCU.waitforEventSafe(REV_BUTTON_PIN, HIGH);
-#endif
-    }
-    else {
-        MCU.delaySafe(50);
-    }
+    MCU.delaySafe(50);
 }
 
 bool App::isAuthorized() {
-    return IS_OPERATOR_AUTHORIZED;
+    return m_isAuthorized;
 }
 
 // Receives notifications whenever a bluetooth command has been received. 
@@ -106,8 +102,6 @@ void App::init() {
     FiringTrigger.init();
     RevTrigger.init();
 
-    m_revvedAtMillis = millis();
-
     Log.println("Completed application initialization.\n");
 }
 
@@ -124,7 +118,6 @@ void App::onRemoteCommandReceived(uint8_t type, uint8_t* data, uint16_t len, uin
 }
 
 void App::authenticate() {
-    auto authorized = true;
     // auto existingToken = Settings.getAuthenticationToken();
 
     // if (token.length > 0 && existingToken.length == 0) {
@@ -140,14 +133,14 @@ void App::authenticate() {
     //     }
     // }
 
-    IS_OPERATOR_AUTHORIZED = authorized;
+    m_isAuthorized = true;
 }
 
 void App::revokeAuthorization() {
-    IS_OPERATOR_AUTHORIZED = false;
+    m_isAuthorized = false;
 }
 
-void App::sendCurrentNotifications() {
+void App::sendAmperesNotifications() {
     auto flywheel1 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor1);
     auto flywheel2 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor2);
     BLE.notifyFlywheelCurrentMilliamps(flywheel1, flywheel2, RevTrigger.isPressed());
