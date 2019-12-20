@@ -20,6 +20,7 @@ BLEController::~BLEController() {
 void BLEController::init() {
   Bluefruit.begin();
   Bluefruit.setName("Nerf Nemesis MXVII-10K");
+  Bluefruit.autoConnLed(false);
   
   Bluefruit.Periph.begin();
 
