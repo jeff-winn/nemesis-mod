@@ -31,16 +31,24 @@ class App {
 
     protected:       
         void waitForRevTriggerToBePressed();
-        void sendCurrentNotifications();
+        void sendAmperesNotifications();
+
+        void revFlywheels();
+        void stopFlywheels();
+
+        void startFiring();
+        void stopFiring();
 
         bool shouldAllowRevvingFlywheels();
         bool shouldAllowFiringRounds();
         bool shouldLockout();
+        bool isAlreadyFiring();
 
         void resetCore();
 
     private:
-        uint32_t m_revvedAtMillis;
+        bool m_firing;
+        bool m_isAuthorized;
         CommandFactory m_commandFactory;
 };
 
