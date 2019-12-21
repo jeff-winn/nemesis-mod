@@ -17,6 +17,7 @@ class ConfigurationService : public CustomBLEService {
         BLECharacteristic m_beltNormalSpeed;
         BLECharacteristic m_beltMediumSpeed;
         BLECharacteristic m_beltMaxSpeed;
+        BLECharacteristic m_hopperLockEnabled;
 };
 
 #endif /* CONFIGURATION_SERVICE_H */

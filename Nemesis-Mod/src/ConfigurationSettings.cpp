@@ -15,6 +15,7 @@ const short FLYWHEEL_LUDICROUS_SPEED_ADDR = 0x120;
 const short FLYWHEEL_TRIM_VARIANCE_ADDR = 0x124;
 const short FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR = 0x128;
 const short FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR = 0x132;
+const short IS_HOPPER_LOCK_ENABLED_ADDR = 0x136;
 
 ConfigurationSettings Settings = ConfigurationSettings();
 
@@ -42,6 +43,8 @@ void ConfigurationSettings::setInitialized(bool value) {
 
 void ConfigurationSettings::defaultSettings() {
     setExistingPairing(false);
+    setIsHopperLockEnabled(true);
+
     setFeedNormalSpeed(100);
     setFeedMediumSpeed(175);
     setFeedMaxSpeed(400);
@@ -174,6 +177,28 @@ float ConfigurationSettings::getFlywheelM2TrimAdjustment() {
 
 void ConfigurationSettings::setFlywheelM2TrimAdjustment(float value) {
     writeFloat(FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR, value);
+}
+
+bool ConfigurationSettings::isHopperLockEnabled() {
+    return readBool(IS_HOPPER_LOCK_ENABLED_ADDR);
+}
+
+void ConfigurationSettings::setIsHopperLockEnabled(bool value) {
+    writeBool(IS_HOPPER_LOCK_ENABLED_ADDR, value);
+}
+
+bool ConfigurationSettings::readBool(short address) {
+    auto value = readInt32(address);
+    return value != 0;
+}
+
+void ConfigurationSettings::writeBool(short address, bool value) {
+    uint32_t rawValue = 0;
+    if (value) {
+        rawValue = 1;
+    }
+
+    writeInt32(address, rawValue);
 }
 
 int ConfigurationSettings::readInt32(short address) {
