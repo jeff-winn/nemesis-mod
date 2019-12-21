@@ -13,6 +13,7 @@ ConfigurationService::ConfigurationService() : CustomBLEService(UUID128_SVC_CONF
     m_beltNormalSpeed = BLECharacteristic(UUID128_CHR_BELT_NORMAL_SPEED);
     m_beltMediumSpeed = BLECharacteristic(UUID128_CHR_BELT_MEDIUM_SPEED);
     m_beltMaxSpeed = BLECharacteristic(UUID128_CHR_BELT_MAX_SPEED);
+    m_hopperLockEnabled = BLECharacteristic(UUID128_CHR_HOPPER_LOCK);
 }
 
 void onFlywheelKidSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
@@ -41,6 +42,10 @@ void onBeltMaxSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint
 
 void onFlywheelTrimVarianceWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
     NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 7);
+}
+
+void onHopperLockEnabledWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
+    NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 8);
 }
 
 void ConfigurationService::init() {
@@ -107,4 +112,19 @@ void ConfigurationService::init() {
 
     auto feedMaxSpeed = Settings.getFeedMaxSpeed();
     m_beltMaxSpeed.write(&feedMaxSpeed, 4);
+
+    m_hopperLockEnabled.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
+    m_hopperLockEnabled.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
+    m_hopperLockEnabled.setFixedLen(1);
+    m_hopperLockEnabled.setUserDescriptor("Hopper Lock Enabled");
+    m_hopperLockEnabled.setWriteCallback(onHopperLockEnabledWriteCallback);
+    m_hopperLockEnabled.begin();
+
+    auto hopperLockEnabled = Settings.isHopperLockEnabled();
+    if (hopperLockEnabled) {
+        m_hopperLockEnabled.write8(0xFF);
+    }
+    else {
+        m_hopperLockEnabled.write8(0x00);
+    }
 }

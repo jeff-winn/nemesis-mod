@@ -71,11 +71,15 @@ void App::run() {
 }
 
 bool App::shouldAllowRevvingFlywheels() {
-    return isAuthorized() && HopperLock.isPressed() && RevTrigger.isPressed();
+    return isAuthorized() && !shouldLockout() && RevTrigger.isPressed();
 }
 
 bool App::shouldAllowFiringRounds() {
-    return isAuthorized() && HopperLock.isPressed() && FiringTrigger.isPressed();
+    return isAuthorized() && !shouldLockout() && FiringTrigger.isPressed();
+}
+
+bool App::shouldLockout() {
+    return Settings.isHopperLockEnabled() && !HopperLock.isPressed();    
 }
 
 void App::waitForRevTriggerToBePressed() {

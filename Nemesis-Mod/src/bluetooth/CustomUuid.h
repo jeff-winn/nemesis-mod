@@ -12,6 +12,9 @@ extern uint8_t UUID128_CHR_FLYWHEEL_SPEED[16];
 // Defines the custom 128-bit UUID for the Belt Speed GATT characteristic.
 extern uint8_t UUID128_CHR_BELT_SPEED[16];
 
+// Defines the custom 128-bit UUID for the Hopper Lock GATT characteristic.
+extern uint8_t UUID128_CHR_HOPPER_LOCK[16];
+
 // Defines the custom 128-bit UUID for the Flywheel M1 Trim Speed GATT characteristic.
 extern uint8_t UUID128_CHR_FLYWHEEL_M1TRIM_SPEED[16];
 

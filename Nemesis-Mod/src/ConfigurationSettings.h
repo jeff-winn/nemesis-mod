@@ -40,6 +40,9 @@ class ConfigurationSettings {
         float getFlywheelM2TrimAdjustment();
         void setFlywheelM2TrimAdjustment(float value);
 
+        bool isHopperLockEnabled();
+        void setIsHopperLockEnabled(bool value);
+
         // Initializes the configuration settings.
         void init();
 
@@ -58,6 +61,9 @@ class ConfigurationSettings {
 
         float readFloat(short address);
         void writeFloat(short address, float value);
+
+        bool readBool(short address);
+        void writeBool(short address, bool value);
 };
 
 // Defines the instance of configuration settings used by the hardware.

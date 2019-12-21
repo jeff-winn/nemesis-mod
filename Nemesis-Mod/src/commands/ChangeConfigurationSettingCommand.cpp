@@ -64,7 +64,19 @@ void ChangeConfigurationSettingCommand::handleImpl(uint8_t* data, uint16_t len) 
             Log.println("Changed flywheel trim variance.");
             break;
         }
+        case 8: {
+            auto value = getByteValueFromPacket(data);
+            Settings.setIsHopperLockEnabled(value != 0);
+
+            Log.println(value);
+            Log.println("Changed hopper lock enabled.");
+            break;
+        }
     }
+}
+
+byte ChangeConfigurationSettingCommand::getByteValueFromPacket(const uint8_t* data) {
+    return data[0];
 }
 
 int ChangeConfigurationSettingCommand::getInt32ValueFromPacket(const uint8_t* data) {

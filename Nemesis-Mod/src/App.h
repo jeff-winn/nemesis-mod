@@ -35,6 +35,7 @@ class App {
 
         bool shouldAllowRevvingFlywheels();
         bool shouldAllowFiringRounds();
+        bool shouldLockout();
 
         void resetCore();
 
