@@ -22,6 +22,7 @@ Button HopperLock = Button(HOPPER_LOCK_BUTTON_PIN);
 App::App() {
     m_commandFactory = CommandFactory();
     m_isAuthorized = true;
+    m_firing = false;
 }
 
 void App::run() {
