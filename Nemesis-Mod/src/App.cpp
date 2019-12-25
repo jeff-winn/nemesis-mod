@@ -80,14 +80,14 @@ void App::stopFlywheels() {
 }
 
 bool App::shouldAllowRevvingFlywheels() {
-    return isAuthorized() && !shouldLockout() && RevTrigger.isPressed();
+    return isAuthorized() && isLockedOut() && RevTrigger.isPressed();
 }
 
 bool App::shouldAllowFiringRounds() {
-    return isAuthorized() && !shouldLockout() && FiringTrigger.isPressed();
+    return isAuthorized() && isLockedOut() && FiringTrigger.isPressed();
 }
 
-bool App::shouldLockout() {
+bool App::isLockedOut() {
     return Settings.isHopperLockEnabled() && !HopperLock.isPressed();    
 }
 
