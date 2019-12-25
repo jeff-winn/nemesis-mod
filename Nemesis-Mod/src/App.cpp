@@ -27,7 +27,7 @@ App::App() {
 
 void App::run() {
     sendAmperesNotifications();
-
+    
     if (shouldAllowRevvingFlywheels()) {
         revFlywheels();
 
@@ -80,11 +80,11 @@ void App::stopFlywheels() {
 }
 
 bool App::shouldAllowRevvingFlywheels() {
-    return isAuthorized() && isLockedOut() && RevTrigger.isPressed();
+    return isAuthorized() && !isLockedOut() && RevTrigger.isPressed();
 }
 
 bool App::shouldAllowFiringRounds() {
-    return isAuthorized() && isLockedOut() && FiringTrigger.isPressed();
+    return isAuthorized() && !isLockedOut() && FiringTrigger.isPressed();
 }
 
 bool App::isLockedOut() {
