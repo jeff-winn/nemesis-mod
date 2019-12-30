@@ -22,6 +22,7 @@ void BLEController::init() {
   Bluefruit.setName("Nerf Nemesis MXVII-10K");
   Bluefruit.autoConnLed(false);
   
+  Bluefruit.ScanResponse.addName();  
   Bluefruit.Periph.begin();
 
   m_discoveryService.setManufacturer("Jeff Winn");
