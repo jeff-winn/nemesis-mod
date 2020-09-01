@@ -31,7 +31,7 @@ Below are the software which must be installed to compile the source code.
 The below are the optional tools that could be used as a replacement for the Makefile support.
 - Arduino Extension for Visual Studio Code
 - Arduino Board Manager Packages
-  - Adafruit nRF52 Boards (0.14.6)
+  - Adafruit nRF52 Boards (0.20.5)
 
 ### Dependencies
 Below are the dependencies that are being used by the project and must be installed using the Arduino IDE Library Manager.

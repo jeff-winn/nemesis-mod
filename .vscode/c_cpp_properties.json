@@ -12,7 +12,7 @@
                 "ARDUINO=10607",
                 "ARDUINO_NRF52832_FEATHER",
                 "ARDUINO_ARCH_NRF52",
-                "ARDUINO_BSP_VERSION=\"0.14.6\"",
+                "ARDUINO_BSP_VERSION=\"0.20.5\"",
                 "NRF52832_XXAA",
                 "NRF52",
                 "SOFTDEVICE_PRESENT",
@@ -26,7 +26,7 @@
                 "${librariesPath}/Adafruit_FRAM_I2C",
                 "${librariesPath}/DualG2HighPowerMotorShield",
                 "${arduinoDataPath}/adafruit/hardware/nrf52/**",
-                "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/7-2017q4/**"
+                "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/9-2019q4/**"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
@@ -36,20 +36,12 @@
                     "${librariesPath}/Adafruit_FRAM_I2C/*",
                     "${librariesPath}/DualG2HighPowerMotorShield/*",
                     "${arduinoDataPath}/adafruit/hardware/nrf52/**",
-                    "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/7-2017q4/**"
+                    "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/9-2019q4/**"
                 ]
             },
-            "compilerPath": "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-gcc.exe",
+            "compilerPath": "${arduinoDataPath}/adafruit/tools/arm-none-eabi-gcc/9-2019q4/bin/arm-none-eabi-gcc.exe",
             "cStandard": "c11",
             "cppStandard": "c++11"
-        },
-        {
-            "name": "Win32",
-            "includePath": [
-                "C:\\Users\\jeffw\\AppData\\Local\\Arduino15\\packages\\adafruit\\tools\\**",
-                "C:\\Users\\jeffw\\AppData\\Local\\Arduino15\\packages\\adafruit\\hardware\\nrf52\\0.14.6\\**"
-            ],
-            "forcedInclude": []
         }
     ],
     "version": 4
