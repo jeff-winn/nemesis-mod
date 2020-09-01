@@ -37,9 +37,3 @@ The below are the optional tools that could be used as a replacement for the Mak
 Below are the dependencies that are being used by the project and must be installed using the Arduino IDE Library Manager.
 - [Adafruit FRAM I2C](https://github.com/adafruit/Adafruit_FRAM_I2C)
 - [DualG2HighPowerMotorShield](https://github.com/pololu/dual-g2-high-power-motor-shield)
-
-## Extras (optional)
-Below are some additional items purchased which are external to the primary hardware used by the project.
-- [Semedea M-Lok Picatinny Rail](https://www.amazon.com/gp/product/B07PBV6SSJ)
-- [TACFUN Picatinny Style 45 Degree Offset Angle Rail Mount](https://www.amazon.com/gp/product/B00RSMZGC0)
-- [Fyland Red/Green Reflex Sight Scope](https://www.amazon.com/gp/product/B075MCP3WQ)
