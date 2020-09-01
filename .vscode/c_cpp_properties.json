@@ -26,7 +26,7 @@
                 "${librariesPath}/Adafruit_FRAM_I2C",
                 "${librariesPath}/DualG2HighPowerMotorShield",
                 "${arduinoDataPath}/adafruit/hardware/nrf52/**",
-                "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/9-2019q4/**"
+                "${arduinoDataPath}/adafruit/tools/arm-none-eabi-gcc/9-2019q4/**"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
@@ -36,7 +36,7 @@
                     "${librariesPath}/Adafruit_FRAM_I2C/*",
                     "${librariesPath}/DualG2HighPowerMotorShield/*",
                     "${arduinoDataPath}/adafruit/hardware/nrf52/**",
-                    "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/9-2019q4/**"
+                    "${arduinoDataPath}/adafruit/tools/arm-none-eabi-gcc/9-2019q4/**"
                 ]
             },
             "compilerPath": "${arduinoDataPath}/adafruit/tools/arm-none-eabi-gcc/9-2019q4/bin/arm-none-eabi-gcc.exe",
