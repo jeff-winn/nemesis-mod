@@ -32,7 +32,7 @@
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": "${workspaceFolder}/.vscode/temp/cache",
                 "path": [
-                    "${workspaceFolder}/Nemesis-Mod/*",
+                    "${workspaceFolder}/Nemesis-Mod/**",
                     "${librariesPath}/Adafruit_FRAM_I2C/*",
                     "${librariesPath}/DualG2HighPowerMotorShield/*",
                     "${arduinoDataPath}/adafruit/hardware/nrf52/**",
