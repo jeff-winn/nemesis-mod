@@ -25,18 +25,26 @@
                 "${workspaceFolder}/Nemesis-Mod/**",
                 "${librariesPath}/Adafruit_FRAM_I2C",
                 "${librariesPath}/DualG2HighPowerMotorShield",
-                "${arduinoDataPath}/adafruit/hardware/nrf52/**",
-                "${arduinoDataPath}/adafruit/tools/arm-none-eabi-gcc/9-2019q4/**"
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/*",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/avr/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/cmsis/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/freertos/config/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/freertos/portable/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/freertos/source/include/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/nordic/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/TinyUSB",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/TinyUSB/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/libraries/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/variants/**",
+                "${arduinoDataPath}/adafruit/tools/arm-none-eabi-gcc/9-2019q4/arm-none-eabi/include/**"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": "${workspaceFolder}/.vscode/temp/cache",
                 "path": [
-                    "${workspaceFolder}/Nemesis-Mod/**",
-                    "${librariesPath}/Adafruit_FRAM_I2C/*",
-                    "${librariesPath}/DualG2HighPowerMotorShield/*",
-                    "${arduinoDataPath}/adafruit/hardware/nrf52/**",
-                    "${arduinoDataPath}/adafruit/tools/arm-none-eabi-gcc/9-2019q4/**"
+                    "${workspaceFolder}",
+                    "${librariesPath}",
+                    "${arduinoDataPath}"
                 ]
             },
             "compilerPath": "${arduinoDataPath}/adafruit/tools/arm-none-eabi-gcc/9-2019q4/bin/arm-none-eabi-gcc.exe",
