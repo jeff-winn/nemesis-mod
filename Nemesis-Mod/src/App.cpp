@@ -46,6 +46,7 @@ void App::run() {
             MCU.delaySafe(10);
         }
 
+        stopFiring();
         stopFlywheels();
     }
 
