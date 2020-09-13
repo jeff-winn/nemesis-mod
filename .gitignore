@@ -17,7 +17,7 @@ libraries
 docs/*.~*
 
 # KiCad files
-docs/schematics/*.bak
+docs/schematics/*.*-bak
 docs/schematics/*.bck
 docs/schematics/*-cache.lib
 
