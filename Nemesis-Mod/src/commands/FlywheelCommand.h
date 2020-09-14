@@ -15,4 +15,4 @@ class FlywheelCommand : public Command {
         FlywheelController* m_controller;
 };
 
-#endif
+#endif /* FLYWHEEL_COMMAND_H */

@@ -1,30 +1,23 @@
 #ifndef CONFIGURATION_SETTINGS_H
 #define CONFIGURATION_SETTINGS_H
 
-#include <Adafruit_FRAM_I2C.h>
-
-// Describes an authentication token.
-struct AuthenticationToken_t {
-    byte length;
-    byte* data;
-};
+#include <Arduino.h>
 
 // Provides access to the configuration settings.
 class ConfigurationSettings {
     public:
-        ConfigurationSettings(Adafruit_FRAM_I2C* fram);
-
-        ~ConfigurationSettings();
-
-        AuthenticationToken_t getAuthenticationToken();
-        void setAuthenticationToken(AuthenticationToken_t token);
+        // AuthenticationToken_t getAuthenticationToken();
+        // void setAuthenticationToken(AuthenticationToken_t token);
         void resetAuthenticationToken();
+
+        void setExistingPairing(bool value);
+        bool hasExistingPairing();
 
         int getFeedNormalSpeed();
         void setFeedNormalSpeed(int value);
 
-        int getFeedHighSpeed();
-        void setFeedHighSpeed(int value);
+        int getFeedMediumSpeed();
+        void setFeedMediumSpeed(int value);
 
         int getFeedMaxSpeed();
         void setFeedMaxSpeed(int value);
@@ -32,20 +25,23 @@ class ConfigurationSettings {
         float getFlywheelTrimVariance();
         void setFlywheelTrimVariance(float value);
 
+        int getFlywheelKidSpeed();
+        void setFlywheelKidSpeed(int value);
+
         int getFlywheelNormalSpeed();
         void setFlywheelNormalSpeed(int value);
 
-        int getFlywheelMediumSpeed();
-        void setFlywheelMediumSpeed(int value);
-
-        int getFlywheelMaxSpeed();
-        void setFlywheelMaxSpeed(int value);
+        int getFlywheelLudicrousSpeed();
+        void setFlywheelLudicrousSpeed(int value);
 
         float getFlywheelM1TrimAdjustment();
         void setFlywheelM1TrimAdjustment(float value);
 
         float getFlywheelM2TrimAdjustment();
         void setFlywheelM2TrimAdjustment(float value);
+
+        bool isHopperLockEnabled();
+        void setIsHopperLockEnabled(bool value);
 
         // Initializes the configuration settings.
         void init();
@@ -66,8 +62,11 @@ class ConfigurationSettings {
         float readFloat(short address);
         void writeFloat(short address, float value);
 
-    private:
-        Adafruit_FRAM_I2C* m_fram;
+        bool readBool(short address);
+        void writeBool(short address, bool value);
 };
 
-#endif
+// Defines the instance of configuration settings used by the hardware.
+extern ConfigurationSettings Settings;
+
+#endif /* CONFIGURATION_SETTINGS_H */

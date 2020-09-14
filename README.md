@@ -9,7 +9,7 @@ It started off as me just wanting to play with an Arduino while repurposing some
 ## Hardware Requirements
 These are the boards and hardware being used by the project.
 - [Nerf Rival Nemesis MXVII-10K](https://shop.hasbro.com/en-us/product/nerf-rival-nemesis-mxvii-10-k-blue:04E71588-5056-9047-F5B8-940FC9A5A209)
-- [Adafruit Feather M0 Bluefruit LE](https://www.adafruit.com/product/2995)
+- [Adafruit Feather nRF52 Bluefruit LE - nRF52832](https://www.adafruit.com/product/3406)
 - [Adafruit FeatherWing Proto - Prototyping Add-on](https://www.adafruit.com/product/2884)
 - [Adafruit I2C Non-Volatile FRAM Breakout](https://www.adafruit.com/product/1895)
 - [Tactile Switch Button (12mm square, 6mm tall)](https://www.adafruit.com/product/1119)
@@ -31,16 +31,9 @@ Below are the software which must be installed to compile the source code.
 The below are the optional tools that could be used as a replacement for the Makefile support.
 - Arduino Extension for Visual Studio Code
 - Arduino Board Manager Packages
-  - Adafruit SAMD Boards (1.5.4)
+  - Adafruit nRF52 Boards (0.20.5)
 
 ### Dependencies
 Below are the dependencies that are being used by the project and must be installed using the Arduino IDE Library Manager.
-- [Adafruit BluefruitLE nRF51](https://github.com/adafruit/Adafruit_BluefruitLE_nRF51)
 - [Adafruit FRAM I2C](https://github.com/adafruit/Adafruit_FRAM_I2C)
 - [DualG2HighPowerMotorShield](https://github.com/pololu/dual-g2-high-power-motor-shield)
-
-## Extras (optional)
-Below are some additional items purchased which are external to the primary hardware used by the project.
-- [Semedea M-Lok Picatinny Rail](https://www.amazon.com/gp/product/B07PBV6SSJ)
-- [TACFUN Picatinny Style 45 Degree Offset Angle Rail Mount](https://www.amazon.com/gp/product/B00RSMZGC0)
-- [Fyland Red/Green Reflex Sight Scope](https://www.amazon.com/gp/product/B075MCP3WQ)

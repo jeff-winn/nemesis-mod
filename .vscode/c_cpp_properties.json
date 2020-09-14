@@ -1,53 +1,60 @@
 {
     "env": {
-        "librariesPath": "${workspaceFolder}/libraries",
-        "arduinoDataPath": "${workspaceFolder}/tools/arduino/packages"
+        "librariesPath": "${env:USERPROFILE}/Documents/Arduino/libraries",
+        "arduinoDataPath": "${env:LOCALAPPDATA}/Arduino15/packages"
     },
     "configurations": [
         {
             "name": "ARM",
             "intelliSenseMode": "gcc-x64",
             "defines": [
-                "F_CPU=48000000L",
-                "ARDUINO=10808",
-                "ARDUINO_ARCH_SAMD",
-                "ARDUINO_SAMD_ZERO",
-                "ARM_MATH_CM0PLUS",
-                "ADAFRUIT_FEATHER_M0",
-                "__arm__",
-                "__SAMD21G18A__"
+                "F_CPU=64000000",
+                "ARDUINO=10813",
+                "ARDUINO_NRF52832_FEATHER",
+                "ARDUINO_ARCH_NRF52",
+                "ARDUINO_BSP_VERSION=\"0.20.5\"",
+                "NRF52832_XXAA",
+                "NRF52",
+                "SOFTDEVICE_PRESENT",
+                "ARDUINO_NRF52_ADAFRUIT",
+                "NRF52_SERIES",
+                "LFS_NAME_MAX=64",
+                "__ENABLE_LOGGING__"
             ],
             "includePath": [
                 "${workspaceFolder}/Nemesis-Mod/**",
-                "${librariesPath}/Adafruit_BluefruitLE_nRF51",
                 "${librariesPath}/Adafruit_FRAM_I2C",
                 "${librariesPath}/DualG2HighPowerMotorShield",
-                "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/cores/arduino",
-                "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/variants/feather_m0",
-                "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/libraries/Adafruit_ZeroDMA",
-                "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/libraries/SPI",
-                "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/libraries/Wire",
-                "${arduinoDataPath}/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL",
-                "${arduinoDataPath}/arduino/tools/CMSIS/4.5.0/CMSIS/Include"
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/avr/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/cmsis/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/freertos/config/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/freertos/portable/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/freertos/source/include/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/nordic",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/nordic/nrfx",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/nordic/nrfx/drivers/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/nordic/nrfx/hal/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/nordic/nrfx/helpers",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/nordic/nrfx/mdk/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/nordic/nrfx/soc",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/nordic/softdevice/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/TinyUSB",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5/TinyUSB/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/libraries/**",
+                "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/variants/**",
+                "${arduinoDataPath}/adafruit/tools/arm-none-eabi-gcc/9-2019q4/arm-none-eabi/include/**"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": "${workspaceFolder}/.vscode/temp/cache",
                 "path": [
-                    "${workspaceFolder}/Nemesis-Mod/*",
-                    "${librariesPath}/Adafruit_BluefruitLE_nRF51/*",
-                    "${librariesPath}/Adafruit_FRAM_I2C/*",
-                    "${librariesPath}/DualG2HighPowerMotorShield/*",
-                    "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/cores/arduino/*",
-                    "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/variants/feather_m0/*",
-                    "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/libraries/Adafruit_ZeroDMA/*",
-                    "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/libraries/SPI/*",
-                    "${arduinoDataPath}/adafruit/hardware/samd/1.5.4/libraries/Wire/*",
-                    "${arduinoDataPath}/arduino/tools/CMSIS-Atmel/1.2.0/CMSIS/Device/ATMEL/*",
-                    "${arduinoDataPath}/arduino/tools/CMSIS/4.5.0/CMSIS/Include/*"
+                    "${workspaceFolder}/**",
+                    "${librariesPath}/**",
+                    "${arduinoDataPath}/**"
                 ]
             },
-            "compilerPath": "${arduinoDataPath}/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-gcc.exe",
+            "compilerPath": "${arduinoDataPath}/adafruit/tools/arm-none-eabi-gcc/9-2019q4/bin/arm-none-eabi-g++.exe",
             "cStandard": "c11",
             "cppStandard": "c++11"
         }

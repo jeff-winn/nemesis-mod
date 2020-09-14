@@ -1,52 +1,88 @@
-#include "ChangeConfigurationSettingCommand.h"
 #include "../BitConverter.h"
+#include "../Log.h"
+#include "ChangeConfigurationSettingCommand.h"
 
-void ChangeConfigurationSettingCommand::handleImpl(Packet_t packet) {
-    auto id = packet.body[0];
-    
-    switch (id) {
+ChangeConfigurationSettingCommand::ChangeConfigurationSettingCommand(uint8_t subtype) : ConfigurationCommand() {
+    m_subtype = subtype;
+}
+
+void ChangeConfigurationSettingCommand::handleImpl(uint8_t* data, uint16_t len) { 
+    switch (m_subtype) {
         case 1: {
-            auto value = getInt32ValueFromPacket(packet);
-            m_config->setFlywheelNormalSpeed(value);
+            auto value = getInt32ValueFromPacket(data);
+            Settings.setFlywheelKidSpeed(value);
+
+            Log.println(value);
+            Log.println("Changed flywheel kid speed.");
             break;
         }
         case 2: {
-            auto value = getInt32ValueFromPacket(packet);
-            m_config->setFlywheelMediumSpeed(value);
+            auto value = getInt32ValueFromPacket(data);
+            Settings.setFlywheelNormalSpeed(value);
+
+            Log.println(value);
+            Log.println("Changed flywheel normal speed.");
             break;
         }
         case 3: {
-            auto value = getInt32ValueFromPacket(packet);
-            m_config->setFlywheelMaxSpeed(value);
+            auto value = getInt32ValueFromPacket(data);
+            Settings.setFlywheelLudicrousSpeed(value);
+
+            Log.println(value);
+            Log.println("Changed flywheel ludicrous speed.");
             break;
         }
         case 4: {
-            auto value = getInt32ValueFromPacket(packet);
-            m_config->setFeedNormalSpeed(value);
+            auto value = getInt32ValueFromPacket(data);
+            Settings.setFeedNormalSpeed(value);
+
+            Log.println(value);
+            Log.println("Changed feed normal speed.");
             break;
         }
         case 5: {
-            auto value = getInt32ValueFromPacket(packet);
-            m_config->setFeedHighSpeed(value);
+            auto value = getInt32ValueFromPacket(data);
+            Settings.setFeedMediumSpeed(value);
+
+            Log.println(value);
+            Log.println("Changed feed medium speed.");
             break;
         }
         case 6: {
-            auto value = getInt32ValueFromPacket(packet);
-            m_config->setFeedMaxSpeed(value);
+            auto value = getInt32ValueFromPacket(data);
+            Settings.setFeedMaxSpeed(value);
+
+            Log.println(value);
+            Log.println("Changed feed max speed.");
             break;
         }
         case 7: {
-            auto value = getFloatValueFromPacket(packet);
-            m_config->setFlywheelTrimVariance(value);
+            auto value = getFloatValueFromPacket(data);
+            Settings.setFlywheelTrimVariance(value);
+
+            Log.println(value, 5);
+            Log.println("Changed flywheel trim variance.");
+            break;
+        }
+        case 8: {
+            auto value = getByteValueFromPacket(data);
+            Settings.setIsHopperLockEnabled(value != 0);
+
+            Log.println(value);
+            Log.println("Changed hopper lock enabled.");
             break;
         }
     }
 }
 
-int ChangeConfigurationSettingCommand::getInt32ValueFromPacket(Packet_t packet) {
-    return Convert.toInt32(packet.body + 1);
+byte ChangeConfigurationSettingCommand::getByteValueFromPacket(const uint8_t* data) {
+    return data[0];
 }
 
-float ChangeConfigurationSettingCommand::getFloatValueFromPacket(Packet_t packet) {
-    return Convert.toFloat(packet.body + 1);
+int ChangeConfigurationSettingCommand::getInt32ValueFromPacket(const uint8_t* data) {
+    return Convert.toInt32(data);
+}
+
+float ChangeConfigurationSettingCommand::getFloatValueFromPacket(const uint8_t* data) {
+    return Convert.toFloat(data);
 }

@@ -12,11 +12,11 @@ class BeltSpeedCommand : public Command {
         ~BeltSpeedCommand() override;
 
     protected:
-        void handleImpl(Packet_t packet) override;
-        BeltSpeed getSpeedFromPacket(Packet_t packet);
+        void handleImpl(uint8_t* data, uint16_t len) override;
+        BeltSpeed getSpeedFromPacket(uint8_t* data);
 
     private:
         FeedController* m_controller;
 };
 
-#endif
+#endif /* BELT_SPEED_COMMAND_H */

@@ -7,19 +7,19 @@
 class BitConverter {
     public:
         // Converts the binary array to an int32_t type.
-        int32_t toInt32(const byte* address);
+        int toInt32(const byte* address);
 
         // Converts the binary array to an float_t type.
-        float_t toFloat(const byte* address);
+        float toFloat(const byte* address);
 
         // Converts the value to a byte array.
-        byte* toInt32Array(const int32_t value);
+        byte* toInt32Array(const int value);
 
         // Converts the value to a byte array.
-        byte* toFloatArray(const float_t value);
+        byte* toFloatArray(const float value);
 };
 
 // Performs conversions between data types.
 extern BitConverter Convert;
 
-#endif
+#endif /* BIT_CONVERTER_H */

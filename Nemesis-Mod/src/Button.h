@@ -1,12 +1,12 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "DigitalPin.h"
+#include <stdint.h>
 
 // Represents a button.
 class Button {
     public:
-        Button(DigitalPin* pin, bool inverted = false);
+        Button(uint32_t pin, bool inverted = false);
 
         virtual ~Button();
 
@@ -17,9 +17,9 @@ class Button {
         virtual bool isPressed();
 
     private:
-        DigitalPin* m_pin;
+        uint32_t m_pin;
         bool m_inverted;
     
 };
 
-#endif
+#endif /* BUTTON_H */

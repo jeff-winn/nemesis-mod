@@ -7,13 +7,16 @@
 // Provides a command which handles flywheel trim adjustment changes.
 class FlywheelTrimAdjustmentCommand : public FlywheelCommand {
     public:
-        using FlywheelCommand::FlywheelCommand;
+        FlywheelTrimAdjustmentCommand(uint8_t subtype, FlywheelController* controller);
 
     protected:
-        void handleImpl(Packet_t packet) override;
+        void handleImpl(uint8_t* data, uint16_t len) override;
 
-        FlywheelMotor getMotorFromPacket(Packet_t packet);
-        float getAdjustmentFromPacket(Packet_t packet);        
+        FlywheelMotor getMotor();
+        float getAdjustmentFromPacket(uint8_t* data);        
+
+    private:
+        uint8_t m_subtype;
 };
 
-#endif
+#endif /* FLYWHEEL_TRIM_ADJUSTMENT_COMMAND_H */

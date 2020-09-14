@@ -1,20 +1,20 @@
+#include "Mainboard.h"
 #include "Button.h"
 
-Button::Button(DigitalPin* pin, bool inverted) {
+Button::Button(uint32_t pin, bool inverted) {
     m_pin = pin;
     m_inverted = inverted;
 }
 
 Button::~Button() {
-    m_pin = NULL;
 }
 
 void Button::init() {
-    m_pin->setInputMode();
+    MCU.pinModeSafe(m_pin, PinMode::Read);    
 }
 
-bool Button::isPressed() {
-    auto value = m_pin->read();
+bool Button::isPressed() {    
+    auto value = MCU.digitalReadSafe(m_pin);
     if (m_inverted) {
         return !value;
     }

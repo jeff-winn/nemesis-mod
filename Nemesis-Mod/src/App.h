@@ -1,27 +1,12 @@
 #ifndef APP_H
 #define APP_H
 
-#include "hardware/BluetoothManager.h"
-#include "Button.h"
-#include "Command.h"
-#include "ConfigurationSettings.h"
-#include "FeedController.h"
-#include "FlywheelController.h"
+#include "CommandFactory.h"
 
 // Represents the main application.
 class App {
     public:
-        App(
-            FlywheelController* flywheelController,
-            FeedController* feedController,            
-            Button* revTrigger, 
-            Button* firingTrigger,
-            Button* resetButton,
-            BluetoothManager* ble,
-            ConfigurationSettings* config,
-            Mainboard* hardware);
-
-        ~App();
+        App();
         
         // Initializes the application.
         void init();
@@ -29,8 +14,12 @@ class App {
         // Runs the application.
         void run();
 
+        void reset();
+
+        void clear();
+
         // Authenticates the operator (thereby releasing the software lock).
-        void authenticate(AuthenticationToken_t token);
+        void authenticate();
 
         // Identifies whether the operator is authorized.
         bool isAuthorized();
@@ -38,20 +27,31 @@ class App {
         // Revokes the operator authorization.
         void revokeAuthorization();
 
-    protected:        
-        Command* createCommandFromPacket(Packet_t packet);
-        void handleAnyExternalCommands();
-        void handleResetAttempt();
-    
+        void onRemoteCommandReceived(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype);
+
+    protected:       
+        void waitForRevTriggerToBePressed();
+        void sendAmperesNotifications();
+
+        void revFlywheels();
+        void stopFlywheels();
+
+        void startFiring();
+        void stopFiring();
+
+        bool shouldAllowRevvingFlywheels();
+        bool shouldAllowFiringRounds();
+        bool isLockedOut();
+        bool isAlreadyFiring();
+
+        void resetCore();
+
     private:
-        FlywheelController* m_flywheelController;
-        FeedController* m_feedController;
-        Button* m_revTrigger;
-        Button* m_firingTrigger;
-        Button* m_resetButton;
-        BluetoothManager* m_ble;
-        ConfigurationSettings* m_config;
-        Mainboard* m_hardware;
+        bool m_firing;
+        bool m_isAuthorized;
+        CommandFactory m_commandFactory;
 };
 
-#endif
+extern App Application;
+
+#endif /* APP_H */

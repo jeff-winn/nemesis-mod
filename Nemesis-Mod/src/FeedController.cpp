@@ -1,54 +1,61 @@
+#include "ConfigurationSettings.h"
 #include "FeedController.h"
+#include "Log.h"
+#include "Mainboard.h"
 
-FeedController::FeedController(Mainboard* hardware, G2HighPowerMotorShield18v17* driver, ConfigurationSettings* config) {
-    m_hardware = hardware;
-    m_driver = driver;
-    m_config = config;
-}
+FeedController Belt = FeedController();
 
-FeedController::~FeedController() {
-    m_hardware = NULL;
-    m_driver = NULL;
-    m_config = NULL;
+FeedController::FeedController() {
+    m_driver = G2HighPowerMotorShield18v17(17, -1, 7, -1, A2);
 }
 
 void FeedController::init() {
-    m_driver->init();
-    m_driver->calibrateCurrentOffset();
-    m_driver->disableDriver();
+    m_driver.init();
+    m_driver.calibrateCurrentOffset();
+    m_driver.disableDriver();
 
-    m_hardware->delaySafe(1);    
+    setSpeed(BeltSpeed::Normal);
+    
+    MCU.delaySafe(1);    
+    Log.println("Completed initializing feed controller.");
+}
+
+unsigned int FeedController::getMotorCurrentMilliamps() {
+    return m_driver.getCurrentMilliamps();
 }
 
 void FeedController::onStart() {
+    m_driver.enableDriver();
+    updateDriver();
+}
+
+void FeedController::updateDriver() {
     m_m1speed = calculateMotorSpeed();
+    m_driver.setSpeed(m_m1speed);
 
-    m_driver->enableDriver();
-    m_driver->setSpeed(m_m1speed);
-
-    m_hardware->delaySafe(1);    
+    MCU.delaySafe(1);    
 }
 
 void FeedController::onStop() {
     auto step = calculateStepFromSpeed(m_m1speed);
 
-    m_driver->setSpeed(0);   
-    m_driver->disableDriver();
+    m_driver.setSpeed(0);   
+    m_driver.disableDriver();
     
-    m_hardware->delaySafe(1);
+    MCU.delaySafe(1);
     m_m1speed = 0;
 }
 
 int FeedController::calculateMotorSpeed() {
     switch (m_speed) {
         case BeltSpeed::Normal: {
-            return m_config->getFeedNormalSpeed();
+            return Settings.getFeedNormalSpeed();
         }
-        case BeltSpeed::High: {
-            return m_config->getFeedHighSpeed();
+        case BeltSpeed::Medium: {
+            return Settings.getFeedMediumSpeed();
         }
         case BeltSpeed::Max: {
-            return m_config->getFeedMaxSpeed();
+            return Settings.getFeedMaxSpeed();
         }
     }
 }
@@ -57,6 +64,16 @@ int FeedController::calculateStepFromSpeed(int speed) {
     return speed / 4;
 }
 
+BeltSpeed FeedController::getSpeed() {
+    return m_speed;
+}
+
 void FeedController::setSpeed(BeltSpeed speed) {
     m_speed = speed;
+
+    if (isRunning()) {
+        updateDriver();
+    }
+
+    Log.println("Feed speed changed.");   
 }

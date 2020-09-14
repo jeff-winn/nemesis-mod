@@ -4,7 +4,6 @@
 // Provides a base implementation of a motor controller.
 class MotorController {
     public:
-        // Initializes the controller.
         virtual void init();
 
         // Starts the controller.
@@ -24,4 +23,4 @@ class MotorController {
         bool m_isRunning;
 };
 
-#endif
+#endif /* MOTOR_CONTROLLER_H */

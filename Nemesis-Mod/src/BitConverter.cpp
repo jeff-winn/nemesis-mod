@@ -1,10 +1,11 @@
 #include "BitConverter.h"
+#include "Log.h"
 
 BitConverter Convert;
 
 union int32_bytes_t {
     byte raw[4];
-    int32_t value;
+    int value;
 };
 
 union float_bytes_t {
@@ -12,17 +13,18 @@ union float_bytes_t {
     float value;
 };
 
-int32_t BitConverter::toInt32(const byte* address) {
-    int32_bytes_t r;
+int BitConverter::toInt32(const byte* address) {
+    int output;
 
-    for (int index = 0; index < 4; index++) {
-        r.raw[index] = address[index];
-    }
+    *((byte*)(&output) + 3) = address[3];
+    *((byte*)(&output) + 2) = address[2];
+    *((byte*)(&output) + 1) = address[1];
+    *((byte*)(&output) + 0) = address[0];
 
-    return r.value;
+    return output;
 }
 
-byte* BitConverter::toInt32Array(const int32_t value) {
+byte* BitConverter::toInt32Array(const int value) {
     int32_bytes_t r;
     r.value = value;
 
@@ -35,17 +37,18 @@ byte* BitConverter::toInt32Array(const int32_t value) {
     return result;
 }
 
-float_t BitConverter::toFloat(const byte* address) {
-    float_bytes_t r;
+float BitConverter::toFloat(const byte* address) {
+    float output;
 
-    for (int index = 0; index < 4; index++) {
-        r.raw[index] = address[index];
-    }
+    *((byte*)(&output) + 3) = address[3];
+    *((byte*)(&output) + 2) = address[2];
+    *((byte*)(&output) + 1) = address[1];
+    *((byte*)(&output) + 0) = address[0];
 
-    return r.value;
+    return output;
 }
 
-byte* BitConverter::toFloatArray(const float_t value) {
+byte* BitConverter::toFloatArray(const float value) {
     float_bytes_t r;
     r.value = value;
 

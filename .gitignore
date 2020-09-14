@@ -1,6 +1,7 @@
 # Visual Studio Code configuration files
 **/.vscode/**
 !**/.vscode/c_cpp_properties.json
+!**/.vscode/extensions.json
 
 # Build configuration outputs
 **/build/*
@@ -16,9 +17,10 @@ libraries
 docs/*.~*
 
 # KiCad files
-docs/schematics/*.bak
-docs/schematics/*.bck
-docs/schematics/*-cache.lib
+docs/kicad/*.*-bak
+docs/kicad/*.bck
+docs/kicad/*-cache.lib
+docs/kicad/*-rescue.*
 
 # MacOS files
 **/.DS_Store
