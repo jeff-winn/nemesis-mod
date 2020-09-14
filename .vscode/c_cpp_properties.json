@@ -22,7 +22,7 @@
                 "__ENABLE_LOGGING__"
             ],
             "includePath": [
-                "${workspaceFolder}/Nemesis-Mod/**",
+                "${workspaceFolder}/**",
                 "${librariesPath}/Adafruit_FRAM_I2C",
                 "${librariesPath}/DualG2HighPowerMotorShield",
                 "${arduinoDataPath}/adafruit/hardware/nrf52/0.20.5/cores/nRF5",
