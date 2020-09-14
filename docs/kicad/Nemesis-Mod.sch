@@ -5,7 +5,7 @@ $Descr USLetter 11000 8500
 encoding utf-8
 Sheet 1 1
 Title "Nemesis Mod"
-Date "2019-05-22"
+Date "2020-09-13"
 Rev "v1.1"
 Comp "https://github.com/jeff-winn/Nemesis-Mod"
 Comment1 "For more information please visit the project website:"
