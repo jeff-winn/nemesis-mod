@@ -7,6 +7,7 @@
 	"settings": {
 		"arduino.defaultBaudRate": 115200,
 		"arduino.logLevel": "info",
+		"arduino.disableIntelliSenseAutoGen": true,
 		"arduino.additionalUrls": [
 			"https://adafruit.github.io/arduino-board-index/package_adafruit_index.json"
 		],
