@@ -2,9 +2,9 @@
 #define BLE_CONTROLLER_H
 
 #include <bluefruit.h>
-#include "bluetooth/BlasterService.h"
-#include "bluetooth/ConfigurationService.h"
-#include "bluetooth/NotificationService.h"
+#include "services/BlasterService.h"
+#include "services/ConfigurationService.h"
+#include "services/NotificationService.h"
 
 // Provides a controller for the on-board bluetooth module.
 class BLEController {
