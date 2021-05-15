@@ -20,7 +20,7 @@ SERIAL_PORT ?=
 VERBOSE = 
 
 # Build path -- used to store built binary and object files
-BUILD_FOLDER = $(WORKSPACE_FOLDER)/build
+BUILD_FOLDER = $(WORKSPACE_FOLDER)/out
 PROJECT_NAME = Mainboard
 PROJECT_FOLDER = $(WORKSPACE_FOLDER)/$(PROJECT_NAME)
 SKETCH_PATH = $(PROJECT_FOLDER)/$(PROJECT_NAME).ino

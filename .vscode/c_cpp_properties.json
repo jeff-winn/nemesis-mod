@@ -5,15 +5,15 @@
     },
     "configurations": [
         {
-            "name": "Bluetooth",
+            "name": "NRF52",
             "intelliSenseMode": "gcc-x64",
             "defines": [
                 "F_CPU=64000000",
                 "ARDUINO=10813",
-                "ARDUINO_NRF52832_FEATHER",
+                "ARDUINO_NRF52840_FEATHER",
                 "ARDUINO_ARCH_NRF52",
                 "ARDUINO_BSP_VERSION=\"0.21.0\"",
-                "NRF52832_XXAA",
+                "NRF52840_XXAA",
                 "NRF52",
                 "SOFTDEVICE_PRESENT",
                 "ARDUINO_NRF52_ADAFRUIT",

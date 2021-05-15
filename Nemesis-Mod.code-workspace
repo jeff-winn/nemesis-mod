@@ -16,8 +16,6 @@
 		"files.exclude": {
 			".vscode/ipch": true,
 			".vscode/temp": true,
-			"build": true,
-			"external": true,
 			"docs": true,
 			"**/*.exe": true,
 			"**/*.bin": true,
