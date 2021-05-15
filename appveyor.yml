@@ -10,7 +10,7 @@ build_script:
 artifacts:
 - path: out/Mainboard.ino.zip
 - path: out/Mainboard.ino.hex
-- path: out/Nemesis-Mod.ino.elf
-- path: out/Nemesis-Mod.ino.map
+- path: out/Mainboard.ino.elf
+- path: out/Mainboard.ino.map
 
 deploy: off
