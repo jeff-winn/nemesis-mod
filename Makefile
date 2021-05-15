@@ -10,8 +10,8 @@ else
 endif
 
 # Arduino CLI Board type
-BOARD_TYPE = adafruit:nrf52
-FQBN = $(BOARD_TYPE):feather52832
+BOARD_TYPE = adafruit:samd
+FQBN = $(BOARD_TYPE):adafruit_feather_m4
 
 # Default port to upload to
 SERIAL_PORT ?= 
@@ -21,9 +21,9 @@ VERBOSE =
 
 # Build path -- used to store built binary and object files
 BUILD_FOLDER = $(WORKSPACE_FOLDER)/build
-PROJECT_NAME = Nemesis-Mod
+PROJECT_NAME = Mainboard
 PROJECT_FOLDER = $(WORKSPACE_FOLDER)/$(PROJECT_NAME)
-SKETCH_PATH = $(PROJECT_FOLDER)/Nemesis-Mod.ino
+SKETCH_PATH = $(PROJECT_FOLDER)/$(PROJECT_NAME).ino
 CONFIG_FILE = $(WORKSPACE_FOLDER)/arduino-cli.yml
 
 all: install_prerequisites rebuild
