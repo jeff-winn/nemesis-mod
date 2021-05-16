@@ -6,7 +6,7 @@
 FlywheelController Flywheels = FlywheelController();
 
 FlywheelController::FlywheelController() {
-    m_driver = DualG2HighPowerMotorShield18v18(31, -1, 27, -1, A0, 11, -1, 30, -1, A1);
+    m_driver = DualG2HighPowerMotorShield18v18(9, -1, 5, -1, -1, 10, -1, 6, -1, -1);
 }
 
 void FlywheelController::init() {

@@ -7,9 +7,9 @@
 #include "Mainboard.h"
 
 const uint32_t SYSTEM_OFF_IN_MSECS = 600000; // 10 minutes
-const uint32_t REV_BUTTON_PIN = 16;
-const uint32_t FIRING_BUTTON_PIN = 15;
-const uint32_t HOPPER_LOCK_BUTTON_PIN = 29;
+const uint32_t REV_BUTTON_PIN = 13;
+const uint32_t FIRING_BUTTON_PIN = 12;
+const uint32_t HOPPER_LOCK_BUTTON_PIN = 19;
 
 App Application = App();
 Button RevTrigger = Button(REV_BUTTON_PIN);
