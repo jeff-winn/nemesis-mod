@@ -22,15 +22,11 @@ App::App() {
     m_firing = false;
 }
 
-void App::run() {
-    sendAmperesNotifications();
-    
+void App::run() {   
     if (shouldAllowRevvingFlywheels()) {
         revFlywheels();
 
         while (shouldAllowRevvingFlywheels()) {
-            sendAmperesNotifications();
-
             if (shouldAllowFiringRounds()) {
                 if (!isAlreadyFiring()) {
                     startFiring();
@@ -47,7 +43,7 @@ void App::run() {
         stopFlywheels();
     }
 
-    waitForRevTriggerToBePressed();
+    MCU.delaySafe(50);
 }
 
 void App::revFlywheels() {
@@ -83,10 +79,6 @@ bool App::shouldAllowFiringRounds() {
 
 bool App::isLockedOut() {
     return Settings.isHopperLockEnabled() && !HopperLock.isPressed();    
-}
-
-void App::waitForRevTriggerToBePressed() {
-    MCU.delaySafe(50);
 }
 
 bool App::isAuthorized() {
@@ -126,13 +118,6 @@ void App::authenticate() {
 
 void App::revokeAuthorization() {
     m_isAuthorized = false;
-}
-
-void App::sendAmperesNotifications() {
-    auto flywheel1 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor1);
-    auto flywheel2 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor2);
-
-    auto feed = Belt.getMotorCurrentMilliamps();
 }
 
 void App::clear() {
