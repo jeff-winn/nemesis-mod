@@ -5,7 +5,7 @@
 FeedController Belt = FeedController();
 
 FeedController::FeedController() {
-    m_driver = G2HighPowerMotorShield18v17(17, -1, 7, -1, A2);
+    m_driver = G2HighPowerMotorShield18v17(17, -1, 11, -1, -1);
 }
 
 void FeedController::init() {
