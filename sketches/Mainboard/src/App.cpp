@@ -22,28 +22,30 @@ App::App() {
     m_firing = false;
 }
 
-void App::run() {   
-    if (shouldAllowRevvingFlywheels()) {
-        revFlywheels();
+void App::run() {
+    while (true) {
+        if (shouldAllowRevvingFlywheels()) {
+            revFlywheels();
 
-        while (shouldAllowRevvingFlywheels()) {
-            if (shouldAllowFiringRounds()) {
-                if (!isAlreadyFiring()) {
-                    startFiring();
+            while (shouldAllowRevvingFlywheels()) {
+                if (shouldAllowFiringRounds()) {
+                    if (!isAlreadyFiring()) {
+                        startFiring();
+                    }
                 }
-            }
-            else {
-                stopFiring();
+                else {
+                    stopFiring();
+                }
+
+                MCU.delaySafe(10);
             }
 
-            MCU.delaySafe(10);
+            stopFiring();
+            stopFlywheels();
         }
 
-        stopFiring();
-        stopFlywheels();
+        MCU.delaySafe(50);
     }
-
-    MCU.delaySafe(50);
 }
 
 void App::revFlywheels() {

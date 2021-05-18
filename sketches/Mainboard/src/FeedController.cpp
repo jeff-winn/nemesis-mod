@@ -56,6 +56,8 @@ int FeedController::calculateMotorSpeed() {
             return Settings.getFeedMaxSpeed();
         }
     }
+
+    return 0;
 }
 
 int FeedController::calculateStepFromSpeed(int speed) {

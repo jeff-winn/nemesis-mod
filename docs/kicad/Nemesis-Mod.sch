@@ -292,18 +292,6 @@ NoConn ~ 5300 1650
 NoConn ~ 5300 1950
 NoConn ~ 5300 2100
 NoConn ~ 5300 1200
-Wire Wire Line
-	6250 5200 6250 5550
-Wire Wire Line
-	6250 5550 8050 5550
-Wire Wire Line
-	8050 5550 8050 5700
-Wire Wire Line
-	6400 5200 6400 5400
-Wire Wire Line
-	6400 5400 7900 5400
-Wire Wire Line
-	7900 5400 7900 5700
 Text GLabel 8200 5700 1    50   Output ~ 0
 5V
 Text Notes 9400 4200 2    50   ~ 0
@@ -416,16 +404,16 @@ Wire Wire Line
 $Comp
 L power:GNDREF #PWR?
 U 1 1 5F5FC40A
-P 6100 5500
-F 0 "#PWR?" H 6100 5250 50  0001 C CNN
-F 1 "GNDREF" H 6105 5327 50  0000 C CNN
-F 2 "" H 6100 5500 50  0001 C CNN
-F 3 "" H 6100 5500 50  0001 C CNN
-	1    6100 5500
+P 6250 5500
+F 0 "#PWR?" H 6250 5250 50  0001 C CNN
+F 1 "GNDREF" H 6255 5327 50  0000 C CNN
+F 2 "" H 6250 5500 50  0001 C CNN
+F 3 "" H 6250 5500 50  0001 C CNN
+	1    6250 5500
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6100 5200 6100 5500
+	6250 5200 6250 5500
 $Comp
 L power:GNDREF #PWR?
 U 1 1 5F600FD0
@@ -498,10 +486,10 @@ Wire Wire Line
 Wire Wire Line
 	2100 4950 2100 5150
 $Comp
-L Nemesis-Mod:Adafruit_M4_Express MCU?
+L Nemesis-Mod:Adafruit_M4_Express MCU1
 U 1 1 60A2924E
 P 2200 2200
-F 0 "MCU?" H 2200 3615 50  0000 C CNN
+F 0 "MCU1" H 2200 3615 50  0000 C CNN
 F 1 "Adafruit_M4_Express" H 2200 3524 50  0000 C CNN
 F 2 "" H 2850 900 50  0001 C CNN
 F 3 "" H 2850 900 50  0001 C CNN
@@ -509,21 +497,10 @@ F 3 "" H 2850 900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Nemesis-Mod:Pololu_G2_HighPower_18v18 Motor_Driver?
-U 1 1 60A2F637
-P 5900 3900
-F 0 "Motor_Driver?" H 5900 5165 50  0000 C CNN
-F 1 "Pololu_G2_HighPower_18v18" H 5900 5074 50  0000 C CNN
-F 2 "" H 5850 5100 50  0001 C CNN
-F 3 "" H 5850 5100 50  0001 C CNN
-	1    5900 3900
-	1    0    0    -1  
-$EndComp
-$Comp
-L Nemesis-Mod:Pololu_G2_HighPower_18v17 Motor_Driver?
+L Nemesis-Mod:Pololu_G2_HighPower_18v17 Motor_Driver1
 U 1 1 60A32645
 P 6250 1400
-F 0 "Motor_Driver?" H 6225 2015 50  0000 C CNN
+F 0 "Motor_Driver1" H 6225 2015 50  0000 C CNN
 F 1 "Pololu_G2_HighPower_18v17" H 6225 1924 50  0000 C CNN
 F 2 "" H 6250 1950 50  0001 C CNN
 F 3 "" H 6250 1950 50  0001 C CNN
@@ -531,10 +508,10 @@ F 3 "" H 6250 1950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Nemesis-Mod:Adafruit_I2C_FRAM_Breakout F?
+L Nemesis-Mod:Adafruit_I2C_FRAM_Breakout F1
 U 1 1 60A3EC1C
 P 1300 4450
-F 0 "F?" V 1965 4317 50  0000 C CNN
+F 0 "F1" V 1965 4317 50  0000 C CNN
 F 1 "Adafruit_I2C_FRAM_Breakout" V 1874 4317 50  0000 C CNN
 F 2 "" H 1150 4900 50  0001 C CNN
 F 3 "" H 1150 4900 50  0001 C CNN
@@ -542,10 +519,10 @@ F 3 "" H 1150 4900 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Nemesis-Mod:Nerf_Hopper_Lock U?
+L Nemesis-Mod:Nerf_Hopper_Lock U1
 U 1 1 60A44315
 P 2950 4150
-F 0 "U?" H 2950 4565 50  0000 C CNN
+F 0 "U1" H 2950 4565 50  0000 C CNN
 F 1 "Nerf_Hopper_Lock" H 2950 4474 50  0000 C CNN
 F 2 "" H 2950 4450 50  0001 C CNN
 F 3 "" H 2950 4450 50  0001 C CNN
@@ -563,4 +540,33 @@ F 3 "" H 8000 6750 50  0001 C CNN
 	1    8150 6700
 	1    0    0    -1  
 $EndComp
+Text GLabel 7900 5700 1    50   Input ~ 0
+VIN
+Text GLabel 6400 5200 3    50   Output ~ 0
+VIN
+$Comp
+L Nemesis-Mod:Pololu_G2_HighPower_18v18 Motor_Driver2
+U 1 1 60A2F637
+P 5900 3900
+F 0 "Motor_Driver2" H 5900 5165 50  0000 C CNN
+F 1 "Pololu_G2_HighPower_18v18" H 5900 5074 50  0000 C CNN
+F 2 "" H 5850 5100 50  0001 C CNN
+F 3 "" H 5850 5100 50  0001 C CNN
+	1    5900 3900
+	1    0    0    -1  
+$EndComp
+NoConn ~ 6100 5200
+$Comp
+L power:GNDREF #PWR?
+U 1 1 60A5CD27
+P 8050 5500
+F 0 "#PWR?" H 8050 5250 50  0001 C CNN
+F 1 "GNDREF" H 8055 5327 50  0000 C CNN
+F 2 "" H 8050 5500 50  0001 C CNN
+F 3 "" H 8050 5500 50  0001 C CNN
+	1    8050 5500
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	8050 5700 8050 5500
 $EndSCHEMATC

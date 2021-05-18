@@ -33,7 +33,7 @@
             "forcedInclude": [
                 "${arduinoDataPath}/adafruit/hardware/nrf52/0.21.0/cores/nRF5/Arduino.h"
             ],
-            "compilerPath": "${arduinoDataPath}/adafruit/tools/arm-none-eabi-gcc/9-2019q4/bin/arm-none-eabi-g++",
+            "compilerPath": "${arduinoDataPath}/adafruit/tools/arm-none-eabi-gcc/9-2019q4/bin/arm-none-eabi-g++.exe",
             "compilerArgs": [],
             "defines": [
                 "F_CPU=64000000",
@@ -57,7 +57,7 @@
             "intelliSenseMode": "gcc-x64",
             "includePath": [
                 "${librariesPath}/Adafruit_FRAM_I2C",
-                "${librariesPath}/DualG2HighPowerMotorShield",
+                "${librariesPath}/DualG2HighPowerMotorShield",                
                 "${arduinoDataPath}/adafruit/hardware/samd/1.6.5/cores/arduino/TinyUSB",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.6.5/cores/arduino/TinyUSB/Adafruit_TinyUSB_ArduinoCore",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.6.5/cores/arduino/TinyUSB/Adafruit_TinyUSB_ArduinoCore/tinyusb/src",
@@ -77,7 +77,7 @@
             ],
             "cStandard": "c11",
             "cppStandard": "c++11",
-            "compilerPath": "${arduinoDataPath}/adafruit/tools/arm-none-eabi-gcc/9-2019q4/bin/arm-none-eabi-g++",
+            "compilerPath": "${arduinoDataPath}/adafruit/tools/arm-none-eabi-gcc/9-2019q4/bin/arm-none-eabi-g++.exe",
             "compilerArgs": [
                 "-mcpu=cortex-m4",
                 "-mthumb",
