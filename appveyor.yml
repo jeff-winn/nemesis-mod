@@ -8,6 +8,7 @@ build_script:
 - cmd: make.exe
 
 artifacts:
-- path: out/Mainboard.ino.*
+- path: out/Mainboard/Mainboard.ino.*
+- path: out/Bluetooth/Bluetooth.ino.*
 
 deploy: off
