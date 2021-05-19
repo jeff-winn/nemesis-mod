@@ -9,7 +9,7 @@
             "name": "Bluetooth",
             "intelliSenseMode": "gcc-x64",
             "includePath": [
-                "${workspaceFolder}/Bluetooth/**",
+                "${workspaceFolder}/sketches/Bluetooth/**",
                 "${arduinoDataPath}/adafruit/hardware/nrf52/0.21.0/cores/nRF5",
                 "${arduinoDataPath}/adafruit/hardware/nrf52/0.21.0/cores/nRF5/avr/**",
                 "${arduinoDataPath}/adafruit/hardware/nrf52/0.21.0/cores/nRF5/cmsis/**",
@@ -56,8 +56,9 @@
             "name": "Mainboard",            
             "intelliSenseMode": "gcc-x64",
             "includePath": [
+                "${workspaceFolder}/sketches/Bluetooth/**",
                 "${librariesPath}/Adafruit_FRAM_I2C",
-                "${librariesPath}/DualG2HighPowerMotorShield",                
+                "${librariesPath}/DualG2HighPowerMotorShield",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.6.5/cores/arduino/TinyUSB",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.6.5/cores/arduino/TinyUSB/Adafruit_TinyUSB_ArduinoCore",
                 "${arduinoDataPath}/adafruit/hardware/samd/1.6.5/cores/arduino/TinyUSB/Adafruit_TinyUSB_ArduinoCore/tinyusb/src",
