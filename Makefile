@@ -11,6 +11,7 @@ endif
 
 # Arduino CLI Board type
 BOARD_TYPE = adafruit:nrf52
+BOARD_VERSION = 0.20.5
 FQBN = $(BOARD_TYPE):feather52832
 
 # Default port to upload to
@@ -32,11 +33,11 @@ install_prerequisites: install_boards install_libraries
 
 install_boards:
 	"$(ARDUINO_CLI)" core update-index
-	"$(ARDUINO_CLI)" core install $(BOARD_TYPE)
+	"$(ARDUINO_CLI)" core install $(BOARD_TYPE)@$(BOARD_VERSION)
 
 install_libraries:
-	"$(ARDUINO_CLI)" lib install "Adafruit FRAM I2C"
-	"$(ARDUINO_CLI)" lib install "DualG2HighPowerMotorShield"
+	"$(ARDUINO_CLI)" lib install "Adafruit FRAM I2C@1.1.3"
+	"$(ARDUINO_CLI)" lib install "DualG2HighPowerMotorShield@2.0.0"
 
 rebuild: clean build
 
