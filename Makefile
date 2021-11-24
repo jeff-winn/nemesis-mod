@@ -10,9 +10,9 @@ else
 endif
 
 # Arduino CLI Board type
-BOARD_TYPE = adafruit:nrf52
-BOARD_VERSION = 0.20.5
-FQBN = $(BOARD_TYPE):feather52832
+BOARD_TYPE = adafruit:samd
+BOARD_VERSION = 1.7.5
+FQBN = $(BOARD_TYPE):adafruit_feather_m4
 
 # Default port to use
 SERIAL_PORT ?= 
