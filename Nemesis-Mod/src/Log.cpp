@@ -22,15 +22,3 @@ void Logger::println(const char value[]) {
     Serial.println(value);
 #endif
 }
-
-void Logger::waitForUsbConnection() {
-#ifdef __ENABLE_LOGGING__
-    Serial.begin(115200);
-    
-    while (!Serial) {
-        delay(10);
-    }
-
-    println("Connected!\n");
-#endif
-}
