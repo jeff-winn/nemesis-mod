@@ -25,17 +25,6 @@ Text GLabel 1500 1200 0    50   Output ~ 0
 NoConn ~ 1500 1350
 Text GLabel 2900 1950 2    50   Input ~ 0
 5V
-$Comp
-L Nemesis-Mod:Adafruit_nRF52_Feather MCU
-U 1 1 5DBD8417
-P -900 2100
-F 0 "MCU" H -900 3515 50  0000 C CNN
-F 1 "Adafruit nRF52832 Feather" H -900 3424 50  0000 C CNN
-F 2 "" H -250 800 50  0001 C CNN
-F 3 "" H -250 800 50  0001 C CNN
-	1    -900 2100
-	1    0    0    -1  
-$EndComp
 NoConn ~ 2900 1650
 NoConn ~ 2900 1800
 NoConn ~ 1800 4050
