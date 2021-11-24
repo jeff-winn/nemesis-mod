@@ -14,7 +14,7 @@ BOARD_TYPE = adafruit:nrf52
 BOARD_VERSION = 0.20.5
 FQBN = $(BOARD_TYPE):feather52832
 
-# Default port to upload to
+# Default port to use
 SERIAL_PORT ?= 
 
 # Optional verbose compile/upload trigger
