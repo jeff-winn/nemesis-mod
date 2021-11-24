@@ -3,8 +3,7 @@ It started off as me just wanting to play with an Arduino while repurposing some
 
 | Branch | Status |
 | ------ | -------------|
-| master | [![Build status](https://ci.appveyor.com/api/projects/status/i8yxeyigt2mpq8k4/branch/master?svg=true)](https://ci.appveyor.com/project/winnster/nemesis-mod/branch/master) |
-| develop | [![Build status](https://ci.appveyor.com/api/projects/status/i8yxeyigt2mpq8k4/branch/develop?svg=true)](https://ci.appveyor.com/project/winnster/nemesis-mod/branch/develop) |
+| master | ![Build status](https://github.com/jeff-winn/Nemesis-Mod/actions/workflows/ci.yaml/badge.svg)](https://github.com/jeff-winn/Nemesis-Mod/actions/workflows/ci.yaml) |
 
 ## Hardware Requirements
 These are the boards and hardware being used by the project.
