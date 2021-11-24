@@ -1,5 +1,4 @@
 #include "App.h"
-#include "BLEController.h"
 #include "Button.h"
 #include "Callbacks.h"
 #include "CommandFactory.h"
@@ -112,9 +111,9 @@ void App::init() {
     Flywheels.init();
     Belt.init();
 
-    SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
-    BLE.init();
-    BLE.startAdvertising();
+    // SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
+    // BLE.init();
+    // BLE.startAdvertising();
 
     FiringTrigger.init();
     RevTrigger.init();
@@ -159,12 +158,12 @@ void App::revokeAuthorization() {
 }
 
 void App::sendAmperesNotifications() {
-    auto flywheel1 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor1);
-    auto flywheel2 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor2);
-    BLE.notifyFlywheelCurrentMilliamps(flywheel1, flywheel2, RevTrigger.isPressed());
+    // auto flywheel1 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor1);
+    // auto flywheel2 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor2);
+    // BLE.notifyFlywheelCurrentMilliamps(flywheel1, flywheel2, RevTrigger.isPressed());
 
-    auto feed = Belt.getMotorCurrentMilliamps();
-    BLE.notifyBeltCurrentMilliamps(feed, FiringTrigger.isPressed());
+    // auto feed = Belt.getMotorCurrentMilliamps();
+    // BLE.notifyBeltCurrentMilliamps(feed, FiringTrigger.isPressed());
 }
 
 void App::clear() {
@@ -182,5 +181,5 @@ void App::reset() {
 
 void App::resetCore() {
     revokeAuthorization();
-    BLE.clearBonds();
+    // BLE.clearBonds();
 }
