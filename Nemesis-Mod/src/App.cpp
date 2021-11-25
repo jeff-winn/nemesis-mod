@@ -5,13 +5,13 @@
 #include "ConfigurationSettings.h"
 #include "FeedController.h"
 #include "FlywheelController.h"
-#include "Log.h"
 #include "Mainboard.h"
 
-const uint32_t SYSTEM_OFF_IN_MSECS = 600000; // 10 minutes
-const uint32_t REV_BUTTON_PIN = 13;
-const uint32_t FIRING_BUTTON_PIN = 12;
-const uint32_t HOPPER_LOCK_BUTTON_PIN = 19;
+const uint32_t SYSTEM_OFF_IN_MSECS = 600000;        // The duration of time (in milliseconds) the system should delay.
+const uint32_t REV_BUTTON_PIN = 13;                 // The GPIO pin handling the rev trigger.
+const uint32_t FIRING_BUTTON_PIN = 12;              // The GPIO pin handling the firing trigger.
+const uint32_t HOPPER_LOCK_BUTTON_PIN = 19;         // The GPIO pin handling the soft lock whether the blaster should be disabled.
+const unsigned long TRIGGER_DELAY_IN_MSECS = 10;    // The duration of time to delay while the triggers are active.
 
 App Application = App();
 Button RevTrigger = Button(REV_BUTTON_PIN);
@@ -32,20 +32,20 @@ void App::run() {
 
         while (shouldAllowRevvingFlywheels()) {
             sendAmperesNotifications();
-
-            if (shouldAllowFiringRounds()) {
+                        
+            while (shouldAllowFiringRounds()) {
                 if (!isAlreadyFiring()) {
                     startFiring();
                 }
-            }
-            else {
-                stopFiring();
-            }
 
-            MCU.delaySafe(10);
+                MCU.delaySafe(TRIGGER_DELAY_IN_MSECS);
+            }            
+            
+            stopFiring();
+
+            MCU.delaySafe(TRIGGER_DELAY_IN_MSECS);
         }
 
-        stopFiring();
         stopFlywheels();
     }
 
@@ -53,7 +53,6 @@ void App::run() {
 }
 
 void App::revFlywheels() {
-    Log.println("Revving flywheels...");
     Flywheels.start();
 }
 
@@ -64,7 +63,6 @@ bool App::isAlreadyFiring() {
 void App::startFiring() {
     m_firing = true;
 
-    Log.println("Firing!");
     Belt.start();
 }
 
@@ -76,7 +74,6 @@ void App::stopFiring() {
 
 void App::stopFlywheels() {
     Flywheels.stop();
-    Log.println("Flywheels stopped.");
 }
 
 bool App::shouldAllowRevvingFlywheels() {
@@ -105,8 +102,6 @@ void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t le
 }
 
 void App::init() {
-    Log.println("Initializing application...");
-
     Settings.init(); 
     Flywheels.init();
     Belt.init();
@@ -118,8 +113,6 @@ void App::init() {
     FiringTrigger.init();
     RevTrigger.init();
     HopperLock.init();
-
-    Log.println("Completed application initialization.\n");
 }
 
 void App::onRemoteCommandReceived(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {   
