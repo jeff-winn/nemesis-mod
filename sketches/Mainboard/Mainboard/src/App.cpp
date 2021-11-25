@@ -107,8 +107,6 @@ void App::init() {
     Belt.init();
 
     // SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
-    // BLE.init();
-    // BLE.startAdvertising();
 
     FiringTrigger.init();
     RevTrigger.init();
