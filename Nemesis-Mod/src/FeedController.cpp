@@ -56,6 +56,8 @@ int FeedController::calculateMotorSpeed() {
             return Settings.getFeedMaxSpeed();
         }
     }
+
+    return 0; // Disable the motor (speed could not be determined).
 }
 
 int FeedController::calculateStepFromSpeed(int speed) {

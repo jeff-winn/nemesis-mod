@@ -75,7 +75,7 @@ int FlywheelController::determineMotorMaximumSpeed() {
         }
     }
 
-    return 0;
+    return 0; // Disable the motor (speed could not be determined).
 }
 
 float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
