@@ -1,5 +1,5 @@
 {
-	"folders": [
+	"folders": [		
 		{
 			"path": ".",
 		}
@@ -15,7 +15,7 @@
 		"C_Cpp.intelliSenseEngine": "Default",
 		"editor.tabSize": 4,
 		"files.exclude": {
-			".vscode/ipch": true,
+			".vscode/ipch": true,			
 			".vscode/temp": true,
 			"build": true,
 			"external": true,
