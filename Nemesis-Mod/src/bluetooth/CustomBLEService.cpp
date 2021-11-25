@@ -1,7 +1,7 @@
-#include "CustomBLEService.h"
+// #include "CustomBLEService.h"
 
-CustomBLEService::CustomBLEService(BLEUuid uuid) : BLEService(uuid) {
-}
+// CustomBLEService::CustomBLEService(BLEUuid uuid) : BLEService(uuid) {
+// }
 
-void CustomBLEService::init() {
-}
+// void CustomBLEService::init() {
+// }

@@ -20,6 +20,14 @@ These are the boards and hardware being used by the project.
 ## Development Environment
 This is the development environment setup that is currently being used to write the code included within this repository.
 
+### Debugging
+To debug the device, you will need a JLink with the following pins connected using the SWD interface:
+- Rst
+- Vref
+- Gnd
+- SWDIO
+- SWCLK
+
 ### Toolset
 Below are the software which must be installed to compile the source code.
 - Visual Studio Code
