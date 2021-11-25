@@ -5,7 +5,7 @@
           "name": "Debug",
           "type": "cortex-debug",
           "cwd": "${workspaceRoot}",
-          "executable": "build/Nemesis-Mod.ino.elf",
+          "executable": "build/Mainboard.ino.elf",
           "request": "launch",
           "servertype": "jlink",
           "runToEntryPoint": "main",
