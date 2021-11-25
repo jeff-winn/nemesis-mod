@@ -13,9 +13,3 @@ jobs:
 
     - name: Build
       run: make
-    
-    - name: Upload binaries
-      uses: actions/upload-artifact@v2
-      with:
-        name: binaries
-        path: build/Nemesis-Mod.ino.*
