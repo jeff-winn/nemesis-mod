@@ -1,11 +1,17 @@
 #include "src/App.h"
-
-App app = App();
+#include "src/Callbacks.h"
 
 void setup() {    
-    app.init();
+    SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
+
+    Application.init();
 }
 
 void loop() {
-    app.runOnce();
+    Application.runOnce();
+}
+
+// Receives notifications whenever a bluetooth command has been received. 
+void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {
+    Application.onRemoteCommandReceived(type, subtype, data, len);
 }

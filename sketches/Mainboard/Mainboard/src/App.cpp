@@ -1,6 +1,5 @@
 #include "App.h"
 #include "Button.h"
-#include "Callbacks.h"
 #include "CommandFactory.h"
 #include "ConfigurationSettings.h"
 #include "FeedController.h"
@@ -96,17 +95,10 @@ bool App::isAuthorized() {
     return m_isAuthorized;
 }
 
-// Receives notifications whenever a bluetooth command has been received. 
-void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {
-    Application.onRemoteCommandReceived(type, data, len, subtype);
-}
-
 void App::init() {
     Settings.init(); 
     Flywheels.init();
     Belt.init();
-
-    // SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
 
     FiringTrigger.init();
     RevTrigger.init();
@@ -172,5 +164,4 @@ void App::reset() {
 
 void App::resetCore() {
     revokeAuthorization();
-    // BLE.clearBonds();
 }

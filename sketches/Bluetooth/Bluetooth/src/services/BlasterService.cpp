@@ -1,5 +1,5 @@
-// #include "../Callbacks.h"
 // #include "../ConfigurationSettings.h"
+#include "../Callbacks.h"
 #include "BlasterService.h"
 #include "CustomUuid.h"
 
@@ -11,19 +11,19 @@ BlasterService::BlasterService() : CustomBLEService(UUID128_SVC_NERF_BLASTER) {
 }
 
 void onFlywheelSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    // NotifyBluetoothCommandReceived(200, data, len, 0);
+    NotifyBluetoothCommandReceived(200, data, len, 0);
 }
 
 void onFlywheelM1TrimAdjustmentWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    // NotifyBluetoothCommandReceived(201, data, len, 1);
+    NotifyBluetoothCommandReceived(201, data, len, 1);
 }
 
 void onFlywheelM2TrimAdjustmentWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    // NotifyBluetoothCommandReceived(201, data, len, 2); 
+    NotifyBluetoothCommandReceived(201, data, len, 2); 
 }
 
 void onBeltSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    // NotifyBluetoothCommandReceived(100, data, len, 0);
+    NotifyBluetoothCommandReceived(100, data, len, 0);
 }
 
 void BlasterService::init() {  
