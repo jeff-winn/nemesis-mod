@@ -35,6 +35,4 @@ class BLEController {
         uint32_t m_lastBeltMilliampsNotifyAtMillis;
 };
 
-extern BLEController BLE;
-
 #endif /* BLE_CONTROLLER_H */

@@ -1,10 +1,11 @@
-#include "src/BLEController.h"
+#include "src/App.h"
 
-void setup() {
-    BLE.init();
-    BLE.startAdvertising();
+App app = App();
+
+void setup() {    
+    app.init();
 }
 
 void loop() {
-    delay(100);
+    app.runOnce();
 }
