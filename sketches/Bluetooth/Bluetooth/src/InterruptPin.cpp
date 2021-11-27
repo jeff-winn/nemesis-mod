@@ -7,7 +7,7 @@ InterruptPin::InterruptPin(uint32_t pin, bool setLedOn) {
 }
 
 void InterruptPin::init() {
-    digitalWrite(m_pin, OUTPUT);
+    pinMode(m_pin, OUTPUT);
 }
 
 void InterruptPin::reset() {
