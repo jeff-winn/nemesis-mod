@@ -48,6 +48,7 @@ install_boards:
 	"$(ARDUINO_CLI)" core install $(BT_BOARD_TYPE)@$(BT_BOARD_VERSION)
 
 install_libraries:
+	"$(ARDUINO_CLI)" lib install "CircularBuffer@1.3.3"
 	"$(ARDUINO_CLI)" lib install "Adafruit FRAM I2C@2.0.0"
 	"$(ARDUINO_CLI)" lib install "DualG2HighPowerMotorShield@2.0.0"
 
