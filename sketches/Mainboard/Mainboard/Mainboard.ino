@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#include <Wire.h>
+
 #include "src/App.h"
 #include "src/Button.h"
 #include "src/Mainboard.h"
@@ -9,7 +11,9 @@ const uint32_t RESET_BUTTON_PIN = 18;
 
 Button ResetButton = Button(RESET_BUTTON_PIN, true);
 
-void setup() {   
+void setup() {
+    Wire.begin();
+    
     ResetButton.init();
     Application.init();
 }
