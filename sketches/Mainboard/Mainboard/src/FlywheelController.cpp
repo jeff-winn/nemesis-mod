@@ -1,5 +1,6 @@
 #include <stddef.h>
-#include "ConfigurationSettings.h"
+
+#include "shared/ConfigurationSettings.h"
 #include "FlywheelController.h"
 #include "Mainboard.h"
 
