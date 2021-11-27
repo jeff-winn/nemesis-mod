@@ -2,6 +2,7 @@
 #define APP_H
 
 #include "BLEController.h"
+#include "InterruptPin.h"
 
 class App {
     public:
@@ -14,7 +15,8 @@ class App {
         void onRemoteCommandReceived(uint8_t type, uint8_t subtype, uint8_t* data, uint16_t len);
 
     private:
-        BLEController ble;
+        BLEController *ble;
+        InterruptPin *interrupt;
 };
 
 extern App Application;
