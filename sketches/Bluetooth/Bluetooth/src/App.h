@@ -12,11 +12,7 @@ class App {
 
         void runOnce();
     
-        void onRemoteCommandReceived(uint8_t type, uint8_t subtype, uint8_t* data, uint16_t len);
-
-    private:
-        BLEController *ble;
-        InterruptPin *interrupt;
+        void onRemoteCommandReceived(uint8_t type, uint8_t subtype, uint8_t* data, uint16_t len);    
 };
 
 extern App Application;

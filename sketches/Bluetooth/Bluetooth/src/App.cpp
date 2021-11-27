@@ -2,25 +2,25 @@
 #include "Callbacks.h"
 
 App Application = App();
+BLEController ble = BLEController();
+InterruptPin interruptPin = InterruptPin(13, true);
 
-App::App() {
-    ble = new BLEController();
-    interrupt = new InterruptPin(13, true);
+App::App() {    
 }
 
 void App::init() {
-    ble->init();
-    ble->startAdvertising();
+    ble.init();
+    ble.startAdvertising();
 
-    interrupt->init();
+    interruptPin.init();
 }
 
 void App::runOnce() {   
-    interrupt->set();
+    interruptPin.set();
 
     delay(1000);
 
-    interrupt->reset();
+    interruptPin.reset();
 
     delay(1000);
 }
