@@ -23,15 +23,11 @@ App::App() {
     m_firing = false;
 }
 
-void App::run() {
-    sendAmperesNotifications();
-    
+void App::run() {   
     if (shouldAllowRevvingFlywheels()) {
         revFlywheels();
 
-        while (shouldAllowRevvingFlywheels()) {
-            sendAmperesNotifications();
-                        
+        while (shouldAllowRevvingFlywheels()) {                        
             while (shouldAllowFiringRounds()) {
                 if (!isAlreadyFiring()) {
                     startFiring();
@@ -138,15 +134,6 @@ void App::authenticate() {
 
 void App::revokeAuthorization() {
     m_isAuthorized = false;
-}
-
-void App::sendAmperesNotifications() {
-    // auto flywheel1 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor1);
-    // auto flywheel2 = Flywheels.getMotorCurrentMilliamps(FlywheelMotor::Motor2);
-    // BLE.notifyFlywheelCurrentMilliamps(flywheel1, flywheel2, RevTrigger.isPressed());
-
-    // auto feed = Belt.getMotorCurrentMilliamps();
-    // BLE.notifyBeltCurrentMilliamps(feed, FiringTrigger.isPressed());
 }
 
 void App::clear() {

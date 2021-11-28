@@ -31,7 +31,6 @@ class App {
 
     protected:       
         void waitForRevTriggerToBePressed();
-        void sendAmperesNotifications();
 
         void revFlywheels();
         void stopFlywheels();
