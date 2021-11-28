@@ -1,7 +1,12 @@
 #include "BLEController.h"
+#include "Callbacks.h"
 
 const uint32_t NOTIFICATION_INTERVAL_IN_MSECS = 10000; // 10 seconds
 const uint32_t NOTIFICATION_INTERVAL_WHILE_ACTIVE_IN_MSECS = 1000; // 1 second
+
+void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t subtype, uint8_t* data, uint8_t len) {
+    BLE.onRemoteCommandReceived(type, subtype, data, len);
+}
 
 BLEController BLE = BLEController();
 
@@ -16,6 +21,8 @@ BLEController::~BLEController() {
 }
 
 void BLEController::init() {
+  SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
+
   Bluefruit.begin();
   Bluefruit.setName("Nerf Nemesis MXVII-10K");
   Bluefruit.autoConnLed(false);
@@ -78,6 +85,9 @@ void BLEController::notifyBeltCurrentMilliamps(uint32_t m1, bool isActive) {
   //   m_notificationService.notifyBeltCurrentMilliamps(m1);
   //   m_lastBeltMilliampsNotifyAtMillis = millis();
   // }
+}
+
+void BLEController::onRemoteCommandReceived(uint8_t type, uint8_t subtype, uint8_t* data, uint8_t len) {  
 }
 
 void BLEController::notifyFlywheelCurrentMilliamps(uint32_t m1, uint32_t m2, bool isActive) {

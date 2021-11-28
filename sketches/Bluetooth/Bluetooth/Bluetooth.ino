@@ -7,15 +7,8 @@ void setup() {
 
     BLE.init();
     BLE.startAdvertising();
-
-    // SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
 }
 
 void loop() {
     delay(100);
 }
-
-// // Occurs whenever a bluetooth command has been received.
-// void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {
-//     Application.onRemoteCommandReceived(type, subtype, data, len);
-// }
