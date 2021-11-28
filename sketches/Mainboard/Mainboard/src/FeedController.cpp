@@ -1,4 +1,4 @@
-#include "shared/ConfigurationSettings.h"
+#include "ConfigurationSettings.h"
 #include "FeedController.h"
 #include "Mainboard.h"
 
