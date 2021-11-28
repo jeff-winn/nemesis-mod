@@ -10,7 +10,6 @@
 class BLEController {
     public:
         BLEController();
-
         ~BLEController();
 
         void init();
@@ -34,5 +33,7 @@ class BLEController {
         uint32_t m_lastFlywheelMilliampsNotifyAtMillis;
         uint32_t m_lastBeltMilliampsNotifyAtMillis;
 };
+
+extern BLEController BLE;
 
 #endif /* BLE_CONTROLLER_H */

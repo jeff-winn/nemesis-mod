@@ -1,27 +1,21 @@
-#include <Wire.h>
+#include "src/I2cController.h"
+#include "src/BLEController.h"
 
-#include "src/App.h"
-#include "src/Callbacks.h"
+void setup() {
+    I2CBus.init();
+    I2CBus.waitForMaster(); // Pauses execution until the master device has completed startup.
 
-void setup() {    
-    SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
+    BLE.init();
+    BLE.startAdvertising();
 
-    Wire.begin(0x01);
-    Wire.onRequest(OnWireRequestReceivedCallback);
-
-    Application.init();
+    // SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
 }
 
 void loop() {
-    Application.runOnce();
+    delay(100);
 }
 
-// Occurs whenever a bluetooth command has been received.
-void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {
-    Application.onRemoteCommandReceived(type, subtype, data, len);
-}
-
-// Occurs whenever an i2c request has been received from the master device.
-void OnWireRequestReceivedCallback() {
-    Application.onI2cRequestReceived();
-}
+// // Occurs whenever a bluetooth command has been received.
+// void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {
+//     Application.onRemoteCommandReceived(type, subtype, data, len);
+// }
