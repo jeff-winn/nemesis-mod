@@ -3,7 +3,9 @@
 
 #include <CircularBuffer.h>
 
-void OnI2cDataReceivedCallback(int bytesAvailable);
+typedef void (*I2cCommandReceivedCallback)(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len);
+
+void OnI2cDataReceivedCallback(int numBytes);
 void OnI2cRequestReceivedCallback();
 
 class I2cController {
@@ -11,7 +13,7 @@ class I2cController {
         I2cController();
         ~I2cController();
 
-        void init();
+        void init(I2cCommandReceivedCallback callback);
 
         void onI2cDataReceived(int numBytes);
         void onI2cRequestReceived();
@@ -23,7 +25,9 @@ class I2cController {
         void waitForMaster();
 
     private:
-        CircularBuffer<uint8_t, 1024> *m_buffer;
+        CircularBuffer<uint8_t, 512> *m_txBuffer;
+        I2cCommandReceivedCallback m_callback;
+        
         volatile bool m_ready; // Identifies whether the master device has indicated it has completed startup.
 
 };

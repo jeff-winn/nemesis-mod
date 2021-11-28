@@ -4,10 +4,6 @@
 const uint32_t NOTIFICATION_INTERVAL_IN_MSECS = 10000; // 10 seconds
 const uint32_t NOTIFICATION_INTERVAL_WHILE_ACTIVE_IN_MSECS = 1000; // 1 second
 
-void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t subtype, uint8_t* data, uint8_t len) {
-    BLE.onRemoteCommandReceived(type, subtype, data, len);
-}
-
 BLEController BLE = BLEController();
 
 BLEController::BLEController() {
@@ -20,8 +16,8 @@ BLEController::BLEController() {
 BLEController::~BLEController() {
 }
 
-void BLEController::init() {
-  SetBluetoothCommandReceivedCallback(OnBluetoothCommandReceivedCallback);
+void BLEController::init(RemoteCommandReceivedCallback callback) {
+  SetBluetoothCommandReceivedCallback(callback);
 
   Bluefruit.begin();
   Bluefruit.setName("Nerf Nemesis MXVII-10K");

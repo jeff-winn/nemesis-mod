@@ -4,10 +4,7 @@
 #include <bluefruit.h>
 #include "services/BlasterService.h"
 #include "services/ConfigurationService.h"
-#include "services/NotificationService.h"
-
-// Occurs whenever a bluetooth command has been received.
-void OnBluetoothCommandReceivedCallback(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype);
+#include "Callbacks.h"
 
 // Provides a controller for the on-board bluetooth module.
 class BLEController {
@@ -15,7 +12,7 @@ class BLEController {
         BLEController();
         ~BLEController();
 
-        void init();
+        void init(RemoteCommandReceivedCallback callback);
         void startAdvertising();
 
         void clearBonds();

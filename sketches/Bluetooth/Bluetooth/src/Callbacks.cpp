@@ -8,8 +8,8 @@ void SetBluetoothCommandReceivedCallback(RemoteCommandReceivedCallback callback)
   onBluetoothRemoteCommandReceivedCallback = callback;
 }
 
-void NotifyBluetoothCommandReceived(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {
+void NotifyBluetoothCommandReceived(uint8_t type, uint8_t* data, uint8_t len, uint8_t subtype) {
   if (onBluetoothRemoteCommandReceivedCallback != NULL) {
-    onBluetoothRemoteCommandReceivedCallback(type, data, len, subtype);
+    onBluetoothRemoteCommandReceivedCallback(type, subtype, data, len);
   }
 }
