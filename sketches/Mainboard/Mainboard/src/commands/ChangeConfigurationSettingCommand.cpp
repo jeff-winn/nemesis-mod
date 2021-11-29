@@ -1,4 +1,4 @@
-#include "../BitConverter.h"
+#include "../shared/BitConverter.h"
 #include "ChangeConfigurationSettingCommand.h"
 
 ChangeConfigurationSettingCommand::ChangeConfigurationSettingCommand(uint8_t subtype) : ConfigurationCommand() {

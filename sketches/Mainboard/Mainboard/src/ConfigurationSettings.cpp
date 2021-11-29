@@ -1,5 +1,5 @@
 #include <Adafruit_FRAM_I2C.h>
-#include "BitConverter.h"
+#include "shared/BitConverter.h"
 #include "ConfigurationSettings.h"
 
 const short HAS_EXISTING_PAIRING_ADDR = 0x02;

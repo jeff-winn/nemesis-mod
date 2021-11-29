@@ -1,5 +1,5 @@
 #include "FlywheelTrimAdjustmentCommand.h"
-#include "../BitConverter.h"
+#include "../shared/BitConverter.h"
 
 FlywheelTrimAdjustmentCommand::FlywheelTrimAdjustmentCommand(uint8_t subtype, FlywheelController* controller) : FlywheelCommand(controller) {
     m_subtype = subtype;    
