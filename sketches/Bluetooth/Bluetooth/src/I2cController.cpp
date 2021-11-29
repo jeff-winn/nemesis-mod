@@ -26,7 +26,6 @@ I2cController::~I2cController() {
 void I2cController::init(I2cCommandReceivedCallback callback) {
     m_callback = callback;
 
-    m_rxBuffer->first();
     Wire.onReceive(OnI2cCommandReceivedCallback);
     Wire.onRequest(OnI2cRequestReceivedCallback);
     Wire.begin(NRF52840_I2C_ADDR);
