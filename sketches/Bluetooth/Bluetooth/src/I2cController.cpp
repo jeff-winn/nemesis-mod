@@ -60,7 +60,7 @@ void I2cController::onI2cCommandReceived(int numBytes) {
     }
 
     m_rxCount++;    
-    delete buffer;
+    delete[] buffer;
 }
 
 void I2cController::runNextPacket() {
@@ -84,6 +84,8 @@ void I2cController::runNextPacket() {
     }
 
     m_callback(type, subtype, data, len);
+    delete[] data;
+
     m_rxCount--;
 }
 
@@ -126,7 +128,7 @@ void I2cController::onI2cRequestReceived() {
     }
 
     Wire.write(packet, size);    
-    delete packet;
+    delete[] packet;
 
     m_txCount--;
 
