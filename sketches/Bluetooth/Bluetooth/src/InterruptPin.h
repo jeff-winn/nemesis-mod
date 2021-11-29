@@ -6,11 +6,10 @@
 class InterruptPin {
     public:
         InterruptPin(uint32_t pin, bool setLedOn);
-
+        ~InterruptPin();
+        
         void init();
-
         void set();
-
         void reset();
 
     private:

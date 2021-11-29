@@ -6,6 +6,9 @@ InterruptPin::InterruptPin(uint32_t pin, bool setLedOn) {
     m_setLedOn = setLedOn;
 }
 
+InterruptPin::~InterruptPin() {    
+}
+
 void InterruptPin::init() {
     pinMode(m_pin, OUTPUT);
 }

@@ -20,5 +20,6 @@ void OnI2cCommandReceived(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t 
     }
 }
 
-void OnBluetoothCommandReceived(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len) {    
+void OnBluetoothCommandReceived(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len) {
+    I2CBus.forwardPacket(type, subtype, data, len);    
 }

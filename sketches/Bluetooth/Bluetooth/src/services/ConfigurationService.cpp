@@ -1,9 +1,8 @@
 // #include "../ConfigurationSettings.h"
 #include "../Callbacks.h"
+#include "../shared/Constants.h"
 #include "ConfigurationService.h"
 #include "CustomUuid.h"
-
-uint8_t CONFIGURATION_COMMAND_ID = 10;
 
 ConfigurationService::ConfigurationService() : CustomBLEService(UUID128_SVC_CONFIGURATION) {
     m_flywheelNormalSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_NORMAL_SPEED);
@@ -17,35 +16,35 @@ ConfigurationService::ConfigurationService() : CustomBLEService(UUID128_SVC_CONF
 }
 
 void onFlywheelKidSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 1);
+    NotifyBluetoothCommandReceived(NRF52_CID_SET_CONFIG, data, len, 1);
 }
 
 void onFlywheelNormalSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 2);
+    NotifyBluetoothCommandReceived(NRF52_CID_SET_CONFIG, data, len, 2);
 }
 
 void onFlywheelLudicrousSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 3);
+    NotifyBluetoothCommandReceived(NRF52_CID_SET_CONFIG, data, len, 3);
 }
 
 void onBeltNormalSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 4);
+    NotifyBluetoothCommandReceived(NRF52_CID_SET_CONFIG, data, len, 4);
 }
 
 void onBeltMediumSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 5);
+    NotifyBluetoothCommandReceived(NRF52_CID_SET_CONFIG, data, len, 5);
 }
 
 void onBeltMaxSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 6);
+    NotifyBluetoothCommandReceived(NRF52_CID_SET_CONFIG, data, len, 6);
 }
 
 void onFlywheelTrimVarianceWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 7);
+    NotifyBluetoothCommandReceived(NRF52_CID_SET_CONFIG, data, len, 7);
 }
 
 void onHopperLockEnabledWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    NotifyBluetoothCommandReceived(CONFIGURATION_COMMAND_ID, data, len, 8);
+    NotifyBluetoothCommandReceived(NRF52_CID_SET_CONFIG, data, len, 8);
 }
 
 void ConfigurationService::init() {

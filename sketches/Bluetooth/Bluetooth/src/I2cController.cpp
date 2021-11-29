@@ -17,14 +17,19 @@ void OnI2cRequestReceivedCallback() {
 I2cController::I2cController() {
     m_rxBuffer = new CircularBuffer<uint8_t, 512>();
     m_txBuffer = new CircularBuffer<uint8_t, 512>();
+
+    m_interrupt = new InterruptPin(A0, true);
 }
 
 I2cController::~I2cController() {
+    delete m_rxBuffer;
     delete m_txBuffer;
+    delete m_interrupt;
 }
 
 void I2cController::init(I2cCommandReceivedCallback callback) {
     m_callback = callback;
+    m_interrupt->init();
 
     Wire.onReceive(OnI2cCommandReceivedCallback);
     Wire.onRequest(OnI2cRequestReceivedCallback);
@@ -73,6 +78,22 @@ void I2cController::runNextPacket() {
     m_rxCount--;
 }
 
+void I2cController::forwardPacket(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len) { 
+    m_txBuffer->push(type);
+    m_txBuffer->push(subtype);
+    m_txBuffer->push(len);
+
+    if (len > 0) {
+        uint8_t index = 0;
+        while (index < len) {
+            m_txBuffer->push(data[index]);        
+            index++;
+        }
+    }
+
+    m_interrupt->set();
+}
+
 void I2cController::onI2cRequestReceived() {
     if (m_txCount == 0) {
         return;
@@ -99,4 +120,8 @@ void I2cController::onI2cRequestReceived() {
     delete packet;
 
     m_txCount--;
+
+    if (m_txCount == 0) {
+        m_interrupt->reset();
+    }
 }
