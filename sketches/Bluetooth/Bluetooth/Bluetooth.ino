@@ -9,6 +9,7 @@ void setup() {
 
 void loop() {
     I2CBus.runNextPacket();
+    delay(10);
 }
 
 void OnI2cCommandReceived(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len) {
