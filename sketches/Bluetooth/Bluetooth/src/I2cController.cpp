@@ -6,8 +6,8 @@
 
 I2cController I2CBus = I2cController();
 
-void OnI2cDataReceivedCallback(int numBytes) {
-    I2CBus.onI2cDataReceived(numBytes);
+void OnI2cCommandReceivedCallback(int numBytes) {
+    I2CBus.onI2cCommandReceived(numBytes);
 }
 
 void OnI2cRequestReceivedCallback() {
@@ -15,6 +15,7 @@ void OnI2cRequestReceivedCallback() {
 }
 
 I2cController::I2cController() {
+    m_rxBuffer = new CircularBuffer<uint8_t, 512>();
     m_txBuffer = new CircularBuffer<uint8_t, 512>();
 }
 
@@ -25,49 +26,62 @@ I2cController::~I2cController() {
 void I2cController::init(I2cCommandReceivedCallback callback) {
     m_callback = callback;
 
-    Wire.onReceive(OnI2cDataReceivedCallback);
+    m_rxBuffer->first();
+    Wire.onReceive(OnI2cCommandReceivedCallback);
     Wire.onRequest(OnI2cRequestReceivedCallback);
     Wire.begin(NRF52840_I2C_ADDR);
 }
 
-void I2cController::onI2cDataReceived(int numBytes) {
+void I2cController::onI2cCommandReceived(int numBytes) {
     uint8_t *buffer = new uint8_t[numBytes];
     Wire.readBytes(buffer, numBytes);
 
-    auto type = buffer[0];
-    auto subtype = buffer[1];
-    auto len = buffer[2];
+    uint8_t current = 0;
+    int index = 0;
 
-    uint8_t *data = NULL;
-    if (len > 0) {    
-        uint8_t pos = 3;
-        uint8_t index = 0;
+    while (index < numBytes) {
+        current = buffer[index];
+        m_rxBuffer->push(current);
 
-        data = new uint8_t[len];
-        while (pos < numBytes) {
-            data[index] = buffer[pos];
-
-            index++;
-            pos++;
-        }
-    }
-    
-    m_callback(type, subtype, data, len);
-    if (data != NULL) {
-        delete data;
+        index++;
     }
 
+    m_rxCount++;    
     delete buffer;
 }
 
-void I2cController::onI2cRequestReceived() {
-    if (m_txBuffer->isEmpty()) {
+void I2cController::runNextPacket() {
+    if (m_rxCount == 0) {
         return;
     }
 
-    auto type = m_txBuffer->pop();
-    auto subtype = m_txBuffer->pop();
-    auto len = m_txBuffer->pop();
+    auto type = m_rxBuffer->shift();
+    auto subtype = m_rxBuffer->shift();
+    auto len = m_rxBuffer->shift();
+
+    byte *data = NULL;
+    if (len > 0) {
+        data = new byte[len];
+
+        uint8_t index = 0;
+        while (index < len) {
+            data[index] = m_rxBuffer->shift();
+            index++;
+        }
+    }
+
+    m_callback(type, subtype, data, len);
+    m_rxCount--;
+}
+
+void I2cController::onI2cRequestReceived() {
+    if (m_txCount == 0) {
+        return;
+    }
+
+    auto type = m_txBuffer->shift();
+    auto subtype = m_txBuffer->shift();
+    auto len = m_txBuffer->shift();
 
     auto size = len + 3;
 
@@ -78,20 +92,12 @@ void I2cController::onI2cRequestReceived() {
 
     uint8_t index = 3;
     while (index < size) {
-        packet[index] = m_txBuffer->pop();
+        packet[index] = m_txBuffer->shift();
         index++;
     }
 
     Wire.write(packet, size);    
     delete packet;
-}
 
-void I2cController::notifyReady() {
-    m_ready = true;
-}
-
-void I2cController::waitForMaster() {
-    while (!m_ready) {
-        delay(1);
-    }
+    m_txCount--;
 }

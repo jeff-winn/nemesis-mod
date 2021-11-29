@@ -48,7 +48,8 @@
 			"functional": "cpp",
 			"tuple": "cpp",
 			"utility": "cpp",
-			"cstddef": "cpp"
+			"cstddef": "cpp",
+			"*.tpp": "cpp"
 		}
 	}
 }
