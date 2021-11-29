@@ -4,7 +4,9 @@
 #include "ConfigurationSettings.h"
 #include "FeedController.h"
 #include "FlywheelController.h"
+#include "hardware/NRF52.h"
 #include "Mainboard.h"
+#include "shared/Constants.h"
 
 const uint32_t SYSTEM_OFF_IN_MSECS = 600000;        // The duration of time (in milliseconds) the system should delay.
 const uint32_t REV_BUTTON_PIN = 13;                 // The GPIO pin handling the rev trigger.
@@ -16,6 +18,7 @@ App Application = App();
 Button RevTrigger = Button(REV_BUTTON_PIN);
 Button FiringTrigger = Button(FIRING_BUTTON_PIN);
 Button HopperLock = Button(HOPPER_LOCK_BUTTON_PIN);
+NRF52 BT = NRF52(NRF52840_I2C_ADDR);
 
 App::App() {
     m_commandFactory = CommandFactory();
@@ -99,6 +102,9 @@ void App::init() {
     FiringTrigger.init();
     RevTrigger.init();
     HopperLock.init();
+
+    BT.init();
+    BT.startAdvertising();
 }
 
 void App::onRemoteCommandReceived(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {   
@@ -114,21 +120,6 @@ void App::onRemoteCommandReceived(uint8_t type, uint8_t* data, uint16_t len, uin
 }
 
 void App::authenticate() {
-    // auto existingToken = Settings.getAuthenticationToken();
-
-    // if (token.length > 0 && existingToken.length == 0) {
-    //     // The user has not stored the authentication data yet, update it.
-    //     Settings.setAuthenticationToken(token);        
-    // }
-    // else if (existingToken.length != token.length) {
-    //     authorized = false;
-    // }
-    // else if (existingToken.length > 0) {
-    //     for (byte index = 0; index < existingToken.length; index++) {
-    //         authorized &= existingToken.data[index] == token.data[index];
-    //     }
-    // }
-
     m_isAuthorized = true;
 }
 
@@ -151,4 +142,5 @@ void App::reset() {
 
 void App::resetCore() {
     revokeAuthorization();
+    BT.clearBonds();
 }
