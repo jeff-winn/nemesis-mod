@@ -3,18 +3,21 @@
 #include "../shared/Constants.h"
 #include "NRF52.h"
 
-NRF52::NRF52(uint8_t addr) {
+NRF52::NRF52(uint8_t addr, uint32_t interruptPin) {
     m_addr = addr;
+    m_signal = new InterruptSignal(interruptPin);
 }
 
-NRF52::~NRF52() {    
+NRF52::~NRF52() {
+    delete m_signal;
 }
 
 void NRF52::init() {
+    m_signal->init();
 }
 
-void NRF52::clearBonds() {
-    sendPacket(NRF52_CID_CLEAR_BONDS, 0, NULL, 0);
+void NRF52::reset() {
+    sendPacket(NRF52_CID_RESET, 0, NULL, 0);
 }
 
 void NRF52::startAdvertising() {

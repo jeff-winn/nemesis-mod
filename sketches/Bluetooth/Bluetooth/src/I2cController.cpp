@@ -36,6 +36,15 @@ void I2cController::init(I2cCommandReceivedCallback callback) {
     Wire.begin(NRF52840_I2C_ADDR);
 }
 
+void I2cController::clear() {    
+    m_interrupt->reset();
+    m_txBuffer->clear();
+    m_rxBuffer->clear();
+
+    m_rxCount = 0;
+    m_txCount = 0;
+}
+
 void I2cController::onI2cCommandReceived(int numBytes) {
     uint8_t *buffer = new uint8_t[numBytes];
     Wire.readBytes(buffer, numBytes);

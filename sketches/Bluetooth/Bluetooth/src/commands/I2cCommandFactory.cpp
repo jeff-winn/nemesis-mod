@@ -1,7 +1,7 @@
 #include <cstddef>
 
 #include "I2cCommandFactory.h"
-#include "i2c/ClearBondsCommand.h"
+#include "i2c/ResetCommand.h"
 #include "i2c/StartAdvertisingCommand.h"
 #include "../shared/Constants.h"
 
@@ -18,8 +18,8 @@ Command *I2cCommandFactory::create(uint8_t type, uint8_t subtype) {
         case NRF52_CID_START_ADVERTISING:
             return new StartAdvertisingCommand();
 
-        case NRF52_CID_CLEAR_BONDS:
-            return new ClearBondsCommand();            
+        case NRF52_CID_RESET:
+            return new ResetCommand();            
     }
 
     return NULL;

@@ -16,6 +16,7 @@ class I2cController {
         ~I2cController();
 
         void init(I2cCommandReceivedCallback callback);
+        void clear();
 
         void runNextPacket();
         void forwardPacket(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len);

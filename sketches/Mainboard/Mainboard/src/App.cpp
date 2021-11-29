@@ -18,7 +18,7 @@ App Application = App();
 Button RevTrigger = Button(REV_BUTTON_PIN);
 Button FiringTrigger = Button(FIRING_BUTTON_PIN);
 Button HopperLock = Button(HOPPER_LOCK_BUTTON_PIN);
-NRF52 BT = NRF52(NRF52840_I2C_ADDR);
+NRF52 BT = NRF52(NRF52840_I2C_ADDR, A0);
 
 App::App() {
     m_commandFactory = CommandFactory();
@@ -142,5 +142,5 @@ void App::reset() {
 
 void App::resetCore() {
     revokeAuthorization();
-    BT.clearBonds();
+    BT.reset();
 }

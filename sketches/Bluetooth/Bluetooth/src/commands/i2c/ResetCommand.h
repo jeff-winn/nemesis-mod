@@ -3,10 +3,10 @@
 
 #include "../Command.h"
 
-class ClearBondsCommand : public Command {
+class ResetCommand : public Command {
     public:
-        ClearBondsCommand();
-        ~ClearBondsCommand() override;
+        ResetCommand();
+        ~ResetCommand() override;
 
     protected:
         void executeImpl(uint8_t *data, uint8_t len) override;  
