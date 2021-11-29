@@ -26,7 +26,7 @@ App::App() {
     m_firing = false;
 }
 
-void App::run() {   
+void App::run() {
     if (shouldAllowRevvingFlywheels()) {
         revFlywheels();
 
@@ -107,7 +107,7 @@ void App::init() {
     BT.startAdvertising();
 }
 
-void App::onRemoteCommandReceived(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype) {   
+void App::onRemoteCommandReceived(uint8_t type, uint8_t subtype, uint8_t* data, uint8_t len) {   
     auto command = m_commandFactory.createCommand(type, subtype);
     if (command) {
         auto requiresAuthorization = command->requiresAuthorization();

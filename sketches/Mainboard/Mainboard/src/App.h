@@ -27,7 +27,7 @@ class App {
         // Revokes the operator authorization.
         void revokeAuthorization();
 
-        void onRemoteCommandReceived(uint8_t type, uint8_t* data, uint16_t len, uint8_t subtype);
+        void onRemoteCommandReceived(uint8_t type, uint8_t subtype, uint8_t* data, uint8_t len);
 
     protected:       
         void waitForRevTriggerToBePressed();

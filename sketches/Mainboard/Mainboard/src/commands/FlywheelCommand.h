@@ -1,18 +1,18 @@
-// #ifndef FLYWHEEL_COMMAND_H
-// #define FLYWHEEL_COMMAND_H
+#ifndef FLYWHEEL_COMMAND_H
+#define FLYWHEEL_COMMAND_H
 
-// #include "../Command.h"
-// #include "../FlywheelController.h"
+#include "../Command.h"
+#include "../FlywheelController.h"
 
-// // Provides a command which handles changes to the flywheel assembly.
-// class FlywheelCommand : public Command {
-//     public:
-//         FlywheelCommand(FlywheelController* controller);
+// Provides a command which handles changes to the flywheel assembly.
+class FlywheelCommand : public Command {
+    public:
+        FlywheelCommand(FlywheelController* controller);
 
-//         ~FlywheelCommand() override;
+        ~FlywheelCommand() override;
 
-//     protected:
-//         FlywheelController* m_controller;
-// };
+    protected:
+        FlywheelController* m_controller;
+};
 
-// #endif /* FLYWHEEL_COMMAND_H */
+#endif /* FLYWHEEL_COMMAND_H */
