@@ -3,15 +3,16 @@
 #include "src/I2cController.h"
 
 void setup() {
-    I2CBus.init(OnI2cCommandReceived);
+    I2CBus.init(OnI2cPacketReceived);
     BLE.init(OnBluetoothCommandReceived);
 }
 
 void loop() {
+    I2CBus.checkForAsyncCommands();
     delay(10);
 }
 
-void OnI2cCommandReceived(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len) {
+void OnI2cPacketReceived(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len) {
     auto command = I2cCommands.create(type, subtype);
     if (command != NULL) {
         command->execute(data, len);

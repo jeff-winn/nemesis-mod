@@ -16,12 +16,16 @@ void OnI2cRequestReceivedCallback() {
 }
 
 I2cController::I2cController() {
+    m_rxBuffer = new CircularBuffer<uint8_t, 512>();
     m_txBuffer = new CircularBuffer<uint8_t, 512>();
+
     m_interrupt = new InterruptPin(A0, true);
 }
 
 I2cController::~I2cController() {
+    delete m_rxBuffer;
     delete m_txBuffer;
+
     delete m_interrupt;
 }
 
@@ -34,11 +38,40 @@ void I2cController::init(I2cCommandReceivedCallback callback) {
     Wire.begin(NRF52840_I2C_ADDR);
 }
 
-void I2cController::clear() {    
+void I2cController::clear() {
     m_interrupt->reset();
-    m_txBuffer->clear();
 
+    m_rxBuffer->clear();
+    m_rxPending = 0;
+
+    m_txBuffer->clear();
     m_txCount = 0;
+}
+
+void I2cController::checkForAsyncCommands() {
+    if (m_rxPending == 0) {
+        return;        
+    }
+
+    auto type = m_rxBuffer->shift();
+    auto subtype = m_rxBuffer->shift();
+    auto len = m_rxBuffer->shift();
+
+    uint8_t *data = NULL;
+    if (len > 0) {
+        data = new uint8_t[len];
+
+        uint8_t index = 0;
+        while (index < len) {
+            data[index] = m_rxBuffer->shift();
+            index++;
+        }
+    }
+
+    m_callback(type, subtype, data, len);
+    m_rxPending--;
+
+    delete[] data;
 }
 
 void I2cController::setTransmitCount(uint8_t count) {
@@ -51,30 +84,46 @@ void I2cController::onI2cCommandReceived(int numBytes) {
 
     auto type = buffer[0];
     auto subtype = buffer[1];
-    auto len = buffer[2];
 
-    uint8_t *data = NULL;
-    if (len > 0) {
-        data = new uint8_t[len];
+    if (shouldExecuteImmediately(type, subtype)) {
+        auto len = buffer[2];
 
-        uint8_t pos = 3;
-        uint8_t index = 0;
+        uint8_t *data = NULL;
+        if (len > 0) {
+            data = new uint8_t[len];
 
-        while (index < len) {
-            data[index] = buffer[pos];
+            uint8_t pos = 3;
+            uint8_t index = 0;
 
-            index++;
-            pos++;
+            while (index < len) {
+                data[index] = buffer[pos];
+
+                index++;
+                pos++;
+            }
+        }
+
+        m_callback(type, subtype, data, len);
+
+        if (data != NULL) {
+            delete[] data;
         }
     }
+    else {
+        uint8_t index = 0;
+        while (index < numBytes) {
+            m_rxBuffer->push(buffer[index]);
+            index++;            
+        }
 
-    m_callback(type, subtype, data, len);
-
-    if (data != NULL) {
-        delete[] data;
+        m_rxPending++;
     }
 
     delete[] buffer;
+}
+
+bool I2cController::shouldExecuteImmediately(uint8_t type, uint8_t subtype) {
+    return type == NRF52_CID_SET_TRANSMIT_COUNT;
 }
 
 void I2cController::forwardPacket(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len) { 

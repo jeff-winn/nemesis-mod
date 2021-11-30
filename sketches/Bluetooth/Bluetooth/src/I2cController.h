@@ -18,16 +18,23 @@ class I2cController {
         void init(I2cCommandReceivedCallback callback);
         void clear();
 
+        void checkForAsyncCommands();
+
         void setTransmitCount(uint8_t count);
         void forwardPacket(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len);
 
         void onI2cCommandReceived(int numBytes);
         void onI2cRequestReceived();
 
+    protected:
+        bool shouldExecuteImmediately(uint8_t type, uint8_t subtype);
+        
     private:
+        CircularBuffer<uint8_t, 512> *m_rxBuffer;
         CircularBuffer<uint8_t, 512> *m_txBuffer;       
         InterruptPin *m_interrupt;
 
+        volatile uint8_t m_rxPending;
         volatile uint8_t m_txCount; // Identifies the number of bytes to transmit.
 
         I2cCommandReceivedCallback m_callback;
