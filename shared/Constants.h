@@ -5,6 +5,7 @@
 const uint8_t NRF52840_I2C_ADDR = 0x1A;
 
 const uint8_t NRF52_CID_SET_CONFIG = 0x0A;
+const uint8_t NRF52_CID_SET_TRANSMIT_COUNT = 0x0B;
 
 const uint8_t NRF52_CID_START_ADVERTISING = 0x01;
 const uint8_t NRF52_CID_RESET = 0x02;

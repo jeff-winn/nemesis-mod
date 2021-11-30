@@ -8,7 +8,6 @@ void setup() {
 }
 
 void loop() {
-    I2CBus.runNextPacket();
     delay(10);
 }
 
