@@ -7,10 +7,11 @@ typedef void (*ReadPacketCallback)(uint8_t type, uint8_t subtype, uint8_t *data,
 
 class NRF52 {
     public:
-        NRF52(uint8_t addr);
+        NRF52(uint8_t addr, uint32_t signalPin);
         ~NRF52();
         
         void init();
+        bool hasPendingPackets();
 
         void startAdvertising();
 
@@ -22,6 +23,7 @@ class NRF52 {
         void sendPacket(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len);
     
     private:
+        InterruptSignal *m_signal;
         uint8_t m_addr;
 };
 
