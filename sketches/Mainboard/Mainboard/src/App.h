@@ -3,6 +3,8 @@
 
 #include "CommandFactory.h"
 
+void OnRemoteCommandReceivedCallback(uint8_t type, uint8_t subtype, uint8_t* data, uint8_t len);
+
 // Represents the main application.
 class App {
     public:
@@ -30,8 +32,6 @@ class App {
         void onRemoteCommandReceived(uint8_t type, uint8_t subtype, uint8_t* data, uint8_t len);
 
     protected:       
-        void waitForRevTriggerToBePressed();
-
         void revFlywheels();
         void stopFlywheels();
 

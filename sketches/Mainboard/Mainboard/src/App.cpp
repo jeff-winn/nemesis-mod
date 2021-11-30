@@ -4,6 +4,7 @@
 #include "ConfigurationSettings.h"
 #include "FeedController.h"
 #include "FlywheelController.h"
+#include "hardware/InterruptSignal.h"
 #include "hardware/NRF52.h"
 #include "Mainboard.h"
 #include "shared/Constants.h"
@@ -18,7 +19,12 @@ App Application = App();
 Button RevTrigger = Button(REV_BUTTON_PIN);
 Button FiringTrigger = Button(FIRING_BUTTON_PIN);
 Button HopperLock = Button(HOPPER_LOCK_BUTTON_PIN);
-NRF52 BT = NRF52(NRF52840_I2C_ADDR, A0);
+NRF52 BT = NRF52(NRF52840_I2C_ADDR);
+InterruptSignal BTHasData = InterruptSignal(A0);
+
+void OnRemoteCommandReceivedCallback(uint8_t type, uint8_t subtype, uint8_t* data, uint8_t len) {
+    Application.onRemoteCommandReceived(type, subtype, data, len);
+}
 
 App::App() {
     m_commandFactory = CommandFactory();
@@ -27,6 +33,10 @@ App::App() {
 }
 
 void App::run() {
+    if (BTHasData.isSet()) {
+        BT.readPacket(OnRemoteCommandReceivedCallback);
+    }
+
     if (shouldAllowRevvingFlywheels()) {
         revFlywheels();
 
@@ -46,8 +56,6 @@ void App::run() {
 
         stopFlywheels();
     }
-
-    waitForRevTriggerToBePressed();
 }
 
 void App::revFlywheels() {
@@ -86,10 +94,6 @@ bool App::isLockedOut() {
     return Settings.isHopperLockEnabled() && !HopperLock.isPressed();    
 }
 
-void App::waitForRevTriggerToBePressed() {
-    MCU.delaySafe(50);
-}
-
 bool App::isAuthorized() {
     return m_isAuthorized;
 }
@@ -103,6 +107,7 @@ void App::init() {
     RevTrigger.init();
     HopperLock.init();
 
+    BTHasData.init();
     BT.init();
     BT.startAdvertising();
 }

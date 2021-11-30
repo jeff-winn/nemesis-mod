@@ -3,17 +3,14 @@
 #include "../shared/Constants.h"
 #include "NRF52.h"
 
-NRF52::NRF52(uint8_t addr, uint32_t interruptPin) {
+NRF52::NRF52(uint8_t addr) {
     m_addr = addr;
-    m_signal = new InterruptSignal(interruptPin);
 }
 
 NRF52::~NRF52() {
-    delete m_signal;
 }
 
 void NRF52::init() {
-    m_signal->init();
 }
 
 void NRF52::reset() {
@@ -21,17 +18,42 @@ void NRF52::reset() {
 }
 
 void NRF52::startAdvertising() {
-    uint8_t success = 0;
-    do
-    {
-        success = sendPacket(NRF52_CID_START_ADVERTISING, 0, NULL, 0);
-        if (success != 0) {
-            delay(1);
-        }
-    } while (success != 0);    
+    sendPacket(NRF52_CID_START_ADVERTISING, 0, NULL, 0);    
 }
 
-uint8_t NRF52::sendPacket(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len) {
+void NRF52::readPacket(ReadPacketCallback callback) {
+    setTransmitCount(3);
+
+    uint8_t *header = new uint8_t[3];
+    Wire.requestFrom(m_addr, 3);
+    Wire.readBytes(header, 3);
+    
+    auto type = header[0];
+    auto subtype = header[1];
+    auto len = header[2];
+
+    uint8_t *data = NULL;
+    if (len > 0) {
+        setTransmitCount(len);
+
+        data = new uint8_t[len];
+        Wire.requestFrom(m_addr, len);
+        Wire.readBytes(data, len);
+    }
+
+    callback(type, subtype, data, len);
+}
+
+void NRF52::setTransmitCount(uint8_t count) {
+    Wire.beginTransmission(m_addr);
+    Wire.write(NRF52_CID_SET_TRANSMIT_COUNT);
+    Wire.write((uint8_t)0);
+    Wire.write((uint8_t)1);
+    Wire.write(count);
+    Wire.endTransmission();
+}
+
+void NRF52::sendPacket(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len) {
     size_t size = len + 3;
 
     uint8_t *packet = new uint8_t[size];
@@ -50,9 +72,7 @@ uint8_t NRF52::sendPacket(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t 
 
     Wire.beginTransmission(m_addr);
     Wire.write(packet, size);
-
-    auto result = Wire.endTransmission();
+    Wire.endTransmission();
+    
     delete packet;
-
-    return result;
 }
