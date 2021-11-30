@@ -29,7 +29,7 @@ void I2cController::init(I2cCommandReceivedCallback callback) {
     m_interrupt->init();
 
     Wire.onReceive(OnI2cCommandReceivedCallback);
-    Wire.onRequest(OnI2cRequestReceivedCallback);
+    Wire.onRequest(OnI2cRequestReceivedCallback);    
     Wire.begin(NRF52840_I2C_ADDR);
 }
 
