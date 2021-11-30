@@ -1,5 +1,6 @@
+#include <stddef.h>
+
 #include "Callbacks.h"
-#include <cstddef>
 
 // Defines the callback which will be executed whenever a bluetooth command has been received.
 RemoteCommandReceivedCallback onBluetoothRemoteCommandReceivedCallback;

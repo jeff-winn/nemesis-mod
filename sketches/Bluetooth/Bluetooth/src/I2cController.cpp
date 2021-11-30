@@ -1,6 +1,7 @@
 #include <Arduino.h>
-#include <cstddef>
+#include <stddef.h>
 #include <Wire.h>
+
 #include "I2cController.h"
 #include "shared/Constants.h"
 
