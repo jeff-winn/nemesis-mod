@@ -82,5 +82,41 @@ void BLEController::setCharacteristic(uint8_t characteristicId, uint8_t *data, u
       auto m2TrimValue = Convert.toFloat(data);
       m_blasterService.setFlywheelM2TrimSpeed(m2TrimValue);
     }
+    case NRF52_CHR_FLYWHEEL_NORMAL_SPEED: {
+      auto flywheelNormalSpeed = Convert.toInt32(data);
+      m_configService.setFlywheelNormalSpeed(flywheelNormalSpeed);
+    }
+    case NRF52_CHR_FLYWHEEL_KID_SPEED: {
+      auto flywheelKidSpeed = Convert.toInt32(data);
+      m_configService.setFlywheelKidSpeed(flywheelKidSpeed);
+    }
+    case NRF52_CHR_FLYWHEEL_LUDICROUS_SPEED: {
+      auto flywheelLudicrousSpeed = Convert.toInt32(data);
+      m_configService.setFlywheelLudicrousSpeed(flywheelLudicrousSpeed);
+    }
+    case NRF52_CHR_FLYWHEEL_TRIM_VARIANCE: {
+      auto flywheelTrimVariance = Convert.toFloat(data);
+      m_configService.setFlywheelTrimVariance(flywheelTrimVariance);
+    }
+    case NRF52_CHR_BELT_NORMAL_SPEED: {
+      auto beltNormalSpeed = Convert.toInt32(data);
+      m_configService.setBeltNormalSpeed(beltNormalSpeed);
+    }
+    case NRF52_CHR_BELT_MEDIUM_SPEED: {
+      auto beltMediumSpeed = Convert.toInt32(data);
+      m_configService.setBeltMediumSpeed(beltMediumSpeed);
+    }
+    case NRF52_CHR_BELT_MAX_SPEED: {
+      auto beltMaxSpeed = Convert.toInt32(data);
+      m_configService.setBeltMaxSpeed(beltMaxSpeed);
+    }
+    case NRF52_CHR_HOPPER_LOCK_ENABLED: {
+      auto hopperLockEnabled = false;
+      if (data[0] != 0) {
+        hopperLockEnabled = true;
+      }
+
+      m_configService.setHopperLockEnabled(hopperLockEnabled);
+    }
   }
 }

@@ -42,11 +42,20 @@ void NRF52::setCharacteristic(uint8_t characteristicId, float value) {
     delete[] data;
 }
 
-void NRF52::setCharacteristic(uint8_t characteristicId, uint32_t value) {
+void NRF52::setCharacteristic(uint8_t characteristicId, int value) {
     uint8_t *data = Convert.toInt32Array(value);
     setCharacteristic(characteristicId, data, 4);
 
     delete[] data;    
+}
+
+void NRF52::setCharacteristic(uint8_t characteristicId, bool value) {
+    uint8_t actual = 0x00;
+    if (value) {
+        actual = 0xFF;
+    }
+
+    setCharacteristic(characteristicId, actual);
 }
 
 void NRF52::setCharacteristic(uint8_t characteristicId, uint8_t *data, uint8_t len) {

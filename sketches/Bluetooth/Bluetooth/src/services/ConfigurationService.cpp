@@ -1,4 +1,3 @@
-// #include "../ConfigurationSettings.h"
 #include "../Callbacks.h"
 #include "../shared/Constants.h"
 #include "ConfigurationService.h"
@@ -54,7 +53,6 @@ void ConfigurationService::init() {
     m_flywheelNormalSpeed.setUserDescriptor("Flywheel Normal Speed");
     m_flywheelNormalSpeed.setWriteCallback(onFlywheelNormalSpeedWriteCallback);
     m_flywheelNormalSpeed.begin();
-    // m_flywheelNormalSpeed.write32(Settings.getFlywheelNormalSpeed());
 
     m_flywheelKidSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_flywheelKidSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
@@ -62,7 +60,6 @@ void ConfigurationService::init() {
     m_flywheelKidSpeed.setUserDescriptor("Flywheel Kid Speed");
     m_flywheelKidSpeed.setWriteCallback(onFlywheelKidSpeedWriteCallback);
     m_flywheelKidSpeed.begin();
-    // m_flywheelKidSpeed.write32(Settings.getFlywheelKidSpeed());
 
     m_flywheelLudicrousSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_flywheelLudicrousSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
@@ -70,7 +67,6 @@ void ConfigurationService::init() {
     m_flywheelLudicrousSpeed.setUserDescriptor("Flywheel Ludicrous Speed");
     m_flywheelLudicrousSpeed.setWriteCallback(onFlywheelLudicrousSpeedWriteCallback);
     m_flywheelLudicrousSpeed.begin();
-    // m_flywheelLudicrousSpeed.write32(Settings.getFlywheelLudicrousSpeed());
 
     m_flywheelTrimVariance.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_flywheelTrimVariance.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
@@ -79,18 +75,12 @@ void ConfigurationService::init() {
     m_flywheelTrimVariance.setWriteCallback(onFlywheelTrimVarianceWriteCallback);
     m_flywheelTrimVariance.begin();
 
-    // auto flywheelTrimVariance = Settings.getFlywheelTrimVariance();
-    // m_flywheelTrimVariance.write(&flywheelTrimVariance, 4);
-
     m_beltNormalSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_beltNormalSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
     m_beltNormalSpeed.setFixedLen(4);
     m_beltNormalSpeed.setUserDescriptor("Belt Feed Normal Speed");
     m_beltNormalSpeed.setWriteCallback(onBeltNormalSpeedWriteCallback);
     m_beltNormalSpeed.begin();
-
-    // auto feedNormalSpeed = Settings.getFeedNormalSpeed();
-    // m_beltNormalSpeed.write(&feedNormalSpeed, 4);
 
     m_beltMediumSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_beltMediumSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
@@ -99,8 +89,6 @@ void ConfigurationService::init() {
     m_beltMediumSpeed.setWriteCallback(onBeltMediumSpeedWriteCallback);
     m_beltMediumSpeed.begin();
 
-    // auto feedMediumSpeed = Settings.getFeedMediumSpeed();
-    // m_beltMediumSpeed.write(&feedMediumSpeed, 4);
 
     m_beltMaxSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_beltMaxSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
@@ -109,21 +97,47 @@ void ConfigurationService::init() {
     m_beltMaxSpeed.setWriteCallback(onBeltMaxSpeedWriteCallback);
     m_beltMaxSpeed.begin();
 
-    // auto feedMaxSpeed = Settings.getFeedMaxSpeed();
-    // m_beltMaxSpeed.write(&feedMaxSpeed, 4);
-
     m_hopperLockEnabled.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_hopperLockEnabled.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
     m_hopperLockEnabled.setFixedLen(1);
     m_hopperLockEnabled.setUserDescriptor("Hopper Lock Enabled");
     m_hopperLockEnabled.setWriteCallback(onHopperLockEnabledWriteCallback);
     m_hopperLockEnabled.begin();
+}
 
-    // auto hopperLockEnabled = Settings.isHopperLockEnabled();
-    // if (hopperLockEnabled) {
-    //     m_hopperLockEnabled.write8(0xFF);
-    // }
-    // else {
-    //     m_hopperLockEnabled.write8(0x00);
-    // }
+void ConfigurationService::setFlywheelNormalSpeed(uint32_t value) {
+    m_flywheelNormalSpeed.write32(value);
+}
+
+void ConfigurationService::setFlywheelKidSpeed(uint32_t value) {
+    m_flywheelKidSpeed.write32(value);
+}
+
+void ConfigurationService::setFlywheelLudicrousSpeed(uint32_t value) {
+    m_flywheelLudicrousSpeed.write32(value);
+}
+
+void ConfigurationService::setFlywheelTrimVariance(float value) {
+    m_flywheelTrimVariance.write(&value, 4);
+}
+
+void ConfigurationService::setBeltNormalSpeed(uint32_t value) {
+    m_beltNormalSpeed.write32(value);
+}
+
+void ConfigurationService::setBeltMediumSpeed(uint32_t value) {
+    m_beltMediumSpeed.write32(value);
+}
+
+void ConfigurationService::setBeltMaxSpeed(uint32_t value) {
+    m_beltMaxSpeed.write32(value);
+}
+
+void ConfigurationService::setHopperLockEnabled(bool value) {
+    if (value) {
+        m_hopperLockEnabled.write8(0xFF);
+    }
+    else {
+        m_hopperLockEnabled.write8(0x00);
+    }
 }

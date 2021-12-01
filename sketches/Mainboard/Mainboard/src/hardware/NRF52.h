@@ -13,9 +13,10 @@ class NRF52 {
         void init();
         bool hasPendingPackets();
 
+        void setCharacteristic(uint8_t characteristicId, bool value);
         void setCharacteristic(uint8_t characteristicId, uint8_t value);
         void setCharacteristic(uint8_t characteristicId, float value);
-        void setCharacteristic(uint8_t characteristicId, uint32_t value);
+        void setCharacteristic(uint8_t characteristicId, int value);
         void setCharacteristic(uint8_t characteristicId, uint8_t *data, uint8_t len);
 
         void startAdvertising();
