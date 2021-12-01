@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+       {
+          "name": "Debug",
+          "type": "cortex-debug",
+          "cwd": "${workspaceRoot}",
+          "executable": "build/Bluetooth.ino.elf",
+          "request": "launch",
+          "servertype": "jlink",
+          "runToEntryPoint": "main",
+          "interface": "swd",
+          "device": "nRF52840_xxAA"
+       }
+    ]
+ }

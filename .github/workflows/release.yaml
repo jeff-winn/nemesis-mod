@@ -16,8 +16,14 @@ jobs:
     - name: Build
       run: make
     
-    - name: Upload binaries
+    - name: Upload mainboard
       uses: actions/upload-artifact@v2
       with:
-        name: binaries
-        path: build/Nemesis-Mod.ino.*
+        name: mainboard
+        path: out/Mainboard/Mainboard.ino.*
+
+    - name: Upload bluetooth
+      uses: actions/upload-artifact@v2
+      with:
+        name: mainboard
+        path: out/Bluetooth/Bluetooth.ino.*
