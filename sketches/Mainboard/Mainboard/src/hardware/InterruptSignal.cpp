@@ -9,7 +9,7 @@ InterruptSignal::~InterruptSignal() {
 }
 
 void InterruptSignal::init() {
-    pinMode(m_pin, INPUT);
+    pinMode(m_pin, INPUT_PULLDOWN);
 }
 
 bool InterruptSignal::isSet() {
