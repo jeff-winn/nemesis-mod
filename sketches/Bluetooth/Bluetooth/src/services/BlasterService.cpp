@@ -65,7 +65,7 @@ void BlasterService::setBeltSpeed(uint8_t value) {
 }
 
 void BlasterService::setFlywheelM1TrimSpeed(float value) {
-    m_flywheelM2TrimSpeed.write(&value, 4);
+    m_flywheelM1TrimSpeed.write(&value, 4);
 }
 
 void BlasterService::setFlywheelM2TrimSpeed(float value) {    
