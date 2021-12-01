@@ -36,14 +36,14 @@ void NRF52::setCharacteristic(uint8_t characteristicId, uint8_t value) {
 }
 
 void NRF52::setCharacteristic(uint8_t characteristicId, float value) {
-    auto data = Convert.toFloatArray(value);
+    uint8_t *data = Convert.toFloatArray(value);
     setCharacteristic(characteristicId, data, 4);
 
     delete[] data;
 }
 
 void NRF52::setCharacteristic(uint8_t characteristicId, uint32_t value) {
-    auto data = Convert.toInt32Array(value);
+    uint8_t *data = Convert.toInt32Array(value);
     setCharacteristic(characteristicId, data, 4);
 
     delete[] data;    

@@ -1,4 +1,3 @@
-// #include "../ConfigurationSettings.h"
 #include "../Callbacks.h"
 #include "../shared/Constants.h"
 #include "BlasterService.h"
@@ -34,7 +33,6 @@ void BlasterService::init() {
     m_flywheelSpeed.setUserDescriptor("Flywheel Speed");
     m_flywheelSpeed.setWriteCallback(onFlywheelSpeedWriteCallback);
     m_flywheelSpeed.begin();
-    m_flywheelSpeed.write8(0x01);
 
     m_flywheelM1TrimSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_flywheelM1TrimSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
@@ -43,9 +41,6 @@ void BlasterService::init() {
     m_flywheelM1TrimSpeed.setWriteCallback(onFlywheelM1TrimAdjustmentWriteCallback);
     m_flywheelM1TrimSpeed.begin();
 
-    // auto m1TrimSpeed = Settings.getFlywheelM1TrimAdjustment();
-    // m_flywheelM1TrimSpeed.write(&m1TrimSpeed, 4);
-
     m_flywheelM2TrimSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_flywheelM2TrimSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
     m_flywheelM2TrimSpeed.setFixedLen(4);
@@ -53,14 +48,26 @@ void BlasterService::init() {
     m_flywheelM2TrimSpeed.setWriteCallback(onFlywheelM2TrimAdjustmentWriteCallback);
     m_flywheelM2TrimSpeed.begin();
 
-    // auto m2TrimSpeed = Settings.getFlywheelM2TrimAdjustment();
-    // m_flywheelM2TrimSpeed.write(&m2TrimSpeed, 4);
-
     m_beltSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_beltSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
     m_beltSpeed.setFixedLen(1);
     m_beltSpeed.setUserDescriptor("Belt Speed");
     m_beltSpeed.setWriteCallback(onBeltSpeedWriteCallback);
     m_beltSpeed.begin();
-    m_beltSpeed.write8(0x01);
+}
+
+void BlasterService::setFlywheelSpeed(uint8_t value) {
+    m_flywheelSpeed.write8(value);
+}
+
+void BlasterService::setBeltSpeed(uint8_t value) {
+    m_beltSpeed.write8(value);
+}
+
+void BlasterService::setFlywheelM1TrimSpeed(float value) {
+    m_flywheelM2TrimSpeed.write(&value, 4);
+}
+
+void BlasterService::setFlywheelM2TrimSpeed(float value) {    
+    m_flywheelM2TrimSpeed.write(&value, 4);
 }

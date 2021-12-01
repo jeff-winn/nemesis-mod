@@ -10,6 +10,11 @@ class BlasterService : public CustomBLEService {
 
         void init() override;
 
+        void setFlywheelSpeed(uint8_t value);
+        void setBeltSpeed(uint8_t value);
+        void setFlywheelM1TrimSpeed(float value);
+        void setFlywheelM2TrimSpeed(float value);
+
     private:
         BLECharacteristic m_flywheelSpeed;
         BLECharacteristic m_flywheelM1TrimSpeed;

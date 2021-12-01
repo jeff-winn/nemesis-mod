@@ -1,5 +1,7 @@
 #include "BLEController.h"
 #include "Callbacks.h"
+#include "shared/BitConverter.h"
+#include "shared/Constants.h"
 
 const uint32_t NOTIFICATION_INTERVAL_IN_MSECS = 10000; // 10 seconds
 const uint32_t NOTIFICATION_INTERVAL_WHILE_ACTIVE_IN_MSECS = 1000; // 1 second
@@ -62,4 +64,23 @@ void BLEController::startAdvertising() {
 
 void BLEController::clearBonds() {
   Bluefruit.clearBonds();
+}
+
+void BLEController::setCharacteristic(uint8_t characteristicId, uint8_t *data, uint8_t len) {
+  switch (characteristicId) {
+    case NRF52_CHR_FLYWHEEL_SPEED: {
+      m_blasterService.setFlywheelSpeed(data[0]);
+    }
+    case NRF52_CHR_BELT_SPEED: {
+      m_blasterService.setBeltSpeed(data[0]);
+    }
+    case NRF52_CHR_FLYWHEEL_M1_TRIM: {
+      auto m1TrimValue = Convert.toFloat(data);
+      m_blasterService.setFlywheelM1TrimSpeed(m1TrimValue);
+    }
+    case NRF52_CHR_FLYWHEEL_M2_TRIM: {
+      auto m2TrimValue = Convert.toFloat(data);
+      m_blasterService.setFlywheelM2TrimSpeed(m2TrimValue);
+    }
+  }
 }

@@ -13,6 +13,8 @@ class BLEController {
         ~BLEController();
 
         void init(RemoteCommandReceivedCallback callback);
+
+        void setCharacteristic(uint8_t characteristicId, uint8_t *data, uint8_t len);
         void startAdvertising();
 
         void clearBonds();
