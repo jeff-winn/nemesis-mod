@@ -99,6 +99,9 @@ void NRF52::sendPacket(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len
 
         while (index < len) {
             packet[pos] = data[index];
+
+            index++;
+            pos++;
         }
     }    
 
