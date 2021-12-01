@@ -5,6 +5,8 @@
 void setup() {
     I2CBus.init(OnI2cPacketReceived);
     BLE.init(OnBluetoothCommandReceived);
+
+    I2CBus.notifyReady();
 }
 
 void loop() {
@@ -21,5 +23,5 @@ void OnI2cPacketReceived(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t l
 }
 
 void OnBluetoothCommandReceived(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len) {
-    I2CBus.forwardPacket(type, subtype, data, len);    
+    I2CBus.sendPacket(type, subtype, data, len);    
 }

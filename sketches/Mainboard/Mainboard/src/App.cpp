@@ -18,7 +18,6 @@ App Application = App();
 Button RevTrigger = Button(REV_BUTTON_PIN);
 Button FiringTrigger = Button(FIRING_BUTTON_PIN);
 Button HopperLock = Button(HOPPER_LOCK_BUTTON_PIN);
-NRF52 BT = NRF52(NRF52840_I2C_ADDR, A0);
 
 void OnRemoteCommandReceivedCallback(uint8_t type, uint8_t subtype, uint8_t* data, uint8_t len) {
     Application.onRemoteCommandReceived(type, subtype, data, len);
@@ -106,7 +105,6 @@ void App::init() {
     HopperLock.init();
 
     BT.init();
-    BT.startAdvertising();
 }
 
 void App::onRemoteCommandReceived(uint8_t type, uint8_t subtype, uint8_t* data, uint8_t len) {   

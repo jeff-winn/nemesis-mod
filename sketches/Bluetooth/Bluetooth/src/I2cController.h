@@ -19,9 +19,10 @@ class I2cController {
         void clear();
 
         void checkForAsyncCommands();
+        void notifyReady();
 
         void setTransmitCount(uint8_t count);
-        void forwardPacket(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len);
+        void sendPacket(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len);
 
         void onI2cCommandReceived(int numBytes);
         void onI2cRequestReceived();

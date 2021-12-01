@@ -1,7 +1,10 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include "../shared/Constants.h"
+#include "../shared/BitConverter.h"
 #include "NRF52.h"
+
+NRF52 BT = NRF52(NRF52840_I2C_ADDR, A0);
 
 NRF52::NRF52(uint8_t addr, uint32_t signalPin) {    
     m_addr = addr;
@@ -26,6 +29,28 @@ bool NRF52::hasPendingPackets() {
 
 void NRF52::startAdvertising() {
     sendPacket(NRF52_CID_START_ADVERTISING, 0, NULL, 0);    
+}
+
+void NRF52::setCharacteristic(uint8_t characteristicId, uint8_t value) {
+    setCharacteristic(characteristicId, &value, 1);
+}
+
+void NRF52::setCharacteristic(uint8_t characteristicId, float value) {
+    auto data = Convert.toFloatArray(value);
+    setCharacteristic(characteristicId, data, 4);
+
+    delete[] data;
+}
+
+void NRF52::setCharacteristic(uint8_t characteristicId, uint32_t value) {
+    auto data = Convert.toInt32Array(value);
+    setCharacteristic(characteristicId, data, 4);
+
+    delete[] data;    
+}
+
+void NRF52::setCharacteristic(uint8_t characteristicId, uint8_t *data, uint8_t len) {
+    sendPacket(NRF52_CID_SET_CHARACTERISTIC, characteristicId, data, len);
 }
 
 void NRF52::readPacket(ReadPacketCallback callback) {
