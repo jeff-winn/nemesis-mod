@@ -15,26 +15,7 @@ These are the boards and hardware being used by the project.
 - [Pololu Dual G2 High-Power Motor Driver 18v18 Shield for Arduino](https://www.pololu.com/product/2515)
 - [Pololu G2 High-Power Motor Driver 18v17](https://www.pololu.com/product/2991)
 - [Pololu 5V, 500mA Step-Down Voltage Regulator](https://www.pololu.com/product/2843)
+
+### Optional Hardware
 - [MaxAmps LiPo 3250 3S 11.1v Battery Pack](https://www.maxamps.com/lipo-3250-3s-11-1v-battery-pack)
-
-## Development Environment
-This is the development environment setup that is currently being used to write the code included within this repository.
-
-### Toolset
-Below are the software which must be installed to compile the source code.
-- Visual Studio Code
-  - C/C++ extension
-- MinGW (with msys-base-bin package)
-
-### Toolset (optional)
-The below are the optional tools that could be used as a replacement for the Makefile support.
-- Arduino Extension for Visual Studio Code
-- Arduino Board Manager Packages
-  - Adafruit SAMD Boards (1.7.5)
-  - Adafruit nRF52 Boards (0.20.5)
-
-### Dependencies
-Below are the dependencies that are being used by the project and must be installed using the Arduino IDE Library Manager.
-- [CircularBuffer](https://github.com/rlogiacco/CircularBuffer)@1.3.3
-- [Adafruit FRAM I2C](https://github.com/adafruit/Adafruit_FRAM_I2C)@2.0.0
-- [DualG2HighPowerMotorShield](https://github.com/pololu/dual-g2-high-power-motor-shield)@2.0.0
+- There is a custom PCB designed to consolidate the wiring within the docs/kicad folder of this project.
