@@ -4,6 +4,7 @@
 #define CIRCULAR_BUFFER_INT_SAFE
 #include <CircularBuffer.h>
 #include "InterruptPin.h"
+#include "Led.h"
 
 typedef void (*I2cCommandReceivedCallback)(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len);
 
@@ -29,11 +30,14 @@ class I2cController {
 
     protected:
         bool shouldExecuteImmediately(uint8_t type, uint8_t subtype);
+        bool shouldInterruptBeSet();
+        bool shouldLedBeOn();
         
     private:
         CircularBuffer<uint8_t, 512> *m_rxBuffer;
         CircularBuffer<uint8_t, 512> *m_txBuffer;       
-        InterruptPin *m_interrupt;
+        InterruptPin *m_interrupt;        
+        Led *m_led;
 
         volatile uint8_t m_rxPending;
         volatile uint8_t m_txCount; // Identifies the number of bytes to transmit.
