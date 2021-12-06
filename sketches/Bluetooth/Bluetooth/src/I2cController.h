@@ -30,6 +30,8 @@ class I2cController {
 
     protected:
         bool shouldExecuteImmediately(uint8_t type, uint8_t subtype);
+        bool shouldInterruptBeSet();
+        bool shouldLedBeOn();
         
     private:
         CircularBuffer<uint8_t, 512> *m_rxBuffer;

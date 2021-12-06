@@ -81,6 +81,10 @@ void I2cController::checkForAsyncCommands() {
     m_callback(type, subtype, data, len);
     m_rxPending--;
 
+    if (!shouldLedBeOn()){
+        m_led->off();
+    }
+    
     delete[] data;
 }
 
@@ -127,6 +131,10 @@ void I2cController::onI2cCommandReceived(int numBytes) {
         }
 
         m_rxPending++;
+
+        if (shouldLedBeOn()) {
+            m_led->on();
+        }
     }
 
     delete[] buffer;
@@ -150,7 +158,10 @@ void I2cController::sendPacket(uint8_t type, uint8_t subtype, uint8_t *data, uin
     }
 
     m_interrupt->set();
-    m_led->on();
+
+    if (shouldLedBeOn()) {
+        m_led->on();
+    }
 }
 
 void I2cController::onI2cRequestReceived() {
@@ -165,8 +176,19 @@ void I2cController::onI2cRequestReceived() {
     Wire.write(buffer, m_txCount);
     delete[] buffer;
 
-    if (m_txBuffer->isEmpty()) {
+    if (!shouldInterruptBeSet()) {
         m_interrupt->reset();
-        m_led->off();
-    }
+        
+        if (!shouldLedBeOn()) {
+            m_led->off();
+        }
+    }    
+}
+
+bool I2cController::shouldInterruptBeSet() {
+    return !m_txBuffer->isEmpty();    
+}
+
+bool I2cController::shouldLedBeOn() {
+    return !m_txBuffer->isEmpty() || !m_rxBuffer->isEmpty();
 }
