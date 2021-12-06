@@ -32,6 +32,8 @@ class App {
         void onRemoteCommandReceived(uint8_t type, uint8_t subtype, uint8_t* data, uint8_t len);
 
     protected:       
+        void checkForAsyncCommands();
+        
         void revFlywheels();
         void stopFlywheels();
 

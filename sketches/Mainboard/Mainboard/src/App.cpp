@@ -30,9 +30,7 @@ App::App() {
 }
 
 void App::run() {
-    if (BT.hasPendingPackets()) {
-        BT.readPacket(OnRemoteCommandReceivedCallback);
-    }
+    checkForAsyncCommands();
 
     if (shouldAllowRevvingFlywheels()) {
         revFlywheels();
@@ -43,15 +41,23 @@ void App::run() {
                     startFiring();
                 }
 
+                checkForAsyncCommands();
                 MCU.delaySafe(TRIGGER_DELAY_IN_MSECS);
             }            
             
             stopFiring();
 
+            checkForAsyncCommands();
             MCU.delaySafe(TRIGGER_DELAY_IN_MSECS);
         }
 
         stopFlywheels();
+    }
+}
+
+void App::checkForAsyncCommands() {
+    if (BT.hasPendingPackets()) {
+        BT.readPacket(OnRemoteCommandReceivedCallback);
     }
 }
 
