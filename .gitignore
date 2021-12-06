@@ -3,6 +3,9 @@
 !**/.vscode/extensions.json
 !**/.vscode/launch.json
 
+# KiCad outputs
+**/kicad/out
+
 # Build configuration outputs
 **/build/*
 **/*.elf

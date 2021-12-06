@@ -41,10 +41,10 @@ Text GLabel 8750 6400 2    50   Input ~ 0
 NoConn ~ 8750 6100
 Text GLabel 2700 3150 2    50   BiDi ~ 0
 SCL
-Text GLabel 3900 1650 3    50   Input ~ 0
+Text GLabel 3200 5650 3    50   Input ~ 0
 3V
-NoConn ~ 3500 1150
-NoConn ~ 3500 1350
+NoConn ~ 2800 5150
+NoConn ~ 2800 5350
 Text Label 850  2250 0    50   ~ 0
 RESET_DOWN
 Wire Wire Line
@@ -52,18 +52,18 @@ Wire Wire Line
 $Comp
 L Nemesis-Mod:Nerf_Hopper_Lock LOCK1
 U 1 1 5F60175A
-P 3900 1250
-F 0 "LOCK1" H 3900 1665 50  0000 C CNN
-F 1 "Nerf Hopper Lock" H 3900 1574 50  0000 C CNN
-F 2 "" H 3900 1550 50  0001 C CNN
-F 3 "" H 3900 1550 50  0001 C CNN
-	1    3900 1250
+P 3200 5250
+F 0 "LOCK1" H 3200 5665 50  0000 C CNN
+F 1 "Nerf Hopper Lock" H 3200 5574 50  0000 C CNN
+F 2 "" H 3200 5550 50  0001 C CNN
+F 3 "" H 3200 5550 50  0001 C CNN
+	1    3200 5250
 	1    0    0    -1  
 $EndComp
-Text Label 4800 1350 2    50   ~ 0
+Text Label 4100 5350 2    50   ~ 0
 SOFT_LOCK1
 Wire Wire Line
-	4300 1350 4800 1350
+	3600 5350 4100 5350
 Text Label 850  2400 0    50   ~ 0
 SOFT_LOCK1
 Wire Wire Line
@@ -298,7 +298,7 @@ NoConn ~ 5550 1500
 NoConn ~ 5550 1800
 NoConn ~ 5550 1950
 NoConn ~ 5550 1050
-Text GLabel 5100 7100 2    50   Output ~ 0
+Text GLabel 4500 1200 2    50   Output ~ 0
 5V
 Text Notes 9650 3750 2    50   ~ 0
 12awg
@@ -385,18 +385,18 @@ Text Label 850  1650 0    50   ~ 0
 BT_INT
 Text GLabel 6650 4750 3    50   Output ~ 0
 11V
-Text GLabel 4150 7100 0    50   Input ~ 0
+Text GLabel 3550 1200 0    50   Input ~ 0
 11V
 NoConn ~ 6350 4750
 $Comp
 L power:GND #PWR07
 U 1 1 61B28A20
-P 4150 7300
-F 0 "#PWR07" H 4150 7050 50  0001 C CNN
-F 1 "GND" H 4155 7127 50  0000 C CNN
-F 2 "" H 4150 7300 50  0001 C CNN
-F 3 "" H 4150 7300 50  0001 C CNN
-	1    4150 7300
+P 3550 1400
+F 0 "#PWR07" H 3550 1150 50  0001 C CNN
+F 1 "GND" H 3555 1227 50  0000 C CNN
+F 2 "" H 3550 1400 50  0001 C CNN
+F 3 "" H 3550 1400 50  0001 C CNN
+	1    3550 1400
 	0    1    -1   0   
 $EndComp
 $Comp
@@ -457,12 +457,12 @@ $EndComp
 $Comp
 L power:GND #PWR08
 U 1 1 61B45500
-P 4300 1150
-F 0 "#PWR08" H 4300 900 50  0001 C CNN
-F 1 "GND" V 4305 1022 50  0000 R CNN
-F 2 "" H 4300 1150 50  0001 C CNN
-F 3 "" H 4300 1150 50  0001 C CNN
-	1    4300 1150
+P 3600 5150
+F 0 "#PWR08" H 3600 4900 50  0001 C CNN
+F 1 "GND" V 3605 5022 50  0000 R CNN
+F 2 "" H 3600 5150 50  0001 C CNN
+F 3 "" H 3600 5150 50  0001 C CNN
+	1    3600 5150
 	0    -1   -1   0   
 $EndComp
 $Comp
@@ -566,35 +566,6 @@ Wire Wire Line
 	2250 6900 2800 6900
 Text Label 2800 6800 2    50   ~ 0
 M2SLP
-$Comp
-L Connector_Generic:Conn_01x02 P1
-U 1 1 61BD9B06
-P 4500 5900
-F 0 "P1" H 4580 5892 50  0000 L CNN
-F 1 "Power" H 4580 5801 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 4500 5900 50  0001 C CNN
-F 3 "https://www.adafruit.com/product/724" H 4500 5900 50  0001 C CNN
-F 4 "724" H 4500 5900 50  0001 C CNN "MPN"
-	1    4500 5900
-	1    0    0    -1  
-$EndComp
-Text GLabel 4300 5900 0    50   Input ~ 0
-11V
-Wire Wire Line
-	4300 6000 4100 6000
-Wire Wire Line
-	4100 6000 4100 6150
-$Comp
-L power:GND #PWR06
-U 1 1 61BDDD6B
-P 4100 6150
-F 0 "#PWR06" H 4100 5900 50  0001 C CNN
-F 1 "GND" H 4105 5977 50  0000 C CNN
-F 2 "" H 4100 6150 50  0001 C CNN
-F 3 "" H 4100 6150 50  0001 C CNN
-	1    4100 6150
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	1750 7300 1250 7300
 Text Label 1250 7400 0    50   ~ 0
@@ -633,26 +604,26 @@ F 3 "" H 2650 900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Nemesis-Mod:Pololu_5V_Step_Down_Regulator R2
-U 1 1 61C57817
-P 4800 7650
-F 0 "R2" H 4625 8665 50  0000 C CNN
-F 1 "5V Regulator" H 4625 8574 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 4650 7700 50  0001 C CNN
-F 3 "" H 4650 7700 50  0001 C CNN
-	1    4800 7650
-	1    0    0    -1  
-$EndComp
-NoConn ~ 4150 6900
-$Comp
 L Nemesis-Mod:Adafruit_I2C_FRAM_Breakout F1
 U 1 1 61C6969C
 P 8250 5750
 F 0 "F1" V 8950 5650 50  0000 C CNN
 F 1 "FRAM Breakout" V 8850 5650 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical" H 8100 6200 50  0001 C CNN
+F 2 "Adafruit:Adafruit_I2C_FRAM_Breakout" H 8100 6200 50  0001 C CNN
 F 3 "" H 8100 6200 50  0001 C CNN
 	1    8250 5750
 	0    -1   -1   0   
 $EndComp
+$Comp
+L Nemesis-Mod:Pololu_5V_Step_Down_Regulator P1
+U 1 1 61B01FC1
+P 4200 1750
+F 0 "P1" H 4025 2765 50  0000 C CNN
+F 1 "Pololu_5V_Step_Down_Regulator" H 4025 2674 50  0000 C CNN
+F 2 "Pololu:5V_Step_Down_Regulator_500mA" H 4050 1800 50  0001 C CNN
+F 3 "" H 4050 1800 50  0001 C CNN
+	1    4200 1750
+	1    0    0    -1  
+$EndComp
+NoConn ~ 3550 1000
 $EndSCHEMATC
