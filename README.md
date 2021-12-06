@@ -10,9 +10,8 @@ These are the boards and hardware being used by the project.
 - [Nerf Rival Nemesis MXVII-10K](https://shop.hasbro.com/en-us/product/nerf-rival-nemesis-mxvii-10-k-blue:04E71588-5056-9047-F5B8-940FC9A5A209)
 - [Adafruit Feather M4 Express](https://www.adafruit.com/product/3857) - Mainboard sketch
 - [Adafruit Feather nRF52840 Express](https://www.adafruit.com/product/4062) - Bluetooth sketch
-- [Adafruit FeatherWing Proto - Prototyping Add-on](https://www.adafruit.com/product/2884)
 - [Adafruit I2C Non-Volatile FRAM Breakout](https://www.adafruit.com/product/1895)
-- [Tactile Switch Button (12mm square, 6mm tall)](https://www.adafruit.com/product/1119)
+- [Tactile Switch Button (6mm square, 5mm tall)](https://www.adafruit.com/product/367)
 - [Pololu Dual G2 High-Power Motor Driver 18v18 Shield for Arduino](https://www.pololu.com/product/2515)
 - [Pololu G2 High-Power Motor Driver 18v17](https://www.pololu.com/product/2991)
 - [Pololu 5V, 500mA Step-Down Voltage Regulator](https://www.pololu.com/product/2843)
