@@ -19,12 +19,14 @@ I2cController::I2cController() {
     m_rxBuffer = new CircularBuffer<uint8_t, 512>();
     m_txBuffer = new CircularBuffer<uint8_t, 512>();
 
-    m_interrupt = new InterruptPin(A0, true);
+    m_interrupt = new InterruptPin(A0);
+    m_led = new Led();
 }
 
 I2cController::~I2cController() {
     delete m_rxBuffer;
     delete m_txBuffer;
+    delete m_led;
 
     delete m_interrupt;
 }
@@ -32,7 +34,8 @@ I2cController::~I2cController() {
 void I2cController::init(I2cCommandReceivedCallback callback) {
     m_callback = callback;
     m_interrupt->init();
-
+    m_led->init();
+    
     clear();
     
     Wire.onReceive(OnI2cCommandReceivedCallback);
@@ -42,6 +45,7 @@ void I2cController::init(I2cCommandReceivedCallback callback) {
 
 void I2cController::clear() {
     m_interrupt->reset();
+    m_led->off();
 
     m_rxBuffer->clear();
     m_rxPending = 0;
@@ -146,6 +150,7 @@ void I2cController::sendPacket(uint8_t type, uint8_t subtype, uint8_t *data, uin
     }
 
     m_interrupt->set();
+    m_led->on();
 }
 
 void I2cController::onI2cRequestReceived() {
@@ -162,5 +167,6 @@ void I2cController::onI2cRequestReceived() {
 
     if (m_txBuffer->isEmpty()) {
         m_interrupt->reset();
+        m_led->off();
     }
 }

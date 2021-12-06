@@ -5,7 +5,7 @@
 
 class InterruptPin {
     public:
-        InterruptPin(uint32_t pin, bool setLedOn);
+        InterruptPin(uint32_t pin);
         ~InterruptPin();
         
         void init();
@@ -14,7 +14,6 @@ class InterruptPin {
 
     private:
         uint32_t m_pin;
-        bool m_setLedOn;        
 };
 
 #endif /* INTERRUPT_PIN_H */
