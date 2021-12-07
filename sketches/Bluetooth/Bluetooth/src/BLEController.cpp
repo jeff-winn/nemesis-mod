@@ -23,7 +23,6 @@ void BLEController::init(RemoteCommandReceivedCallback callback) {
 
   Bluefruit.begin();
   Bluefruit.setName("Nerf Nemesis MXVII-10K");
-  Bluefruit.autoConnLed(false);
   
   Bluefruit.ScanResponse.addName();  
   Bluefruit.Periph.begin();

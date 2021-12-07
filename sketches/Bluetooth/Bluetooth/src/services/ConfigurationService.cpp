@@ -89,7 +89,6 @@ void ConfigurationService::init() {
     m_beltMediumSpeed.setWriteCallback(onBeltMediumSpeedWriteCallback);
     m_beltMediumSpeed.begin();
 
-
     m_beltMaxSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_beltMaxSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
     m_beltMaxSpeed.setFixedLen(4);
