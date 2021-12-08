@@ -19,3 +19,6 @@ These are the boards and hardware being used by the project.
 ### Optional Hardware
 - [MaxAmps LiPo 3250 3S 11.1v Battery Pack](https://www.maxamps.com/lipo-3250-3s-11-1v-battery-pack)
 - There is a custom PCB designed to consolidate the wiring within the docs/kicad folder of this project.
+
+## Bluetooth Support
+If you wish to use the bluetooth connectivity included with this device, please see the Wiki page.
