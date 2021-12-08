@@ -15,7 +15,7 @@ MAIN_BOARD_VERSION = 1.7.5
 MAIN_FQBN = $(MAIN_BOARD_TYPE):adafruit_feather_m4
 
 BT_BOARD_TYPE = adafruit:nrf52
-BT_BOARD_VERSION = 0.20.5
+BT_BOARD_VERSION = 1.2.0
 BT_FQBN = $(BT_BOARD_TYPE):feather52840
 
 # Default port to use
