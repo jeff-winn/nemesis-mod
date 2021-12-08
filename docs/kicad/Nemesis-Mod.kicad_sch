@@ -454,6 +454,9 @@
     (path "/0ac385c6-95d0-456b-97c0-5cd1065b43ce/96e03bc9-9d4d-4137-9c35-352f5815a7ae"
       (reference "#PWR0118") (unit 1) (value "GND") (footprint "")
     )
+    (path "/0ac385c6-95d0-456b-97c0-5cd1065b43ce/41c9c3b8-2883-4fdc-b499-17634b4fcf10"
+      (reference "#PWR0119") (unit 1) (value "+3.3V") (footprint "")
+    )
     (path "/4ab53a61-c94d-4793-92ba-388eb4bdfdad"
       (reference "BATT1") (unit 1) (value "11.1V 3S LiPo") (footprint "")
     )
@@ -471,9 +474,6 @@
     )
     (path "/e32477ef-d678-444f-b26c-29a85901c4f1/2ff057b0-973b-43dd-9789-08dfd10cc5c8"
       (reference "H1") (unit 1) (value " ") (footprint "Connector_PinHeader_2.54mm:PinHeader_2x14_P2.54mm_Vertical")
-    )
-    (path "/ba07b7a9-728a-4a45-b56c-aced7a41f501/707a6514-8269-4029-b2d6-31b906dad62c"
-      (reference "LOCK1") (unit 1) (value "Nerf Hopper Open Button") (footprint "")
     )
     (path "/82d3265a-5100-495d-a477-2f939c3a86af/0bb919fe-8e02-449c-9390-f8be02e733b0"
       (reference "M1-M2") (unit 1) (value "Pololu_G2_HighPower_18v18") (footprint "")
@@ -496,11 +496,14 @@
     (path "/e32477ef-d678-444f-b26c-29a85901c4f1/fe104181-4d25-4bda-b605-17e8b018bcea"
       (reference "SW1") (unit 1) (value "SW1") (footprint "Button_Switch_THT:SW_PUSH_6mm")
     )
+    (path "/ba07b7a9-728a-4a45-b56c-aced7a41f501/707a6514-8269-4029-b2d6-31b906dad62c"
+      (reference "SW2") (unit 1) (value "Nerf Hopper Open Button") (footprint "")
+    )
     (path "/0ac385c6-95d0-456b-97c0-5cd1065b43ce/a15b12fc-0293-4949-b484-344f3f770f4f"
-      (reference "SW2") (unit 1) (value "Rev Trigger") (footprint "")
+      (reference "TRG1") (unit 1) (value "Rev Trigger") (footprint "")
     )
     (path "/0ac385c6-95d0-456b-97c0-5cd1065b43ce/bdaf9568-7446-4849-95c1-637aa2f29209"
-      (reference "SW3") (unit 1) (value "Firing Trigger") (footprint "")
+      (reference "TRG2") (unit 1) (value "Firing Trigger") (footprint "")
     )
   )
 )

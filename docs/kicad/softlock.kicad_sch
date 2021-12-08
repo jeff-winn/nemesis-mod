@@ -200,7 +200,7 @@
   (symbol (lib_id "Nemesis-Mod:Nerf_Hopper_Lock") (at 143.51 100.33 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 707a6514-8269-4029-b2d6-31b906dad62c)
-    (property "Reference" "LOCK1" (id 0) (at 143.51 89.789 0))
+    (property "Reference" "SW2" (id 0) (at 143.51 89.789 0))
     (property "Value" "Nerf Hopper Open Button" (id 1) (at 143.51 92.1004 0))
     (property "Footprint" "" (id 2) (at 143.51 92.71 0)
       (effects (font (size 1.27 1.27)) hide)
