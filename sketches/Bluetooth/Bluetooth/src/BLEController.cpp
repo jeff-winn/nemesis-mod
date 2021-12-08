@@ -62,7 +62,7 @@ void BLEController::startAdvertising() {
 }
 
 void BLEController::clearBonds() {
-  Bluefruit.clearBonds();
+  Bluefruit.Periph.clearBonds();
 }
 
 void BLEController::setCharacteristic(uint8_t characteristicId, uint8_t *data, uint8_t len) {
