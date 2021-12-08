@@ -413,6 +413,26 @@
     [
       "d4a1d3c4-b315-4bec-9220-d12a9eab51e0",
       ""
+    ],
+    [
+      "82d3265a-5100-495d-a477-2f939c3a86af",
+      "Flywheels"
+    ],
+    [
+      "ce052e62-9895-4eaf-b763-02bb1f2f2fc0",
+      "Belt Feed"
+    ],
+    [
+      "e32477ef-d678-444f-b26c-29a85901c4f1",
+      "Mainboard"
+    ],
+    [
+      "0ac385c6-95d0-456b-97c0-5cd1065b43ce",
+      "Triggers"
+    ],
+    [
+      "ba07b7a9-728a-4a45-b56c-aced7a41f501",
+      "Hopper Lock"
     ]
   ],
   "text_variables": {}
