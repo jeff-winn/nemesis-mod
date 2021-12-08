@@ -8,7 +8,7 @@
 		"arduino.defaultBaudRate": 115200,
 		"arduino.logLevel": "info",
 		"cortex-debug.armToolchainPath": "${env:LOCALAPPDATA}/Arduino15/packages/adafruit/tools/arm-none-eabi-gcc/9-2019q4/bin",
-		"cortex-debug.JLinkGDBServerPath": "C:/Program Files/SEGGER/JLink/JLinkGDBServerCL.exe",
+		"cortex-debug.JLinkGDBServerPath": "${env:PROGRAMFILES}/SEGGER/JLink/JLinkGDBServerCL.exe",
 		"arduino.additionalUrls": [
 			"https://adafruit.github.io/arduino-board-index/package_adafruit_index.json"
 		],
