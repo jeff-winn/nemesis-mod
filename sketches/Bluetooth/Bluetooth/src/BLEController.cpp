@@ -18,7 +18,7 @@ BLEController::BLEController() {
 BLEController::~BLEController() {
 }
 
-void BLEController::init(RemoteCommandReceivedCallback callback) {
+void BLEController::init(RemoteCommandReceivedCallback callback, const char *pin) {
   SetBluetoothCommandReceivedCallback(callback);
 
   Bluefruit.begin();
@@ -46,6 +46,11 @@ void BLEController::init(RemoteCommandReceivedCallback callback) {
   Bluefruit.Advertising.restartOnDisconnect(true);
   Bluefruit.Advertising.setInterval(32, 244);
   Bluefruit.Advertising.setFastTimeout(30);
+
+  Bluefruit.Security.setIOCaps(false, false, false);
+  if (pin != NULL) {
+    Bluefruit.Security.setPIN(pin);
+  }
 }
 
 void BLEController::startAdvertising() {

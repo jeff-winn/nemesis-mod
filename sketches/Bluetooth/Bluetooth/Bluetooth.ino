@@ -2,8 +2,10 @@
 #include "src/commands/I2cCommandFactory.h"
 #include "src/I2cController.h"
 
+#define PAIRING_PIN "000000"
+
 void setup() {
-    BLE.init(OnBluetoothCommandReceived);
+    BLE.init(OnBluetoothCommandReceived, PAIRING_PIN);
 
     I2CBus.init(OnI2cPacketReceived);
     I2CBus.notifyReady();
