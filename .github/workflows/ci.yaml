@@ -23,5 +23,26 @@ jobs:
     - name: Upload bluetooth
       uses: actions/upload-artifact@v2
       with:
-        name: mainboard
+        name: bluetooth
         path: out/Bluetooth/Bluetooth.ino.*
+
+  package:
+    runs-on: windows-latest
+    timeout-minutes: 15
+
+    steps:
+    - name: Checkout packager
+      uses: actions/checkout@v2
+      repository: 
+    
+    - name: Download mainboard
+      uses: actions/download-artifact@v2
+      with:
+        name: mainboard
+        path: bin/mainboard
+
+    - name: Download bluetooth
+      uses: actions/download-artifact@v2
+      with:
+        name: bluetooth
+        path: bin/bluetooth
