@@ -46,9 +46,6 @@ jobs:
         name: mainboard
         path: out/mainboard
 
-    - name: Package mainboard
-      run: python uf2/utils/uf2conv.py -c -b 0x4000 -o out/mainboard.uf2 out/mainboard/mainboard.ino.bin
-
     - name: Download bluetooth
       uses: actions/download-artifact@v2
       with:
@@ -58,8 +55,11 @@ jobs:
     - name: Decompress bluetooth
       run: 7z x out/bluetooth/Bluetooth.ino.zip
 
+    - name: Package mainboard
+      run: python uf2/utils/uf2conv.py -c -b 0x4000 -o ${env:GITHUB_WORKSPACE}/out/mainboard.uf2 ${env:GITHUB_WORKSPACE}/out/mainboard/mainboard.ino.bin
+
     - name: Package bluetooth
-      run: python uf2/utils/uf2conv.py -c -b 0x4000 -o out/bluetooth.uf2 out/bluetooth/Bluetooth.ino.bin
+      run: python uf2/utils/uf2conv.py -c -b 0x4000 -o ${env:GITHUB_WORKSPACE}/out/bluetooth.uf2 ${env:GITHUB_WORKSPACE}/out/bluetooth/Bluetooth.ino.bin
 
     - name: Upload mainboard.uf2
       uses: actions/upload-artifact@v2
