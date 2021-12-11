@@ -38,6 +38,8 @@ jobs:
         repository: microsoft/uf2
         path: uf2
     
+    - uses: actions/setup-python@v2
+
     - name: Download mainboard
       uses: actions/download-artifact@v2
       with:
@@ -45,7 +47,7 @@ jobs:
         path: out/mainboard
 
     - name: Package mainboard
-      run: uf2/utils/uf2conv.py -c -b 0x4000 -o out/mainboard.uf2 out/mainboard/mainboard.ino.bin
+      run: python uf2/utils/uf2conv.py -c -b 0x4000 -o out/mainboard.uf2 out/mainboard/mainboard.ino.bin
 
     - name: Download bluetooth
       uses: actions/download-artifact@v2
@@ -57,7 +59,7 @@ jobs:
       run: 7z x out/bluetooth/Bluetooth.ino.zip
 
     - name: Package bluetooth
-      run: uf2/utils/uf2conv.py -c -b 0x4000 -o out/bluetooth.uf2 out/bluetooth/Bluetooth.ino.bin
+      run: python uf2/utils/uf2conv.py -c -b 0x4000 -o out/bluetooth.uf2 out/bluetooth/Bluetooth.ino.bin
 
     - name: Upload mainboard.uf2
       uses: actions/upload-artifact@v2
