@@ -56,7 +56,7 @@ jobs:
     - name: Package bluetooth
       run: python uf2/utils/uf2conv.py -c -b 0x26000 -f 0xADA52840 -o ${env:GITHUB_WORKSPACE}/out/bluetooth.uf2 ${env:GITHUB_WORKSPACE}/out/bluetooth/Bluetooth.ino.bin
 
-    - name: Upload mainboard.uf2
+    - name: Upload mainboard
       uses: actions/upload-artifact@v2
       with:
         name: mainboard
