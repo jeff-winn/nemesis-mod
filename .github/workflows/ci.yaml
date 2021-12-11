@@ -17,14 +17,17 @@ jobs:
     - name: Upload mainboard
       uses: actions/upload-artifact@v2
       with:
-        name: mainboard
-        path: out/Mainboard/Mainboard.ino.*
+        name: sketches
+        path: out/Mainboard/Mainboard.ino.bin
+
+    - name: Decompress bluetooth
+      run: 7z x out/bluetooth/Bluetooth.ino.zip -o${env.GITHUB_WORKSPACE}/out/bluetooth
 
     - name: Upload bluetooth
       uses: actions/upload-artifact@v2
       with:
-        name: bluetooth
-        path: out/Bluetooth/Bluetooth.ino.*
+        name: sketches
+        path: out/Bluetooth/Bluetooth.ino.bin
 
   package:
     runs-on: windows-latest
@@ -38,28 +41,20 @@ jobs:
         repository: microsoft/uf2
         path: uf2
     
-    - uses: actions/setup-python@v2
+    - name: Setup Python
+      uses: actions/setup-python@v2
 
-    - name: Download mainboard
+    - name: Download sketches
       uses: actions/download-artifact@v2
       with:
-        name: mainboard
-        path: out/mainboard
-
-    - name: Download bluetooth
-      uses: actions/download-artifact@v2
-      with:
-        name: bluetooth
-        path: out/bluetooth
-    
-    - name: Decompress bluetooth
-      run: 7z x out/bluetooth/Bluetooth.ino.zip
+        name: sketches
+        path: bin/sketches   
 
     - name: Package mainboard
       run: python uf2/utils/uf2conv.py -c -b 0x4000 -o ${env:GITHUB_WORKSPACE}/out/mainboard.uf2 ${env:GITHUB_WORKSPACE}/out/mainboard/mainboard.ino.bin
 
     - name: Package bluetooth
-      run: python uf2/utils/uf2conv.py -c -b 0x4000 -o ${env:GITHUB_WORKSPACE}/out/bluetooth.uf2 ${env:GITHUB_WORKSPACE}/out/bluetooth/Bluetooth.ino.bin
+      run: python uf2/utils/uf2conv.py -c -b 0x26000 -f 0xADA52840 -o ${env:GITHUB_WORKSPACE}/out/bluetooth.uf2 ${env:GITHUB_WORKSPACE}/out/bluetooth/Bluetooth.ino.bin
 
     - name: Upload mainboard.uf2
       uses: actions/upload-artifact@v2
@@ -67,7 +62,7 @@ jobs:
         name: mainboard
         path: out/mainboard.uf2
 
-    - name: Upload bluetooth.uf2
+    - name: Upload bluetooth
       uses: actions/upload-artifact@v2
       with:
         name: bluetooth
