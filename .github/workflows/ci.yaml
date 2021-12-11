@@ -35,7 +35,7 @@ jobs:
     - name: Checkout packager
       uses: actions/checkout@v2
       with:
-        repository: https://github.com/microsoft/uf2.git
+        repository: microsoft/uf2
     
     - name: Download mainboard
       uses: actions/download-artifact@v2
