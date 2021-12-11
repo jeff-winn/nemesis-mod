@@ -25,5 +25,5 @@ jobs:
     - name: Upload bluetooth
       uses: actions/upload-artifact@v2
       with:
-        name: mainboard
+        name: bluetooth
         path: out/Bluetooth/Bluetooth.ino.*
