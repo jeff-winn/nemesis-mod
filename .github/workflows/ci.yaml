@@ -33,7 +33,8 @@ jobs:
     steps:
     - name: Checkout packager
       uses: actions/checkout@v2
-      repository: https://github.com/microsoft/uf2.git
+      with:
+        repository: https://github.com/microsoft/uf2.git
     
     - name: Download mainboard
       uses: actions/download-artifact@v2
