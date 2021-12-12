@@ -21,7 +21,7 @@ jobs:
         path: out/Mainboard/Mainboard.ino.bin
 
     - name: Extract files
-      run: 7z e out/Bluetooth.ino.zip -o\*
+      run: 7z e ${env:GITHUB_WORKSPACE}/out/Bluetooth.ino.zip -o\*
 
     - name: Upload bluetooth
       uses: actions/upload-artifact@v2
