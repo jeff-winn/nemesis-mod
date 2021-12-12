@@ -67,7 +67,7 @@ jobs:
         path: mainboard.uf2
 
     - name: Upload bluetooth
-     uses: actions/upload-artifact@v2
-     with:
-       name: bluetooth
-       path: bluetooth.uf2
+      uses: actions/upload-artifact@v2
+      with:
+        name: bluetooth
+        path: bluetooth.uf2
