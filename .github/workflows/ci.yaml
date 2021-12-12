@@ -21,7 +21,7 @@ jobs:
         path: out/Mainboard/Mainboard.ino.bin
 
     - name: Decompress bluetooth
-      run: 7z x ${env.GITHUB_WORKSPACE}/out/bluetooth/Bluetooth.ino.zip -o${env.GITHUB_WORKSPACE}/out/bluetooth
+      run: 7z x ${env:GITHUB_WORKSPACE}/out/bluetooth/Bluetooth.ino.zip -o${env:GITHUB_WORKSPACE}/out/bluetooth
 
     - name: Upload bluetooth
       uses: actions/upload-artifact@v2
