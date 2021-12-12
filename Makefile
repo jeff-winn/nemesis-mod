@@ -10,6 +10,7 @@ else
 endif
 
 # Arduino CLI Board type
+# NOTE: Any changes to the FQBNs here will also likely require updating the release workflow for packaging the UF2 files.
 MAIN_BOARD_TYPE = adafruit:samd
 MAIN_BOARD_VERSION = 1.7.5
 MAIN_FQBN = $(MAIN_BOARD_TYPE):adafruit_feather_m4

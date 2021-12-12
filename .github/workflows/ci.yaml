@@ -51,7 +51,7 @@ jobs:
         path: bin/sketches   
 
     # The values passed into the script need to be retrieved from the following page:
-    # See: https://github.com/adafruit/Adafruit_nRF52_Bootloader
+    # See: https://learn.adafruit.com/adafruit-feather-m4-express-atsamd51/uf2-bootloader-details
     - name: Package mainboard
       run: python uf2/utils/uf2conv.py -c -b 0x4000 -o ${env:GITHUB_WORKSPACE}/out/mainboard.uf2 ${env:GITHUB_WORKSPACE}/out/mainboard/mainboard.ino.bin
 
