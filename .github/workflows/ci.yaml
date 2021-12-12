@@ -21,7 +21,7 @@ jobs:
         path: out/Mainboard/Mainboard.ino.bin
 
     - name: Decompress bluetooth
-      run: 7z x out/bluetooth/Bluetooth.ino.zip -o${env.GITHUB_WORKSPACE}/out/bluetooth
+      run: 7z x ${env.GITHUB_WORKSPACE}/out/bluetooth/Bluetooth.ino.zip -o${env.GITHUB_WORKSPACE}/out/bluetooth
 
     - name: Upload bluetooth
       uses: actions/upload-artifact@v2
@@ -50,9 +50,13 @@ jobs:
         name: sketches
         path: bin/sketches   
 
+    # The values passed into the script need to be retrieved from the following page:
+    # See: https://github.com/adafruit/Adafruit_nRF52_Bootloader
     - name: Package mainboard
       run: python uf2/utils/uf2conv.py -c -b 0x4000 -o ${env:GITHUB_WORKSPACE}/out/mainboard.uf2 ${env:GITHUB_WORKSPACE}/out/mainboard/mainboard.ino.bin
 
+    # The values passed into the script need to be retrieved from the following page:
+    # See: https://github.com/adafruit/Adafruit_nRF52_Bootloader
     - name: Package bluetooth
       run: python uf2/utils/uf2conv.py -c -b 0x26000 -f 0xADA52840 -o ${env:GITHUB_WORKSPACE}/out/bluetooth.uf2 ${env:GITHUB_WORKSPACE}/out/bluetooth/Bluetooth.ino.bin
 
