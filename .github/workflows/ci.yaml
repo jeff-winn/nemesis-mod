@@ -50,7 +50,7 @@ jobs:
     # The values passed into the script need to be retrieved from the following page:
     # See: https://learn.adafruit.com/adafruit-feather-m4-express-atsamd51/uf2-bootloader-details
     - name: Package mainboard
-      run: python uf2/utils/uf2conv.py -c -b 0x4000 -o ${env:GITHUB_WORKSPACE}/out/mainboard.uf2 ${env:GITHUB_WORKSPACE}/sketches/mainboard.ino.bin
+      run: python uf2/utils/uf2conv.py -c -b 0x4000 -o ${env:GITHUB_WORKSPACE}/out/mainboard.uf2 ${env:GITHUB_WORKSPACE}/bin/mainboard.ino.bin
 
     # The values passed into the script need to be retrieved from the following page:
     # See: https://github.com/adafruit/Adafruit_nRF52_Bootloader
@@ -60,7 +60,7 @@ jobs:
     - name: Upload mainboard
       uses: actions/upload-artifact@v2
       with:
-        name: mainboard
+        name: mainboard.uf2
         path: out/mainboard.uf2
 
     #- name: Upload bluetooth
