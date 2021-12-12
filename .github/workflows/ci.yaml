@@ -20,11 +20,14 @@ jobs:
         name: sketches
         path: out/Mainboard/Mainboard.ino.bin
 
+    - name: Extract files
+      run: 7z e out/Bluetooth.ino.zip -o\*
+
     - name: Upload bluetooth
       uses: actions/upload-artifact@v2
       with:
         name: sketches
-        path: out/Bluetooth/Bluetooth.ino.zip
+        path: out/Bluetooth/Bluetooth.ino.bin
 
   package:
     runs-on: windows-latest
