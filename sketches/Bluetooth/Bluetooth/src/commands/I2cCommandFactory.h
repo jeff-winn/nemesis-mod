@@ -8,7 +8,7 @@ class I2cCommandFactory {
         I2cCommandFactory();
         ~I2cCommandFactory();
 
-        Command *create(uint8_t type, uint8_t subtype);
+        Command* create(uint8_t type, uint8_t subtype);
 };
 
 extern I2cCommandFactory I2cCommands;

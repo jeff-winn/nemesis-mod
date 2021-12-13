@@ -6,12 +6,12 @@
 // Provides access to the configuration settings.
 class ConfigurationSettings {
     public:
-        // AuthenticationToken_t getAuthenticationToken();
-        // void setAuthenticationToken(AuthenticationToken_t token);
         void resetAuthenticationToken();
 
         void setExistingPairing(bool value);
         bool hasExistingPairing();
+
+        const char* getPairingPin();
 
         int getFeedNormalSpeed();
         void setFeedNormalSpeed(int value);

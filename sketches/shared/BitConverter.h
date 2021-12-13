@@ -17,6 +17,12 @@ class BitConverter {
 
         // Converts the value to a byte array.
         byte* toFloatArray(const float value);
+
+        // Converts the string to a byte array.
+        byte* toByteArray(const char* str, size_t len);
+
+        // Converts the byte array to a string.
+        char* toCharArray(const byte* bytes, size_t len);
 };
 
 // Performs conversions between data types.

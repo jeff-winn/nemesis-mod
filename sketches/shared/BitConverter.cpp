@@ -59,3 +59,23 @@ byte* BitConverter::toFloatArray(const float value) {
 
     return result;
 }
+
+char* BitConverter::toCharArray(const byte* bytes, size_t len) {
+    char* chars = new char[len];
+
+    for (int index = 0; index < len; index++) {
+        chars[index] = (byte)bytes[index];
+    }
+
+    return chars;
+}
+
+byte* BitConverter::toByteArray(const char* str, size_t len) {
+    byte* bytes = new byte[len];
+
+    for (int index = 0; index < len; index++) {
+        bytes[index] = (byte)str[index];
+    }
+
+    return bytes;
+}

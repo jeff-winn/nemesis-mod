@@ -27,6 +27,15 @@ bool NRF52::hasPendingPackets() {
     return m_signal->isSet();
 }
 
+void NRF52::setPin(const char* pin) {
+    auto len = strlen(pin);
+    auto bytes = Convert.toByteArray(pin, len);
+
+    sendPacket(NRF52_CID_SET_PIN, 0, bytes, len);
+
+    delete[] bytes;
+}
+
 void NRF52::startAdvertising() {
     sendPacket(NRF52_CID_START_ADVERTISING, 0, NULL, 0);    
 }
