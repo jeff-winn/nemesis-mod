@@ -2,6 +2,8 @@
 #include "shared/BitConverter.h"
 #include "ConfigurationSettings.h"
 
+const char* DEFAULT_PAIRING_PIN = "000000";
+
 const short HAS_EXISTING_PAIRING_ADDR = 0x02;
 const short OPERATOR_TOKEN_LENGTH_ADDR = 0x10;
 const short OPERATOR_TOKEN_ADDR = 0x11;
@@ -62,28 +64,9 @@ void ConfigurationSettings::clear() {
     }
 }
 
-// AuthenticationToken_t ConfigurationSettings::getAuthenticationToken() {
-//     AuthenticationToken_t result;
-
-//     result.length = framDriver.read(OPERATOR_TOKEN_LENGTH_ADDR);
-//     if (result.length > 0) {
-//         result.data = new byte[result.length];
-
-//         for (byte index = 0; index < result.length; index++) {
-//             result.data[index] = framDriver.read(OPERATOR_TOKEN_ADDR + index);
-//         }
-//     }
-
-//     return result;
-// }
-
-// void ConfigurationSettings::setAuthenticationToken(AuthenticationToken_t token) {
-//     framDriver.write(OPERATOR_TOKEN_ADDR, token.length);
-
-//     for (byte index = 0; index < token.length; index++) {
-//         framDriver.write(OPERATOR_TOKEN_ADDR + index, token.data[index]);
-//     }
-// }
+const char* ConfigurationSettings::getPairingPin() {
+    return DEFAULT_PAIRING_PIN;
+}
 
 bool ConfigurationSettings::hasExistingPairing() {
     return framDriver.read(HAS_EXISTING_PAIRING_ADDR) != 0x00;

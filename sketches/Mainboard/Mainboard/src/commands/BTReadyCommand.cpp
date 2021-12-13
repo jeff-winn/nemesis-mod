@@ -24,5 +24,6 @@ void BTReadyCommand::handleImpl(uint8_t* data, uint16_t len) {
     BT.setCharacteristic(NRF52_CHR_BELT_MAX_SPEED, Settings.getFeedMaxSpeed());
     BT.setCharacteristic(NRF52_CHR_HOPPER_LOCK_ENABLED, Settings.isHopperLockEnabled());
     
+    BT.setPin(Settings.getPairingPin());
     BT.startAdvertising();
 }
