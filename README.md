@@ -6,9 +6,8 @@ It started off as me just wanting to play with an Arduino while repurposing some
 | master | [![CI](https://github.com/jeff-winn/Nemesis-Mod/actions/workflows/ci.yaml/badge.svg)](https://github.com/jeff-winn/Nemesis-Mod/actions/workflows/ci.yaml) |
 
 ## Hardware Requirements
-These are the boards and hardware being used by the project.
+These are the boards and hardware being used by the project:
 - [Adafruit Feather M4 Express](https://www.adafruit.com/product/3857) - Mainboard sketch
-- [Adafruit Feather nRF52840 Express](https://www.adafruit.com/product/4062) - Bluetooth sketch
 - [Adafruit I2C Non-Volatile FRAM Breakout](https://www.adafruit.com/product/1895)
 - [Tactile Button Switch (6mm square, 5mm tall)](https://www.adafruit.com/product/367)
 - [Pololu Dual G2 High-Power Motor Driver 18v18 Shield for Arduino](https://www.pololu.com/product/2515)
@@ -16,6 +15,7 @@ These are the boards and hardware being used by the project.
 - [Pololu 5V, 500mA Step-Down Voltage Regulator](https://www.pololu.com/product/2843)
 
 ### Optional Hardware
+- [Adafruit Feather nRF52840 Express](https://www.adafruit.com/product/4062) - Bluetooth sketch
 - [MaxAmps LiPo 3250 3S 11.1v Battery Pack](https://www.maxamps.com/lipo-3250-3s-11-1v-battery-pack)
 - There is a custom PCB designed to consolidate the wiring within the docs/kicad folder of this project.
 
