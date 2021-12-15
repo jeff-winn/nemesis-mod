@@ -1,222 +1,253 @@
-#include <Adafruit_FRAM_I2C.h>
-#include "shared/BitConverter.h"
 #include "ConfigurationSettings.h"
-
-const char* DEFAULT_PAIRING_PIN = "000000";
-
-const short HAS_EXISTING_PAIRING_ADDR = 0x02;
-const short OPERATOR_TOKEN_LENGTH_ADDR = 0x10;
-const short OPERATOR_TOKEN_ADDR = 0x11;
-const short FEED_NORMAL_SPEED_ADDR = 0x100;
-const short FEED_MEDIUM_SPEED_ADDR = 0x104;
-const short FEED_MAX_SPEED_ADDR = 0x108;
-const short FLYWHEEL_KID_SPEED_ADDR = 0x112;
-const short FLYWHEEL_NORMAL_SPEED_ADDR = 0x116;
-const short FLYWHEEL_LUDICROUS_SPEED_ADDR = 0x120;
-const short FLYWHEEL_TRIM_VARIANCE_ADDR = 0x124;
-const short FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR = 0x128;
-const short FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR = 0x132;
-const short IS_HOPPER_LOCK_ENABLED_ADDR = 0x136;
+#include "shared/BitConverter.h"
+#include "SdCard.h"
 
 ConfigurationSettings Settings = ConfigurationSettings();
 
-// Defines the FRAM module for persistent data storage.
-Adafruit_FRAM_I2C framDriver = Adafruit_FRAM_I2C();
+String readStringFromIni(const char* section, const char* key, const IniFile& ini) {
+    const size_t len = 256;
+    char buffer[len];
+
+    ini.getValue(section, key, buffer, len);
+
+    return String(buffer);
+}
+
+ConfigurationSettings::ConfigurationSettings() {
+}
+
+ConfigurationSettings::~ConfigurationSettings() {
+}
 
 void ConfigurationSettings::init() {
-    framDriver.begin();
+    Sdc.init();
 
-    if (!initialized()) {
-        defaultSettings();
-        resetAuthenticationToken();
+    auto file = Sdc.openIni();
+    m_pin = readStringFromIni("bluetooth", "pin", file);
 
-        setInitialized(true);
-    }
+    file.close();
+
+    // if (!initialized()) {
+    //     defaultSettings();
+    //     resetAuthenticationToken();
+
+    //     setInitialized(true);
+    // }
 }
 
 bool ConfigurationSettings::initialized() {
-    return framDriver.read(0x1) != 0;
+    return true;
+
+    // return framDriver.read(0x1) != 0;
 }
 
 void ConfigurationSettings::setInitialized(bool value) {
-    framDriver.write(0x1, (value ? 0xFF : 0x00));
+    // framDriver.write(0x1, (value ? 0xFF : 0x00));
 }
 
 void ConfigurationSettings::defaultSettings() {
-    setExistingPairing(false);
-    setIsHopperLockEnabled(true);
+    // setExistingPairing(false);
+    // setIsHopperLockEnabled(true);
 
-    setFeedNormalSpeed(100);
-    setFeedMediumSpeed(175);
-    setFeedMaxSpeed(400);
+    // setFeedNormalSpeed(100);
+    // setFeedMediumSpeed(175);
+    // setFeedMaxSpeed(400);
 
-    setFlywheelKidSpeed(195);
-    setFlywheelNormalSpeed(215);
-    setFlywheelLudicrousSpeed(400);
-    setFlywheelTrimVariance(0.1F);
-    setFlywheelM1TrimAdjustment(1.0F);
-    setFlywheelM2TrimAdjustment(1.0F);
+    // setFlywheelKidSpeed(195);
+    // setFlywheelNormalSpeed(215);
+    // setFlywheelLudicrousSpeed(400);
+    // setFlywheelTrimVariance(0.1F);
+    // setFlywheelM1TrimAdjustment(1.0F);
+    // setFlywheelM2TrimAdjustment(1.0F);
 }
 
 void ConfigurationSettings::clear() {
-    for (int addr = 0; addr < 32000; addr++) {
-        framDriver.write(addr, 0x00);
-    }
+    // for (int addr = 0; addr < 32000; addr++) {
+    //     framDriver.write(addr, 0x00);
+    // }
 }
 
 const char* ConfigurationSettings::getPairingPin() {
-    return DEFAULT_PAIRING_PIN;
+    return m_pin.c_str();
 }
 
 bool ConfigurationSettings::hasExistingPairing() {
-    return framDriver.read(HAS_EXISTING_PAIRING_ADDR) != 0x00;
+    return false;
+    
+    // return framDriver.read(HAS_EXISTING_PAIRING_ADDR) != 0x00;
 }
 
 void ConfigurationSettings::setExistingPairing(bool value) {
-    uint8_t raw = 0x00;
-    if (value) {
-        raw = 0xFF;
-    }
+    // uint8_t raw = 0x00;
+    // if (value) {
+    //     raw = 0xFF;
+    // }
 
-    framDriver.write(HAS_EXISTING_PAIRING_ADDR, raw);
+    // framDriver.write(HAS_EXISTING_PAIRING_ADDR, raw);
 }
 
 void ConfigurationSettings::resetAuthenticationToken() {
-    for (uint16_t addr = OPERATOR_TOKEN_ADDR; addr < FEED_NORMAL_SPEED_ADDR; addr++) {
-        framDriver.write(addr, 0x00);
-    }
+    // for (uint16_t addr = OPERATOR_TOKEN_ADDR; addr < FEED_NORMAL_SPEED_ADDR; addr++) {
+    //     framDriver.write(addr, 0x00);
+    // }
 }
 
 int ConfigurationSettings::getFeedNormalSpeed() {
-    return readInt32(FEED_NORMAL_SPEED_ADDR);
+    return 1;
+
+    // return readInt32(FEED_NORMAL_SPEED_ADDR);
 }
 
 void ConfigurationSettings::setFeedNormalSpeed(int value) {
-    writeInt32(FEED_NORMAL_SPEED_ADDR, value);
+    // writeInt32(FEED_NORMAL_SPEED_ADDR, value);
 }
 
 int ConfigurationSettings::getFeedMediumSpeed() {
-    return readInt32(FEED_MEDIUM_SPEED_ADDR);
+    return 2;
+
+    // return readInt32(FEED_MEDIUM_SPEED_ADDR);
 }
 
 void ConfigurationSettings::setFeedMediumSpeed(int value) {
-    writeInt32(FEED_MEDIUM_SPEED_ADDR, value);
+    // writeInt32(FEED_MEDIUM_SPEED_ADDR, value);
 }
 
 int ConfigurationSettings::getFeedMaxSpeed() {
-    return readInt32(FEED_MAX_SPEED_ADDR);
+    return 3;
+
+    // return readInt32(FEED_MAX_SPEED_ADDR);
 }
 
 void ConfigurationSettings::setFeedMaxSpeed(int value) {    
-    writeInt32(FEED_MAX_SPEED_ADDR, value);
+    // writeInt32(FEED_MAX_SPEED_ADDR, value);
 }
 
 int ConfigurationSettings::getFlywheelKidSpeed() {
-    return readInt32(FLYWHEEL_KID_SPEED_ADDR);
+    return 4;
+
+    // return readInt32(FLYWHEEL_KID_SPEED_ADDR);
 }
 
 void ConfigurationSettings::setFlywheelKidSpeed(int value) {
-    writeInt32(FLYWHEEL_KID_SPEED_ADDR, value);
+    // writeInt32(FLYWHEEL_KID_SPEED_ADDR, value);
 }
 
 int ConfigurationSettings::getFlywheelNormalSpeed() {
-    return readInt32(FLYWHEEL_NORMAL_SPEED_ADDR);
+    return 5;
+
+    // return readInt32(FLYWHEEL_NORMAL_SPEED_ADDR);
 }
 
 void ConfigurationSettings::setFlywheelNormalSpeed(int value) {    
-    writeInt32(FLYWHEEL_NORMAL_SPEED_ADDR, value);
+    // writeInt32(FLYWHEEL_NORMAL_SPEED_ADDR, value);
 }
 
 int ConfigurationSettings::getFlywheelLudicrousSpeed() {
-    return readInt32(FLYWHEEL_LUDICROUS_SPEED_ADDR);
+    return 6;
+
+    // return readInt32(FLYWHEEL_LUDICROUS_SPEED_ADDR);
 }
 
 void ConfigurationSettings::setFlywheelLudicrousSpeed(int value) {
-    writeInt32(FLYWHEEL_LUDICROUS_SPEED_ADDR, value);
+    // writeInt32(FLYWHEEL_LUDICROUS_SPEED_ADDR, value);
 }
 
 float ConfigurationSettings::getFlywheelTrimVariance() {
-    return readFloat(FLYWHEEL_TRIM_VARIANCE_ADDR);
+    return 7.0F;
+
+    // return readFloat(FLYWHEEL_TRIM_VARIANCE_ADDR);
 }
 
 void ConfigurationSettings::setFlywheelTrimVariance(float value) {
-    writeFloat(FLYWHEEL_TRIM_VARIANCE_ADDR, value);
+    // writeFloat(FLYWHEEL_TRIM_VARIANCE_ADDR, value);
 }
 
 float ConfigurationSettings::getFlywheelM1TrimAdjustment() {
-    return readFloat(FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR);
+    return 8.0F;
+
+    // return readFloat(FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR);
 }
 
 void ConfigurationSettings::setFlywheelM1TrimAdjustment(float value) {
-    writeFloat(FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR, value);
+    // writeFloat(FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR, value);
 }
 
 float ConfigurationSettings::getFlywheelM2TrimAdjustment() {
-    return readFloat(FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR);
+    return 9.0F;
+    
+    // return readFloat(FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR);
 }
 
 void ConfigurationSettings::setFlywheelM2TrimAdjustment(float value) {
-    writeFloat(FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR, value);
+    // writeFloat(FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR, value);
 }
 
 bool ConfigurationSettings::isHopperLockEnabled() {
-    return readBool(IS_HOPPER_LOCK_ENABLED_ADDR);
+    return true;
+
+    // return readBool(IS_HOPPER_LOCK_ENABLED_ADDR);
 }
 
 void ConfigurationSettings::setIsHopperLockEnabled(bool value) {
-    writeBool(IS_HOPPER_LOCK_ENABLED_ADDR, value);
+    // writeBool(IS_HOPPER_LOCK_ENABLED_ADDR, value);
 }
 
 bool ConfigurationSettings::readBool(short address) {
-    auto value = readInt32(address);
-    return value != 0;
+    return true;
+
+    // auto value = readInt32(address);
+    // return value != 0;
 }
 
 void ConfigurationSettings::writeBool(short address, bool value) {
-    uint32_t rawValue = 0;
-    if (value) {
-        rawValue = 1;
-    }
+    // uint32_t rawValue = 0;
+    // if (value) {
+    //     rawValue = 1;
+    // }
 
-    writeInt32(address, rawValue);
+    // writeInt32(address, rawValue);
 }
 
 int ConfigurationSettings::readInt32(short address) {
-    byte raw[4];
+    return 0;
 
-    for (auto index = 0; index < 4; index++) {
-        raw[index] = framDriver.read(address + index);
-    }
+    // byte raw[4];
 
-    return Convert.toInt32(raw);
+    // for (auto index = 0; index < 4; index++) {
+    //     raw[index] = framDriver.read(address + index);
+    // }
+
+    // return Convert.toInt32(raw);
 }
 
 void ConfigurationSettings::writeInt32(short address, int value) {
-    byte* raw = Convert.toInt32Array(value);
+    // byte* raw = Convert.toInt32Array(value);
 
-    for (auto index = 0; index < 4; index++) {
-        framDriver.write(address + index, raw[index]);
-    }
+    // for (auto index = 0; index < 4; index++) {
+    //     framDriver.write(address + index, raw[index]);
+    // }
 
-    delete[] raw;
+    // delete[] raw;
 }
 
 float ConfigurationSettings::readFloat(short address) {
-    byte raw[4];
+    return 0.0F;
 
-    for (auto index = 0; index < 4; index++) {
-        raw[index] = framDriver.read(address + index);
-    }
+    // byte raw[4];
 
-    return Convert.toFloat(raw);
+    // for (auto index = 0; index < 4; index++) {
+    //     raw[index] = framDriver.read(address + index);
+    // }
+
+    // return Convert.toFloat(raw);
 }
 
 void ConfigurationSettings::writeFloat(short address, float value) {
-    byte* raw = Convert.toFloatArray(value);
+    // byte* raw = Convert.toFloatArray(value);
 
-    for (auto index = 0; index < 4; index++) {
-        framDriver.write(address + index, raw[index]);
-    }
+    // for (auto index = 0; index < 4; index++) {
+    //     framDriver.write(address + index, raw[index]);
+    // }
 
-    delete[] raw;
+    // delete[] raw;
 }

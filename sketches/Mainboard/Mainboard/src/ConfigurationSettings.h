@@ -6,6 +6,9 @@
 // Provides access to the configuration settings.
 class ConfigurationSettings {
     public:
+        ConfigurationSettings();
+        ~ConfigurationSettings();
+
         void resetAuthenticationToken();
 
         void setExistingPairing(bool value);
@@ -64,6 +67,10 @@ class ConfigurationSettings {
 
         bool readBool(short address);
         void writeBool(short address, bool value);
+
+    private:
+
+        String m_pin;
 };
 
 // Defines the instance of configuration settings used by the hardware.

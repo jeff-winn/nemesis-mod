@@ -50,8 +50,8 @@ install_boards:
 
 install_libraries:
 	"$(ARDUINO_CLI)" lib install "CircularBuffer@1.3.3"
-	"$(ARDUINO_CLI)" lib install "Adafruit FRAM I2C@2.0.0"
 	"$(ARDUINO_CLI)" lib install "DualG2HighPowerMotorShield@2.0.0"
+	"$(ARDUINO_CLI)" lib install "IniFile@1.3.0"
 
 rebuild: clean build
 
