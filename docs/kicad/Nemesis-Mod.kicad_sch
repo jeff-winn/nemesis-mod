@@ -463,17 +463,14 @@
     (path "/ce052e62-9895-4eaf-b763-02bb1f2f2fc0/ea0658cd-816e-408e-924b-067dc4ea75f8"
       (reference "Belt_M3") (unit 1) (value "Motor_DC") (footprint "")
     )
-    (path "/e32477ef-d678-444f-b26c-29a85901c4f1/d5abcffd-9f92-40ee-9c4e-464ab9c4361c"
-      (reference "F1") (unit 1) (value "FRAM Breakout") (footprint "Adafruit:Adafruit_I2C_FRAM_Breakout")
-    )
     (path "/82d3265a-5100-495d-a477-2f939c3a86af/97e59e1c-e5d2-4d05-a9fb-968536188e0f"
       (reference "Flywheel_M1") (unit 1) (value "Motor_DC") (footprint "")
     )
     (path "/82d3265a-5100-495d-a477-2f939c3a86af/0affb59e-815b-4814-9528-bb7b3c68e111"
       (reference "Flywheel_M2") (unit 1) (value "Motor_DC") (footprint "")
     )
-    (path "/e32477ef-d678-444f-b26c-29a85901c4f1/2ff057b0-973b-43dd-9789-08dfd10cc5c8"
-      (reference "H1") (unit 1) (value " ") (footprint "Connector_PinHeader_2.54mm:PinHeader_2x14_P2.54mm_Vertical")
+    (path "/e32477ef-d678-444f-b26c-29a85901c4f1/ce77382d-309b-4f34-bc89-db819c8181be"
+      (reference "H1") (unit 1) (value " ") (footprint "Connector_PinHeader_2.54mm:PinHeader_2x12_P2.54mm_Vertical")
     )
     (path "/82d3265a-5100-495d-a477-2f939c3a86af/0bb919fe-8e02-449c-9390-f8be02e733b0"
       (reference "M1-M2") (unit 1) (value "Pololu_G2_HighPower_18v18") (footprint "")
@@ -504,6 +501,9 @@
     )
     (path "/0ac385c6-95d0-456b-97c0-5cd1065b43ce/bdaf9568-7446-4849-95c1-637aa2f29209"
       (reference "TRG2") (unit 1) (value "Firing Trigger") (footprint "")
+    )
+    (path "/e32477ef-d678-444f-b26c-29a85901c4f1/395e95e2-c327-41c4-8ae8-c31de7e8a58b"
+      (reference "U1") (unit 1) (value "Adafruit_MicroSD_SPI_Breakout") (footprint "Adafruit:Adafruit_MicroSD_Breakout")
     )
   )
 )
