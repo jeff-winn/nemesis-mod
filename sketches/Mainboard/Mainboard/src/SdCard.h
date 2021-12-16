@@ -4,6 +4,8 @@
 #include <IniFile.h>
 #include <SD.h>
 
+#define BLASTER_CONFIG_FILE     "blaster.ini"
+
 class SdCard {
     public:
         SdCard(uint32_t csPin, uint32_t detPin);

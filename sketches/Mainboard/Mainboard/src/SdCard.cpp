@@ -15,9 +15,10 @@ void SdCard::init() {
     pinMode(m_detPin, INPUT);
     pinMode(m_csPin, OUTPUT);
 
-    SD.begin(m_csPin);
-       
-    m_started = true;
+    auto success = SD.begin(m_csPin);
+    if (success) {
+        m_started = true;
+    }
 }
 
 bool SdCard::detected() {
@@ -25,7 +26,7 @@ bool SdCard::detected() {
 }
 
 IniFile SdCard::openIni() {
-    IniFile result("blaster.ini");
+    IniFile result = IniFile(BLASTER_CONFIG_FILE);
     result.open();
     
     return result;
