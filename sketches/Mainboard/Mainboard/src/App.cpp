@@ -103,9 +103,9 @@ bool App::isAuthorized() {
 
 void App::init() {
     Settings.init(); 
+    
     Flywheels.init();
     Belt.init();
-
     FiringTrigger.init();
     RevTrigger.init();
     HopperLock.init();
