@@ -1,5 +1,4 @@
 #include "SdCard.h"
-#include <SPI.h>
 
 SdCard Sdc = SdCard(A2, A1);
 
@@ -12,8 +11,6 @@ void SdCard::init() {
     if (m_started) {
         return;
     }
-
-    SPI.begin();
 
     pinMode(m_detPin, INPUT);
     pinMode(m_csPin, OUTPUT);

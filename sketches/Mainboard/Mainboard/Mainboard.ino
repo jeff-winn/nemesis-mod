@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <SPI.h>
 #include <Wire.h>
 
 #include "src/App.h"
@@ -12,6 +13,7 @@ const uint32_t RESET_BUTTON_PIN = 18;
 Button ResetButton = Button(RESET_BUTTON_PIN, true);
 
 void setup() {
+    SPI.begin();
     Wire.begin();
     
     ResetButton.init();
