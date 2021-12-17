@@ -18,17 +18,19 @@ BLEController::BLEController() {
 BLEController::~BLEController() {
 }
 
-void BLEController::init(RemoteCommandReceivedCallback callback) {
+void BLEController::setCallback(RemoteCommandReceivedCallback callback) {
   SetBluetoothCommandReceivedCallback(callback);
+}
 
+void BLEController::init(const char* name) {
   Bluefruit.begin();
-  Bluefruit.setName("Nerf Nemesis MXVII-10K");
+  Bluefruit.setName(name);
   
   Bluefruit.ScanResponse.addName();  
   Bluefruit.Periph.begin();
 
   m_discoveryService.setManufacturer("Jeff Winn");
-  m_discoveryService.setModel("Nerf Nemesis MXVII-10K");
+  m_discoveryService.setModel("Generic Blaster");
   m_discoveryService.begin();
 
   m_blasterService.begin();

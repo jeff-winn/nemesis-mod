@@ -77,6 +77,10 @@ BeltSpeed ConfigurationSettings::parsePusherSpeed(const char* value) {
     return BeltSpeed::Normal;
 }
 
+const char* ConfigurationSettings::getName() {
+    return m_name.c_str();
+}
+
 const char* ConfigurationSettings::getPairingPin() {
     return m_pin.c_str();
 }

@@ -19,7 +19,9 @@ class NRF52 {
         void setCharacteristic(uint8_t characteristicId, int value);
         void setCharacteristic(uint8_t characteristicId, uint8_t *data, uint8_t len);
 
+        void setName(const char* name);
         void setPin(const char* pin);
+        
         void startAdvertising();
 
         void readPacket(ReadPacketCallback callback);

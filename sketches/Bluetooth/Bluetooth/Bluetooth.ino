@@ -3,7 +3,7 @@
 #include "src/I2cController.h"
 
 void setup() {
-    BLE.init(OnBluetoothCommandReceived);
+    BLE.setCallback(OnBluetoothCommandReceived);
 
     I2CBus.init(OnI2cPacketReceived);
     I2CBus.notifyReady();

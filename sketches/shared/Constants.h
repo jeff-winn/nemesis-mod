@@ -10,6 +10,7 @@ const uint8_t NRF52_CID_START_ADVERTISING = 0x01;
 const uint8_t NRF52_CID_RESET = 0x02;
 const uint8_t NRF52_CID_SET_CHARACTERISTIC = 0x03;
 const uint8_t NRF52_CID_SET_PIN = 0x04;
+const uint8_t NRF52_CID_SET_NAME = 0x05;
 const uint8_t NRF52_CID_BELT_SPEED = 0x64;
 const uint8_t NRF52_CID_FLYWHEEL_SPEED = 0xC8;
 const uint8_t NRF52_CID_FLYWHEEL_TRIM = 0xC9;

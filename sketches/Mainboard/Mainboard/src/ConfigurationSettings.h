@@ -16,6 +16,7 @@ class ConfigurationSettings {
         void setExistingPairing(bool value);
         bool hasExistingPairing();
 
+        const char* getName();
         const char* getPairingPin();
 
         int getFeedLowSpeed();
