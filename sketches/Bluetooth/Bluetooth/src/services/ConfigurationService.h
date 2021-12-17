@@ -10,8 +10,8 @@ class ConfigurationService : public CustomBLEService {
         void init() override;
 
         void setFlywheelNormalSpeed(uint32_t value);
-        void setFlywheelKidSpeed(uint32_t value);
-        void setFlywheelLudicrousSpeed(uint32_t value);
+        void setFlywheelLowSpeed(uint32_t value);
+        void setFlywheelMaxSpeed(uint32_t value);
         void setFlywheelTrimVariance(float value);
         void setBeltNormalSpeed(uint32_t value);
         void setBeltLowSpeed(uint32_t value);
@@ -20,8 +20,8 @@ class ConfigurationService : public CustomBLEService {
     
     private:
         BLECharacteristic m_flywheelNormalSpeed;
-        BLECharacteristic m_flywheelKidSpeed;
-        BLECharacteristic m_flywheelLudicrousSpeed;
+        BLECharacteristic m_flywheelLowSpeed;
+        BLECharacteristic m_flywheelMaxSpeed;
         BLECharacteristic m_flywheelTrimVariance;
         BLECharacteristic m_beltNormalSpeed;
         BLECharacteristic m_beltLowSpeed;

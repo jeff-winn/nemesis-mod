@@ -10,10 +10,10 @@ FlywheelSpeed FlywheelSpeedCommand::getSpeedFromPacket(uint8_t* data) {
 
     switch (value) {
         case 1: {
-            return FlywheelSpeed::Kid;
+            return FlywheelSpeed::Low;
         }
         case 255: {
-            return FlywheelSpeed::Ludicrous;
+            return FlywheelSpeed::Max;
         }
     }
 

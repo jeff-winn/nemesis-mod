@@ -55,11 +55,11 @@ void ConfigurationSettings::init() {
 
 FlywheelSpeed ConfigurationSettings::parseFlywheelSpeed(const char* value) {
     if (value == "low") {
-        return FlywheelSpeed::Kid;
+        return FlywheelSpeed::Low;
     }
 
     if (value == "max") {
-        return FlywheelSpeed::Ludicrous;
+        return FlywheelSpeed::Max;
     }
 
     return FlywheelSpeed::Normal;
@@ -71,7 +71,7 @@ BeltSpeed ConfigurationSettings::parsePusherSpeed(const char* value) {
     }
 
     if (value == "max") {
-        return BeltSpeed::Normal;
+        return BeltSpeed::Max;
     }
 
     return BeltSpeed::Normal;
@@ -146,11 +146,11 @@ void ConfigurationSettings::setFeedMaxSpeed(int value) {
     m_pusherMax = value;
 }
 
-int ConfigurationSettings::getFlywheelKidSpeed() {
+int ConfigurationSettings::getFlywheelLowSpeed() {
     return m_flywheelsLow;
 }
 
-void ConfigurationSettings::setFlywheelKidSpeed(int value) {
+void ConfigurationSettings::setFlywheelLowSpeed(int value) {
     m_flywheelsLow = value;
 }
 
@@ -162,11 +162,11 @@ void ConfigurationSettings::setFlywheelNormalSpeed(int value) {
     m_flywheelsNormal = value;
 }
 
-int ConfigurationSettings::getFlywheelLudicrousSpeed() {
+int ConfigurationSettings::getFlywheelMaxSpeed() {
     return m_flywheelsMax;
 }
 
-void ConfigurationSettings::setFlywheelLudicrousSpeed(int value) {
+void ConfigurationSettings::setFlywheelMaxSpeed(int value) {
     m_flywheelsMax = value;
 }
 

@@ -9,7 +9,7 @@ void ChangeConfigurationSettingCommand::handleImpl(uint8_t* data, uint16_t len) 
     switch (m_subtype) {
         case 1: {
             auto value = getInt32ValueFromPacket(data);
-            Settings.setFlywheelKidSpeed(value);
+            Settings.setFlywheelLowSpeed(value);
             break;
         }
         case 2: {
@@ -19,7 +19,7 @@ void ChangeConfigurationSettingCommand::handleImpl(uint8_t* data, uint16_t len) 
         }
         case 3: {
             auto value = getInt32ValueFromPacket(data);
-            Settings.setFlywheelLudicrousSpeed(value);
+            Settings.setFlywheelMaxSpeed(value);
             break;
         }
         case 4: {

@@ -5,8 +5,8 @@
 
 ConfigurationService::ConfigurationService() : CustomBLEService(UUID128_SVC_CONFIGURATION) {
     m_flywheelNormalSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_NORMAL_SPEED);
-    m_flywheelKidSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_KID_SPEED);
-    m_flywheelLudicrousSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_LUDICROUS_SPEED);
+    m_flywheelLowSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_LOW_SPEED);
+    m_flywheelMaxSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_MAX_SPEED);
     m_flywheelTrimVariance = BLECharacteristic(UUID128_CHR_FLYWHEEL_TRIM_VARIANCE);
     m_beltNormalSpeed = BLECharacteristic(UUID128_CHR_BELT_NORMAL_SPEED);
     m_beltLowSpeed = BLECharacteristic(UUID128_CHR_BELT_LOW_SPEED);
@@ -14,7 +14,7 @@ ConfigurationService::ConfigurationService() : CustomBLEService(UUID128_SVC_CONF
     m_hopperLockEnabled = BLECharacteristic(UUID128_CHR_HOPPER_LOCK);
 }
 
-void onFlywheelKidSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
+void onFlywheelLowSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
     NotifyBluetoothCommandReceived(NRF52_CID_SET_CONFIG, data, len, 1);
 }
 
@@ -22,7 +22,7 @@ void onFlywheelNormalSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* ch
     NotifyBluetoothCommandReceived(NRF52_CID_SET_CONFIG, data, len, 2);
 }
 
-void onFlywheelLudicrousSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
+void onFlywheelMaxSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
     NotifyBluetoothCommandReceived(NRF52_CID_SET_CONFIG, data, len, 3);
 }
 
@@ -54,19 +54,19 @@ void ConfigurationService::init() {
     m_flywheelNormalSpeed.setWriteCallback(onFlywheelNormalSpeedWriteCallback);
     m_flywheelNormalSpeed.begin();
 
-    m_flywheelKidSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
-    m_flywheelKidSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
-    m_flywheelKidSpeed.setFixedLen(4);
-    m_flywheelKidSpeed.setUserDescriptor("Flywheel Kid Speed");
-    m_flywheelKidSpeed.setWriteCallback(onFlywheelKidSpeedWriteCallback);
-    m_flywheelKidSpeed.begin();
+    m_flywheelLowSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
+    m_flywheelLowSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
+    m_flywheelLowSpeed.setFixedLen(4);
+    m_flywheelLowSpeed.setUserDescriptor("Flywheel Low Speed");
+    m_flywheelLowSpeed.setWriteCallback(onFlywheelLowSpeedWriteCallback);
+    m_flywheelLowSpeed.begin();
 
-    m_flywheelLudicrousSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
-    m_flywheelLudicrousSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
-    m_flywheelLudicrousSpeed.setFixedLen(4);
-    m_flywheelLudicrousSpeed.setUserDescriptor("Flywheel Ludicrous Speed");
-    m_flywheelLudicrousSpeed.setWriteCallback(onFlywheelLudicrousSpeedWriteCallback);
-    m_flywheelLudicrousSpeed.begin();
+    m_flywheelMaxSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
+    m_flywheelMaxSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
+    m_flywheelMaxSpeed.setFixedLen(4);
+    m_flywheelMaxSpeed.setUserDescriptor("Flywheel Max Speed");
+    m_flywheelMaxSpeed.setWriteCallback(onFlywheelMaxSpeedWriteCallback);
+    m_flywheelMaxSpeed.begin();
 
     m_flywheelTrimVariance.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_flywheelTrimVariance.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
@@ -108,12 +108,12 @@ void ConfigurationService::setFlywheelNormalSpeed(uint32_t value) {
     m_flywheelNormalSpeed.write32(value);
 }
 
-void ConfigurationService::setFlywheelKidSpeed(uint32_t value) {
-    m_flywheelKidSpeed.write32(value);
+void ConfigurationService::setFlywheelLowSpeed(uint32_t value) {
+    m_flywheelLowSpeed.write32(value);
 }
 
-void ConfigurationService::setFlywheelLudicrousSpeed(uint32_t value) {
-    m_flywheelLudicrousSpeed.write32(value);
+void ConfigurationService::setFlywheelMaxSpeed(uint32_t value) {
+    m_flywheelMaxSpeed.write32(value);
 }
 
 void ConfigurationService::setFlywheelTrimVariance(float value) {

@@ -97,13 +97,13 @@ void BLEController::setCharacteristic(uint8_t characteristicId, uint8_t *data, u
       auto flywheelNormalSpeed = Convert.toInt32(data);
       m_configService.setFlywheelNormalSpeed(flywheelNormalSpeed);
     }
-    case NRF52_CHR_FLYWHEEL_KID_SPEED: {
-      auto flywheelKidSpeed = Convert.toInt32(data);
-      m_configService.setFlywheelKidSpeed(flywheelKidSpeed);
+    case NRF52_CHR_FLYWHEEL_LOW_SPEED: {
+      auto flywheelLowSpeed = Convert.toInt32(data);
+      m_configService.setFlywheelLowSpeed(flywheelLowSpeed);
     }
-    case NRF52_CHR_FLYWHEEL_LUDICROUS_SPEED: {
-      auto flywheelLudicrousSpeed = Convert.toInt32(data);
-      m_configService.setFlywheelLudicrousSpeed(flywheelLudicrousSpeed);
+    case NRF52_CHR_FLYWHEEL_MAX_SPEED: {
+      auto flywheelMaxSpeed = Convert.toInt32(data);
+      m_configService.setFlywheelMaxSpeed(flywheelMaxSpeed);
     }
     case NRF52_CHR_FLYWHEEL_TRIM_VARIANCE: {
       auto flywheelTrimVariance = Convert.toFloat(data);

@@ -66,14 +66,14 @@ int FlywheelController::calculateLimiterForSpeed(int speed) {
 
 int FlywheelController::determineMotorMaximumSpeed() {
     switch (m_speed) {
-        case FlywheelSpeed::Kid: {
-            return Settings.getFlywheelKidSpeed();
+        case FlywheelSpeed::Low: {
+            return Settings.getFlywheelLowSpeed();
         }
         case FlywheelSpeed::Normal: {
             return Settings.getFlywheelNormalSpeed();
         }
-        case FlywheelSpeed::Ludicrous: {
-            return Settings.getFlywheelLudicrousSpeed();
+        case FlywheelSpeed::Max: {
+            return Settings.getFlywheelMaxSpeed();
         }
     }
 

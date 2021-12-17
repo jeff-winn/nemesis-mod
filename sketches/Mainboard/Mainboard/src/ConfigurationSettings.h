@@ -31,14 +31,14 @@ class ConfigurationSettings {
         float getFlywheelTrimVariance();
         void setFlywheelTrimVariance(float value);
 
-        int getFlywheelKidSpeed();
-        void setFlywheelKidSpeed(int value);
+        int getFlywheelLowSpeed();
+        void setFlywheelLowSpeed(int value);
 
         int getFlywheelNormalSpeed();
         void setFlywheelNormalSpeed(int value);
 
-        int getFlywheelLudicrousSpeed();
-        void setFlywheelLudicrousSpeed(int value);
+        int getFlywheelMaxSpeed();
+        void setFlywheelMaxSpeed(int value);
 
         float getFlywheelM1TrimAdjustment();
         void setFlywheelM1TrimAdjustment(float value);
