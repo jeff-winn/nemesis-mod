@@ -11,7 +11,7 @@ enum class PusherSpeed {
     Max = 255
 };
 
-// Provides a mechanism to control the feed assembly.
+// Provides a mechanism to control the pusher assembly.
 class PusherController : public MotorController {
     public:
         PusherController();
@@ -44,6 +44,6 @@ class PusherController : public MotorController {
         int m_m1speed;
 };
 
-extern PusherController Belt;
+extern PusherController Pusher;
 
 #endif /* PUSHER_CONTROLLER_H */

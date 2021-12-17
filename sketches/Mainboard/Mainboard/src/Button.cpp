@@ -1,5 +1,6 @@
-#include "Mainboard.h"
 #include "Button.h"
+
+#include "Mainboard.h"
 
 Button::Button(uint32_t pin, bool inverted) {
     m_pin = pin;

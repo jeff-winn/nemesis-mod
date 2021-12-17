@@ -1,6 +1,6 @@
-#include <cstddef>
-
 #include "CommandFactory.h"
+
+#include <cstddef>
 #include "commands/BTReadyCommand.h"
 #include "commands/ChangeConfigurationSettingCommand.h"
 #include "commands/FlywheelSpeedCommand.h"
@@ -14,7 +14,7 @@ Command* CommandFactory::createCommand(uint8_t type, uint8_t subtype) {
             return new ChangeConfigurationSettingCommand(subtype);
         
         case NRF52_CID_PUSHER_SPEED:
-            return new PusherSpeedCommand(&Belt);
+            return new PusherSpeedCommand(&Pusher);
         
         case NRF52_CID_FLYWHEEL_SPEED:
             return new FlywheelSpeedCommand(&Flywheels);

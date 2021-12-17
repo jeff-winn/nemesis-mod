@@ -1,8 +1,9 @@
-#include "ConfigurationSettings.h"
 #include "PusherController.h"
+
+#include "ConfigurationSettings.h"
 #include "Mainboard.h"
 
-PusherController Belt = PusherController();
+PusherController Pusher = PusherController();
 
 PusherController::PusherController() {
     m_driver = G2HighPowerMotorShield18v17(17, 0, 11, 0, A2);

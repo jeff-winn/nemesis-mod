@@ -1,4 +1,5 @@
 #include "App.h"
+
 #include "Button.h"
 #include "CommandFactory.h"
 #include "ConfigurationSettings.h"
@@ -72,11 +73,11 @@ bool App::isAlreadyFiring() {
 void App::startFiring() {
     m_firing = true;
 
-    Belt.start();
+    Pusher.start();
 }
 
 void App::stopFiring() {
-    Belt.stop();
+    Pusher.stop();
 
     m_firing = false;
 }
@@ -105,7 +106,7 @@ void App::init() {
     Settings.init(); 
     
     Flywheels.init();
-    Belt.init();
+    Pusher.init();
     FiringTrigger.init();
     RevTrigger.init();
     HopperLock.init();
