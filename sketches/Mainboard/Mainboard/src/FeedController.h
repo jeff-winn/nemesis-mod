@@ -4,8 +4,8 @@
 #include "hardware/G2HighPowerMotorShield.h"
 #include "MotorController.h"
 
-// Defines the belt speeds (rate of fire) available.
-enum class BeltSpeed {
+// Defines the pusher speeds (rate of fire) available.
+enum class PusherSpeed {
     Normal = 1,
     Low = 2,
     Max = 255
@@ -22,11 +22,11 @@ class FeedController : public MotorController {
         // Gets the current of the motor specified (in milliamps).
         unsigned int getMotorCurrentMilliamps();
 
-        // Gets the belt speed.
-        BeltSpeed getSpeed();
+        // Gets the pusher speed.
+        PusherSpeed getSpeed();
 
-        // Sets the belt speed.
-        void setSpeed(BeltSpeed speed);
+        // Sets the pusher speed.
+        void setSpeed(PusherSpeed speed);
 
     protected:
         int calculateMotorSpeed();
@@ -40,7 +40,7 @@ class FeedController : public MotorController {
     private:
         G2HighPowerMotorShield18v17 m_driver;
 
-        BeltSpeed m_speed;
+        PusherSpeed m_speed;
         int m_m1speed;
 };
 

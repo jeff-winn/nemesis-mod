@@ -52,15 +52,15 @@ class ConfigurationSettings {
         FlywheelSpeed getFlywheelSpeed();
         void setFlywheelSpeed(FlywheelSpeed value);
 
-        BeltSpeed getPusherSpeed();
-        void setPusherSpeed(BeltSpeed value);
+        PusherSpeed getPusherSpeed();
+        void setPusherSpeed(PusherSpeed value);
 
         // Initializes the configuration settings.
         void init();
 
     protected:
         FlywheelSpeed parseFlywheelSpeed(const char* value);
-        BeltSpeed parsePusherSpeed(const char* value);
+        PusherSpeed parsePusherSpeed(const char* value);
 
     private:
         String m_name;
@@ -80,7 +80,7 @@ class ConfigurationSettings {
         unsigned int m_flywheelsMax;
 
         FlywheelSpeed m_flywheelSpeed;
-        BeltSpeed m_pusherSpeed;
+        PusherSpeed m_pusherSpeed;
 };
 
 // Defines the instance of configuration settings used by the hardware.

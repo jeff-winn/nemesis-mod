@@ -65,16 +65,16 @@ FlywheelSpeed ConfigurationSettings::parseFlywheelSpeed(const char* value) {
     return FlywheelSpeed::Normal;
 }
 
-BeltSpeed ConfigurationSettings::parsePusherSpeed(const char* value) {
+PusherSpeed ConfigurationSettings::parsePusherSpeed(const char* value) {
     if (value == "low") {
-        return BeltSpeed::Low;
+        return PusherSpeed::Low;
     }
 
     if (value == "max") {
-        return BeltSpeed::Max;
+        return PusherSpeed::Max;
     }
 
-    return BeltSpeed::Normal;
+    return PusherSpeed::Normal;
 }
 
 const char* ConfigurationSettings::getName() {
@@ -108,11 +108,11 @@ void ConfigurationSettings::setFlywheelSpeed(FlywheelSpeed value) {
     m_flywheelSpeed = value;
 }
 
-BeltSpeed ConfigurationSettings::getPusherSpeed() {
+PusherSpeed ConfigurationSettings::getPusherSpeed() {
     return m_pusherSpeed;
 }
 
-void ConfigurationSettings::setPusherSpeed(BeltSpeed value) {
+void ConfigurationSettings::setPusherSpeed(PusherSpeed value) {
     m_pusherSpeed = value;
 }
 
