@@ -122,27 +122,27 @@ void ConfigurationSettings::resetAuthenticationToken() {
     // }
 }
 
-int ConfigurationSettings::getFeedLowSpeed() {
+int ConfigurationSettings::getPusherLowSpeed() {
     return m_pusherLow;
 }
 
-void ConfigurationSettings::setFeedLowSpeed(int value) {
+void ConfigurationSettings::setPusherLowSpeed(int value) {
     m_pusherLow = value;
 }
 
-int ConfigurationSettings::getFeedNormalSpeed() {
+int ConfigurationSettings::getPusherNormalSpeed() {
     return m_pusherNormal;
 }
 
-void ConfigurationSettings::setFeedNormalSpeed(int value) {
+void ConfigurationSettings::setPusherNormalSpeed(int value) {
     m_pusherNormal = value;
 }
 
-int ConfigurationSettings::getFeedMaxSpeed() {
+int ConfigurationSettings::getPusherMaxSpeed() {
     return m_pusherMax;
 }
 
-void ConfigurationSettings::setFeedMaxSpeed(int value) {    
+void ConfigurationSettings::setPusherMaxSpeed(int value) {    
     m_pusherMax = value;
 }
 

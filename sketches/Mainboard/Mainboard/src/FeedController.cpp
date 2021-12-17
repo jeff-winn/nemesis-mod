@@ -48,13 +48,13 @@ void FeedController::onStop() {
 int FeedController::calculateMotorSpeed() {
     switch (m_speed) {
         case BeltSpeed::Low: {
-            return Settings.getFeedLowSpeed();
+            return Settings.getPusherLowSpeed();
         }
         case BeltSpeed::Normal: {
-            return Settings.getFeedNormalSpeed();
+            return Settings.getPusherNormalSpeed();
         }
         case BeltSpeed::Max: {
-            return Settings.getFeedMaxSpeed();
+            return Settings.getPusherMaxSpeed();
         }
     }
 

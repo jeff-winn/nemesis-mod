@@ -13,9 +13,9 @@ class ConfigurationService : public CustomBLEService {
         void setFlywheelLowSpeed(uint32_t value);
         void setFlywheelMaxSpeed(uint32_t value);
         void setFlywheelTrimVariance(float value);
-        void setBeltNormalSpeed(uint32_t value);
-        void setBeltLowSpeed(uint32_t value);
-        void setBeltMaxSpeed(uint32_t value);
+        void setPusherNormalSpeed(uint32_t value);
+        void setPusherLowSpeed(uint32_t value);
+        void setPusherMaxSpeed(uint32_t value);
         void setHopperLockEnabled(bool value);
     
     private:
@@ -23,9 +23,9 @@ class ConfigurationService : public CustomBLEService {
         BLECharacteristic m_flywheelLowSpeed;
         BLECharacteristic m_flywheelMaxSpeed;
         BLECharacteristic m_flywheelTrimVariance;
-        BLECharacteristic m_beltNormalSpeed;
-        BLECharacteristic m_beltLowSpeed;
-        BLECharacteristic m_beltMaxSpeed;
+        BLECharacteristic m_pusherNormalSpeed;
+        BLECharacteristic m_pusherLowSpeed;
+        BLECharacteristic m_pusherMaxSpeed;
         BLECharacteristic m_hopperLockEnabled;
 };
 

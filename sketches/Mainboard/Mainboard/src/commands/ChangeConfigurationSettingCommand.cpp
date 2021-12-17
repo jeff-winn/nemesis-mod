@@ -24,17 +24,17 @@ void ChangeConfigurationSettingCommand::handleImpl(uint8_t* data, uint16_t len) 
         }
         case 4: {
             auto value = getInt32ValueFromPacket(data);
-            Settings.setFeedNormalSpeed(value);
+            Settings.setPusherNormalSpeed(value);
             break;
         }
         case 5: {
             auto value = getInt32ValueFromPacket(data);
-            Settings.setFeedLowSpeed(value);
+            Settings.setPusherLowSpeed(value);
             break;
         }
         case 6: {
             auto value = getInt32ValueFromPacket(data);
-            Settings.setFeedMaxSpeed(value);
+            Settings.setPusherMaxSpeed(value);
             break;
         }
         case 7: {

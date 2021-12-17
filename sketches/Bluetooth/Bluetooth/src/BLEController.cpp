@@ -83,7 +83,7 @@ void BLEController::setCharacteristic(uint8_t characteristicId, uint8_t *data, u
       m_blasterService.setFlywheelSpeed(data[0]);
     }
     case NRF52_CHR_BELT_SPEED: {
-      m_blasterService.setBeltSpeed(data[0]);
+      m_blasterService.setPusherSpeed(data[0]);
     }
     case NRF52_CHR_FLYWHEEL_M1_TRIM: {
       auto m1TrimValue = Convert.toFloat(data);
@@ -109,17 +109,17 @@ void BLEController::setCharacteristic(uint8_t characteristicId, uint8_t *data, u
       auto flywheelTrimVariance = Convert.toFloat(data);
       m_configService.setFlywheelTrimVariance(flywheelTrimVariance);
     }
-    case NRF52_CHR_BELT_NORMAL_SPEED: {
-      auto beltNormalSpeed = Convert.toInt32(data);
-      m_configService.setBeltNormalSpeed(beltNormalSpeed);
+    case NRF52_CHR_PUSHER_NORMAL_SPEED: {
+      auto pusherNormalSpeed = Convert.toInt32(data);
+      m_configService.setPusherNormalSpeed(pusherNormalSpeed);
     }
-    case NRF52_CHR_BELT_LOW_SPEED: {
-      auto beltLowSpeed = Convert.toInt32(data);
-      m_configService.setBeltLowSpeed(beltLowSpeed);
+    case NRF52_CHR_PUSHER_LOW_SPEED: {
+      auto pusherLowSpeed = Convert.toInt32(data);
+      m_configService.setPusherLowSpeed(pusherLowSpeed);
     }
-    case NRF52_CHR_BELT_MAX_SPEED: {
-      auto beltMaxSpeed = Convert.toInt32(data);
-      m_configService.setBeltMaxSpeed(beltMaxSpeed);
+    case NRF52_CHR_PUSHER_MAX_SPEED: {
+      auto pusherMaxSpeed = Convert.toInt32(data);
+      m_configService.setPusherMaxSpeed(pusherMaxSpeed);
     }
     case NRF52_CHR_HOPPER_LOCK_ENABLED: {
       auto hopperLockEnabled = false;

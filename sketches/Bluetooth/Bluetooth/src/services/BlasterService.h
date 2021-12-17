@@ -11,7 +11,7 @@ class BlasterService : public CustomBLEService {
         void init() override;
 
         void setFlywheelSpeed(uint8_t value);
-        void setBeltSpeed(uint8_t value);
+        void setPusherSpeed(uint8_t value);
         void setFlywheelM1TrimSpeed(float value);
         void setFlywheelM2TrimSpeed(float value);
 
@@ -19,7 +19,7 @@ class BlasterService : public CustomBLEService {
         BLECharacteristic m_flywheelSpeed;
         BLECharacteristic m_flywheelM1TrimSpeed;
         BLECharacteristic m_flywheelM2TrimSpeed;
-        BLECharacteristic m_beltSpeed;
+        BLECharacteristic m_pusherSpeed;
 };
 
 #endif /* BLASTER_SERVICE_H */

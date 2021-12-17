@@ -19,14 +19,14 @@ class ConfigurationSettings {
         const char* getName();
         const char* getPairingPin();
 
-        int getFeedLowSpeed();
-        void setFeedLowSpeed(int value);
+        int getPusherLowSpeed();
+        void setPusherLowSpeed(int value);
 
-        int getFeedNormalSpeed();
-        void setFeedNormalSpeed(int value);
+        int getPusherNormalSpeed();
+        void setPusherNormalSpeed(int value);
 
-        int getFeedMaxSpeed();
-        void setFeedMaxSpeed(int value);
+        int getPusherMaxSpeed();
+        void setPusherMaxSpeed(int value);
 
         float getFlywheelTrimVariance();
         void setFlywheelTrimVariance(float value);
