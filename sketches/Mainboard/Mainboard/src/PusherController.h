@@ -1,5 +1,5 @@
-#ifndef FEED_CONTROLLER_H
-#define FEED_CONTROLLER_H
+#ifndef PUSHER_CONTROLLER_H
+#define PUSHER_CONTROLLER_H
 
 #include "hardware/G2HighPowerMotorShield.h"
 #include "MotorController.h"
@@ -12,9 +12,9 @@ enum class PusherSpeed {
 };
 
 // Provides a mechanism to control the feed assembly.
-class FeedController : public MotorController {
+class PusherController : public MotorController {
     public:
-        FeedController();
+        PusherController();
 
         // Initializes the controller.
         void init() override;
@@ -44,6 +44,6 @@ class FeedController : public MotorController {
         int m_m1speed;
 };
 
-extern FeedController Belt;
+extern PusherController Belt;
 
-#endif /* FEED_CONTROLLER_H */
+#endif /* PUSHER_CONTROLLER_H */

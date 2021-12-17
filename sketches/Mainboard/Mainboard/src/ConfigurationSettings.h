@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include "FlywheelController.h"
-#include "FeedController.h"
+#include "PusherController.h"
 
 // Provides access to the configuration settings.
 class ConfigurationSettings {

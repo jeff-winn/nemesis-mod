@@ -1,19 +1,19 @@
-#include "BeltSpeedCommand.h"
+#include "PusherSpeedCommand.h"
 
-BeltSpeedCommand::BeltSpeedCommand(FeedController* controller) {
+PusherSpeedCommand::PusherSpeedCommand(PusherController* controller) {
     m_controller = controller;
 }
 
-BeltSpeedCommand::~BeltSpeedCommand() {
+PusherSpeedCommand::~PusherSpeedCommand() {
     m_controller = NULL;
 }
 
-void BeltSpeedCommand::handleImpl(uint8_t* data, uint16_t len) {
+void PusherSpeedCommand::handleImpl(uint8_t* data, uint16_t len) {
     auto newSpeed = getSpeedFromPacket(data);
     m_controller->setSpeed(newSpeed);
 }
 
-PusherSpeed BeltSpeedCommand::getSpeedFromPacket(uint8_t* data) {
+PusherSpeed PusherSpeedCommand::getSpeedFromPacket(uint8_t* data) {
     auto value = data[0];
 
     switch (value) {

@@ -82,7 +82,7 @@ void BLEController::setCharacteristic(uint8_t characteristicId, uint8_t *data, u
     case NRF52_CHR_FLYWHEEL_SPEED: {
       m_blasterService.setFlywheelSpeed(data[0]);
     }
-    case NRF52_CHR_BELT_SPEED: {
+    case NRF52_CHR_PUSHER_SPEED: {
       m_blasterService.setPusherSpeed(data[0]);
     }
     case NRF52_CHR_FLYWHEEL_M1_TRIM: {

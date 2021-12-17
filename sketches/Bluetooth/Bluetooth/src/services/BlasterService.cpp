@@ -7,7 +7,7 @@ BlasterService::BlasterService() : CustomBLEService(UUID128_SVC_NERF_BLASTER) {
     m_flywheelSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_SPEED);
     m_flywheelM1TrimSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_M1TRIM_SPEED);
     m_flywheelM2TrimSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_M2TRIM_SPEED);
-    m_pusherSpeed = BLECharacteristic(UUID128_CHR_BELT_SPEED);
+    m_pusherSpeed = BLECharacteristic(UUID128_CHR_PUSHER_SPEED);
 }
 
 void onFlywheelSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
@@ -23,7 +23,7 @@ void onFlywheelM2TrimAdjustmentWriteCallback(uint16_t conn_hdl, BLECharacteristi
 }
 
 void onPusherSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    NotifyBluetoothCommandReceived(NRF52_CID_BELT_SPEED, data, len, 0);
+    NotifyBluetoothCommandReceived(NRF52_CID_PUSHER_SPEED, data, len, 0);
 }
 
 void BlasterService::init() {  
