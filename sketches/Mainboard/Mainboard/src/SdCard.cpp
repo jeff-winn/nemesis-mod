@@ -1,4 +1,5 @@
 #include "SdCard.h"
+#include <SD.h>
 
 #define BLASTER_CONFIG_FILE "blaster.cfg"
 

@@ -2,7 +2,6 @@
 #define SD_CARD_H
 
 #include <ArduinoJson.h>
-#include <SD.h>
 
 class SdCard {
     public:
