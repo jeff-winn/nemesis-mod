@@ -30,7 +30,7 @@ void onBeltNormalSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, u
     NotifyBluetoothCommandReceived(NRF52_CID_SET_CONFIG, data, len, 4);
 }
 
-void onBeltMediumSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
+void onBeltLowSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
     NotifyBluetoothCommandReceived(NRF52_CID_SET_CONFIG, data, len, 5);
 }
 
@@ -86,7 +86,7 @@ void ConfigurationService::init() {
     m_beltLowSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
     m_beltLowSpeed.setFixedLen(4);
     m_beltLowSpeed.setUserDescriptor("Pusher Low Speed");
-    m_beltLowSpeed.setWriteCallback(onBeltMediumSpeedWriteCallback);
+    m_beltLowSpeed.setWriteCallback(onBeltLowSpeedWriteCallback);
     m_beltLowSpeed.begin();
 
     m_beltMaxSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
