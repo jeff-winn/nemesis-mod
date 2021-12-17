@@ -111,9 +111,9 @@ void BLEController::setCharacteristic(uint8_t characteristicId, uint8_t *data, u
       auto beltNormalSpeed = Convert.toInt32(data);
       m_configService.setBeltNormalSpeed(beltNormalSpeed);
     }
-    case NRF52_CHR_BELT_MEDIUM_SPEED: {
-      auto beltMediumSpeed = Convert.toInt32(data);
-      m_configService.setBeltMediumSpeed(beltMediumSpeed);
+    case NRF52_CHR_BELT_LOW_SPEED: {
+      auto beltLowSpeed = Convert.toInt32(data);
+      m_configService.setBeltLowSpeed(beltLowSpeed);
     }
     case NRF52_CHR_BELT_MAX_SPEED: {
       auto beltMaxSpeed = Convert.toInt32(data);

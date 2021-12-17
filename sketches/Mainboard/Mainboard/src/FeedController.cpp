@@ -13,7 +13,8 @@ void FeedController::init() {
     m_driver.calibrateCurrentOffset();
     m_driver.disableDriver();
 
-    setSpeed(BeltSpeed::Normal);
+    auto speed = Settings.getPusherSpeed();
+    setSpeed(speed);
     
     MCU.delaySafe(1);    
 }
@@ -46,11 +47,11 @@ void FeedController::onStop() {
 
 int FeedController::calculateMotorSpeed() {
     switch (m_speed) {
+        case BeltSpeed::Low: {
+            return Settings.getFeedLowSpeed();
+        }
         case BeltSpeed::Normal: {
             return Settings.getFeedNormalSpeed();
-        }
-        case BeltSpeed::Medium: {
-            return Settings.getFeedMediumSpeed();
         }
         case BeltSpeed::Max: {
             return Settings.getFeedMaxSpeed();

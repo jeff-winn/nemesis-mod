@@ -1,10 +1,8 @@
 #ifndef SD_CARD_H
 #define SD_CARD_H
 
-#include <IniFile.h>
+#include <ArduinoJson.h>
 #include <SD.h>
-
-#define BLASTER_CONFIG_FILE     "blaster.ini"
 
 class SdCard {
     public:
@@ -13,7 +11,7 @@ class SdCard {
         void init();
         bool detected();
 
-        IniFile openIni();        
+        DynamicJsonDocument readConfig();        
 
     private:
         uint32_t m_csPin;

@@ -18,7 +18,7 @@ BeltSpeed BeltSpeedCommand::getSpeedFromPacket(uint8_t* data) {
 
     switch (value) {
         case 2: {
-            return BeltSpeed::Medium;            
+            return BeltSpeed::Low;            
         }
         case 255: {
             return BeltSpeed::Max;

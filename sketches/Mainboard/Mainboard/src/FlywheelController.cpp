@@ -15,7 +15,8 @@ void FlywheelController::init() {
     m_driver.calibrateCurrentOffsets();
     m_driver.disableDrivers();
 
-    setSpeed(FlywheelSpeed::Normal);
+    auto speed = Settings.getFlywheelSpeed();
+    setSpeed(speed);
     
     MCU.delaySafe(1);
 }

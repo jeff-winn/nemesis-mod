@@ -9,7 +9,7 @@ ConfigurationService::ConfigurationService() : CustomBLEService(UUID128_SVC_CONF
     m_flywheelLudicrousSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_LUDICROUS_SPEED);
     m_flywheelTrimVariance = BLECharacteristic(UUID128_CHR_FLYWHEEL_TRIM_VARIANCE);
     m_beltNormalSpeed = BLECharacteristic(UUID128_CHR_BELT_NORMAL_SPEED);
-    m_beltMediumSpeed = BLECharacteristic(UUID128_CHR_BELT_MEDIUM_SPEED);
+    m_beltLowSpeed = BLECharacteristic(UUID128_CHR_BELT_LOW_SPEED);
     m_beltMaxSpeed = BLECharacteristic(UUID128_CHR_BELT_MAX_SPEED);
     m_hopperLockEnabled = BLECharacteristic(UUID128_CHR_HOPPER_LOCK);
 }
@@ -78,28 +78,28 @@ void ConfigurationService::init() {
     m_beltNormalSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_beltNormalSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
     m_beltNormalSpeed.setFixedLen(4);
-    m_beltNormalSpeed.setUserDescriptor("Belt Feed Normal Speed");
+    m_beltNormalSpeed.setUserDescriptor("Pusher Normal Speed");
     m_beltNormalSpeed.setWriteCallback(onBeltNormalSpeedWriteCallback);
     m_beltNormalSpeed.begin();
 
-    m_beltMediumSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
-    m_beltMediumSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
-    m_beltMediumSpeed.setFixedLen(4);
-    m_beltMediumSpeed.setUserDescriptor("Belt Feed Medium Speed");
-    m_beltMediumSpeed.setWriteCallback(onBeltMediumSpeedWriteCallback);
-    m_beltMediumSpeed.begin();
+    m_beltLowSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
+    m_beltLowSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
+    m_beltLowSpeed.setFixedLen(4);
+    m_beltLowSpeed.setUserDescriptor("Pusher Low Speed");
+    m_beltLowSpeed.setWriteCallback(onBeltMediumSpeedWriteCallback);
+    m_beltLowSpeed.begin();
 
     m_beltMaxSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_beltMaxSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
     m_beltMaxSpeed.setFixedLen(4);
-    m_beltMaxSpeed.setUserDescriptor("Belt Feed Max Speed");
+    m_beltMaxSpeed.setUserDescriptor("Pusher Max Speed");
     m_beltMaxSpeed.setWriteCallback(onBeltMaxSpeedWriteCallback);
     m_beltMaxSpeed.begin();
 
     m_hopperLockEnabled.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
     m_hopperLockEnabled.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
     m_hopperLockEnabled.setFixedLen(1);
-    m_hopperLockEnabled.setUserDescriptor("Hopper Lock Enabled");
+    m_hopperLockEnabled.setUserDescriptor("Mag Lock Enabled");
     m_hopperLockEnabled.setWriteCallback(onHopperLockEnabledWriteCallback);
     m_hopperLockEnabled.begin();
 }
@@ -124,8 +124,8 @@ void ConfigurationService::setBeltNormalSpeed(uint32_t value) {
     m_beltNormalSpeed.write32(value);
 }
 
-void ConfigurationService::setBeltMediumSpeed(uint32_t value) {
-    m_beltMediumSpeed.write32(value);
+void ConfigurationService::setBeltLowSpeed(uint32_t value) {
+    m_beltLowSpeed.write32(value);
 }
 
 void ConfigurationService::setBeltMaxSpeed(uint32_t value) {

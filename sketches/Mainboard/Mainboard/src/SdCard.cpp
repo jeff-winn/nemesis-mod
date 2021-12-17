@@ -1,5 +1,7 @@
 #include "SdCard.h"
 
+#define BLASTER_CONFIG_FILE "blaster.cfg"
+
 SdCard Sdc = SdCard(A2, A1);
 
 SdCard::SdCard(uint32_t csPin, uint32_t detPin) {
@@ -25,9 +27,13 @@ bool SdCard::detected() {
     return digitalRead(m_detPin) != 0;
 }
 
-IniFile SdCard::openIni() {
-    IniFile result = IniFile(BLASTER_CONFIG_FILE);
-    result.open();
-    
-    return result;
+DynamicJsonDocument SdCard::readConfig() {
+    auto file = SD.open(BLASTER_CONFIG_FILE, FILE_READ);
+    auto size = file.size();
+
+    DynamicJsonDocument doc(size);  
+    deserializeJson(doc, file);
+
+    file.close();
+    return doc;
 }

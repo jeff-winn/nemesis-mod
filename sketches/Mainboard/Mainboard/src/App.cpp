@@ -134,14 +134,14 @@ void App::revokeAuthorization() {
 }
 
 void App::clear() {
-    Settings.clear();
+    // Settings.clear();
 
     resetCore();
 }
 
 void App::reset() {
     Settings.resetAuthenticationToken();
-    Settings.defaultSettings();
+    // Settings.defaultSettings();
 
     resetCore();
 }

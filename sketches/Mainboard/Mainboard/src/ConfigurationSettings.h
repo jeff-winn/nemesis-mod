@@ -2,6 +2,8 @@
 #define CONFIGURATION_SETTINGS_H
 
 #include <Arduino.h>
+#include "FlywheelController.h"
+#include "FeedController.h"
 
 // Provides access to the configuration settings.
 class ConfigurationSettings {
@@ -16,11 +18,11 @@ class ConfigurationSettings {
 
         const char* getPairingPin();
 
+        int getFeedLowSpeed();
+        void setFeedLowSpeed(int value);
+
         int getFeedNormalSpeed();
         void setFeedNormalSpeed(int value);
-
-        int getFeedMediumSpeed();
-        void setFeedMediumSpeed(int value);
 
         int getFeedMaxSpeed();
         void setFeedMaxSpeed(int value);
@@ -46,31 +48,38 @@ class ConfigurationSettings {
         bool isHopperLockEnabled();
         void setIsHopperLockEnabled(bool value);
 
+        FlywheelSpeed getFlywheelSpeed();
+        void setFlywheelSpeed(FlywheelSpeed value);
+
+        BeltSpeed getPusherSpeed();
+        void setPusherSpeed(BeltSpeed value);
+
         // Initializes the configuration settings.
         void init();
 
-        // Defaults all of the configuration settings.
-        void defaultSettings();
-
-        // Clears the configuration settings.
-        void clear();
-
     protected:
-        bool initialized();
-        void setInitialized(bool value);
-
-        int readInt32(short address);
-        void writeInt32(short address, int value);
-
-        float readFloat(short address);
-        void writeFloat(short address, float value);
-
-        bool readBool(short address);
-        void writeBool(short address, bool value);
+        FlywheelSpeed parseFlywheelSpeed(const char* value);
+        BeltSpeed parsePusherSpeed(const char* value);
 
     private:
-
+        String m_name;
+        bool m_isBluetoothEnabled;
         String m_pin;
+        float m_flywheelTrimVariance;
+        float m_flywheel1TrimAdjustment;
+        float m_flywheel2TrimAdjustment;
+        bool m_isMagLockEnabled;
+
+        unsigned int m_pusherLow;
+        unsigned int m_pusherNormal;
+        unsigned int m_pusherMax;
+
+        unsigned int m_flywheelsLow;
+        unsigned int m_flywheelsNormal;
+        unsigned int m_flywheelsMax;
+
+        FlywheelSpeed m_flywheelSpeed;
+        BeltSpeed m_pusherSpeed;
 };
 
 // Defines the instance of configuration settings used by the hardware.

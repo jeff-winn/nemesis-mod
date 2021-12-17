@@ -20,7 +20,7 @@ void BTReadyCommand::handleImpl(uint8_t* data, uint16_t len) {
     BT.setCharacteristic(NRF52_CHR_FLYWHEEL_LUDICROUS_SPEED, Settings.getFlywheelLudicrousSpeed());
     BT.setCharacteristic(NRF52_CHR_FLYWHEEL_TRIM_VARIANCE, Settings.getFlywheelTrimVariance());
     BT.setCharacteristic(NRF52_CHR_BELT_NORMAL_SPEED, Settings.getFeedNormalSpeed());
-    BT.setCharacteristic(NRF52_CHR_BELT_MEDIUM_SPEED, Settings.getFeedMediumSpeed());
+    BT.setCharacteristic(NRF52_CHR_BELT_LOW_SPEED, Settings.getFeedLowSpeed());
     BT.setCharacteristic(NRF52_CHR_BELT_MAX_SPEED, Settings.getFeedMaxSpeed());
     BT.setCharacteristic(NRF52_CHR_HOPPER_LOCK_ENABLED, Settings.isHopperLockEnabled());
     
