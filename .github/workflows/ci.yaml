@@ -16,7 +16,7 @@ jobs:
     env:
       SONAR_SCANNER_VERSION: 4.4.0.2170
       SONAR_SERVER_URL: "https://sonarcloud.io"
-      BUILD_WRAPPER_OUT_DIR: .sonarqube/out
+      BUILD_WRAPPER_OUT_DIR: build_wrapper_out_dir
 
     steps:
     - name: Checkout
@@ -27,7 +27,7 @@ jobs:
       with:
         java-version: 11
     
-    - name: Download and set up sonar-scanner
+    - name: Setup sonar-scanner
       env:
         SONAR_SCANNER_DOWNLOAD_URL: https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${{ env.SONAR_SCANNER_VERSION }}-windows.zip
       run: |
@@ -36,7 +36,7 @@ jobs:
         unzip -o $HOME\.sonar\sonar-scanner.zip -d $HOME\.sonar\
         echo "$HOME\.sonar\sonar-scanner-${{ env.SONAR_SCANNER_VERSION }}-windows\bin" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
 
-    - name: Download and set up build-wrapper
+    - name: Setup build-wrapper
       env:
         BUILD_WRAPPER_DOWNLOAD_URL: ${{ env.SONAR_SERVER_URL }}/static/cpp/build-wrapper-win-x86.zip
       run: |
