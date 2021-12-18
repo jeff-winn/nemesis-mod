@@ -16,7 +16,7 @@ jobs:
     env:
       SONAR_SCANNER_VERSION: 4.4.0.2170
       SONAR_SERVER_URL: "https://sonarcloud.io"
-      BUILD_WRAPPER_OUT_DIR: build_wrapper_out_dir
+      BUILD_WRAPPER_OUT_DIR: out
 
     steps:
     - name: Checkout
@@ -45,7 +45,8 @@ jobs:
         echo "$HOME\.sonar\build-wrapper-win-x86" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
 
     - name: Build
-      run: build-wrapper-win-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} make clean all
+      run: |
+        build-wrapper-win-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} make
 
     - name: Run sonar-scanner
       env:
@@ -53,9 +54,3 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
         sonar-scanner --define sonar.host.url="${{ env.SONAR_SERVER_URL }}" --define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}"
-
-    - name: Upload everything
-      uses: actions/upload-artifact@v2
-      with:
-        name: everything
-        path: .
