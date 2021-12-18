@@ -7,7 +7,7 @@
 **/kicad/out
 
 # Build configuration outputs
-**/build/*
+sketches/**/build/*
 **/*.elf
 **/*.hex
 **/*.bin
