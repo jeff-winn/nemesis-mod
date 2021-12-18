@@ -127,5 +127,5 @@ void NRF52::sendPacket(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len
     Wire.write(packet, size);
     Wire.endTransmission();
     
-    delete packet;
+    delete[] packet;
 }
