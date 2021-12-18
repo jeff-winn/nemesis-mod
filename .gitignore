@@ -12,7 +12,8 @@
 **/*.hex
 **/*.bin
 
-# Arduino data files
+# Arduino
+out
 tools
 libraries
 
