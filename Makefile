@@ -59,5 +59,5 @@ clean:
 	@rm -rf "$(BUILD_FOLDER)"
 
 build:
-	"$(ARDUINO_CLI)" compile $(VERBOSE) --build-path="$(MAIN_BUILD_FOLDER)" --build-cache-path="$(MAIN_BUILD_FOLDER)" --fqbn $(MAIN_FQBN) "$(MAIN_PROJECT_FOLDER)"
-	"$(ARDUINO_CLI)" compile $(VERBOSE) --build-path="$(BT_BUILD_FOLDER)" --build-cache-path="$(BT_BUILD_FOLDER)" --fqbn $(BT_FQBN) "$(BT_PROJECT_FOLDER)"
+	"$(ARDUINO_CLI)" compile $(VERBOSE) --build-path="$(MAIN_BUILD_FOLDER)" --fqbn $(MAIN_FQBN) "$(MAIN_PROJECT_FOLDER)"
+	"$(ARDUINO_CLI)" compile $(VERBOSE) --build-path="$(BT_BUILD_FOLDER)" --fqbn $(BT_FQBN) "$(BT_PROJECT_FOLDER)"
