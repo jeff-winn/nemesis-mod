@@ -27,7 +27,7 @@ VERBOSE =
 
 # Build path -- used to store built binary and object files
 SKETCHES_FOLDER = $(WORKSPACE_FOLDER)/sketches
-BUILD_FOLDER = $(WORKSPACE_FOLDER)/out
+BUILD_FOLDER = $(WORKSPACE_FOLDER)/build
 
 CONFIG_FILE = $(WORKSPACE_FOLDER)/arduino-cli.yml
 
