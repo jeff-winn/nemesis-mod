@@ -27,17 +27,20 @@ VERBOSE =
 
 # Build path -- used to store built binary and object files
 SKETCHES_FOLDER = $(WORKSPACE_FOLDER)/sketches
-BUILD_FOLDER = $(WORKSPACE_FOLDER)/out
+BUILD_FOLDER = $(WORKSPACE_FOLDER)/build
+OUT_FOLDER = $(WORKSPACE_FOLDER)/out
 
 CONFIG_FILE = $(WORKSPACE_FOLDER)/arduino-cli.yml
 
 MAIN_PROJECT_NAME = Mainboard
 MAIN_BUILD_FOLDER = $(BUILD_FOLDER)/$(MAIN_PROJECT_NAME)
 MAIN_PROJECT_FOLDER = $(SKETCHES_FOLDER)/$(MAIN_PROJECT_NAME)/$(MAIN_PROJECT_NAME)
+MAIN_OUT_FOLDER = $(OUT_FOLDER)/$(MAIN_PROJECT_NAME)
 
 BT_PROJECT_NAME = Bluetooth
 BT_BUILD_FOLDER = $(BUILD_FOLDER)/$(BT_PROJECT_NAME)
 BT_PROJECT_FOLDER = $(SKETCHES_FOLDER)/$(BT_PROJECT_NAME)/$(BT_PROJECT_NAME)
+BT_OUT_FOLDER = $(OUT_FOLDER)/$(BT_PROJECT_NAME)
 
 all: install_prerequisites rebuild
 
@@ -59,5 +62,5 @@ clean:
 	@rm -rf "$(BUILD_FOLDER)"
 
 build:
-	"$(ARDUINO_CLI)" compile $(VERBOSE) --build-path="$(MAIN_BUILD_FOLDER)" --build-cache-path="$(MAIN_BUILD_FOLDER)" --fqbn $(MAIN_FQBN) "$(MAIN_PROJECT_FOLDER)"
-	"$(ARDUINO_CLI)" compile $(VERBOSE) --build-path="$(BT_BUILD_FOLDER)" --build-cache-path="$(BT_BUILD_FOLDER)" --fqbn $(BT_FQBN) "$(BT_PROJECT_FOLDER)"
+	"$(ARDUINO_CLI)" compile $(VERBOSE) --build-path="$(MAIN_BUILD_FOLDER)" --fqbn $(MAIN_FQBN) --output-dir="$(MAIN_OUT_FOLDER)" "$(MAIN_PROJECT_FOLDER)"
+	"$(ARDUINO_CLI)" compile $(VERBOSE) --build-path="$(BT_BUILD_FOLDER)" --fqbn $(BT_FQBN) --output-dir="$(BT_OUT_FOLDER)" "$(BT_PROJECT_FOLDER)"
