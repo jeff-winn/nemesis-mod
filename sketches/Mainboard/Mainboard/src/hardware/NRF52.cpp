@@ -28,9 +28,14 @@ bool NRF52::hasPendingPackets() {
 }
 
 void NRF52::setPin(const char* pin) {
-    auto len = strlen(pin);
-    auto bytes = Convert.toByteArray(pin, len);
+    if (pin == nullptr) {
+        return;
+    }
 
+    String str(pin);
+    auto len = str.length();
+
+    auto bytes = Convert.toByteArray(str.c_str(), len);
     sendPacket(NRF52_CID_SET_PIN, 0, bytes, len);
 
     delete[] bytes;
