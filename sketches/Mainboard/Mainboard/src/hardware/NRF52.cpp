@@ -31,10 +31,13 @@ void NRF52::setPin(const char* pin) {
     if (pin == nullptr) {
         return;
     }
-    
-    auto len = strlen(pin) + 1; // Make sure the null character is also being transferred.
-    auto bytes = Convert.toByteArray(pin, len);
 
+    auto len = strlen(pin) + 1;
+
+    char str[len];
+    strlcpy(str, pin, len);
+
+    auto bytes = Convert.toByteArray(str, len);
     sendPacket(NRF52_CID_SET_PIN, 0, bytes, len);
 
     delete[] bytes;
