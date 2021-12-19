@@ -32,12 +32,10 @@ void NRF52::setPin(const char* pin) {
         return;
     }
 
-    auto len = strlen(pin) + 1;
+    String str(pin);
+    auto len = str.length();
 
-    char str[len];
-    strlcpy(str, pin, len);
-
-    auto bytes = Convert.toByteArray(str, len);
+    auto bytes = Convert.toByteArray(str.c_str(), len);
     sendPacket(NRF52_CID_SET_PIN, 0, bytes, len);
 
     delete[] bytes;
