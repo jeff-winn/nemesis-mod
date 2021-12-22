@@ -79,13 +79,28 @@ void I2cController::checkForAsyncCommands() {
     }
 
     m_callback(type, subtype, data, len);
-    m_rxPending--;
+
+    decrementPending();
 
     if (!shouldLedBeOn()){
         m_led->off();
     }
     
     delete[] data;
+}
+
+void I2cController::incrementPending() {
+    auto pending = m_rxPending;
+    pending++;
+
+    m_rxPending = pending;
+}
+
+void I2cController::decrementPending() {
+    auto pending = m_rxPending;
+    pending--;
+
+    m_rxPending = pending;
 }
 
 void I2cController::setTransmitCount(uint8_t count) {
@@ -130,7 +145,7 @@ void I2cController::onI2cCommandReceived(int numBytes) {
             index++;            
         }
 
-        m_rxPending++;
+        incrementPending();
 
         if (shouldLedBeOn()) {
             m_led->on();

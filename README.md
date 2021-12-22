@@ -3,7 +3,7 @@ It started off as me just wanting to play with an Arduino while repurposing some
 
 | Branch | Status |
 | ------ | -------------|
-| master | [![CI](https://github.com/jeff-winn/Nemesis-Mod/actions/workflows/ci.yaml/badge.svg)](https://github.com/jeff-winn/Nemesis-Mod/actions/workflows/ci.yaml) |
+| master | [![CI](https://github.com/jeff-winn/Nemesis-Mod/actions/workflows/ci.yaml/badge.svg)](https://github.com/jeff-winn/Nemesis-Mod/actions/workflows/ci.yaml) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=nemesis-mod&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=nemesis-mod) |
 
 ## Hardware Requirements
 These are the boards and hardware being used by the project:

@@ -37,9 +37,14 @@ void NRF52::setName(const char* name) {
 }
 
 void NRF52::setPin(const char* pin) {
-    auto len = strlen(pin);
-    auto bytes = Convert.toByteArray(pin, len);
+    if (pin == nullptr) {
+        return;
+    }
 
+    String str(pin);
+    auto len = str.length();
+
+    auto bytes = Convert.toByteArray(str.c_str(), len);
     sendPacket(NRF52_CID_SET_PIN, 0, bytes, len);
 
     delete[] bytes;
@@ -136,5 +141,5 @@ void NRF52::sendPacket(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len
     Wire.write(packet, size);
     Wire.endTransmission();
     
-    delete packet;
+    delete[] packet;
 }

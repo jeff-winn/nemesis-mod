@@ -29,6 +29,9 @@ class I2cController {
         void onI2cRequestReceived();
 
     protected:
+        void incrementPending();
+        void decrementPending();
+
         bool shouldExecuteImmediately(uint8_t type, uint8_t subtype);
         bool shouldInterruptBeSet();
         bool shouldLedBeOn();
