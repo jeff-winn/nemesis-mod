@@ -10,11 +10,11 @@ Button::Button(uint32_t pin, bool inverted) {
 Button::~Button() {
 }
 
-void Button::init() {
+void Button::init() const {
     MCU.pinModeSafe(m_pin, PinMode::Read);    
 }
 
-bool Button::isPressed() {    
+bool Button::isPressed() const {    
     auto value = MCU.digitalReadSafe(m_pin);
     if (m_inverted) {
         return !value;

@@ -11,10 +11,10 @@ class Button {
         virtual ~Button();
 
         // Initializes the button.
-        virtual void init();
+        virtual void init() const;
 
         // Returns a value indicating whether the button is pressed.
-        virtual bool isPressed();
+        virtual bool isPressed() const;
 
     private:
         uint32_t m_pin;
