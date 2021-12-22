@@ -35,9 +35,7 @@ void handleResetAttempt() {
         MCU.delaySafe(50);
     }
 
-    auto successful = false;
     auto diff = millis() - started;
-
     if (diff >= CLEAR_HOLD_IN_MSECS) {
         Application.clear();
     }
