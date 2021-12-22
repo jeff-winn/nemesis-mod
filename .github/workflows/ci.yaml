@@ -4,9 +4,12 @@ on:
   push:
     paths-ignore:
       - 'docs/**'
+      - 'kicad/**'
+      
   pull_request:
     paths-ignore:
       - 'docs/**'
+      - 'kicad/**'
 
 jobs:
   build:
