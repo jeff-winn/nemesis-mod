@@ -81,45 +81,56 @@ void BLEController::setCharacteristic(uint8_t characteristicId, uint8_t *data, u
   switch (characteristicId) {
     case NRF52_CHR_FLYWHEEL_SPEED: {
       m_blasterService.setFlywheelSpeed(data[0]);
+      break;
     }
     case NRF52_CHR_PUSHER_SPEED: {
       m_blasterService.setPusherSpeed(data[0]);
+      break;
     }
     case NRF52_CHR_FLYWHEEL_M1_TRIM: {
       auto m1TrimValue = Convert.toFloat(data);
       m_blasterService.setFlywheelM1TrimSpeed(m1TrimValue);
+      break;
     }
     case NRF52_CHR_FLYWHEEL_M2_TRIM: {
       auto m2TrimValue = Convert.toFloat(data);
       m_blasterService.setFlywheelM2TrimSpeed(m2TrimValue);
+      break;
     }
     case NRF52_CHR_FLYWHEEL_NORMAL_SPEED: {
       auto flywheelNormalSpeed = Convert.toInt32(data);
       m_configService.setFlywheelNormalSpeed(flywheelNormalSpeed);
+      break;
     }
     case NRF52_CHR_FLYWHEEL_LOW_SPEED: {
       auto flywheelLowSpeed = Convert.toInt32(data);
       m_configService.setFlywheelLowSpeed(flywheelLowSpeed);
+      break;
     }
     case NRF52_CHR_FLYWHEEL_MAX_SPEED: {
       auto flywheelMaxSpeed = Convert.toInt32(data);
       m_configService.setFlywheelMaxSpeed(flywheelMaxSpeed);
+      break;
     }
     case NRF52_CHR_FLYWHEEL_TRIM_VARIANCE: {
       auto flywheelTrimVariance = Convert.toFloat(data);
       m_configService.setFlywheelTrimVariance(flywheelTrimVariance);
+      break;
     }
     case NRF52_CHR_PUSHER_NORMAL_SPEED: {
       auto pusherNormalSpeed = Convert.toInt32(data);
       m_configService.setPusherNormalSpeed(pusherNormalSpeed);
+      break;
     }
     case NRF52_CHR_PUSHER_LOW_SPEED: {
       auto pusherLowSpeed = Convert.toInt32(data);
       m_configService.setPusherLowSpeed(pusherLowSpeed);
+      break;
     }
     case NRF52_CHR_PUSHER_MAX_SPEED: {
       auto pusherMaxSpeed = Convert.toInt32(data);
       m_configService.setPusherMaxSpeed(pusherMaxSpeed);
+      break;
     }
     case NRF52_CHR_HOPPER_LOCK_ENABLED: {
       auto hopperLockEnabled = false;
@@ -128,6 +139,7 @@ void BLEController::setCharacteristic(uint8_t characteristicId, uint8_t *data, u
       }
 
       m_configService.setHopperLockEnabled(hopperLockEnabled);
+      break;
     }
   }
 }
