@@ -9,6 +9,11 @@ jobs:
     runs-on: windows-latest
     timeout-minutes: 15
 
+    env:
+      SONAR_SCANNER_VERSION: 4.4.0.2170
+      SONAR_SERVER_URL: "https://sonarcloud.io"
+      BUILD_WRAPPER_OUT_DIR: out
+
     steps:
     - name: Checkout
       uses: actions/checkout@v2
