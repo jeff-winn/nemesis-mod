@@ -21,13 +21,13 @@ libraries
 docs/*.~*
 
 # KiCad files
-docs/kicad/*.*-bak
-docs/kicad/*.bck
-docs/kicad/*-cache.lib
-docs/kicad/*-rescue.*
-docs/kicad/fp-info-cache
+docs/kicad/**/*.*-bak
+docs/kicad/**/*.bck
+docs/kicad/**/*-cache.lib
+docs/kicad/**/*-rescue.*
+docs/kicad/**/fp-info-cache
 docs/kicad/**/*.bak
-docs/kicad/*.kicad_prl
+docs/kicad/**/*.kicad_prl
 
 # MacOS files
 **/.DS_Store
