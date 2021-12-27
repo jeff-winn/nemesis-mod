@@ -27,6 +27,7 @@ docs/kicad/*-cache.lib
 docs/kicad/*-rescue.*
 docs/kicad/fp-info-cache
 docs/kicad/**/*.bak
+docs/kicad/*.kicad_prl
 
 # MacOS files
 **/.DS_Store
