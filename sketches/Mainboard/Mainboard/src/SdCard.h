@@ -25,6 +25,7 @@ class SdCard {
         bool m_started;
 };
 
-const SdCard& getSd();
+// Gets the mechanism to access the SD card.
+const SdCard& getSdc();
 
 #endif /* SD_CARD_H */

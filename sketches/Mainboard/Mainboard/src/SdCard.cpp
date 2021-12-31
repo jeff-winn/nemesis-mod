@@ -4,7 +4,7 @@
 const String BLASTER_CONFIG_FILE = "blaster.cfg";
 const SdCard g_Sdc = SdCard(A2, A1);
 
-const SdCard& getSd() {
+const SdCard& getSdc() {
     return g_Sdc;
 }
 

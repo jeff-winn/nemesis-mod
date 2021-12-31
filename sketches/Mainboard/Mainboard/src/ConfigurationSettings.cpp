@@ -11,7 +11,7 @@ ConfigurationSettings::~ConfigurationSettings() {
 }
 
 void ConfigurationSettings::init() {
-    auto sdc = getSd();
+    auto sdc = getSdc();
     sdc.init();
 
     auto config = sdc.readConfig();
