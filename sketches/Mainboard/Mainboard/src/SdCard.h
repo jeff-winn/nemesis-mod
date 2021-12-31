@@ -3,18 +3,25 @@
 
 #include <ArduinoJson.h>
 
+/*
+A mechanism which is capable of interacting with the SD card file system.
+*/
 class SdCard {
     public:
-        SdCard(uint32_t csPin, uint32_t detPin);
+        SdCard(uint8_t csPin, uint8_t detPin) : m_csPin(csPin), m_detPin(detPin) { }
 
+        // Initializes the instance.
         void init();
-        bool detected();
 
-        DynamicJsonDocument readConfig();        
+        // Identifies whether an SD card is detected.
+        bool detected() const;
+
+        // Reads the configuration file into memory.
+        DynamicJsonDocument readConfig() const;        
 
     private:
-        uint32_t m_csPin;
-        uint32_t m_detPin;
+        uint8_t m_csPin;
+        uint8_t m_detPin;
         bool m_started;
 };
 

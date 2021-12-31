@@ -1,14 +1,9 @@
 #include "SdCard.h"
 #include <SD.h>
 
-#define BLASTER_CONFIG_FILE "blaster.cfg"
+const String BLASTER_CONFIG_FILE = "blaster.cfg";
 
-SdCard Sdc = SdCard(A2, A1);
-
-SdCard::SdCard(uint32_t csPin, uint32_t detPin) {
-    m_csPin = csPin;
-    m_detPin = detPin;
-}
+SdCard Sdc(A2, A1);
 
 void SdCard::init() {
     if (m_started) {
@@ -24,11 +19,11 @@ void SdCard::init() {
     }
 }
 
-bool SdCard::detected() {
+bool SdCard::detected() const {
     return digitalRead(m_detPin) != 0;
 }
 
-DynamicJsonDocument SdCard::readConfig() {
+DynamicJsonDocument SdCard::readConfig() const {
     auto file = SD.open(BLASTER_CONFIG_FILE, FILE_READ);
     auto size = file.size();
 
