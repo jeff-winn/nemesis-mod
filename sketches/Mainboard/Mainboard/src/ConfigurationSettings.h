@@ -8,8 +8,8 @@
 // Provides access to the configuration settings.
 class ConfigurationSettings {
     public:
-        ConfigurationSettings();
-        ~ConfigurationSettings();
+        ConfigurationSettings() = default;
+        ~ConfigurationSettings() = default;
 
         void resetAuthenticationToken();
 

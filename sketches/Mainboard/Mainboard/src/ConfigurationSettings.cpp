@@ -4,12 +4,6 @@
 
 ConfigurationSettings Settings = ConfigurationSettings();
 
-ConfigurationSettings::ConfigurationSettings() {
-}
-
-ConfigurationSettings::~ConfigurationSettings() {
-}
-
 void ConfigurationSettings::init() {
     auto sdc = getSdc();
     sdc.init();
