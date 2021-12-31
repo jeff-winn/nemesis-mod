@@ -2,8 +2,11 @@
 #include <SD.h>
 
 const String BLASTER_CONFIG_FILE = "blaster.cfg";
+const SdCard g_Sdc = SdCard(A2, A1);
 
-SdCard Sdc(A2, A1);
+const SdCard& getSd() {
+    return g_Sdc;
+}
 
 void SdCard::init() {
     if (m_started) {

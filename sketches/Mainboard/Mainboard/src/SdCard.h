@@ -25,7 +25,6 @@ class SdCard {
         bool m_started;
 };
 
-// Grants access to the SD card.
-extern SdCard Sdc;
+const SdCard& getSd();
 
 #endif /* SD_CARD_H */

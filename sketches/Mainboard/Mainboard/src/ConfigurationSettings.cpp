@@ -11,9 +11,10 @@ ConfigurationSettings::~ConfigurationSettings() {
 }
 
 void ConfigurationSettings::init() {
-    Sdc.init();
+    auto sdc = getSd();
+    sdc.init();
 
-    auto config = Sdc.readConfig();
+    auto config = sdc.readConfig();
     m_name = String(config["name"].as<const char*>());
     
     auto bluetooth = config["bluetooth"];
