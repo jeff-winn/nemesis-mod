@@ -72,15 +72,15 @@ PusherSpeed ConfigurationSettings::parsePusherSpeed(const char* value) {
     return PusherSpeed::Normal;
 }
 
-const char* ConfigurationSettings::getName() {
+const char* ConfigurationSettings::getName() const {
     return m_name.c_str();
 }
 
-const char* ConfigurationSettings::getPairingPin() {
+const char* ConfigurationSettings::getPairingPin() const {
     return m_pin.c_str();
 }
 
-bool ConfigurationSettings::hasExistingPairing() {
+bool ConfigurationSettings::hasExistingPairing() const {
     return false;
     
     // return framDriver.read(HAS_EXISTING_PAIRING_ADDR) != 0x00;
@@ -95,7 +95,7 @@ void ConfigurationSettings::setExistingPairing(bool value) {
     // framDriver.write(HAS_EXISTING_PAIRING_ADDR, raw);
 }
 
-FlywheelSpeed ConfigurationSettings::getFlywheelSpeed() {
+FlywheelSpeed ConfigurationSettings::getFlywheelSpeed() const {
     return m_flywheelSpeed;
 }
 
@@ -103,7 +103,7 @@ void ConfigurationSettings::setFlywheelSpeed(FlywheelSpeed value) {
     m_flywheelSpeed = value;
 }
 
-PusherSpeed ConfigurationSettings::getPusherSpeed() {
+PusherSpeed ConfigurationSettings::getPusherSpeed() const {
     return m_pusherSpeed;
 }
 
@@ -117,7 +117,7 @@ void ConfigurationSettings::resetAuthenticationToken() {
     // }
 }
 
-int ConfigurationSettings::getPusherLowSpeed() {
+int ConfigurationSettings::getPusherLowSpeed() const {
     return m_pusherLow;
 }
 
@@ -125,7 +125,7 @@ void ConfigurationSettings::setPusherLowSpeed(int value) {
     m_pusherLow = value;
 }
 
-int ConfigurationSettings::getPusherNormalSpeed() {
+int ConfigurationSettings::getPusherNormalSpeed() const {
     return m_pusherNormal;
 }
 
@@ -133,7 +133,7 @@ void ConfigurationSettings::setPusherNormalSpeed(int value) {
     m_pusherNormal = value;
 }
 
-int ConfigurationSettings::getPusherMaxSpeed() {
+int ConfigurationSettings::getPusherMaxSpeed() const {
     return m_pusherMax;
 }
 
@@ -141,7 +141,7 @@ void ConfigurationSettings::setPusherMaxSpeed(int value) {
     m_pusherMax = value;
 }
 
-int ConfigurationSettings::getFlywheelLowSpeed() {
+int ConfigurationSettings::getFlywheelLowSpeed() const {
     return m_flywheelsLow;
 }
 
@@ -149,7 +149,7 @@ void ConfigurationSettings::setFlywheelLowSpeed(int value) {
     m_flywheelsLow = value;
 }
 
-int ConfigurationSettings::getFlywheelNormalSpeed() {
+int ConfigurationSettings::getFlywheelNormalSpeed() const {
     return m_flywheelsNormal;
 }
 
@@ -157,7 +157,7 @@ void ConfigurationSettings::setFlywheelNormalSpeed(int value) {
     m_flywheelsNormal = value;
 }
 
-int ConfigurationSettings::getFlywheelMaxSpeed() {
+int ConfigurationSettings::getFlywheelMaxSpeed() const {
     return m_flywheelsMax;
 }
 
@@ -165,7 +165,7 @@ void ConfigurationSettings::setFlywheelMaxSpeed(int value) {
     m_flywheelsMax = value;
 }
 
-float ConfigurationSettings::getFlywheelTrimVariance() {
+float ConfigurationSettings::getFlywheelTrimVariance() const {
     return m_flywheelTrimVariance;
 }
 
@@ -173,7 +173,7 @@ void ConfigurationSettings::setFlywheelTrimVariance(float value) {
     m_flywheelTrimVariance = value;
 }
 
-float ConfigurationSettings::getFlywheelM1TrimAdjustment() {
+float ConfigurationSettings::getFlywheelM1TrimAdjustment() const {
     return m_flywheel1TrimAdjustment;
 }
 
@@ -181,7 +181,7 @@ void ConfigurationSettings::setFlywheelM1TrimAdjustment(float value) {
     m_flywheel1TrimAdjustment = value;
 }
 
-float ConfigurationSettings::getFlywheelM2TrimAdjustment() {
+float ConfigurationSettings::getFlywheelM2TrimAdjustment() const {
     return m_flywheel2TrimAdjustment;
 }
 
@@ -189,7 +189,7 @@ void ConfigurationSettings::setFlywheelM2TrimAdjustment(float value) {
     m_flywheel2TrimAdjustment = value;
 }
 
-bool ConfigurationSettings::isHopperLockEnabled() {
+bool ConfigurationSettings::isHopperLockEnabled() const {
     return m_isMagLockEnabled;
 }
 

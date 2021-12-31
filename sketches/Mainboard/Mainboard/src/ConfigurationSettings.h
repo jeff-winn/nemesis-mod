@@ -14,45 +14,45 @@ class ConfigurationSettings {
         void resetAuthenticationToken();
 
         void setExistingPairing(bool value);
-        bool hasExistingPairing();
+        bool hasExistingPairing() const;
 
-        const char* getName();
-        const char* getPairingPin();
+        const char* getName() const;
+        const char* getPairingPin() const;
 
-        int getPusherLowSpeed();
+        int getPusherLowSpeed() const;
         void setPusherLowSpeed(int value);
 
-        int getPusherNormalSpeed();
+        int getPusherNormalSpeed() const;
         void setPusherNormalSpeed(int value);
 
-        int getPusherMaxSpeed();
+        int getPusherMaxSpeed() const;
         void setPusherMaxSpeed(int value);
 
-        float getFlywheelTrimVariance();
+        float getFlywheelTrimVariance() const;
         void setFlywheelTrimVariance(float value);
 
-        int getFlywheelLowSpeed();
+        int getFlywheelLowSpeed() const;
         void setFlywheelLowSpeed(int value);
 
-        int getFlywheelNormalSpeed();
+        int getFlywheelNormalSpeed() const;
         void setFlywheelNormalSpeed(int value);
 
-        int getFlywheelMaxSpeed();
+        int getFlywheelMaxSpeed() const;
         void setFlywheelMaxSpeed(int value);
 
-        float getFlywheelM1TrimAdjustment();
+        float getFlywheelM1TrimAdjustment() const;
         void setFlywheelM1TrimAdjustment(float value);
 
-        float getFlywheelM2TrimAdjustment();
+        float getFlywheelM2TrimAdjustment() const;
         void setFlywheelM2TrimAdjustment(float value);
 
-        bool isHopperLockEnabled();
+        bool isHopperLockEnabled() const;
         void setIsHopperLockEnabled(bool value);
 
-        FlywheelSpeed getFlywheelSpeed();
+        FlywheelSpeed getFlywheelSpeed() const;
         void setFlywheelSpeed(FlywheelSpeed value);
 
-        PusherSpeed getPusherSpeed();
+        PusherSpeed getPusherSpeed() const;
         void setPusherSpeed(PusherSpeed value);
 
         // Initializes the configuration settings.
