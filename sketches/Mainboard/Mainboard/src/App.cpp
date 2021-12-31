@@ -135,15 +135,11 @@ void App::revokeAuthorization() {
 }
 
 void App::clear() {
-    // Settings.clear();
-
     resetCore();
 }
 
 void App::reset() {
     Settings.resetAuthenticationToken();
-    // Settings.defaultSettings();
-
     resetCore();
 }
 
