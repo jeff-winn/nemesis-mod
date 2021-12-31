@@ -5,7 +5,7 @@ PusherSpeedCommand::PusherSpeedCommand(PusherController* controller) {
 }
 
 PusherSpeedCommand::~PusherSpeedCommand() {
-    m_controller = NULL;
+    m_controller = nullptr;
 }
 
 void PusherSpeedCommand::handleImpl(uint8_t* data, uint16_t len) {
@@ -13,16 +13,15 @@ void PusherSpeedCommand::handleImpl(uint8_t* data, uint16_t len) {
     m_controller->setSpeed(newSpeed);
 }
 
-PusherSpeed PusherSpeedCommand::getSpeedFromPacket(uint8_t* data) {
+PusherSpeed PusherSpeedCommand::getSpeedFromPacket(uint8_t* data) const {
     auto value = data[0];
 
     switch (value) {
-        case 2: {
+        case 2:
             return PusherSpeed::Low;            
-        }
-        case 255: {
-            return PusherSpeed::Max;
-        }
+        
+        case 255:
+            return PusherSpeed::Max;        
     }
 
     return PusherSpeed::Normal;

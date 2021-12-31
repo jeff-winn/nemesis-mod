@@ -8,12 +8,11 @@
 class PusherSpeedCommand : public Command {
     public:
         PusherSpeedCommand(PusherController* controller);
-
         ~PusherSpeedCommand() override;
 
     protected:
         void handleImpl(uint8_t* data, uint16_t len) override;
-        PusherSpeed getSpeedFromPacket(uint8_t* data);
+        PusherSpeed getSpeedFromPacket(uint8_t* data) const;
 
     private:
         PusherController* m_controller;
