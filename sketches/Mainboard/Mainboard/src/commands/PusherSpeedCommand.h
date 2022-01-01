@@ -8,7 +8,6 @@
 class PusherSpeedCommand : public Command {
     public:
         explicit PusherSpeedCommand(PusherController* controller);
-        ~PusherSpeedCommand() override;
 
     protected:
         void handleImpl(const uint8_t* data, const uint16_t len) override;

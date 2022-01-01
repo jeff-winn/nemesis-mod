@@ -4,10 +4,6 @@ PusherSpeedCommand::PusherSpeedCommand(PusherController* controller) {
     m_controller = controller;
 }
 
-PusherSpeedCommand::~PusherSpeedCommand() {
-    m_controller = nullptr;
-}
-
 void PusherSpeedCommand::handleImpl(const uint8_t* data, const uint16_t len) {
     auto newSpeed = getSpeedFromPacket(data);
     m_controller->setSpeed(newSpeed);
