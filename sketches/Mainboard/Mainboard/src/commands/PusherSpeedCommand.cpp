@@ -21,8 +21,9 @@ PusherSpeed PusherSpeedCommand::getSpeedFromPacket(uint8_t* data) const {
             return PusherSpeed::Low;            
         
         case 255:
-            return PusherSpeed::Max;        
-    }
+            return PusherSpeed::Max;
 
-    return PusherSpeed::Normal;
+        default:
+            return PusherSpeed::Normal;
+    }
 }
