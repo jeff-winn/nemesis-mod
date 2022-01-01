@@ -10,10 +10,10 @@ class Command {
         virtual ~Command() = default;
 
         // Executes the command.
-        void execute(uint8_t *data, uint8_t len);
+        void execute(const uint8_t* data, const uint8_t len);
 
     protected:
-        virtual void executeImpl(uint8_t *data, uint8_t len) = 0;
+        virtual void executeImpl(const uint8_t* data, const uint8_t len) = 0;
         virtual bool validate();
 };
 

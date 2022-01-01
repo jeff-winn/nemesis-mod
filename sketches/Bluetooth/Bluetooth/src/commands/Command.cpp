@@ -4,7 +4,7 @@ bool Command::validate() {
     return true;
 }
 
-void Command::execute(uint8_t *data, uint8_t len) {
+void Command::execute(const uint8_t* data, const uint8_t len) {
     if (!validate()) {
         return;
     }

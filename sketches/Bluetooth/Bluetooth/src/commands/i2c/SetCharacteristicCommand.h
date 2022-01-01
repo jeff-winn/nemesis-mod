@@ -8,7 +8,7 @@ class SetCharacteristicCommand : public Command {
         SetCharacteristicCommand(uint8_t characteristicId);
     
     protected:
-        void executeImpl(uint8_t *data, uint8_t len) override;
+        void executeImpl(const uint8_t* data, const uint8_t len) override;
     
     private:
         uint8_t m_characteristicId;

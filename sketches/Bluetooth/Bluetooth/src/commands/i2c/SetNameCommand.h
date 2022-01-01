@@ -8,7 +8,7 @@ class SetNameCommand : public Command {
         SetNameCommand() = default;
 
     protected:
-        void executeImpl(uint8_t *data, uint8_t len) override;
+        void executeImpl(const uint8_t* data, const uint8_t len) override;
 };
 
 #endif /* SET_NAME_COMMAND_H */

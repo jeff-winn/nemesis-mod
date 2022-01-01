@@ -5,6 +5,6 @@ SetCharacteristicCommand::SetCharacteristicCommand(uint8_t characteristicId) {
     m_characteristicId = characteristicId;
 }
 
-void SetCharacteristicCommand::executeImpl(uint8_t *data, uint8_t len) {
+void SetCharacteristicCommand::executeImpl(const uint8_t* data, const uint8_t len) {
     BLE.setCharacteristic(m_characteristicId, data, len);
 }
