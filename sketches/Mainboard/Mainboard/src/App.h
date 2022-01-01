@@ -3,7 +3,7 @@
 
 #include "CommandFactory.h"
 
-void OnRemoteCommandReceivedCallback(uint8_t type, uint8_t subtype, uint8_t* data, uint8_t len);
+void OnRemoteCommandReceivedCallback(const uint8_t type, const uint8_t subtype, const uint8_t* data, const uint8_t len);
 
 // Represents the main application.
 class App {
@@ -29,7 +29,8 @@ class App {
         // Revokes the operator authorization.
         void revokeAuthorization();
 
-        void onRemoteCommandReceived(uint8_t type, uint8_t subtype, uint8_t* data, uint8_t len);
+        // Occurs when a remote command has been received.
+        void onRemoteCommandReceived(const uint8_t type, const uint8_t subtype, const uint8_t* data, const uint8_t len);
 
     protected:       
         void checkForAsyncCommands();

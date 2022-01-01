@@ -8,7 +8,7 @@
 #include "commands/PusherSpeedCommand.h"
 #include "shared/Constants.h"
 
-Command* CommandFactory::createCommand(uint8_t type, uint8_t subtype) {
+Command* CommandFactory::createCommand(const uint8_t type, const uint8_t subtype) {
     switch (type) {
         case NRF52_CID_SET_CONFIG:
             return new ChangeConfigurationSettingCommand(subtype);

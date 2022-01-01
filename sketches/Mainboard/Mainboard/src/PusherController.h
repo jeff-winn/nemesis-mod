@@ -15,7 +15,7 @@ enum class PusherSpeed {
 class PusherController : public MotorController {
     public:
         PusherController();
-        ~PusherController() = default;
+        virtual ~PusherController() = default;
 
         // Initializes the controller.
         void init() override;

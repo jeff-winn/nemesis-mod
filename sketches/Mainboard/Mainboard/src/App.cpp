@@ -20,7 +20,7 @@ Button RevTrigger = Button(REV_BUTTON_PIN);
 Button FiringTrigger = Button(FIRING_BUTTON_PIN);
 Button HopperLock = Button(HOPPER_LOCK_BUTTON_PIN);
 
-void OnRemoteCommandReceivedCallback(uint8_t type, uint8_t subtype, uint8_t* data, uint8_t len) {
+void OnRemoteCommandReceivedCallback(const uint8_t type, const uint8_t subtype, const uint8_t* data, const uint8_t len) {
     Application.onRemoteCommandReceived(type, subtype, data, len);
 }
 
@@ -114,7 +114,7 @@ void App::init() {
     BT.init();
 }
 
-void App::onRemoteCommandReceived(uint8_t type, uint8_t subtype, uint8_t* data, uint8_t len) {   
+void App::onRemoteCommandReceived(const uint8_t type, const uint8_t subtype, const uint8_t* data, const uint8_t len) {   
     auto command = m_commandFactory.createCommand(type, subtype);
     if (command) {
         auto requiresAuthorization = command->requiresAuthorization();

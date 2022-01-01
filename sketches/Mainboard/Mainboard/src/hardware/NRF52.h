@@ -3,7 +3,7 @@
 
 #include "InterruptSignal.h"
 
-typedef void (*ReadPacketCallback)(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len);
+typedef void (*ReadPacketCallback)(const uint8_t type, const uint8_t subtype, const uint8_t* data, const uint8_t len);
 
 class NRF52 {
     public:
