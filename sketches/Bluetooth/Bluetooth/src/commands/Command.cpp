@@ -1,8 +1,5 @@
 #include "Command.h"
 
-Command::~Command() {
-}
-
 bool Command::validate() {
     return true;
 }

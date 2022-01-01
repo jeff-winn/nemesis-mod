@@ -5,8 +5,9 @@
 
 // Provides a base class for commands.
 class Command {
-    public:       
-        virtual ~Command();
+    public:
+        Command() = default;
+        virtual ~Command() = default;
 
         // Executes the command.
         void execute(uint8_t *data, uint8_t len);

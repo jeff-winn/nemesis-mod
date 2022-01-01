@@ -5,8 +5,7 @@
 
 class ResetCommand : public Command {
     public:
-        ResetCommand();
-        ~ResetCommand() override;
+        ResetCommand() = default;
 
     protected:
         void executeImpl(uint8_t *data, uint8_t len) override;  

@@ -5,9 +5,8 @@
 
 class SetTransmitCountCommand : public Command {
     public:
-        SetTransmitCountCommand();
-        ~SetTransmitCountCommand() override;
-
+        SetTransmitCountCommand() = default;
+        
     protected:
         void executeImpl(uint8_t *data, uint8_t len) override;  
 };
