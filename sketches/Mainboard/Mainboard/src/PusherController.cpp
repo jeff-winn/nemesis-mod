@@ -48,15 +48,14 @@ void PusherController::onStop() {
 
 int PusherController::calculateMotorSpeed() {
     switch (m_speed) {
-        case PusherSpeed::Low: {
+        case PusherSpeed::Low:
             return Settings.getPusherLowSpeed();
-        }
-        case PusherSpeed::Normal: {
+        
+        case PusherSpeed::Normal:
             return Settings.getPusherNormalSpeed();
-        }
-        case PusherSpeed::Max: {
-            return Settings.getPusherMaxSpeed();
-        }
+        
+        case PusherSpeed::Max:
+            return Settings.getPusherMaxSpeed();        
     }
 
     return 0; // Disable the motor (speed could not be determined).
