@@ -139,7 +139,6 @@ void App::clear() {
 }
 
 void App::reset() {
-    Settings.resetAuthenticationToken();
     resetCore();
 }
 

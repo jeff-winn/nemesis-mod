@@ -37,8 +37,6 @@ void PusherController::updateDriver() {
 }
 
 void PusherController::onStop() {
-    auto step = calculateStepFromSpeed(m_m1speed);
-
     m_driver.setSpeed(0);   
     m_driver.disableDriver();
     
@@ -46,7 +44,7 @@ void PusherController::onStop() {
     m_m1speed = 0;
 }
 
-int PusherController::calculateMotorSpeed() {
+int PusherController::calculateMotorSpeed() const {
     switch (m_speed) {
         case PusherSpeed::Low:
             return Settings.getPusherLowSpeed();
@@ -61,11 +59,11 @@ int PusherController::calculateMotorSpeed() {
     return 0; // Disable the motor (speed could not be determined).
 }
 
-int PusherController::calculateStepFromSpeed(int speed) {
+int PusherController::calculateStepFromSpeed(int speed) const {
     return speed / 4;
 }
 
-PusherSpeed PusherController::getSpeed() {
+PusherSpeed PusherController::getSpeed() const{
     return m_speed;
 }
 

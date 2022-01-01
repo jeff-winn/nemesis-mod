@@ -11,11 +11,6 @@ class ConfigurationSettings {
         ConfigurationSettings() = default;
         ~ConfigurationSettings() = default;
 
-        void resetAuthenticationToken();
-
-        void setExistingPairing(bool value);
-        bool hasExistingPairing() const;
-
         const char* getName() const;
         const char* getPairingPin() const;
 

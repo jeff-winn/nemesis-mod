@@ -23,14 +23,14 @@ class PusherController : public MotorController {
         unsigned int getMotorCurrentMilliamps();
 
         // Gets the pusher speed.
-        PusherSpeed getSpeed();
+        PusherSpeed getSpeed() const;
 
         // Sets the pusher speed.
         void setSpeed(PusherSpeed speed);
 
     protected:
-        int calculateMotorSpeed();
-        int calculateStepFromSpeed(int speed);
+        int calculateMotorSpeed() const;
+        int calculateStepFromSpeed(int speed) const;
 
         void onStart() override;
         void onStop() override;

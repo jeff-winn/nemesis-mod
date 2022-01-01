@@ -80,21 +80,6 @@ const char* ConfigurationSettings::getPairingPin() const {
     return m_pin.c_str();
 }
 
-bool ConfigurationSettings::hasExistingPairing() const {
-    return false;
-    
-    // return framDriver.read(HAS_EXISTING_PAIRING_ADDR) != 0x00;
-}
-
-void ConfigurationSettings::setExistingPairing(bool value) {
-    // uint8_t raw = 0x00;
-    // if (value) {
-    //     raw = 0xFF;
-    // }
-
-    // framDriver.write(HAS_EXISTING_PAIRING_ADDR, raw);
-}
-
 FlywheelSpeed ConfigurationSettings::getFlywheelSpeed() const {
     return m_flywheelSpeed;
 }
@@ -109,12 +94,6 @@ PusherSpeed ConfigurationSettings::getPusherSpeed() const {
 
 void ConfigurationSettings::setPusherSpeed(PusherSpeed value) {
     m_pusherSpeed = value;
-}
-
-void ConfigurationSettings::resetAuthenticationToken() {
-    // for (uint16_t addr = OPERATOR_TOKEN_ADDR; addr < FEED_NORMAL_SPEED_ADDR; addr++) {
-    //     framDriver.write(addr, 0x00);
-    // }
 }
 
 int ConfigurationSettings::getPusherLowSpeed() const {
