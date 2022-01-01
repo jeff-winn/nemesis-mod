@@ -53,10 +53,11 @@ int PusherController::calculateMotorSpeed() const {
             return Settings.getPusherNormalSpeed();
         
         case PusherSpeed::Max:
-            return Settings.getPusherMaxSpeed();        
+            return Settings.getPusherMaxSpeed();
+        
+        default:
+            return 0; // Disable the motor (speed could not be determined).
     }
-
-    return 0; // Disable the motor (speed could not be determined).
 }
 
 int PusherController::calculateStepFromSpeed(int speed) const {

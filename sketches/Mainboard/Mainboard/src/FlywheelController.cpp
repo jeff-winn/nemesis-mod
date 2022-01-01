@@ -27,10 +27,11 @@ unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
             return m_driver.getM1CurrentMilliamps();
         
         case FlywheelMotor::Motor2:
-            return m_driver.getM2CurrentMilliamps();        
-    }
+            return m_driver.getM2CurrentMilliamps();
 
-    return 0;
+        default:
+            return 0;
+    }
 }
 
 void FlywheelController::onStart() {
@@ -72,10 +73,11 @@ int FlywheelController::determineMotorMaximumSpeed() {
             return Settings.getFlywheelNormalSpeed();
         
         case FlywheelSpeed::Max:
-            return Settings.getFlywheelMaxSpeed();        
+            return Settings.getFlywheelMaxSpeed();
+            
+        default:
+            return 0; // Disable the motor (speed could not be determined).
     }
-
-    return 0; // Disable the motor (speed could not be determined).
 }
 
 float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
@@ -84,10 +86,11 @@ float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
             return Settings.getFlywheelM1TrimAdjustment();
         
         case FlywheelMotor::Motor2:
-            return Settings.getFlywheelM2TrimAdjustment();        
-    }
+            return Settings.getFlywheelM2TrimAdjustment();
 
-    return 1;
+        default:
+            return 1;
+    }
 }
 
 void FlywheelController::onStop() {
