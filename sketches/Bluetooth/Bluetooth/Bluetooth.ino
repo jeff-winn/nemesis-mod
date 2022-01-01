@@ -13,7 +13,7 @@ void loop() {
     I2CBus.checkForAsyncCommands();
 }
 
-void OnI2cPacketReceived(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len) {
+void OnI2cPacketReceived(const uint8_t type, const uint8_t subtype, const uint8_t* data, const uint8_t len) {
     auto command = I2cCommands.create(type, subtype);
     if (command != NULL) {
         command->execute(data, len);
@@ -21,6 +21,6 @@ void OnI2cPacketReceived(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t l
     }
 }
 
-void OnBluetoothCommandReceived(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len) {
+void OnBluetoothCommandReceived(const uint8_t type, const uint8_t subtype, const uint8_t* data, const uint8_t len) {
     I2CBus.sendPacket(type, subtype, data, len);    
 }

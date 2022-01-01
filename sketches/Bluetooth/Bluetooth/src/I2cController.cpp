@@ -159,7 +159,7 @@ bool I2cController::shouldExecuteImmediately(uint8_t type, uint8_t subtype) {
     return type == NRF52_CID_SET_TRANSMIT_COUNT;
 }
 
-void I2cController::sendPacket(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len) { 
+void I2cController::sendPacket(const uint8_t type, const uint8_t subtype, const uint8_t* data, const uint8_t len) { 
     m_txBuffer->push(type);
     m_txBuffer->push(subtype);
     m_txBuffer->push(len);
