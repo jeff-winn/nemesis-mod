@@ -15,10 +15,7 @@ BLEController::BLEController() {
   m_discoveryService = BLEDis();
 }
 
-BLEController::~BLEController() {
-}
-
-void BLEController::setCallback(RemoteCommandReceivedCallback callback) {
+void BLEController::setCallback(RemoteCommandReceivedCallback callback) const {
   SetBluetoothCommandReceivedCallback(callback);
 }
 
@@ -79,67 +76,114 @@ void BLEController::clearBonds() {
 
 void BLEController::setCharacteristic(uint8_t characteristicId, uint8_t *data, uint8_t len) {
   switch (characteristicId) {
-    case NRF52_CHR_FLYWHEEL_SPEED: {
-      m_blasterService.setFlywheelSpeed(data[0]);
+    case NRF52_CHR_FLYWHEEL_SPEED:
+      setFlywheelSpeed(data);
       break;
-    }
-    case NRF52_CHR_PUSHER_SPEED: {
-      m_blasterService.setPusherSpeed(data[0]);
-      break;
-    }
-    case NRF52_CHR_FLYWHEEL_M1_TRIM: {
-      auto m1TrimValue = Convert.toFloat(data);
-      m_blasterService.setFlywheelM1TrimSpeed(m1TrimValue);
-      break;
-    }
-    case NRF52_CHR_FLYWHEEL_M2_TRIM: {
-      auto m2TrimValue = Convert.toFloat(data);
-      m_blasterService.setFlywheelM2TrimSpeed(m2TrimValue);
-      break;
-    }
-    case NRF52_CHR_FLYWHEEL_NORMAL_SPEED: {
-      auto flywheelNormalSpeed = Convert.toInt32(data);
-      m_configService.setFlywheelNormalSpeed(flywheelNormalSpeed);
-      break;
-    }
-    case NRF52_CHR_FLYWHEEL_LOW_SPEED: {
-      auto flywheelLowSpeed = Convert.toInt32(data);
-      m_configService.setFlywheelLowSpeed(flywheelLowSpeed);
-      break;
-    }
-    case NRF52_CHR_FLYWHEEL_MAX_SPEED: {
-      auto flywheelMaxSpeed = Convert.toInt32(data);
-      m_configService.setFlywheelMaxSpeed(flywheelMaxSpeed);
-      break;
-    }
-    case NRF52_CHR_FLYWHEEL_TRIM_VARIANCE: {
-      auto flywheelTrimVariance = Convert.toFloat(data);
-      m_configService.setFlywheelTrimVariance(flywheelTrimVariance);
-      break;
-    }
-    case NRF52_CHR_PUSHER_NORMAL_SPEED: {
-      auto pusherNormalSpeed = Convert.toInt32(data);
-      m_configService.setPusherNormalSpeed(pusherNormalSpeed);
-      break;
-    }
-    case NRF52_CHR_PUSHER_LOW_SPEED: {
-      auto pusherLowSpeed = Convert.toInt32(data);
-      m_configService.setPusherLowSpeed(pusherLowSpeed);
-      break;
-    }
-    case NRF52_CHR_PUSHER_MAX_SPEED: {
-      auto pusherMaxSpeed = Convert.toInt32(data);
-      m_configService.setPusherMaxSpeed(pusherMaxSpeed);
-      break;
-    }
-    case NRF52_CHR_HOPPER_LOCK_ENABLED: {
-      auto hopperLockEnabled = false;
-      if (data[0] != 0) {
-        hopperLockEnabled = true;
-      }
 
-      m_configService.setHopperLockEnabled(hopperLockEnabled);
+    case NRF52_CHR_PUSHER_SPEED:
+      setPusherSpeed(data);
       break;
-    }
+    
+    case NRF52_CHR_FLYWHEEL_M1_TRIM:
+      setFlywheelM1TrimSpeed(data, len);
+      break;
+    
+    case NRF52_CHR_FLYWHEEL_M2_TRIM:
+      setFlywheelM2TrimSpeed(data, len);
+      break;
+    
+    case NRF52_CHR_FLYWHEEL_NORMAL_SPEED:
+      setFlywheelNormalSpeed(data);
+      break;
+    
+    case NRF52_CHR_FLYWHEEL_LOW_SPEED:
+      setFlywheelLowSpeed(data);
+      break;
+    
+    case NRF52_CHR_FLYWHEEL_MAX_SPEED:
+      setFlywheelMaxSpeed(data);
+      break;
+    
+    case NRF52_CHR_FLYWHEEL_TRIM_VARIANCE:
+      setFlywheelTrimVariance(data);
+      break;
+    
+    case NRF52_CHR_PUSHER_NORMAL_SPEED:
+      setPusherNormalSpeed(data);
+      break;
+    
+    case NRF52_CHR_PUSHER_LOW_SPEED:
+      setPusherLowSpeed(data);
+      break;
+    
+    case NRF52_CHR_PUSHER_MAX_SPEED:
+      setPusherMaxSpeed(data);
+      break;
+    
+    case NRF52_CHR_HOPPER_LOCK_ENABLED:
+      setHopperLockEnabled(data);
+      break;  
   }
+}
+
+void BLEController::setFlywheelSpeed(uint8_t* data) {
+  m_blasterService.setFlywheelSpeed(data[0]);
+}
+
+void BLEController::setPusherSpeed(uint8_t* data) {
+  m_blasterService.setPusherSpeed(data[0]);
+}
+
+void BLEController::setFlywheelM1TrimSpeed(uint8_t* data, uint8_t len) {
+  auto m1TrimValue = Convert.toFloat(data);
+  m_blasterService.setFlywheelM1TrimSpeed(m1TrimValue);
+}
+
+void BLEController::setFlywheelM2TrimSpeed(uint8_t* data, uint8_t len) {
+  auto m2TrimValue = Convert.toFloat(data);
+  m_blasterService.setFlywheelM2TrimSpeed(m2TrimValue);
+}
+
+void BLEController::setFlywheelNormalSpeed(uint8_t* data) {
+  auto flywheelNormalSpeed = Convert.toInt32(data);
+  m_configService.setFlywheelNormalSpeed(flywheelNormalSpeed);
+}
+
+void BLEController::setFlywheelLowSpeed(uint8_t* data) {
+  auto flywheelLowSpeed = Convert.toInt32(data);
+  m_configService.setFlywheelLowSpeed(flywheelLowSpeed);
+}
+
+void BLEController::setFlywheelMaxSpeed(uint8_t* data) {
+  auto flywheelMaxSpeed = Convert.toInt32(data);
+  m_configService.setFlywheelMaxSpeed(flywheelMaxSpeed);
+}
+
+void BLEController::setFlywheelTrimVariance(uint8_t* data) {
+  auto flywheelTrimVariance = Convert.toFloat(data);
+  m_configService.setFlywheelTrimVariance(flywheelTrimVariance);
+}
+
+void BLEController::setPusherNormalSpeed(uint8_t* data) {
+  auto pusherNormalSpeed = Convert.toInt32(data);
+  m_configService.setPusherNormalSpeed(pusherNormalSpeed);
+}
+
+void BLEController::setPusherLowSpeed(uint8_t* data) {
+  auto pusherLowSpeed = Convert.toInt32(data);
+  m_configService.setPusherLowSpeed(pusherLowSpeed);
+}
+
+void BLEController::setPusherMaxSpeed(uint8_t* data) {
+  auto pusherMaxSpeed = Convert.toInt32(data);
+  m_configService.setPusherMaxSpeed(pusherMaxSpeed);
+}
+
+void BLEController::setHopperLockEnabled(uint8_t* data) {
+  auto hopperLockEnabled = false;
+  if (data[0] != 0) {
+    hopperLockEnabled = true;
+  }
+
+  m_configService.setHopperLockEnabled(hopperLockEnabled);
 }
