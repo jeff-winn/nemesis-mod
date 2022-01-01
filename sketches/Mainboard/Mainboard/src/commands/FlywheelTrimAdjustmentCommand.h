@@ -10,10 +10,10 @@ class FlywheelTrimAdjustmentCommand : public FlywheelCommand {
         FlywheelTrimAdjustmentCommand(uint8_t subtype, FlywheelController* controller);
 
     protected:
-        void handleImpl(uint8_t* data, uint16_t len) override;
+        void handleImpl(const uint8_t* data, const uint16_t len) override;
 
-        FlywheelMotor getMotor();
-        float getAdjustmentFromPacket(uint8_t* data);        
+        FlywheelMotor getMotor() const;
+        float getAdjustmentFromPacket(const uint8_t* data) const;
 
     private:
         uint8_t m_subtype;

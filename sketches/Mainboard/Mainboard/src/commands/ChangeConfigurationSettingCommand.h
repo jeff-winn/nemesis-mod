@@ -9,11 +9,11 @@ class ChangeConfigurationSettingCommand : public ConfigurationCommand {
         ChangeConfigurationSettingCommand(uint8_t subtype);
 
     protected:
-        void handleImpl(uint8_t* data, uint16_t len) override;
+        void handleImpl(const uint8_t* data, const uint16_t len) override;
 
-        int getInt32ValueFromPacket(const uint8_t* data);
-        byte getByteValueFromPacket(const uint8_t* data);
-        float getFloatValueFromPacket(const uint8_t* data);
+        int getInt32ValueFromPacket(const uint8_t* data) const;
+        byte getByteValueFromPacket(const uint8_t* data) const;
+        float getFloatValueFromPacket(const uint8_t* data) const;
 
     private:
         uint8_t m_subtype;

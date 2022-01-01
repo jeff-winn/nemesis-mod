@@ -5,7 +5,7 @@ ChangeConfigurationSettingCommand::ChangeConfigurationSettingCommand(uint8_t sub
     m_subtype = subtype;
 }
 
-void ChangeConfigurationSettingCommand::handleImpl(uint8_t* data, uint16_t len) { 
+void ChangeConfigurationSettingCommand::handleImpl(const uint8_t* data, const uint16_t len) { 
     switch (m_subtype) {
         case 1: {
             auto value = getInt32ValueFromPacket(data);
@@ -50,14 +50,14 @@ void ChangeConfigurationSettingCommand::handleImpl(uint8_t* data, uint16_t len) 
     }
 }
 
-byte ChangeConfigurationSettingCommand::getByteValueFromPacket(const uint8_t* data) {
+byte ChangeConfigurationSettingCommand::getByteValueFromPacket(const uint8_t* data) const {
     return data[0];
 }
 
-int ChangeConfigurationSettingCommand::getInt32ValueFromPacket(const uint8_t* data) {
+int ChangeConfigurationSettingCommand::getInt32ValueFromPacket(const uint8_t* data) const {
     return Convert.toInt32(data);
 }
 
-float ChangeConfigurationSettingCommand::getFloatValueFromPacket(const uint8_t* data) {
+float ChangeConfigurationSettingCommand::getFloatValueFromPacket(const uint8_t* data) const {
     return Convert.toFloat(data);
 }

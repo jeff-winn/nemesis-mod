@@ -12,11 +12,11 @@ class Command {
         virtual bool requiresAuthorization();
 
         // Handles the packet.
-        void handle(uint8_t* data, uint16_t len);
+        void handle(const uint8_t* data, const uint16_t len);
 
     protected:
-        virtual void handleImpl(uint8_t* data, uint16_t len);
-        virtual bool validate(uint8_t* data, uint16_t len);
+        virtual void handleImpl(const uint8_t* data, const uint16_t len);
+        virtual bool validate(const uint8_t* data, const uint16_t len);
 };
 
 #endif /* COMMAND_H */

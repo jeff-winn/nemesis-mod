@@ -1,6 +1,6 @@
 #include "Command.h"
 
-void Command::handle(uint8_t* data, uint16_t len) {
+void Command::handle(const uint8_t* data, const uint16_t len) {
     if (!validate(data, len)) {
         return;
     }
@@ -8,11 +8,11 @@ void Command::handle(uint8_t* data, uint16_t len) {
     handleImpl(data, len);
 }
 
-bool Command::validate(uint8_t* data, uint16_t len) {
+bool Command::validate(const uint8_t* data, const uint16_t len) {
     return true;
 }
 
-void Command::handleImpl(uint8_t* data, uint16_t len) {
+void Command::handleImpl(const uint8_t* data, const uint16_t len) {
 }
 
 bool Command::requiresAuthorization() {

@@ -4,13 +4,7 @@
 #include "../hardware/NRF52.h"
 #include "../shared/Constants.h"
 
-BTReadyCommand::BTReadyCommand() {    
-}
-
-BTReadyCommand::~BTReadyCommand() {
-}
-
-void BTReadyCommand::handleImpl(uint8_t* data, uint16_t len) {
+void BTReadyCommand::handleImpl(const uint8_t* data, const uint16_t len) {
     BT.setCharacteristic(NRF52_CHR_FLYWHEEL_SPEED, (uint8_t)0x01);
     BT.setCharacteristic(NRF52_CHR_PUSHER_SPEED, (uint8_t)0x01);    
     BT.setCharacteristic(NRF52_CHR_FLYWHEEL_M1_TRIM, Settings.getFlywheelM1TrimAdjustment());
