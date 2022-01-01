@@ -6,5 +6,5 @@ SetCharacteristicCommand::SetCharacteristicCommand(uint8_t characteristicId) {
 }
 
 void SetCharacteristicCommand::executeImpl(const uint8_t* data, const uint8_t len) {
-    BLE.setCharacteristic(m_characteristicId, data, len);
+    BLE.setCharacteristic(m_characteristicId, data);
 }

@@ -15,7 +15,7 @@ class BLEController {
         void setCallback(RemoteCommandReceivedCallback callback) const;
         void init(const char* name);
 
-        void setCharacteristic(const uint8_t characteristicId, const uint8_t *data, const uint8_t len);
+        void setCharacteristic(const uint8_t characteristicId, const uint8_t *data);
         void startAdvertising();
 
         void clearBonds();
@@ -24,8 +24,8 @@ class BLEController {
     protected:
         void setFlywheelSpeed(const uint8_t* data);
         void setPusherSpeed(const uint8_t* data);
-        void setFlywheelM1TrimSpeed(const uint8_t* data, uint8_t len);
-        void setFlywheelM2TrimSpeed(const uint8_t* data, uint8_t len);
+        void setFlywheelM1TrimSpeed(const uint8_t* data);
+        void setFlywheelM2TrimSpeed(const uint8_t* data);
         void setFlywheelNormalSpeed(const uint8_t* data);
         void setFlywheelLowSpeed(const uint8_t* data);
         void setFlywheelMaxSpeed(const uint8_t* data);

@@ -74,7 +74,7 @@ void BLEController::clearBonds() {
   Bluefruit.Periph.clearBonds();
 }
 
-void BLEController::setCharacteristic(const uint8_t characteristicId, const uint8_t* data, const uint8_t len) {
+void BLEController::setCharacteristic(const uint8_t characteristicId, const uint8_t* data) {
   switch (characteristicId) {
     case NRF52_CHR_FLYWHEEL_SPEED:
       setFlywheelSpeed(data);
@@ -85,11 +85,11 @@ void BLEController::setCharacteristic(const uint8_t characteristicId, const uint
       break;
     
     case NRF52_CHR_FLYWHEEL_M1_TRIM:
-      setFlywheelM1TrimSpeed(data, len);
+      setFlywheelM1TrimSpeed(data);
       break;
     
     case NRF52_CHR_FLYWHEEL_M2_TRIM:
-      setFlywheelM2TrimSpeed(data, len);
+      setFlywheelM2TrimSpeed(data);
       break;
     
     case NRF52_CHR_FLYWHEEL_NORMAL_SPEED:
@@ -134,12 +134,12 @@ void BLEController::setPusherSpeed(const uint8_t* data) {
   m_blasterService.setPusherSpeed(data[0]);
 }
 
-void BLEController::setFlywheelM1TrimSpeed(const uint8_t* data, uint8_t len) {
+void BLEController::setFlywheelM1TrimSpeed(const uint8_t* data) {
   auto m1TrimValue = Convert.toFloat(data);
   m_blasterService.setFlywheelM1TrimSpeed(m1TrimValue);
 }
 
-void BLEController::setFlywheelM2TrimSpeed(const uint8_t* data, uint8_t len) {
+void BLEController::setFlywheelM2TrimSpeed(const uint8_t* data) {
   auto m2TrimValue = Convert.toFloat(data);
   m_blasterService.setFlywheelM2TrimSpeed(m2TrimValue);
 }
