@@ -15,25 +15,25 @@ class BLEController {
         void setCallback(RemoteCommandReceivedCallback callback) const;
         void init(const char* name);
 
-        void setCharacteristic(uint8_t characteristicId, uint8_t *data, uint8_t len);
+        void setCharacteristic(const uint8_t characteristicId, const uint8_t *data, const uint8_t len);
         void startAdvertising();
 
         void clearBonds();
         void setPin(const char* pin);
 
     protected:
-        void setFlywheelSpeed(uint8_t* data);
-        void setPusherSpeed(uint8_t* data);
-        void setFlywheelM1TrimSpeed(uint8_t* data, uint8_t len);
-        void setFlywheelM2TrimSpeed(uint8_t* data, uint8_t len);
-        void setFlywheelNormalSpeed(uint8_t* data);
-        void setFlywheelLowSpeed(uint8_t* data);
-        void setFlywheelMaxSpeed(uint8_t* data);
-        void setFlywheelTrimVariance(uint8_t* data);
-        void setPusherNormalSpeed(uint8_t* data);
-        void setPusherLowSpeed(uint8_t* data);
-        void setPusherMaxSpeed(uint8_t* data);
-        void setHopperLockEnabled(uint8_t* data);
+        void setFlywheelSpeed(const uint8_t* data);
+        void setPusherSpeed(const uint8_t* data);
+        void setFlywheelM1TrimSpeed(const uint8_t* data, uint8_t len);
+        void setFlywheelM2TrimSpeed(const uint8_t* data, uint8_t len);
+        void setFlywheelNormalSpeed(const uint8_t* data);
+        void setFlywheelLowSpeed(const uint8_t* data);
+        void setFlywheelMaxSpeed(const uint8_t* data);
+        void setFlywheelTrimVariance(const uint8_t* data);
+        void setPusherNormalSpeed(const uint8_t* data);
+        void setPusherLowSpeed(const uint8_t* data);
+        void setPusherMaxSpeed(const uint8_t* data);
+        void setHopperLockEnabled(const uint8_t* data);
 
     private:
         BlasterService m_blasterService;

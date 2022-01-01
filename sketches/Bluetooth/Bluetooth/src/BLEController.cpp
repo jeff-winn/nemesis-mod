@@ -74,7 +74,7 @@ void BLEController::clearBonds() {
   Bluefruit.Periph.clearBonds();
 }
 
-void BLEController::setCharacteristic(uint8_t characteristicId, uint8_t *data, uint8_t len) {
+void BLEController::setCharacteristic(const uint8_t characteristicId, const uint8_t* data, const uint8_t len) {
   switch (characteristicId) {
     case NRF52_CHR_FLYWHEEL_SPEED:
       setFlywheelSpeed(data);
@@ -126,60 +126,60 @@ void BLEController::setCharacteristic(uint8_t characteristicId, uint8_t *data, u
   }
 }
 
-void BLEController::setFlywheelSpeed(uint8_t* data) {
+void BLEController::setFlywheelSpeed(const uint8_t* data) {
   m_blasterService.setFlywheelSpeed(data[0]);
 }
 
-void BLEController::setPusherSpeed(uint8_t* data) {
+void BLEController::setPusherSpeed(const uint8_t* data) {
   m_blasterService.setPusherSpeed(data[0]);
 }
 
-void BLEController::setFlywheelM1TrimSpeed(uint8_t* data, uint8_t len) {
+void BLEController::setFlywheelM1TrimSpeed(const uint8_t* data, uint8_t len) {
   auto m1TrimValue = Convert.toFloat(data);
   m_blasterService.setFlywheelM1TrimSpeed(m1TrimValue);
 }
 
-void BLEController::setFlywheelM2TrimSpeed(uint8_t* data, uint8_t len) {
+void BLEController::setFlywheelM2TrimSpeed(const uint8_t* data, uint8_t len) {
   auto m2TrimValue = Convert.toFloat(data);
   m_blasterService.setFlywheelM2TrimSpeed(m2TrimValue);
 }
 
-void BLEController::setFlywheelNormalSpeed(uint8_t* data) {
+void BLEController::setFlywheelNormalSpeed(const uint8_t* data) {
   auto flywheelNormalSpeed = Convert.toInt32(data);
   m_configService.setFlywheelNormalSpeed(flywheelNormalSpeed);
 }
 
-void BLEController::setFlywheelLowSpeed(uint8_t* data) {
+void BLEController::setFlywheelLowSpeed(const uint8_t* data) {
   auto flywheelLowSpeed = Convert.toInt32(data);
   m_configService.setFlywheelLowSpeed(flywheelLowSpeed);
 }
 
-void BLEController::setFlywheelMaxSpeed(uint8_t* data) {
+void BLEController::setFlywheelMaxSpeed(const uint8_t* data) {
   auto flywheelMaxSpeed = Convert.toInt32(data);
   m_configService.setFlywheelMaxSpeed(flywheelMaxSpeed);
 }
 
-void BLEController::setFlywheelTrimVariance(uint8_t* data) {
+void BLEController::setFlywheelTrimVariance(const uint8_t* data) {
   auto flywheelTrimVariance = Convert.toFloat(data);
   m_configService.setFlywheelTrimVariance(flywheelTrimVariance);
 }
 
-void BLEController::setPusherNormalSpeed(uint8_t* data) {
+void BLEController::setPusherNormalSpeed(const uint8_t* data) {
   auto pusherNormalSpeed = Convert.toInt32(data);
   m_configService.setPusherNormalSpeed(pusherNormalSpeed);
 }
 
-void BLEController::setPusherLowSpeed(uint8_t* data) {
+void BLEController::setPusherLowSpeed(const uint8_t* data) {
   auto pusherLowSpeed = Convert.toInt32(data);
   m_configService.setPusherLowSpeed(pusherLowSpeed);
 }
 
-void BLEController::setPusherMaxSpeed(uint8_t* data) {
+void BLEController::setPusherMaxSpeed(const uint8_t* data) {
   auto pusherMaxSpeed = Convert.toInt32(data);
   m_configService.setPusherMaxSpeed(pusherMaxSpeed);
 }
 
-void BLEController::setHopperLockEnabled(uint8_t* data) {
+void BLEController::setHopperLockEnabled(const uint8_t* data) {
   auto hopperLockEnabled = false;
   if (data[0] != 0) {
     hopperLockEnabled = true;
