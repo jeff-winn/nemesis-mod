@@ -59,8 +59,8 @@ class ConfigurationSettings {
         void init();
 
     protected:
-        FlywheelSpeed parseFlywheelSpeed(const char* value);
-        PusherSpeed parsePusherSpeed(const char* value);
+        FlywheelSpeed parseFlywheelSpeed(const char* value) const;
+        PusherSpeed parsePusherSpeed(const char* value) const;
 
     private:
         String m_name;

@@ -48,7 +48,7 @@ void ConfigurationSettings::init() {
     }
 }
 
-FlywheelSpeed ConfigurationSettings::parseFlywheelSpeed(const char* value) {
+FlywheelSpeed ConfigurationSettings::parseFlywheelSpeed(const char* value) const {
     if (value == "low") {
         return FlywheelSpeed::Low;
     }
@@ -60,7 +60,7 @@ FlywheelSpeed ConfigurationSettings::parseFlywheelSpeed(const char* value) {
     return FlywheelSpeed::Normal;
 }
 
-PusherSpeed ConfigurationSettings::parsePusherSpeed(const char* value) {
+PusherSpeed ConfigurationSettings::parsePusherSpeed(const char* value) const {
     if (value == "low") {
         return PusherSpeed::Low;
     }
