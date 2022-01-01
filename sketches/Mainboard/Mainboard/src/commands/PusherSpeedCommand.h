@@ -7,7 +7,7 @@
 // Provides a command to change the pusher speed.
 class PusherSpeedCommand : public Command {
     public:
-        PusherSpeedCommand(PusherController* controller);
+        explicit PusherSpeedCommand(PusherController* controller);
         ~PusherSpeedCommand() override;
 
     protected:
