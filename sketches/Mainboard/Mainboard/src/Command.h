@@ -6,7 +6,7 @@
 // Provides a base class for commands.
 class Command {
     public:       
-        virtual ~Command();
+        virtual ~Command() = default;
 
         // Indicates whether the command requires authorization to handle.
         virtual bool requiresAuthorization();

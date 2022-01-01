@@ -1,8 +1,5 @@
 #include "Command.h"
 
-Command::~Command() {
-}
-
 void Command::handle(uint8_t* data, uint16_t len) {
     if (!validate(data, len)) {
         return;
