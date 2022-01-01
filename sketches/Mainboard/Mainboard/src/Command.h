@@ -15,7 +15,7 @@ class Command {
         void handle(const uint8_t* data, const uint16_t len);
 
     protected:
-        virtual void handleImpl(const uint8_t* data, const uint16_t len);
+        virtual void handleImpl(const uint8_t* data, const uint16_t len) = 0;
         virtual bool validate(const uint8_t* data, const uint16_t len);
 };
 

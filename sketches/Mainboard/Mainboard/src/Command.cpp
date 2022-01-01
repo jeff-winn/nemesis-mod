@@ -12,9 +12,6 @@ bool Command::validate(const uint8_t* data, const uint16_t len) {
     return true;
 }
 
-void Command::handleImpl(const uint8_t* data, const uint16_t len) {
-}
-
 bool Command::requiresAuthorization() {
     return true;
 }
