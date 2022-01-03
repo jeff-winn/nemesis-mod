@@ -7,12 +7,12 @@
 **/kicad/out
 
 # Build configuration outputs
+sketches/**/build/*
 **/*.elf
 **/*.hex
 **/*.bin
 
 # Arduino
-**/build/**
 out
 tools
 libraries
