@@ -28,9 +28,10 @@ bool NRF52::hasPendingPackets() {
 }
 
 void NRF52::setName(const char* name) {
-    auto len = strlen(name) + 1;
-    auto bytes = Convert.toByteArray(name, len);
+    String str(name);
+    auto len = str.length() + 1;
 
+    auto bytes = Convert.toByteArray(name, len);
     sendPacket(NRF52_CID_SET_NAME, 0, bytes, len);
 
     delete[] bytes;
