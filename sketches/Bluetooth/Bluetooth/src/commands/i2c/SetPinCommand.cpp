@@ -5,7 +5,7 @@
 
 void SetPinCommand::executeImpl(const uint8_t* data, const uint8_t len) {
     auto pin = Convert.toCharArray(data, len);
-    if (pin != NULL) {
+    if (pin != nullptr) {
         BLE.setPin(pin);
     }
 

@@ -34,6 +34,7 @@ class BLEController {
         void setPusherLowSpeed(const uint8_t* data);
         void setPusherMaxSpeed(const uint8_t* data);
         void setHopperLockEnabled(const uint8_t* data);
+        void onInvalidCharacteristicReceived();
 
     private:
         BlasterService m_blasterService;

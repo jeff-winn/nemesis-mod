@@ -55,7 +55,7 @@ void I2cController::clear() {
 }
 
 void I2cController::notifyReady() {
-    sendPacket(NRF52_CID_READY, 0, NULL, 0);
+    sendPacket(NRF52_CID_READY, 0, nullptr, 0);
 }
 
 void I2cController::checkForAsyncCommands() {
@@ -67,7 +67,7 @@ void I2cController::checkForAsyncCommands() {
     auto subtype = m_rxBuffer->shift();
     auto len = m_rxBuffer->shift();
 
-    uint8_t *data = NULL;
+    uint8_t *data = nullptr;
     if (len > 0) {
         data = new uint8_t[len];
 
@@ -114,10 +114,10 @@ void I2cController::onI2cCommandReceived(int numBytes) {
     auto type = buffer[0];
     auto subtype = buffer[1];
 
-    if (shouldExecuteImmediately(type, subtype)) {
+    if (shouldExecuteImmediately(type)) {
         auto len = buffer[2];
 
-        uint8_t *data = NULL;
+        uint8_t *data = nullptr;
         if (len > 0) {
             data = new uint8_t[len];
 
@@ -134,7 +134,7 @@ void I2cController::onI2cCommandReceived(int numBytes) {
 
         m_callback(type, subtype, data, len);
 
-        if (data != NULL) {
+        if (data != nullptr) {
             delete[] data;
         }
     }
@@ -155,7 +155,7 @@ void I2cController::onI2cCommandReceived(int numBytes) {
     delete[] buffer;
 }
 
-bool I2cController::shouldExecuteImmediately(uint8_t type, uint8_t subtype) {
+bool I2cController::shouldExecuteImmediately(uint8_t type) {
     return type == NRF52_CID_SET_TRANSMIT_COUNT;
 }
 

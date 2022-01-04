@@ -12,13 +12,13 @@ void ConfigurationSettings::init() {
     m_name = String(config["name"].as<const char*>());
     
     auto bluetooth = config["bluetooth"];
-    if (bluetooth != NULL) {
+    if (bluetooth != nullptr) {
         m_pin = String(bluetooth["pin"].as<const char*>());
         m_isBluetoothEnabled = bluetooth["enabled"].as<bool>();
     }
     
     auto defaults = config["defaults"];
-    if (defaults != NULL) {
+    if (defaults != nullptr) {
         unsigned int flywheelTrimVariance = defaults["flywheelTrimVariance"].as<unsigned int>();
         m_flywheelTrimVariance = flywheelTrimVariance / 100;
 
@@ -34,14 +34,14 @@ void ConfigurationSettings::init() {
     }
 
     auto pusher = config["pusher"];
-    if (pusher != NULL) {
+    if (pusher != nullptr) {
         m_pusherLow = pusher["low"].as<unsigned int>();
         m_pusherNormal = pusher["normal"].as<unsigned int>();
         m_pusherMax = pusher["max"].as<unsigned int>();
     }
 
     auto flywheels = config["flywheels"];
-    if (flywheels != NULL) {
+    if (flywheels != nullptr) {
         m_flywheelsLow = flywheels["low"].as<unsigned int>();
         m_flywheelsNormal = flywheels["normal"].as<unsigned int>();
         m_flywheelsMax = flywheels["max"].as<unsigned int>();

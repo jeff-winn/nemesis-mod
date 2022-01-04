@@ -38,5 +38,5 @@ Command* I2cCommandFactory::create(uint8_t type, uint8_t subtype) {
             return new SetTransmitCountCommand();
     }
 
-    return NULL;
+    return nullptr;
 }

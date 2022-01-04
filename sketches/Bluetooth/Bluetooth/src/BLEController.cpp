@@ -3,9 +3,6 @@
 #include "shared/BitConverter.h"
 #include "shared/Constants.h"
 
-const uint32_t NOTIFICATION_INTERVAL_IN_MSECS = 10000; // 10 seconds
-const uint32_t NOTIFICATION_INTERVAL_WHILE_ACTIVE_IN_MSECS = 1000; // 1 second
-
 BLEController BLE = BLEController();
 
 BLEController::BLEController() {
@@ -50,7 +47,7 @@ void BLEController::init(const char* name) {
 }
 
 void BLEController::setPin(const char* pin) {
-  if (pin == NULL) {
+  if (pin == nullptr) {
     return;
   }
 
@@ -122,7 +119,11 @@ void BLEController::setCharacteristic(const uint8_t characteristicId, const uint
     
     case NRF52_CHR_HOPPER_LOCK_ENABLED:
       setHopperLockEnabled(data);
-      break;  
+      break;
+
+    default:
+      onInvalidCharacteristicReceived();
+      break;
   }
 }
 
@@ -186,4 +187,8 @@ void BLEController::setHopperLockEnabled(const uint8_t* data) {
   }
 
   m_configService.setHopperLockEnabled(hopperLockEnabled);
+}
+
+void BLEController::onInvalidCharacteristicReceived() {
+  // This method intentionally left blank.
 }

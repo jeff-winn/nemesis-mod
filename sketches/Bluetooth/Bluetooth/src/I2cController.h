@@ -32,7 +32,7 @@ class I2cController {
         void incrementPending();
         void decrementPending();
 
-        bool shouldExecuteImmediately(uint8_t type, uint8_t subtype);
+        bool shouldExecuteImmediately(uint8_t type);
         bool shouldInterruptBeSet();
         bool shouldLedBeOn();
         

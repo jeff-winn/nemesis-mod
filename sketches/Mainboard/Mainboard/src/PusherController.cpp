@@ -60,10 +60,6 @@ int PusherController::calculateMotorSpeed() const {
     }
 }
 
-int PusherController::calculateStepFromSpeed(int speed) const {
-    return speed / 4;
-}
-
 PusherSpeed PusherController::getSpeed() const{
     return m_speed;
 }
