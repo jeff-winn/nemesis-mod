@@ -114,7 +114,7 @@ void I2cController::onI2cCommandReceived(int numBytes) {
     auto type = buffer[0];
     auto subtype = buffer[1];
 
-    if (shouldExecuteImmediately(type, subtype)) {
+    if (shouldExecuteImmediately(type)) {
         auto len = buffer[2];
 
         uint8_t *data = nullptr;
@@ -155,7 +155,7 @@ void I2cController::onI2cCommandReceived(int numBytes) {
     delete[] buffer;
 }
 
-bool I2cController::shouldExecuteImmediately(uint8_t type, uint8_t subtype) {
+bool I2cController::shouldExecuteImmediately(uint8_t type) {
     return type == NRF52_CID_SET_TRANSMIT_COUNT;
 }
 

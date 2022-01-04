@@ -119,7 +119,11 @@ void BLEController::setCharacteristic(const uint8_t characteristicId, const uint
     
     case NRF52_CHR_HOPPER_LOCK_ENABLED:
       setHopperLockEnabled(data);
-      break;  
+      break;
+
+    default:
+      onInvalidCharacteristicReceived();
+      break;
   }
 }
 
@@ -183,4 +187,8 @@ void BLEController::setHopperLockEnabled(const uint8_t* data) {
   }
 
   m_configService.setHopperLockEnabled(hopperLockEnabled);
+}
+
+void BLEController::onInvalidCharacteristicReceived() {
+  // This method intentionally left blank.
 }
