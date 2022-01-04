@@ -8,7 +8,7 @@ It started off as me just wanting to play with an Arduino while repurposing some
 ## Hardware Requirements
 These are the boards and hardware being used by the project:
 - [Adafruit Feather M4 Express](https://www.adafruit.com/product/3857) - Mainboard sketch
-- [Adafruit I2C Non-Volatile FRAM Breakout](https://www.adafruit.com/product/1895)
+- [Adafruit Micro SD SPI or SDIO Card Breakout Board](https://www.adafruit.com/product/4682)
 - [Tactile Button Switch (6mm square, 5mm tall)](https://www.adafruit.com/product/367)
 - [Pololu Dual G2 High-Power Motor Driver 18v18 Shield for Arduino](https://www.pololu.com/product/2515)
 - [Pololu G2 High-Power Motor Driver 18v17](https://www.pololu.com/product/2991)
