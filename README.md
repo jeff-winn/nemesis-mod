@@ -17,7 +17,6 @@ These are the boards and hardware being used by the project:
 ### Optional Hardware
 - [Adafruit Feather nRF52840 Express](https://www.adafruit.com/product/4062) - Bluetooth sketch
 - [MaxAmps LiPo 3250 3S 11.1v Battery Pack](https://www.maxamps.com/lipo-3250-3s-11-1v-battery-pack)
-- There is a custom PCB designed to consolidate the wiring within the kicad folder of this project.
 
 ## Bluetooth Support
 If you wish to use the Bluetooth connectivity included with this device, please see the Wiki page.
