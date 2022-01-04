@@ -15,7 +15,7 @@ void loop() {
 
 void OnI2cPacketReceived(const uint8_t type, const uint8_t subtype, const uint8_t* data, const uint8_t len) {
     auto command = I2cCommands.create(type, subtype);
-    if (command != NULL) {
+    if (command != nullptr) {
         command->execute(data, len);
         delete command;
     }

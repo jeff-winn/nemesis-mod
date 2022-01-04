@@ -20,7 +20,7 @@ void NRF52::init() {
 }
 
 void NRF52::reset() {
-    sendPacket(NRF52_CID_RESET, 0, NULL, 0);
+    sendPacket(NRF52_CID_RESET, 0, nullptr, 0);
 }
 
 bool NRF52::hasPendingPackets() {
@@ -52,7 +52,7 @@ void NRF52::setPin(const char* pin) {
 }
 
 void NRF52::startAdvertising() {
-    sendPacket(NRF52_CID_START_ADVERTISING, 0, NULL, 0);    
+    sendPacket(NRF52_CID_START_ADVERTISING, 0, nullptr, 0);    
 }
 
 void NRF52::setCharacteristic(uint8_t characteristicId, uint8_t value) {
@@ -97,7 +97,7 @@ void NRF52::readPacket(ReadPacketCallback callback) {
     auto subtype = header[1];
     auto len = header[2];
 
-    uint8_t *data = NULL;
+    uint8_t *data = nullptr;
     if (len > 0) {
         setTransmitCount(len);
 

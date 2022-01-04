@@ -50,7 +50,7 @@ void BLEController::init(const char* name) {
 }
 
 void BLEController::setPin(const char* pin) {
-  if (pin == NULL) {
+  if (pin == nullptr) {
     return;
   }
 

@@ -27,5 +27,5 @@ Command* CommandFactory::createCommand(const uint8_t type, const uint8_t subtype
         
     }
 
-    return NULL;
+    return nullptr;
 }
