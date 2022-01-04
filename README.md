@@ -20,4 +20,4 @@ These are the boards and hardware being used by the project:
 - There is a custom PCB designed to consolidate the wiring within the kicad folder of this project.
 
 ## Bluetooth Support
-If you wish to use the bluetooth connectivity included with this device, please see the Wiki page.
+If you wish to use the Bluetooth connectivity included with this device, please see the Wiki page.
