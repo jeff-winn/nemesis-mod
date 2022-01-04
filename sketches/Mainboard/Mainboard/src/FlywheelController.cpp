@@ -90,8 +90,6 @@ float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
 }
 
 void FlywheelController::onStop() {
-    auto minimum = min(m_m1Speed, m_m2Speed);
-
     m_driver.setSpeeds(0, 0);
     m_driver.disableDrivers();
 
