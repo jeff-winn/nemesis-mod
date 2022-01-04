@@ -61,5 +61,5 @@ jobs:
     - name: Upload build-wrapper dump
       uses: actions/upload-artifact@v2
       with:
-        name: build-wrapper-dump.json
+        name: build-wrapper-dump
         path: ${{ env.BUILD_WRAPPER_OUT_DIR }}/build-wrapper-dump.json
