@@ -31,7 +31,6 @@ class PusherController : public MotorController {
 
     protected:
         int calculateMotorSpeed() const;
-        int calculateStepFromSpeed(int speed) const;
 
         void onStart() override;
         void onStop() override;

@@ -42,8 +42,7 @@ class FlywheelController : public MotorController {
         int calculateLimiterForSpeed(int speed);
         int calculateMotorSpeed(FlywheelMotor motor);
         float getMotorSpeedAdjustment(FlywheelMotor motor);
-        int determineMotorMaximumSpeed();    
-        int calculateStepFromValue(int value);
+        int determineMotorMaximumSpeed();
 
         void updateDrivers();
 

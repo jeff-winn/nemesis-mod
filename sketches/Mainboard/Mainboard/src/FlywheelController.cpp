@@ -47,10 +47,6 @@ void FlywheelController::updateDrivers() {
     MCU.delaySafe(1);
 }
 
-int FlywheelController::calculateStepFromValue(int value) {
-    return value / 4;
-}
-
 int FlywheelController::calculateMotorSpeed(FlywheelMotor motor) {
     auto maximumSpeed = determineMotorMaximumSpeed();
     
@@ -95,7 +91,6 @@ float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
 
 void FlywheelController::onStop() {
     auto minimum = min(m_m1Speed, m_m2Speed);
-    auto step = calculateStepFromValue(minimum);
 
     m_driver.setSpeeds(0, 0);
     m_driver.disableDrivers();
