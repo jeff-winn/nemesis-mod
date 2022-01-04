@@ -1,222 +1,177 @@
-#include <Adafruit_FRAM_I2C.h>
-#include "shared/BitConverter.h"
 #include "ConfigurationSettings.h"
-
-const char* DEFAULT_PAIRING_PIN = "000000";
-
-const short HAS_EXISTING_PAIRING_ADDR = 0x02;
-const short OPERATOR_TOKEN_LENGTH_ADDR = 0x10;
-const short OPERATOR_TOKEN_ADDR = 0x11;
-const short FEED_NORMAL_SPEED_ADDR = 0x100;
-const short FEED_MEDIUM_SPEED_ADDR = 0x104;
-const short FEED_MAX_SPEED_ADDR = 0x108;
-const short FLYWHEEL_KID_SPEED_ADDR = 0x112;
-const short FLYWHEEL_NORMAL_SPEED_ADDR = 0x116;
-const short FLYWHEEL_LUDICROUS_SPEED_ADDR = 0x120;
-const short FLYWHEEL_TRIM_VARIANCE_ADDR = 0x124;
-const short FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR = 0x128;
-const short FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR = 0x132;
-const short IS_HOPPER_LOCK_ENABLED_ADDR = 0x136;
+#include "shared/BitConverter.h"
+#include "SdCard.h"
 
 ConfigurationSettings Settings = ConfigurationSettings();
 
-// Defines the FRAM module for persistent data storage.
-Adafruit_FRAM_I2C framDriver = Adafruit_FRAM_I2C();
-
 void ConfigurationSettings::init() {
-    framDriver.begin();
+    auto sdc = getSdc();
+    sdc.init();
 
-    if (!initialized()) {
-        defaultSettings();
-        resetAuthenticationToken();
+    auto config = sdc.readConfig();
+    m_name = String(config["name"].as<const char*>());
+    
+    auto bluetooth = config["bluetooth"];
+    if (bluetooth != NULL) {
+        m_pin = String(bluetooth["pin"].as<const char*>());
+        m_isBluetoothEnabled = bluetooth["enabled"].as<bool>();
+    }
+    
+    auto defaults = config["defaults"];
+    if (defaults != NULL) {
+        unsigned int flywheelTrimVariance = defaults["flywheelTrimVariance"].as<unsigned int>();
+        m_flywheelTrimVariance = flywheelTrimVariance / 100;
 
-        setInitialized(true);
+        unsigned int flywheel1TrimAdjustment = defaults["flywheel1TrimAdjustment"].as<unsigned int>();
+        m_flywheel1TrimAdjustment = flywheel1TrimAdjustment / 100;
+
+        unsigned int flywheel2TrimAdjustment = defaults["flywheel2TrimAdjustment"].as<unsigned int>();
+        m_flywheel2TrimAdjustment = flywheel2TrimAdjustment / 100;
+        m_isMagLockEnabled = defaults["maglock"].as<bool>();
+
+        m_pusherSpeed = parsePusherSpeed(defaults["pusher"].as<const char*>());
+        m_flywheelSpeed = parseFlywheelSpeed(defaults["flywheels"].as<const char*>());
+    }
+
+    auto pusher = config["pusher"];
+    if (pusher != NULL) {
+        m_pusherLow = pusher["low"].as<unsigned int>();
+        m_pusherNormal = pusher["normal"].as<unsigned int>();
+        m_pusherMax = pusher["max"].as<unsigned int>();
+    }
+
+    auto flywheels = config["flywheels"];
+    if (flywheels != NULL) {
+        m_flywheelsLow = flywheels["low"].as<unsigned int>();
+        m_flywheelsNormal = flywheels["normal"].as<unsigned int>();
+        m_flywheelsMax = flywheels["max"].as<unsigned int>();
     }
 }
 
-bool ConfigurationSettings::initialized() {
-    return framDriver.read(0x1) != 0;
-}
-
-void ConfigurationSettings::setInitialized(bool value) {
-    framDriver.write(0x1, (value ? 0xFF : 0x00));
-}
-
-void ConfigurationSettings::defaultSettings() {
-    setExistingPairing(false);
-    setIsHopperLockEnabled(true);
-
-    setFeedNormalSpeed(100);
-    setFeedMediumSpeed(175);
-    setFeedMaxSpeed(400);
-
-    setFlywheelKidSpeed(195);
-    setFlywheelNormalSpeed(215);
-    setFlywheelLudicrousSpeed(400);
-    setFlywheelTrimVariance(0.1F);
-    setFlywheelM1TrimAdjustment(1.0F);
-    setFlywheelM2TrimAdjustment(1.0F);
-}
-
-void ConfigurationSettings::clear() {
-    for (int addr = 0; addr < 32000; addr++) {
-        framDriver.write(addr, 0x00);
-    }
-}
-
-const char* ConfigurationSettings::getPairingPin() {
-    return DEFAULT_PAIRING_PIN;
-}
-
-bool ConfigurationSettings::hasExistingPairing() {
-    return framDriver.read(HAS_EXISTING_PAIRING_ADDR) != 0x00;
-}
-
-void ConfigurationSettings::setExistingPairing(bool value) {
-    uint8_t raw = 0x00;
-    if (value) {
-        raw = 0xFF;
+FlywheelSpeed ConfigurationSettings::parseFlywheelSpeed(const char* value) const {
+    if (value == "low") {
+        return FlywheelSpeed::Low;
     }
 
-    framDriver.write(HAS_EXISTING_PAIRING_ADDR, raw);
-}
-
-void ConfigurationSettings::resetAuthenticationToken() {
-    for (uint16_t addr = OPERATOR_TOKEN_ADDR; addr < FEED_NORMAL_SPEED_ADDR; addr++) {
-        framDriver.write(addr, 0x00);
+    if (value == "max") {
+        return FlywheelSpeed::Max;
     }
+
+    return FlywheelSpeed::Normal;
 }
 
-int ConfigurationSettings::getFeedNormalSpeed() {
-    return readInt32(FEED_NORMAL_SPEED_ADDR);
+PusherSpeed ConfigurationSettings::parsePusherSpeed(const char* value) const {
+    if (value == "low") {
+        return PusherSpeed::Low;
+    }
+
+    if (value == "max") {
+        return PusherSpeed::Max;
+    }
+
+    return PusherSpeed::Normal;
 }
 
-void ConfigurationSettings::setFeedNormalSpeed(int value) {
-    writeInt32(FEED_NORMAL_SPEED_ADDR, value);
+const char* ConfigurationSettings::getName() const {
+    return m_name.c_str();
 }
 
-int ConfigurationSettings::getFeedMediumSpeed() {
-    return readInt32(FEED_MEDIUM_SPEED_ADDR);
+const char* ConfigurationSettings::getPairingPin() const {
+    return m_pin.c_str();
 }
 
-void ConfigurationSettings::setFeedMediumSpeed(int value) {
-    writeInt32(FEED_MEDIUM_SPEED_ADDR, value);
+FlywheelSpeed ConfigurationSettings::getFlywheelSpeed() const {
+    return m_flywheelSpeed;
 }
 
-int ConfigurationSettings::getFeedMaxSpeed() {
-    return readInt32(FEED_MAX_SPEED_ADDR);
+void ConfigurationSettings::setFlywheelSpeed(FlywheelSpeed value) {
+    m_flywheelSpeed = value;
 }
 
-void ConfigurationSettings::setFeedMaxSpeed(int value) {    
-    writeInt32(FEED_MAX_SPEED_ADDR, value);
+PusherSpeed ConfigurationSettings::getPusherSpeed() const {
+    return m_pusherSpeed;
 }
 
-int ConfigurationSettings::getFlywheelKidSpeed() {
-    return readInt32(FLYWHEEL_KID_SPEED_ADDR);
+void ConfigurationSettings::setPusherSpeed(PusherSpeed value) {
+    m_pusherSpeed = value;
 }
 
-void ConfigurationSettings::setFlywheelKidSpeed(int value) {
-    writeInt32(FLYWHEEL_KID_SPEED_ADDR, value);
+int ConfigurationSettings::getPusherLowSpeed() const {
+    return m_pusherLow;
 }
 
-int ConfigurationSettings::getFlywheelNormalSpeed() {
-    return readInt32(FLYWHEEL_NORMAL_SPEED_ADDR);
+void ConfigurationSettings::setPusherLowSpeed(int value) {
+    m_pusherLow = value;
+}
+
+int ConfigurationSettings::getPusherNormalSpeed() const {
+    return m_pusherNormal;
+}
+
+void ConfigurationSettings::setPusherNormalSpeed(int value) {
+    m_pusherNormal = value;
+}
+
+int ConfigurationSettings::getPusherMaxSpeed() const {
+    return m_pusherMax;
+}
+
+void ConfigurationSettings::setPusherMaxSpeed(int value) {    
+    m_pusherMax = value;
+}
+
+int ConfigurationSettings::getFlywheelLowSpeed() const {
+    return m_flywheelsLow;
+}
+
+void ConfigurationSettings::setFlywheelLowSpeed(int value) {
+    m_flywheelsLow = value;
+}
+
+int ConfigurationSettings::getFlywheelNormalSpeed() const {
+    return m_flywheelsNormal;
 }
 
 void ConfigurationSettings::setFlywheelNormalSpeed(int value) {    
-    writeInt32(FLYWHEEL_NORMAL_SPEED_ADDR, value);
+    m_flywheelsNormal = value;
 }
 
-int ConfigurationSettings::getFlywheelLudicrousSpeed() {
-    return readInt32(FLYWHEEL_LUDICROUS_SPEED_ADDR);
+int ConfigurationSettings::getFlywheelMaxSpeed() const {
+    return m_flywheelsMax;
 }
 
-void ConfigurationSettings::setFlywheelLudicrousSpeed(int value) {
-    writeInt32(FLYWHEEL_LUDICROUS_SPEED_ADDR, value);
+void ConfigurationSettings::setFlywheelMaxSpeed(int value) {
+    m_flywheelsMax = value;
 }
 
-float ConfigurationSettings::getFlywheelTrimVariance() {
-    return readFloat(FLYWHEEL_TRIM_VARIANCE_ADDR);
+float ConfigurationSettings::getFlywheelTrimVariance() const {
+    return m_flywheelTrimVariance;
 }
 
 void ConfigurationSettings::setFlywheelTrimVariance(float value) {
-    writeFloat(FLYWHEEL_TRIM_VARIANCE_ADDR, value);
+    m_flywheelTrimVariance = value;
 }
 
-float ConfigurationSettings::getFlywheelM1TrimAdjustment() {
-    return readFloat(FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR);
+float ConfigurationSettings::getFlywheelM1TrimAdjustment() const {
+    return m_flywheel1TrimAdjustment;
 }
 
 void ConfigurationSettings::setFlywheelM1TrimAdjustment(float value) {
-    writeFloat(FLYWHEEL_M1_TRIM_ADJUSTMENT_ADDR, value);
+    m_flywheel1TrimAdjustment = value;
 }
 
-float ConfigurationSettings::getFlywheelM2TrimAdjustment() {
-    return readFloat(FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR);
+float ConfigurationSettings::getFlywheelM2TrimAdjustment() const {
+    return m_flywheel2TrimAdjustment;
 }
 
 void ConfigurationSettings::setFlywheelM2TrimAdjustment(float value) {
-    writeFloat(FLYWHEEL_M2_TRIM_ADJUSTMENT_ADDR, value);
+    m_flywheel2TrimAdjustment = value;
 }
 
-bool ConfigurationSettings::isHopperLockEnabled() {
-    return readBool(IS_HOPPER_LOCK_ENABLED_ADDR);
+bool ConfigurationSettings::isHopperLockEnabled() const {
+    return m_isMagLockEnabled;
 }
 
 void ConfigurationSettings::setIsHopperLockEnabled(bool value) {
-    writeBool(IS_HOPPER_LOCK_ENABLED_ADDR, value);
-}
-
-bool ConfigurationSettings::readBool(short address) {
-    auto value = readInt32(address);
-    return value != 0;
-}
-
-void ConfigurationSettings::writeBool(short address, bool value) {
-    uint32_t rawValue = 0;
-    if (value) {
-        rawValue = 1;
-    }
-
-    writeInt32(address, rawValue);
-}
-
-int ConfigurationSettings::readInt32(short address) {
-    byte raw[4];
-
-    for (auto index = 0; index < 4; index++) {
-        raw[index] = framDriver.read(address + index);
-    }
-
-    return Convert.toInt32(raw);
-}
-
-void ConfigurationSettings::writeInt32(short address, int value) {
-    byte* raw = Convert.toInt32Array(value);
-
-    for (auto index = 0; index < 4; index++) {
-        framDriver.write(address + index, raw[index]);
-    }
-
-    delete[] raw;
-}
-
-float ConfigurationSettings::readFloat(short address) {
-    byte raw[4];
-
-    for (auto index = 0; index < 4; index++) {
-        raw[index] = framDriver.read(address + index);
-    }
-
-    return Convert.toFloat(raw);
-}
-
-void ConfigurationSettings::writeFloat(short address, float value) {
-    byte* raw = Convert.toFloatArray(value);
-
-    for (auto index = 0; index < 4; index++) {
-        framDriver.write(address + index, raw[index]);
-    }
-
-    delete[] raw;
+    m_isMagLockEnabled = value;
 }

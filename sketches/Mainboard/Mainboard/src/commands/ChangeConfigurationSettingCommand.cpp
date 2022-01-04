@@ -5,11 +5,11 @@ ChangeConfigurationSettingCommand::ChangeConfigurationSettingCommand(uint8_t sub
     m_subtype = subtype;
 }
 
-void ChangeConfigurationSettingCommand::handleImpl(uint8_t* data, uint16_t len) { 
+void ChangeConfigurationSettingCommand::handleImpl(const uint8_t* data, const uint16_t len) { 
     switch (m_subtype) {
         case 1: {
             auto value = getInt32ValueFromPacket(data);
-            Settings.setFlywheelKidSpeed(value);
+            Settings.setFlywheelLowSpeed(value);
             break;
         }
         case 2: {
@@ -19,22 +19,22 @@ void ChangeConfigurationSettingCommand::handleImpl(uint8_t* data, uint16_t len) 
         }
         case 3: {
             auto value = getInt32ValueFromPacket(data);
-            Settings.setFlywheelLudicrousSpeed(value);
+            Settings.setFlywheelMaxSpeed(value);
             break;
         }
         case 4: {
             auto value = getInt32ValueFromPacket(data);
-            Settings.setFeedNormalSpeed(value);
+            Settings.setPusherNormalSpeed(value);
             break;
         }
         case 5: {
             auto value = getInt32ValueFromPacket(data);
-            Settings.setFeedMediumSpeed(value);
+            Settings.setPusherLowSpeed(value);
             break;
         }
         case 6: {
             auto value = getInt32ValueFromPacket(data);
-            Settings.setFeedMaxSpeed(value);
+            Settings.setPusherMaxSpeed(value);
             break;
         }
         case 7: {
@@ -50,14 +50,14 @@ void ChangeConfigurationSettingCommand::handleImpl(uint8_t* data, uint16_t len) 
     }
 }
 
-byte ChangeConfigurationSettingCommand::getByteValueFromPacket(const uint8_t* data) {
+byte ChangeConfigurationSettingCommand::getByteValueFromPacket(const uint8_t* data) const {
     return data[0];
 }
 
-int ChangeConfigurationSettingCommand::getInt32ValueFromPacket(const uint8_t* data) {
+int ChangeConfigurationSettingCommand::getInt32ValueFromPacket(const uint8_t* data) const {
     return Convert.toInt32(data);
 }
 
-float ChangeConfigurationSettingCommand::getFloatValueFromPacket(const uint8_t* data) {
+float ChangeConfigurationSettingCommand::getFloatValueFromPacket(const uint8_t* data) const {
     return Convert.toFloat(data);
 }

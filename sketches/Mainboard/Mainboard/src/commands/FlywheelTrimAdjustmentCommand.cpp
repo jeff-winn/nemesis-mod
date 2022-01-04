@@ -5,23 +5,23 @@ FlywheelTrimAdjustmentCommand::FlywheelTrimAdjustmentCommand(uint8_t subtype, Fl
     m_subtype = subtype;    
 }
 
-void FlywheelTrimAdjustmentCommand::handleImpl(uint8_t* data, uint16_t len) {
+void FlywheelTrimAdjustmentCommand::handleImpl(const uint8_t* data, const uint16_t len) {
     auto motor = getMotor();
     auto adjustment = getAdjustmentFromPacket(data);
 
     m_controller->setMotorSpeedAdjustment(motor, adjustment);
 }
 
-FlywheelMotor FlywheelTrimAdjustmentCommand::getMotor() {
+FlywheelMotor FlywheelTrimAdjustmentCommand::getMotor() const {
     switch (m_subtype) {
-        case 2: {
+        case 2:
             return FlywheelMotor::Motor2;
-        }
-    }
 
-    return FlywheelMotor::Motor1;
+        default:
+            return FlywheelMotor::Motor1;
+    }
 }
 
-float FlywheelTrimAdjustmentCommand::getAdjustmentFromPacket(uint8_t* data) {
+float FlywheelTrimAdjustmentCommand::getAdjustmentFromPacket(const uint8_t* data) const {
     return Convert.toFloat(data);
 }

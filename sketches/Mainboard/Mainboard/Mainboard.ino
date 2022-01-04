@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <SPI.h>
 #include <Wire.h>
 
 #include "src/App.h"
@@ -9,9 +10,10 @@ const uint16_t CLEAR_HOLD_IN_MSECS = 30000;  // 30 seconds
 const uint16_t RESET_HOLD_IN_MSECS = 5000;   // 5 seconds
 const uint32_t RESET_BUTTON_PIN = 18;
 
-Button ResetButton = Button(RESET_BUTTON_PIN, true);
+Button ResetButton(RESET_BUTTON_PIN, true);
 
 void setup() {
+    SPI.begin();
     Wire.begin();
     
     ResetButton.init();
@@ -33,9 +35,7 @@ void handleResetAttempt() {
         MCU.delaySafe(50);
     }
 
-    auto successful = false;
     auto diff = millis() - started;
-
     if (diff >= CLEAR_HOLD_IN_MSECS) {
         Application.clear();
     }

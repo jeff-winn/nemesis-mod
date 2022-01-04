@@ -27,6 +27,16 @@ bool NRF52::hasPendingPackets() {
     return m_signal->isSet();
 }
 
+void NRF52::setName(const char* name) {
+    String str(name);
+    auto len = str.length() + 1;
+
+    auto bytes = Convert.toByteArray(name, len);
+    sendPacket(NRF52_CID_SET_NAME, 0, bytes, len);
+
+    delete[] bytes;
+}
+
 void NRF52::setPin(const char* pin) {
     if (pin == nullptr) {
         return;

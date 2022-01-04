@@ -5,11 +5,10 @@
 
 class BTReadyCommand : public Command {
     public:
-        BTReadyCommand();
-        ~BTReadyCommand() override;
+        BTReadyCommand() = default;
 
     protected:
-        void handleImpl(uint8_t* data, uint16_t len) override;
+        void handleImpl(const uint8_t* data, const uint16_t len) override;
 };
 
 #endif /* BT_READY_COMMAND_H */

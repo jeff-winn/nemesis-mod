@@ -15,20 +15,19 @@ BLEController::BLEController() {
   m_discoveryService = BLEDis();
 }
 
-BLEController::~BLEController() {
+void BLEController::setCallback(RemoteCommandReceivedCallback callback) const {
+  SetBluetoothCommandReceivedCallback(callback);
 }
 
-void BLEController::init(RemoteCommandReceivedCallback callback) {
-  SetBluetoothCommandReceivedCallback(callback);
-
+void BLEController::init(const char* name) {
   Bluefruit.begin();
-  Bluefruit.setName("Nerf Nemesis MXVII-10K");
+  Bluefruit.setName(name);
   
   Bluefruit.ScanResponse.addName();  
   Bluefruit.Periph.begin();
 
   m_discoveryService.setManufacturer("Jeff Winn");
-  m_discoveryService.setModel("Nerf Nemesis MXVII-10K");
+  m_discoveryService.setModel("Generic Blaster");
   m_discoveryService.begin();
 
   m_blasterService.begin();
@@ -75,57 +74,116 @@ void BLEController::clearBonds() {
   Bluefruit.Periph.clearBonds();
 }
 
-void BLEController::setCharacteristic(uint8_t characteristicId, uint8_t *data, uint8_t len) {
+void BLEController::setCharacteristic(const uint8_t characteristicId, const uint8_t* data) {
   switch (characteristicId) {
-    case NRF52_CHR_FLYWHEEL_SPEED: {
-      m_blasterService.setFlywheelSpeed(data[0]);
-    }
-    case NRF52_CHR_BELT_SPEED: {
-      m_blasterService.setBeltSpeed(data[0]);
-    }
-    case NRF52_CHR_FLYWHEEL_M1_TRIM: {
-      auto m1TrimValue = Convert.toFloat(data);
-      m_blasterService.setFlywheelM1TrimSpeed(m1TrimValue);
-    }
-    case NRF52_CHR_FLYWHEEL_M2_TRIM: {
-      auto m2TrimValue = Convert.toFloat(data);
-      m_blasterService.setFlywheelM2TrimSpeed(m2TrimValue);
-    }
-    case NRF52_CHR_FLYWHEEL_NORMAL_SPEED: {
-      auto flywheelNormalSpeed = Convert.toInt32(data);
-      m_configService.setFlywheelNormalSpeed(flywheelNormalSpeed);
-    }
-    case NRF52_CHR_FLYWHEEL_KID_SPEED: {
-      auto flywheelKidSpeed = Convert.toInt32(data);
-      m_configService.setFlywheelKidSpeed(flywheelKidSpeed);
-    }
-    case NRF52_CHR_FLYWHEEL_LUDICROUS_SPEED: {
-      auto flywheelLudicrousSpeed = Convert.toInt32(data);
-      m_configService.setFlywheelLudicrousSpeed(flywheelLudicrousSpeed);
-    }
-    case NRF52_CHR_FLYWHEEL_TRIM_VARIANCE: {
-      auto flywheelTrimVariance = Convert.toFloat(data);
-      m_configService.setFlywheelTrimVariance(flywheelTrimVariance);
-    }
-    case NRF52_CHR_BELT_NORMAL_SPEED: {
-      auto beltNormalSpeed = Convert.toInt32(data);
-      m_configService.setBeltNormalSpeed(beltNormalSpeed);
-    }
-    case NRF52_CHR_BELT_MEDIUM_SPEED: {
-      auto beltMediumSpeed = Convert.toInt32(data);
-      m_configService.setBeltMediumSpeed(beltMediumSpeed);
-    }
-    case NRF52_CHR_BELT_MAX_SPEED: {
-      auto beltMaxSpeed = Convert.toInt32(data);
-      m_configService.setBeltMaxSpeed(beltMaxSpeed);
-    }
-    case NRF52_CHR_HOPPER_LOCK_ENABLED: {
-      auto hopperLockEnabled = false;
-      if (data[0] != 0) {
-        hopperLockEnabled = true;
-      }
+    case NRF52_CHR_FLYWHEEL_SPEED:
+      setFlywheelSpeed(data);
+      break;
 
-      m_configService.setHopperLockEnabled(hopperLockEnabled);
-    }
+    case NRF52_CHR_PUSHER_SPEED:
+      setPusherSpeed(data);
+      break;
+    
+    case NRF52_CHR_FLYWHEEL_M1_TRIM:
+      setFlywheelM1TrimSpeed(data);
+      break;
+    
+    case NRF52_CHR_FLYWHEEL_M2_TRIM:
+      setFlywheelM2TrimSpeed(data);
+      break;
+    
+    case NRF52_CHR_FLYWHEEL_NORMAL_SPEED:
+      setFlywheelNormalSpeed(data);
+      break;
+    
+    case NRF52_CHR_FLYWHEEL_LOW_SPEED:
+      setFlywheelLowSpeed(data);
+      break;
+    
+    case NRF52_CHR_FLYWHEEL_MAX_SPEED:
+      setFlywheelMaxSpeed(data);
+      break;
+    
+    case NRF52_CHR_FLYWHEEL_TRIM_VARIANCE:
+      setFlywheelTrimVariance(data);
+      break;
+    
+    case NRF52_CHR_PUSHER_NORMAL_SPEED:
+      setPusherNormalSpeed(data);
+      break;
+    
+    case NRF52_CHR_PUSHER_LOW_SPEED:
+      setPusherLowSpeed(data);
+      break;
+    
+    case NRF52_CHR_PUSHER_MAX_SPEED:
+      setPusherMaxSpeed(data);
+      break;
+    
+    case NRF52_CHR_HOPPER_LOCK_ENABLED:
+      setHopperLockEnabled(data);
+      break;  
   }
+}
+
+void BLEController::setFlywheelSpeed(const uint8_t* data) {
+  m_blasterService.setFlywheelSpeed(data[0]);
+}
+
+void BLEController::setPusherSpeed(const uint8_t* data) {
+  m_blasterService.setPusherSpeed(data[0]);
+}
+
+void BLEController::setFlywheelM1TrimSpeed(const uint8_t* data) {
+  auto m1TrimValue = Convert.toFloat(data);
+  m_blasterService.setFlywheelM1TrimSpeed(m1TrimValue);
+}
+
+void BLEController::setFlywheelM2TrimSpeed(const uint8_t* data) {
+  auto m2TrimValue = Convert.toFloat(data);
+  m_blasterService.setFlywheelM2TrimSpeed(m2TrimValue);
+}
+
+void BLEController::setFlywheelNormalSpeed(const uint8_t* data) {
+  auto flywheelNormalSpeed = Convert.toInt32(data);
+  m_configService.setFlywheelNormalSpeed(flywheelNormalSpeed);
+}
+
+void BLEController::setFlywheelLowSpeed(const uint8_t* data) {
+  auto flywheelLowSpeed = Convert.toInt32(data);
+  m_configService.setFlywheelLowSpeed(flywheelLowSpeed);
+}
+
+void BLEController::setFlywheelMaxSpeed(const uint8_t* data) {
+  auto flywheelMaxSpeed = Convert.toInt32(data);
+  m_configService.setFlywheelMaxSpeed(flywheelMaxSpeed);
+}
+
+void BLEController::setFlywheelTrimVariance(const uint8_t* data) {
+  auto flywheelTrimVariance = Convert.toFloat(data);
+  m_configService.setFlywheelTrimVariance(flywheelTrimVariance);
+}
+
+void BLEController::setPusherNormalSpeed(const uint8_t* data) {
+  auto pusherNormalSpeed = Convert.toInt32(data);
+  m_configService.setPusherNormalSpeed(pusherNormalSpeed);
+}
+
+void BLEController::setPusherLowSpeed(const uint8_t* data) {
+  auto pusherLowSpeed = Convert.toInt32(data);
+  m_configService.setPusherLowSpeed(pusherLowSpeed);
+}
+
+void BLEController::setPusherMaxSpeed(const uint8_t* data) {
+  auto pusherMaxSpeed = Convert.toInt32(data);
+  m_configService.setPusherMaxSpeed(pusherMaxSpeed);
+}
+
+void BLEController::setHopperLockEnabled(const uint8_t* data) {
+  auto hopperLockEnabled = false;
+  if (data[0] != 0) {
+    hopperLockEnabled = true;
+  }
+
+  m_configService.setHopperLockEnabled(hopperLockEnabled);
 }

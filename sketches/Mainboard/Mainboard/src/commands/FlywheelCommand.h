@@ -9,8 +9,6 @@ class FlywheelCommand : public Command {
     public:
         FlywheelCommand(FlywheelController* controller);
 
-        ~FlywheelCommand() override;
-
     protected:
         FlywheelController* m_controller;
 };

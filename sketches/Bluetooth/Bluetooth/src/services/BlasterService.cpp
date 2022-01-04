@@ -7,7 +7,7 @@ BlasterService::BlasterService() : CustomBLEService(UUID128_SVC_NERF_BLASTER) {
     m_flywheelSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_SPEED);
     m_flywheelM1TrimSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_M1TRIM_SPEED);
     m_flywheelM2TrimSpeed = BLECharacteristic(UUID128_CHR_FLYWHEEL_M2TRIM_SPEED);
-    m_beltSpeed = BLECharacteristic(UUID128_CHR_BELT_SPEED);
+    m_pusherSpeed = BLECharacteristic(UUID128_CHR_PUSHER_SPEED);
 }
 
 void onFlywheelSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
@@ -22,8 +22,8 @@ void onFlywheelM2TrimAdjustmentWriteCallback(uint16_t conn_hdl, BLECharacteristi
     NotifyBluetoothCommandReceived(NRF52_CID_FLYWHEEL_TRIM, data, len, 2); 
 }
 
-void onBeltSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-    NotifyBluetoothCommandReceived(NRF52_CID_BELT_SPEED, data, len, 0);
+void onPusherSpeedWriteCallback(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
+    NotifyBluetoothCommandReceived(NRF52_CID_PUSHER_SPEED, data, len, 0);
 }
 
 void BlasterService::init() {  
@@ -48,20 +48,20 @@ void BlasterService::init() {
     m_flywheelM2TrimSpeed.setWriteCallback(onFlywheelM2TrimAdjustmentWriteCallback);
     m_flywheelM2TrimSpeed.begin();
 
-    m_beltSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
-    m_beltSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
-    m_beltSpeed.setFixedLen(1);
-    m_beltSpeed.setUserDescriptor("Belt Speed");
-    m_beltSpeed.setWriteCallback(onBeltSpeedWriteCallback);
-    m_beltSpeed.begin();
+    m_pusherSpeed.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE);
+    m_pusherSpeed.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
+    m_pusherSpeed.setFixedLen(1);
+    m_pusherSpeed.setUserDescriptor("Pusher Speed");
+    m_pusherSpeed.setWriteCallback(onPusherSpeedWriteCallback);
+    m_pusherSpeed.begin();
 }
 
 void BlasterService::setFlywheelSpeed(uint8_t value) {
     m_flywheelSpeed.write8(value);
 }
 
-void BlasterService::setBeltSpeed(uint8_t value) {
-    m_beltSpeed.write8(value);
+void BlasterService::setPusherSpeed(uint8_t value) {
+    m_pusherSpeed.write8(value);
 }
 
 void BlasterService::setFlywheelM1TrimSpeed(float value) {

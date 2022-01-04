@@ -7,7 +7,7 @@
 class CommandFactory {
     public:
         // Creates a new command.
-        Command* createCommand(uint8_t type, uint8_t subtype);
+        Command* createCommand(const uint8_t type, const uint8_t subtype);
 };
 
 #endif /* COMMAND_FACTORY_H */

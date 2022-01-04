@@ -6,10 +6,10 @@
 
 // Defines the flywheel speeds available.
 enum class FlywheelSpeed {
-    Kid = 1,
+    Low = 1,
     Normal = 2,
     // WARNING: This value may cause physical bruising on the intended target, use with caution!
-    Ludicrous = 255
+    Max = 255
 };
 
 // Defines the motors within the flywheel assembly.

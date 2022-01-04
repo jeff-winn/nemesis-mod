@@ -2,68 +2,80 @@
 #define CONFIGURATION_SETTINGS_H
 
 #include <Arduino.h>
+#include "FlywheelController.h"
+#include "PusherController.h"
 
 // Provides access to the configuration settings.
 class ConfigurationSettings {
     public:
-        void resetAuthenticationToken();
+        ConfigurationSettings() = default;
+        ~ConfigurationSettings() = default;
 
-        void setExistingPairing(bool value);
-        bool hasExistingPairing();
+        const char* getName() const;
+        const char* getPairingPin() const;
 
-        const char* getPairingPin();
+        int getPusherLowSpeed() const;
+        void setPusherLowSpeed(int value);
 
-        int getFeedNormalSpeed();
-        void setFeedNormalSpeed(int value);
+        int getPusherNormalSpeed() const;
+        void setPusherNormalSpeed(int value);
 
-        int getFeedMediumSpeed();
-        void setFeedMediumSpeed(int value);
+        int getPusherMaxSpeed() const;
+        void setPusherMaxSpeed(int value);
 
-        int getFeedMaxSpeed();
-        void setFeedMaxSpeed(int value);
-
-        float getFlywheelTrimVariance();
+        float getFlywheelTrimVariance() const;
         void setFlywheelTrimVariance(float value);
 
-        int getFlywheelKidSpeed();
-        void setFlywheelKidSpeed(int value);
+        int getFlywheelLowSpeed() const;
+        void setFlywheelLowSpeed(int value);
 
-        int getFlywheelNormalSpeed();
+        int getFlywheelNormalSpeed() const;
         void setFlywheelNormalSpeed(int value);
 
-        int getFlywheelLudicrousSpeed();
-        void setFlywheelLudicrousSpeed(int value);
+        int getFlywheelMaxSpeed() const;
+        void setFlywheelMaxSpeed(int value);
 
-        float getFlywheelM1TrimAdjustment();
+        float getFlywheelM1TrimAdjustment() const;
         void setFlywheelM1TrimAdjustment(float value);
 
-        float getFlywheelM2TrimAdjustment();
+        float getFlywheelM2TrimAdjustment() const;
         void setFlywheelM2TrimAdjustment(float value);
 
-        bool isHopperLockEnabled();
+        bool isHopperLockEnabled() const;
         void setIsHopperLockEnabled(bool value);
+
+        FlywheelSpeed getFlywheelSpeed() const;
+        void setFlywheelSpeed(FlywheelSpeed value);
+
+        PusherSpeed getPusherSpeed() const;
+        void setPusherSpeed(PusherSpeed value);
 
         // Initializes the configuration settings.
         void init();
 
-        // Defaults all of the configuration settings.
-        void defaultSettings();
-
-        // Clears the configuration settings.
-        void clear();
-
     protected:
-        bool initialized();
-        void setInitialized(bool value);
+        FlywheelSpeed parseFlywheelSpeed(const char* value) const;
+        PusherSpeed parsePusherSpeed(const char* value) const;
 
-        int readInt32(short address);
-        void writeInt32(short address, int value);
+    private:
+        String m_name;
+        bool m_isBluetoothEnabled;
+        String m_pin;
+        float m_flywheelTrimVariance;
+        float m_flywheel1TrimAdjustment;
+        float m_flywheel2TrimAdjustment;
+        bool m_isMagLockEnabled;
 
-        float readFloat(short address);
-        void writeFloat(short address, float value);
+        unsigned int m_pusherLow;
+        unsigned int m_pusherNormal;
+        unsigned int m_pusherMax;
 
-        bool readBool(short address);
-        void writeBool(short address, bool value);
+        unsigned int m_flywheelsLow;
+        unsigned int m_flywheelsNormal;
+        unsigned int m_flywheelsMax;
+
+        FlywheelSpeed m_flywheelSpeed;
+        PusherSpeed m_pusherSpeed;
 };
 
 // Defines the instance of configuration settings used by the hardware.

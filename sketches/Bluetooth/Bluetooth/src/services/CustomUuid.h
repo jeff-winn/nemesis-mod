@@ -9,8 +9,8 @@ extern uint8_t UUID128_SVC_NERF_BLASTER[16];
 // Defines the custom 128-bit UUID for the Flywheel Speed GATT characteristic.
 extern uint8_t UUID128_CHR_FLYWHEEL_SPEED[16];
 
-// Defines the custom 128-bit UUID for the Belt Speed GATT characteristic.
-extern uint8_t UUID128_CHR_BELT_SPEED[16];
+// Defines the custom 128-bit UUID for the Pusher Speed GATT characteristic.
+extern uint8_t UUID128_CHR_PUSHER_SPEED[16];
 
 // Defines the custom 128-bit UUID for the Hopper Lock GATT characteristic.
 extern uint8_t UUID128_CHR_HOPPER_LOCK[16];
@@ -33,26 +33,26 @@ extern uint8_t UUID128_CHR_BELT_M1_CURRENT_MILLIAMPS[16];
 // Defines the custom 128-bit UUID for the Configuration GATT service.
 extern uint8_t UUID128_SVC_CONFIGURATION[16];
 
-// Defines the custom 128-bit UUID for the Flywheel kid speed GATT characteristic.
-extern uint8_t UUID128_CHR_FLYWHEEL_KID_SPEED[16];
+// Defines the custom 128-bit UUID for the Flywheel low speed GATT characteristic.
+extern uint8_t UUID128_CHR_FLYWHEEL_LOW_SPEED[16];
 
 // Defines the custom 128-bit UUID for the Flywheel normal speed GATT characteristic.
 extern uint8_t UUID128_CHR_FLYWHEEL_NORMAL_SPEED[16];
 
-// Defines the custom 128-bit UUID for the Flywheel ludicrous speed GATT characteristic.
-extern uint8_t UUID128_CHR_FLYWHEEL_LUDICROUS_SPEED[16];
+// Defines the custom 128-bit UUID for the Flywheel max speed GATT characteristic.
+extern uint8_t UUID128_CHR_FLYWHEEL_MAX_SPEED[16];
 
 // Defines the custom 128-bit UUID for the Flywheel trim variance GATT characteristic.
 extern uint8_t UUID128_CHR_FLYWHEEL_TRIM_VARIANCE[16];
 
-// Defines the custom 128-bit UUID for the Belt normal speed GATT characteristic.
-extern uint8_t UUID128_CHR_BELT_NORMAL_SPEED[16];
+// Defines the custom 128-bit UUID for the Pusher normal speed GATT characteristic.
+extern uint8_t UUID128_CHR_PUSHER_NORMAL_SPEED[16];
 
-// Defines the custom 128-bit UUID for the Belt medium speed GATT characteristic.
-extern uint8_t UUID128_CHR_BELT_MEDIUM_SPEED[16];
+// Defines the custom 128-bit UUID for the Pusher low speed GATT characteristic.
+extern uint8_t UUID128_CHR_PUSHER_LOW_SPEED[16];
 
-// Defines the custom 128-bit UUID for the Belt maximum speed GATT characteristic.
-extern uint8_t UUID128_CHR_BELT_MAX_SPEED[16];
+// Defines the custom 128-bit UUID for the Pusher maximum speed GATT characteristic.
+extern uint8_t UUID128_CHR_PUSHER_MAX_SPEED[16];
 
 // Defines the custom 128-bit UUID for the Notification GATT service.
 extern uint8_t UUID128_SVC_NOTIFICATIONS[16];

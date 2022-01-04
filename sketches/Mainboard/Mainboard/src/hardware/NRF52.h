@@ -3,7 +3,7 @@
 
 #include "InterruptSignal.h"
 
-typedef void (*ReadPacketCallback)(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len);
+typedef void (*ReadPacketCallback)(const uint8_t type, const uint8_t subtype, const uint8_t* data, const uint8_t len);
 
 class NRF52 {
     public:
@@ -19,7 +19,9 @@ class NRF52 {
         void setCharacteristic(uint8_t characteristicId, int value);
         void setCharacteristic(uint8_t characteristicId, uint8_t *data, uint8_t len);
 
+        void setName(const char* name);
         void setPin(const char* pin);
+        
         void startAdvertising();
 
         void readPacket(ReadPacketCallback callback);

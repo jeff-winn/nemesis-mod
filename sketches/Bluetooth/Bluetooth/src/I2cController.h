@@ -6,7 +6,7 @@
 #include "InterruptPin.h"
 #include "Led.h"
 
-typedef void (*I2cCommandReceivedCallback)(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len);
+typedef void (*I2cCommandReceivedCallback)(const uint8_t type, const uint8_t subtype, const uint8_t* data, const uint8_t len);
 
 void OnI2cCommandReceivedCallback(int numBytes);
 void OnI2cRequestReceivedCallback();
@@ -23,7 +23,7 @@ class I2cController {
         void notifyReady();
 
         void setTransmitCount(uint8_t count);
-        void sendPacket(uint8_t type, uint8_t subtype, uint8_t *data, uint8_t len);
+        void sendPacket(const uint8_t type, const uint8_t subtype, const uint8_t* data, const uint8_t len);
 
         void onI2cCommandReceived(int numBytes);
         void onI2cRequestReceived();

@@ -6,7 +6,6 @@
 
 // Provides a base class for handling configuration commands.
 class ConfigurationCommand : public Command {
-
 };
 
 #endif /* CONFIGURATION_COMMAND_H */

@@ -15,22 +15,23 @@ void FlywheelController::init() {
     m_driver.calibrateCurrentOffsets();
     m_driver.disableDrivers();
 
-    setSpeed(FlywheelSpeed::Normal);
+    auto speed = Settings.getFlywheelSpeed();
+    setSpeed(speed);
     
     MCU.delaySafe(1);
 }
 
 unsigned int FlywheelController::getMotorCurrentMilliamps(FlywheelMotor motor) {
     switch (motor) {
-        case FlywheelMotor::Motor1: {
+        case FlywheelMotor::Motor1:
             return m_driver.getM1CurrentMilliamps();
-        }
-        case FlywheelMotor::Motor2: {
+        
+        case FlywheelMotor::Motor2:
             return m_driver.getM2CurrentMilliamps();
-        }
-    }
 
-    return 0;
+        default:
+            return 0;
+    }
 }
 
 void FlywheelController::onStart() {
@@ -65,31 +66,31 @@ int FlywheelController::calculateLimiterForSpeed(int speed) {
 
 int FlywheelController::determineMotorMaximumSpeed() {
     switch (m_speed) {
-        case FlywheelSpeed::Kid: {
-            return Settings.getFlywheelKidSpeed();
-        }
-        case FlywheelSpeed::Normal: {
+        case FlywheelSpeed::Low:
+            return Settings.getFlywheelLowSpeed();
+        
+        case FlywheelSpeed::Normal:
             return Settings.getFlywheelNormalSpeed();
-        }
-        case FlywheelSpeed::Ludicrous: {
-            return Settings.getFlywheelLudicrousSpeed();
-        }
+        
+        case FlywheelSpeed::Max:
+            return Settings.getFlywheelMaxSpeed();
+            
+        default:
+            return 0; // Disable the motor (speed could not be determined).
     }
-
-    return 0; // Disable the motor (speed could not be determined).
 }
 
 float FlywheelController::getMotorSpeedAdjustment(FlywheelMotor motor) {
     switch (motor) {
-        case FlywheelMotor::Motor1: {
+        case FlywheelMotor::Motor1:
             return Settings.getFlywheelM1TrimAdjustment();
-        }
-        case FlywheelMotor::Motor2: {
+        
+        case FlywheelMotor::Motor2:
             return Settings.getFlywheelM2TrimAdjustment();
-        }
-    }
 
-    return 1;
+        default:
+            return 1;
+    }
 }
 
 void FlywheelController::onStop() {

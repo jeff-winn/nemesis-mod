@@ -3,13 +3,7 @@
 #include "../../BLEController.h"
 #include "../../shared/BitConverter.h"
 
-SetPinCommand::SetPinCommand() {    
-}
-
-SetPinCommand::~SetPinCommand() {    
-}
-
-void SetPinCommand::executeImpl(uint8_t *data, uint8_t len) {
+void SetPinCommand::executeImpl(const uint8_t* data, const uint8_t len) {
     auto pin = Convert.toCharArray(data, len);
     if (pin != NULL) {
         BLE.setPin(pin);
