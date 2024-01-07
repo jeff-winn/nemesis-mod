@@ -9,13 +9,7 @@ on:
       - 'kicad/**'
   schedule:
     - cron: '0 0 1 */1 *'
-
-      
-  pull_request:
-    paths-ignore:
-      - 'docs/**'
-      - 'kicad/**'
-
+    
 jobs:
   build:
     runs-on: windows-latest
