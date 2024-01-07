@@ -1,9 +1,16 @@
-# About the project...
+# Nemesis Mod
 It started off as me just wanting to play with an Arduino while repurposing some old .NET Gadgeteer hardware I had laying around the house. It turned into quite a bit more than that over the months that I worked on it. Hopefully the source code will help someone interested in replicating the success I had with my project with their own. Happy coding!
 
 | Branch | Status |
 | ------ | -------------|
 | master | [![CI](https://github.com/jeff-winn/Nemesis-Mod/actions/workflows/ci.yaml/badge.svg)](https://github.com/jeff-winn/Nemesis-Mod/actions/workflows/ci.yaml) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=nemesis-mod&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=nemesis-mod) |
+
+## Setting up your environment
+Because this project requires the use of symbolic links, you will need to use the command line to clone the repository. Visual Studio Code can do it, but it does not permit symbolic links by default.
+
+```shell
+git clone -c core.symlinks=true 
+```
 
 ## Hardware Requirements
 These are the boards and hardware being used by the project:
