@@ -12,11 +12,11 @@ endif
 # Arduino CLI Board type
 # NOTE: Any changes to the FQBNs here will also likely require updating the release workflow for packaging the UF2 files.
 MAIN_BOARD_TYPE = adafruit:samd
-MAIN_BOARD_VERSION = 1.7.5
+MAIN_BOARD_VERSION = 1.7.9
 MAIN_FQBN = $(MAIN_BOARD_TYPE):adafruit_feather_m4
 
 BT_BOARD_TYPE = adafruit:nrf52
-BT_BOARD_VERSION = 1.2.0
+BT_BOARD_VERSION = 1.3.0
 BT_FQBN = $(BT_BOARD_TYPE):feather52840
 
 # Default port to use
@@ -52,7 +52,7 @@ install_boards:
 	"$(ARDUINO_CLI)" core install $(BT_BOARD_TYPE)@$(BT_BOARD_VERSION)
 
 install_libraries:
-	"$(ARDUINO_CLI)" lib install "ArduinoJson@6.18.5"
+	"$(ARDUINO_CLI)" lib install "ArduinoJson@6.21.3"
 	"$(ARDUINO_CLI)" lib install "CircularBuffer@1.3.3"
 	"$(ARDUINO_CLI)" lib install "DualG2HighPowerMotorShield@2.0.0"
 	"$(ARDUINO_CLI)" lib install "SD@1.2.4"
